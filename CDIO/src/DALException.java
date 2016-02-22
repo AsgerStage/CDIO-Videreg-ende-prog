@@ -1,5 +1,5 @@
 
-public class DALException {
+public class DALException extends Exception {
 	
 
 }
