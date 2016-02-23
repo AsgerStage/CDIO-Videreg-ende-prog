@@ -1,11 +1,14 @@
-/**
- * TestMainLasse
- * @author Lasse
- * @version 22-02-2016
- */
+
 public class Main 
 {
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws DALException {
+       
+    	OperatorDAO ops =new OperatorDAO();
+    	OperatorDTO op=new OperatorDTO(11);
+    	ops.createOperatoer(op);
+    	
+    	
+    	
+    	System.out.println(ops.getOperator(11)); 
     }
 }	

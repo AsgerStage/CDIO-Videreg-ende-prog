@@ -6,11 +6,21 @@ public class OperatorDTO {
 	String oprNavn;
 	String ini;
 	int cpr;
-	char[] password;
-
-
-
-
+	String password;
+public OperatorDTO(int opr)
+{
+oprId=opr;	
+}
+public void setoprId(int oprId)
+{
+	this.oprId=oprId;
+	
+}
+public int getoprId()
+{
+	return oprId;
+	
+}
 public void setName(String name)
 {
 	this.oprNavn=name;
@@ -22,26 +32,28 @@ public void setCpr(int cpr)
 	
 }
 
-public void setPassword(char[] password)
+public void setPassword(String password)
 {
 	this.password=password;
 	
 }
-public String getName(int oprId)
+public String getName()
 {
 	return this.oprNavn;
 	
 }
-public int getCpr(int oprId)
+public int getCpr()
 {
 	return this.cpr;
 	
 }
 
-public char[] getPassword(int oprId)
+public String getPassword()
 {
 	return this.password;
 	
 }
+
+
 
 }
