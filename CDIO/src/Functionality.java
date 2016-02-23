@@ -6,25 +6,25 @@ public class Functionality implements IFunctionality {
 	}
 
 	@Override
-	public void createOpr(OperatoerDTO opr) {
+	public void createOpr(OperatorDTO opr) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteOpr(OperatoerDTO opr) {
+	public void deleteOpr(OperatorDTO opr) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateOpr(OperatoerDTO opr) {
+	public void updateOpr(OperatorDTO opr) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public OperatoerDTO readOpr(OperatoerDTO opr) {
+	public OperatorDTO readOpr(OperatorDTO opr) {
 		// TODO Auto-generated method stub
 		return null;
 	}
