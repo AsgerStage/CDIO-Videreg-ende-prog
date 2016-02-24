@@ -1,8 +1,12 @@
 
 public class OpNameException extends Exception {
 
-	public OpNameException() {
-		// TODO Auto-generated constructor stub
+	private static final long serialVersionUID = 1L;
+	private String name;
+
+	public OpNameException(String name) {
+		super("Navnet overholder ikke reglerne for et navn.");
+		this.name = name;
 	}
 
 }
