@@ -1,3 +1,12 @@
+package cdio;
+
+import cdio.models.OperatorDTO;
+import cdio.exceptions.DALException;
+import cdio.data.OperatorDAO;
+import cdio.functionality.Functionality;
+import cdio.view.View;
+import cdio.view.IView;
+
 
 public class Main 
 {

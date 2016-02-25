@@ -1,3 +1,5 @@
+package cdio.view;
+
 /**
  * <b>IView</b>
  * <p>Interfacet for brugergrænseflade.
