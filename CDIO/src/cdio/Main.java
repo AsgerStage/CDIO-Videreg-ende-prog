@@ -16,7 +16,7 @@ public class Main
     	OperatorDTO op=new OperatorDTO(11);
     	ops.createOperatoer(op);
     	
-        IView view = new View(new Functionality());
+        IView view = new View(new Functionality(new OperatorDAO()));
         view.dialog();
     	
     	
