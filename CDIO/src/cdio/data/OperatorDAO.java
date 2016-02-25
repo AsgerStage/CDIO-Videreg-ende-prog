@@ -37,13 +37,18 @@ public class OperatorDAO implements IOperatorDAO {
 
 	@Override
 	public void updateOperatoer(OperatorDTO opr) throws DALException {
-		// TODO Auto-generated method stub
+		
+		OperatorDTO temp = opr;
+		deleteOperatoer(opr);
+		createOperatoer(temp);
+		
 		
 	}
 
 	@Override
 	public void deleteOperatoer(OperatorDTO opr) throws DALException {
-		Oplist.remove(opr);
+		
+		Oplist.remove(opr.getoprId());
 		
 	}
 
