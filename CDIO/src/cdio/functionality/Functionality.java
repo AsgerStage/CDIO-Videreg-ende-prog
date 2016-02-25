@@ -119,7 +119,7 @@ public class Functionality implements IFunctionality {
 	}
 
     @Override
-    public OperatorDTO readOpr(OperatorDTO opr) {
+    public OperatorDTO readOpr(int oprID) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

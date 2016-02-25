@@ -338,8 +338,8 @@ class Dialog implements Runnable
         System.out.print("\tNyt password: ");
         newPass2 = scanner.nextLine();
         
-//        functionality.changePass(oldPass, newPass1, newPass2);
-        functionality.changePass(newPass1);
+        functionality.changePass(oldPass, newPass1, newPass2);
+//        functionality.changePass(newPass1);
     }
     
     private void readUser() throws DALException, InputMismatchException {
@@ -352,7 +352,7 @@ class Dialog implements Runnable
         System.out.print("\tOperatør id: ");
         userID = scanner.nextInt();
         
-        final OperatorDTO userDTO = null; // = functionality.readOpr(userID);
+        final OperatorDTO userDTO = functionality.readOpr(userID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t" + userDTO.getName());
             System.out.println("\tID:\t" + userDTO.getoprId());
@@ -376,9 +376,9 @@ class Dialog implements Runnable
         System.out.print("\tCPR: ");
         cpr = scanner.nextInt();
         
-//        oprId = functionality.createOpr(name, cpr);
-//        System.out.println("Bruger oprattet med operatør id: " + oprId);
-        System.out.println("Fjern kommentering");
+        oprId = functionality.createOpr(name, cpr);
+        System.out.println("Bruger oprattet med operatør id: " + oprId);
+//        System.out.println("Fjern kommentering");
     }
     
     private void updateUser() throws DALException, InputMismatchException {
@@ -398,12 +398,12 @@ class Dialog implements Runnable
         System.out.print("\tPassword: ");
         password = new Scanner(System.in).nextLine();
         
-//        boolean isUpdate = functionality.updateOpr(new OperatorDTO(oprId, name, cpr, password));
-//        if(isUpdate)
-//            System.out.println("Brugeren " + oprId + " blev opdateret");
-//        else
-//            System.out.println("Kunne ikke opdatere brugeren");
-        System.out.println("Fjern kommentering");
+        boolean isUpdate = functionality.updateOpr(new OperatorDTO(oprId, name, cpr, password));
+        if(isUpdate)
+            System.out.println("Brugeren " + oprId + " blev opdateret");
+        else
+            System.out.println("Kunne ikke opdatere brugeren");
+//        System.out.println("Fjern kommentering");
     }
     
     private void deleteUser() throws DALException, InputMismatchException {
@@ -416,11 +416,11 @@ class Dialog implements Runnable
         System.out.print("\tBruger ID: ");
         oprId = scanner.nextInt();
         
-//        boolean isDeleted = functionality.deleteOpr(oprId);
-//        if(isDeleted)
-//            System.out.println("Brugeren " + oprId + " blev fjernet");
-//        else
-//            System.out.println("Kunne ikke slette brugeren");
-        System.out.println("Fjern kommentering");
+        boolean isDeleted = functionality.deleteOpr(oprId);
+        if(isDeleted)
+            System.out.println("Brugeren " + oprId + " blev fjernet");
+        else
+            System.out.println("Kunne ikke slette brugeren");
+//        System.out.println("Fjern kommentering");
     }
 }
