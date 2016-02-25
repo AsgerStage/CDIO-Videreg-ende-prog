@@ -42,7 +42,7 @@ public class Dialog implements Runnable
             System.out.print("\n\tBruger ID:\t");
             int userID = scanner.nextInt();
             System.out.print("\tPassword:\t");
-            String password = scanner.nextLine();
+            String password = new Scanner(System.in).nextLine();
             
             currUserID = login(userID, password);
             
@@ -60,13 +60,13 @@ public class Dialog implements Runnable
                     }
                     default:
                     case -1: { //Uautorisret bruger
-                        System.out.println("Du har ikke tilladelse til denne funktion");
+                        System.out.println("Du har ikke tilladelse til denne menu");
                         break;
                     }
                 }
             }
             else
-                System.out.println("Bruger eller password er inkorrekt");
+                System.out.println("Bruger ID eller password er inkorrekt");
         }
     }
     

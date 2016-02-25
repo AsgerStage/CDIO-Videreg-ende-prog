@@ -4,13 +4,8 @@ import cdio.data.IOperatorDAO;
 import cdio.data.OperatorDAO;
 import cdio.exceptions.DALException;
 import cdio.models.OperatorDTO;
-
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Functionality implements IFunctionality {
 
@@ -117,11 +112,9 @@ public class Functionality implements IFunctionality {
 	@Override
 	public boolean login(int userId, String password) {
             try {
-                if (dao.getOperator(userId).getPassword().equals(password)) {
-                    return true;
-                }
-                else
-                    return false;
+                OperatorDTO opr = dao.getOperator(userId);
+                if(opr != null)
+                    return opr.getPassword().equals(password);
             } catch (DALException ex) {
                 ex.printStackTrace();
             }
