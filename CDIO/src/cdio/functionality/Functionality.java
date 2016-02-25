@@ -120,7 +120,13 @@ public class Functionality implements IFunctionality {
 
     @Override
     public OperatorDTO readOpr(int oprID) {
-        throw new UnsupportedOperationException("Not supported yet.");
+   try {
+	return dao.getOperator(oprID);
+} catch (DALException e) {
+	
+	e.printStackTrace();
+	return null;
+}
     }
 
 }
