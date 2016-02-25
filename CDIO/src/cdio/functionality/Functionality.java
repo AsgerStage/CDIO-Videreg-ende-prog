@@ -23,21 +23,23 @@ public class Functionality implements IFunctionality {
 	}
 
 	@Override
-	public int createOpr(String oprNavn, int cpr) { 
+	public int createOpr(String oprNavn, int cpr, String ini, int rank) {
 		// TODO Auto-generated method stub
-            Random random = new Random();
-        
-            for (int i = 0; i < 20; i++) {
+		Random random = new Random();
 
-                int ran = random.nextInt(122 - 33) + 33;
+		for (int i = 0; i < 20; i++) {
 
-                System.out.print((char) ran);
-            }
-            
-		OperatorDTO opr = new OperatorDTO(oprID, oprNavn, ini, cpr, password, rank); // Ny operator oprettes (der skal laves nogle metoder til at autogenerer oprID og ini )
-		
-                operatoerer.add(opr); // operator tilf�jes en liste over operat�rer 
-		return oprID; // Her skal der returneres et oprID eller en ini-kode n�r operat�ren er oprettet
+			int ran = random.nextInt(122 - 33) + 33;
+			char kode = ((char) ran);
+
+		}
+		String pass = java.lang.String.valueOf("kode");
+
+		OperatorDTO opr = new OperatorDTO(oprID, oprNavn, ini, cpr, pass, rank); // Ny
+
+		operatoerer.add(opr); // operator tilf�jes en liste over operat�rer
+		return oprID; // Her skal der returneres et oprID eller en ini-kode
+						// n�r operat�ren er oprettet
 	}
 
 	@Override
