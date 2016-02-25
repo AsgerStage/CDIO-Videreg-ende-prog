@@ -7,6 +7,8 @@ public class Main
     	OperatorDTO op=new OperatorDTO(11);
     	ops.createOperatoer(op);
     	
+        IView view = new View(new Functionality());
+        view.dialog();
     	
     	
     	System.out.println(ops.getOperator(11)); 
