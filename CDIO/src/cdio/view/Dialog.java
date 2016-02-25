@@ -70,6 +70,18 @@ public class Dialog implements Runnable
         }
     }
     
+    /**
+     * <b>Login</b>
+     * <p>Undersøger om det angivne operatør ID matcher passwordet.
+     * @param userID
+     *      Operatørens ID.
+     * @param password
+     *      Operatørens password.
+     * @return 
+     *      Returnerer 1 hvis brugeren er administrator
+     *      <p>0 hvis brugeren er operatør
+     *      <p>-1 hvis operatør ID og passwordet matcher eller operatøren ikke har rettigheder til programet.
+     */
     private int login(int userID, String password) {
         if(functionality.login(userID, password))
             return functionality.readOpr(userID).getRank();
@@ -77,6 +89,12 @@ public class Dialog implements Runnable
             return -1;
     }
     
+    /**
+     * <b>Menu</b>
+     * <p>Viser brugergrænsefladens top menu.
+     * @param isAdmin 
+     *      Angiver om brugeren er administrator (administratoren har flere muligheder i menu'en)
+     */
     private void menu(boolean isAdmin) {
         while(loggedIn) {
             System.out.println("\n*******************************************");
@@ -105,7 +123,6 @@ public class Dialog implements Runnable
             }
             
             switch(action) {
-                
                 case MENUOPTION_MEASURE: {
                     try {
                         measure();
@@ -239,6 +256,14 @@ public class Dialog implements Runnable
         }
     }
     
+    /**
+     * <b>Afvejning</b>
+     * <p>Måler nettovægten for en pakke.
+     * @throws DALException
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     * @throws InputMismatchException 
+     *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
+     */
     private void measure() throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
         double tara, brutto;
@@ -257,12 +282,20 @@ public class Dialog implements Runnable
         System.out.println("\tNettovægt = " + functionality.measure(tara, brutto));
     }
     
-    private void viewProfile(int userID) throws DALException {
+    /**
+     * <b>Vis profil</b>
+     * <p>Henter brugerens data ud fra det angivne operatør ID.
+     * @param oprID
+     *      Brugerens operatør ID.
+     * @throws DALException 
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     */
+    private void viewProfile(int oprID) throws DALException {
         scanner = new Scanner(System.in);
         System.out.println("\n-------------------------------------------");
         System.out.println("Profil");
         
-        final OperatorDTO userDTO = functionality.readOpr(userID);
+        final OperatorDTO userDTO = functionality.readOpr(oprID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t" + userDTO.getName());
             System.out.println("\tID:\t" + userDTO.getoprID());
@@ -272,6 +305,16 @@ public class Dialog implements Runnable
             System.out.println("Kunne ikke læse din profil");
     }
     
+    /**
+     * <b>Skift password</b>
+     * <p>Skifter brugerens password.
+     * @param oprID
+     *      Brugerens operatør ID.
+     * @throws DALException
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     * @throws InputMismatchException 
+     *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
+     */
     private void changePassword(int oprID) throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
         String oldPass, newPass1, newPass2;
@@ -289,6 +332,14 @@ public class Dialog implements Runnable
         functionality.changePass(oprID, oldPass, newPass1, newPass2);
     }
     
+    /**
+     * <b>Læs operatør</b>
+     * <p>Henter en operatørs data ud fra det data som brugeren indtaster.
+     * @throws DALException
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     * @throws InputMismatchException 
+     *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
+     */
     private void readUser() throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
         int userID;
@@ -310,23 +361,49 @@ public class Dialog implements Runnable
             System.out.println("Kunne ikke finde operatøren med id " + userID);
     }
     
+    /**
+     * <b>Opret operatør</b>
+     * <p>Opretter en ny operatør ud fra det data som brugeren indtater.
+     * @throws DALException
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     * @throws InputMismatchException 
+     *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
+     */
     private void createUser() throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
-        String name;
-        int cpr, oprId;
+        String name, ini;
+        int oprId, rank;
+        long cpr;
         
         System.out.println("\n-------------------------------------------");
         System.out.println("Opret bruger");
         
         System.out.print("\tNavn: ");
         name = scanner.nextLine();
+        System.out.print("\tInitialer: ");
+        ini = scanner.nextLine();
         System.out.print("\tCPR: ");
-        cpr = scanner.nextInt();
+        cpr = scanner.nextLong();
+        System.out.print("\tRank: ");
+        rank = scanner.nextInt();
         
-        oprId = functionality.createOpr(name, cpr);
-        System.out.println("Bruger oprattet med operatør id: " + oprId);
+        oprId = functionality.createOpr(name, ini, cpr, rank);
+        
+        if(oprId != -1)
+            System.out.println("Bruger oprattet med operatør id: " + oprId);
+        else
+            System.out.println("Kunne ikke oprette operatøren");
     }
     
+    /**
+     * <b>Opdater operatør</b>
+     * <p>Opdaterer en operatørs data ud fra den data som brugeren indtater. 
+     * <p>Opdaterer ikke felter der angives med en null værdi.
+     * @throws DALException
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     * @throws InputMismatchException 
+     *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
+     */
     private void updateUser() throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
         String name;
@@ -334,6 +411,7 @@ public class Dialog implements Runnable
         
         System.out.println("\n-------------------------------------------");
         System.out.println("Opdater bruger");
+        System.out.println("Lad navne feltet stå tomt hvis det ikke skal opdateres og angiv -1 for de andre felter hvis de ikke skal opdateres.");
         
         System.out.print("\tBruger ID: ");
         oprId = scanner.nextInt();
@@ -344,6 +422,9 @@ public class Dialog implements Runnable
         System.out.print("\tPassword: ");
         rank = new Scanner(System.in).nextInt();
         
+        if(name.length() < 1)
+            name = null;
+        
         boolean isUpdate = functionality.updateOpr(oprId, name, cpr, rank);
         if(isUpdate)
             System.out.println("Brugeren " + oprId + " blev opdateret");
@@ -351,6 +432,14 @@ public class Dialog implements Runnable
             System.out.println("Kunne ikke opdatere brugeren");
     }
     
+    /**
+     * <b>Slet operatør</b>
+     * <p>Sletter operatøren med det angivne operatør ID.
+     * @throws DALException
+     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     * @throws InputMismatchException 
+     *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
+     */
     private void deleteUser() throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
         int oprId;

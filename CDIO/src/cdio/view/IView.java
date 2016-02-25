@@ -6,7 +6,8 @@ package cdio.view;
  * @author Lasse Holm Nielsen - S123954
  * @version 24-02-2016
  */
-public interface IView {
+public interface IView 
+{
     /**
      * Åbner dialogen i brugergrænsefladen.
      */
