@@ -89,7 +89,7 @@ public interface IFunctionality
      * @param oprID
      *      Operatørens ID.
      * @param password
-     *      Operatørens password
+     *      Operatørens password.
      * @return 
      *      Returnerer true hvis operatør ID og passwordet matcher.
      */

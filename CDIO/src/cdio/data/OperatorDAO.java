@@ -11,7 +11,7 @@ public class OperatorDAO implements IOperatorDAO {
 	
 	public OperatorDAO() {
             Oplist.add(new OperatorDTO(99, "Admin", "Abc0234", 0000000000L, "Abc0234", 1));
-            Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "x-8)nydKN(x4iB0HHHa3", 2909912191L, "1122", 0));
+            Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "1122", 0));
 	}
 
 	@Override
@@ -46,12 +46,12 @@ public class OperatorDAO implements IOperatorDAO {
 		
 	}
 
-	@Override
-	public void deleteOperatoer(OperatorDTO opr) throws DALException {
-		
-		Oplist.remove(opr.getoprID());
-		
-	}
-
-	
+    @Override
+    public void deleteOperatoer(OperatorDTO opr) throws DALException {
+        ArrayList<OperatorDTO> tempList = (ArrayList<OperatorDTO>) Oplist.clone();
+        for (OperatorDTO operatoer : tempList) {
+            if(opr.getoprID() == operatoer.getoprID())
+                Oplist.remove(operatoer);
+        }
+    }
 }
