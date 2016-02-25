@@ -63,7 +63,7 @@ class Dialog implements Runnable
     protected boolean loggedIn = false;
     
     private final IFunctionality functionality;
-    private OperatorDTO currUser;
+    private int currUserID;
     private Scanner scanner;
     private final int MENUOPTION_EXIT = 0;
     private final int MENUOPTION_MEASURE = 1;
@@ -75,7 +75,7 @@ class Dialog implements Runnable
     private final int MENUOPTION_DELETE_USER = 7;
 
     public Dialog(IFunctionality functionality) {
-        currUser = null;
+        currUserID = -1;
         this.functionality = functionality;
     }
     
@@ -86,15 +86,15 @@ class Dialog implements Runnable
             System.out.println("\n*******************************************");
             System.out.print("\nLogin");
             System.out.print("\n\tUser Name:\t");
-            String userName = scanner.nextLine();
+            int userID = scanner.nextInt();
             System.out.print("\tPassword:\t");
             String password = scanner.nextLine();
             
-            currUser = login(userName, password);
+            currUserID = login(userID, password);
             
-            if(currUser != null) {
+            if(currUserID != -1) {
 //                switch(currUser.rank) {
-                switch(1) {
+                switch(functionality.readOpr(userID).getRank()) {
                     case 1: { //Administrator
                         loggedIn = true;
                         menu(true);
@@ -117,14 +117,11 @@ class Dialog implements Runnable
         }
     }
     
-    private OperatorDTO login(String user, String password) {
-//        try {
-//            return functionality.login(user, password);
-//        } catch (DALException e) {
-//            return null;
-//        }
-//        return null;
-        return new OperatorDTO(10);
+    private int login(int userID, String password) {
+        if(functionality.login(userID, password))
+            return functionality.readOpr(userID).getRank();
+        else
+            return -1;
     }
     
     private void menu(boolean isAdmin) {
@@ -173,7 +170,7 @@ class Dialog implements Runnable
                 
                 case MENUOPTION_PROFILE: {
                     try {
-                        viewProfile(currUser);
+                        viewProfile(currUserID);
                     } 
                     catch (DALException ex) {
                         System.out.println("Kunne ikke læse din profil: " + ex);
@@ -183,7 +180,7 @@ class Dialog implements Runnable
                 
                 case MENUOPTION_CHANGE_PASSWORD: {
                     try {
-                        changePassword(currUser);
+                        changePassword(currUserID);
                     } 
                     catch (DALException ex) {
                         System.out.println("Kunne ikke skifte dit password: " + ex);
@@ -275,7 +272,7 @@ class Dialog implements Runnable
                 
                 case MENUOPTION_EXIT: {
                     loggedIn = false;
-                    currUser = null;
+                    currUserID = -1;
                     System.out.println("Du er nu logget ud");
                     break;
                 }
@@ -307,14 +304,12 @@ class Dialog implements Runnable
         System.out.println("\tNettovægt = " + functionality.measure(tara, brutto));
     }
     
-//    private void viewProfile(int userID) throws DALException {
-//        OperatorDTO userDTO = functionality.readOpr(userID);
-    private void viewProfile(OperatorDTO user) throws DALException {
+    private void viewProfile(int userID) throws DALException {
         scanner = new Scanner(System.in);
         System.out.println("\n-------------------------------------------");
         System.out.println("Profil");
         
-        final OperatorDTO userDTO = functionality.readOpr(user);
+        final OperatorDTO userDTO = functionality.readOpr(userID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t" + userDTO.getName());
             System.out.println("\tID:\t" + userDTO.getoprId());
@@ -324,7 +319,7 @@ class Dialog implements Runnable
             System.out.println("Kunne ikke læse din profil");
     }
     
-    private void changePassword(OperatorDTO user) throws DALException, InputMismatchException {
+    private void changePassword(int oprID) throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
         String oldPass, newPass1, newPass2;
         
@@ -338,8 +333,7 @@ class Dialog implements Runnable
         System.out.print("\tNyt password: ");
         newPass2 = scanner.nextLine();
         
-        functionality.changePass(oldPass, newPass1, newPass2);
-//        functionality.changePass(newPass1);
+        functionality.changePass(oprID, oldPass, newPass1, newPass2);
     }
     
     private void readUser() throws DALException, InputMismatchException {
@@ -378,13 +372,12 @@ class Dialog implements Runnable
         
         oprId = functionality.createOpr(name, cpr);
         System.out.println("Bruger oprattet med operatør id: " + oprId);
-//        System.out.println("Fjern kommentering");
     }
     
     private void updateUser() throws DALException, InputMismatchException {
         scanner = new Scanner(System.in);
-        String name, password;
-        int cpr, oprId;
+        String name;
+        int cpr, oprId, rank;
         
         System.out.println("\n-------------------------------------------");
         System.out.println("Opdater bruger");
@@ -396,14 +389,13 @@ class Dialog implements Runnable
         System.out.print("\tCPR: ");
         cpr = scanner.nextInt();
         System.out.print("\tPassword: ");
-        password = new Scanner(System.in).nextLine();
+        rank = new Scanner(System.in).nextInt();
         
-        boolean isUpdate = functionality.updateOpr(new OperatorDTO(oprId, name, cpr, password));
+        boolean isUpdate = functionality.updateOpr(oprId, name, cpr, rank);
         if(isUpdate)
             System.out.println("Brugeren " + oprId + " blev opdateret");
         else
             System.out.println("Kunne ikke opdatere brugeren");
-//        System.out.println("Fjern kommentering");
     }
     
     private void deleteUser() throws DALException, InputMismatchException {
