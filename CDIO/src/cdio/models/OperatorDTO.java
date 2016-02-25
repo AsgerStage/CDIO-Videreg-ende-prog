@@ -2,7 +2,7 @@ package cdio.models;
 
 public class OperatorDTO 
 {
-    private int oprId;
+    private int oprID;
     private String oprNavn;
     private String ini;
     private long cpr;
@@ -11,11 +11,11 @@ public class OperatorDTO
 
     public OperatorDTO(int opr)
     {
-            oprId = opr;
+            oprID = opr;
     }
 
-    public OperatorDTO(int oprId, String oprNavn, String ini, long cpr, String password, int rank) {
-        this.oprId = oprId;
+    public OperatorDTO(int oprID, String oprNavn, String ini, long cpr, String password, int rank) {
+        this.oprID = oprID;
         this.oprNavn = oprNavn;
         this.ini = ini;
         this.cpr = cpr;
@@ -47,15 +47,15 @@ public class OperatorDTO
 
     }
 
-    public void setoprId(int oprId) 
+    public void setoprId(int oprID) 
     {
-            this.oprId = oprId;
+            this.oprID = oprID;
 
     }
 
-    public int getoprId() 
+    public int getoprID() 
     {
-            return this.oprId;
+            return this.oprID;
 
     }
 

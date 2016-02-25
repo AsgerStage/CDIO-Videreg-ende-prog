@@ -23,8 +23,11 @@ public class Functionality implements IFunctionality {
 	}
 
 	@Override
-	public int createOpr(String oprNavn, int cpr, String ini, int rank) {
+	public int createOpr(int oprID, String oprNavn, String ini, long cpr, int rank){
 		// TODO Auto-generated method stub
+		
+		generateID ();
+		
 		Random random = new Random();
 
 		for (int i = 0; i < 20; i++) {
@@ -35,23 +38,24 @@ public class Functionality implements IFunctionality {
 		}
 		String pass = java.lang.String.valueOf("kode");
 
-		OperatorDTO opr = new OperatorDTO(oprID, oprNavn, ini, cpr, pass, rank); // Ny
 
-		operatoerer.add(opr); // operator tilf�jes en liste over operat�rer
-		return oprID; // Her skal der returneres et oprID eller en ini-kode
-		// n�r operat�ren er oprettet
+		OperatorDTO opr = new OperatorDTO(oprID, oprNavn, ini, cpr, pass, rank);
+
+		return oprID; 
+
 	}
 
 	private int generateID (){
 		Random ID = new Random ();
-		int newID;
+		int oprID;
 
-		newID =11+ID.nextInt(89);
+		oprID =11+ID.nextInt(89);
 
-		if ( !operatoerer.contains(newID)){
-			//operatoerer.add(newIni);
+		if ( !operatoerer.contains(oprID)){
+
 		}
-		return newID;
+		return oprID;
+
 
 	}
 
@@ -61,7 +65,7 @@ public class Functionality implements IFunctionality {
 	public boolean deleteOpr (int oprID) {
 		// TODO Auto-generated method stub
 		for(OperatorDTO oprDTO: operatoerer){
-			if(oprDTO.getoprId()==oprID){
+			if(oprDTO.getoprID()==oprID){
 				operatoerer.remove(oprDTO);
 				return true;
 			}
@@ -72,7 +76,7 @@ public class Functionality implements IFunctionality {
 	@Override
 	public boolean updateOpr(int oprID, String name, int cpr, int rank) {
 		for(OperatorDTO oprDTO: operatoerer){
-			if(oprDTO.getoprId()==oprID){
+			if(oprDTO.getoprID()==oprID){
 
 				OperatorDTO updatedOpr = oprDTO;
 				if(name != null)
