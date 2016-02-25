@@ -273,7 +273,7 @@ public class Dialog implements Runnable
      * <b>Afvejning</b>
      * <p>Måler nettovægten for en pakke.
      * @throws DALException
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
@@ -301,7 +301,7 @@ public class Dialog implements Runnable
      * @param oprID
      *      Brugerens operatør ID.
      * @throws DALException 
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      */
     private void viewProfile(int oprID) throws DALException {
         scanner = new Scanner(System.in);
@@ -326,7 +326,7 @@ public class Dialog implements Runnable
      * @param oprID
      *      Brugerens operatør ID.
      * @throws DALException
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
@@ -354,7 +354,7 @@ public class Dialog implements Runnable
      * <b>Læs operatør</b>
      * <p>Henter en operatørs data ud fra det data som brugeren indtaster.
      * @throws DALException
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
@@ -385,7 +385,7 @@ public class Dialog implements Runnable
      * <b>Opret operatør</b>
      * <p>Opretter en ny operatør ud fra det data som brugeren indtater.
      * @throws DALException
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
@@ -420,7 +420,7 @@ public class Dialog implements Runnable
      * <p>Opdaterer en operatørs data ud fra den data som brugeren indtater. 
      * <p>Opdaterer ikke felter der angives med en null værdi.
      * @throws DALException
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
@@ -456,7 +456,7 @@ public class Dialog implements Runnable
      * <b>Slet operatør</b>
      * <p>Sletter operatøren med det angivne operatør ID.
      * @throws DALException
-     *      Smider en DAL exception hvis der opstår en fejl i funktions eller data laget.
+     *      Smider en Data Access Layer exception hvis der opstår en fejl i funktions eller data laget.
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
