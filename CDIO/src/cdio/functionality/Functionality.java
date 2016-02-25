@@ -30,7 +30,7 @@ public class Functionality implements IFunctionality {
 	@Override
 	public int createOpr(String oprNavn, int cpr) { 
 		// TODO Auto-generated method stub
-            Random random = new Random(1991);
+            Random random = new Random();
         
             for (int i = 0; i < 20; i++) {
 
