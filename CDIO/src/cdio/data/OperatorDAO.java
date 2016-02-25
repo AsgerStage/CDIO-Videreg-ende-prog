@@ -10,15 +10,15 @@ public class OperatorDAO implements IOperatorDAO {
 	ArrayList<OperatorDTO> Oplist = new ArrayList<>();
 	
 	public OperatorDAO() {
-            Oplist.add(new OperatorDTO(1, "Admin", "Abc0234", 0000000000L, "Abc0234", 1));
-            Oplist.add(new OperatorDTO(2, "Lasse H Nilesen", "x-8)nydKN(x4iB0HHHa3", 2909912191L, "1122", 0));
+            Oplist.add(new OperatorDTO(99, "Admin", "Abc0234", 0000000000L, "Abc0234", 1));
+            Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "x-8)nydKN(x4iB0HHHa3", 2909912191L, "1122", 0));
 	}
 
 	@Override
 	public OperatorDTO getOperator(int oprId) throws DALException {
-		for (int i=0;i<Oplist.size();i++)
+		for(int i=0;i<Oplist.size();i++)
 		{
-			if (Oplist.get(i).getoprId()==oprId)
+			if (Oplist.get(i).getoprID()==oprId)
 				return Oplist.get(i);
 		}
 		return null;
@@ -49,7 +49,7 @@ public class OperatorDAO implements IOperatorDAO {
 	@Override
 	public void deleteOperatoer(OperatorDTO opr) throws DALException {
 		
-		Oplist.remove(opr.getoprId());
+		Oplist.remove(opr.getoprID());
 		
 	}
 

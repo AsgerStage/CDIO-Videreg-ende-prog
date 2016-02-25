@@ -265,7 +265,7 @@ public class Dialog implements Runnable
         final OperatorDTO userDTO = functionality.readOpr(userID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t" + userDTO.getName());
-            System.out.println("\tID:\t" + userDTO.getoprId());
+            System.out.println("\tID:\t" + userDTO.getoprID());
             System.out.println("\tCPR:\t" + userDTO.getCpr());
         }
         else
@@ -302,7 +302,7 @@ public class Dialog implements Runnable
         final OperatorDTO userDTO = functionality.readOpr(userID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t" + userDTO.getName());
-            System.out.println("\tID:\t" + userDTO.getoprId());
+            System.out.println("\tID:\t" + userDTO.getoprID());
             System.out.println("\tCPR:\t" + userDTO.getCpr());
             System.out.println("\tPassword:\t" + userDTO.getPassword());
         }
