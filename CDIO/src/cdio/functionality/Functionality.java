@@ -8,6 +8,7 @@ import cdio.models.OperatorDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,6 +30,15 @@ public class Functionality implements IFunctionality {
 	@Override
 	public int createOpr(String oprNavn, int cpr) { 
 		// TODO Auto-generated method stub
+            Random random = new Random(1991);
+        
+            for (int i = 0; i < 20; i++) {
+
+                int ran = random.nextInt(122 - 33) + 33;
+
+                System.out.print((char) ran);
+            }
+            
 		OperatorDTO opr = new OperatorDTO(oprID, oprNavn, ini, cpr, password, rank); // Ny operator oprettes (der skal laves nogle metoder til at autogenerer oprID og ini )
 		
                 operatoerer.add(opr); // operator tilf�jes en liste over operat�rer 
