@@ -9,9 +9,21 @@ public class OperatorDTO {
 	String ini;
 	int cpr;
 	String password;
+	int rank;
 public OperatorDTO(int opr)
 {
 oprId=opr;	
+}
+
+public void setRank(int rank)
+{
+	this.rank=rank;
+	
+}
+public int getRank()
+{
+	return this.rank;
+	
 }
 public void setoprId(int oprId)
 {
@@ -20,7 +32,7 @@ public void setoprId(int oprId)
 }
 public int getoprId()
 {
-	return oprId;
+	return this.oprId;
 	
 }
 public void setName(String name)
