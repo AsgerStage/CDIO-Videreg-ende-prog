@@ -1,32 +1,45 @@
 package cdio.functionality;
 
+import cdio.data.IOperatorDAO;
+import cdio.data.OperatorDAO;
+import cdio.exceptions.DALException;
 import cdio.models.OperatorDTO;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Functionality implements IFunctionality {
 
-	List<OperatoerDTO> operatoerer= new ArrayList <OperatoerDTO>();
+	private List<OperatorDTO> operatoerer;
+        private final IOperatorDAO dao;
 
-	public Functionality() {
-		// TODO Auto-generated constructor stub
+	public Functionality(IOperatorDAO dao) {
+            this.dao = dao;
+            try {
+                operatoerer = new OperatorDAO().getOperatorList();
+                // TODO Auto-generated constructor stub
+            } catch (DALException ex) {
+                ex.printStackTrace();
+            }
 	}
 
 	@Override
-	public void createOpr(String oprNavn, int cpr) { 
+	public int createOpr(String oprNavn, int cpr) { 
 		// TODO Auto-generated method stub
-		OperatoerDTO opr = new OperatoerDTO(oprId, oprNavn, ini, cpr, password); // Ny operator oprettes (der skal laves nogle metoder til at autogenerer oprId og ini )
-		operatoerer.add(opr); // operator tilføjes en liste over operatører 
-		return; // Her skal der returneres et oprId eller en ini-kode når operatøren er oprettet
+		OperatorDTO opr = new OperatorDTO(oprID, oprNavn, ini, cpr, password, rank); // Ny operator oprettes (der skal laves nogle metoder til at autogenerer oprID og ini )
+		
+                operatoerer.add(opr); // operator tilfï¿½jes en liste over operatï¿½rer 
+		return oprID; // Her skal der returneres et oprID eller en ini-kode nï¿½r operatï¿½ren er oprettet
 	}
 
 	@Override
-	public boolean deleteOpr (int oprId) {
+	public boolean deleteOpr (int oprID) {
 		// TODO Auto-generated method stub
-		for(OperatoerDTO oprDTO: operatoerer){
-			if(oprDTO.oprId==oprId){
+		for(OperatorDTO oprDTO: operatoerer){
+			if(oprDTO.getoprId()==oprID){
 				operatoerer.remove(oprDTO);
 				return true;
 			}
@@ -35,17 +48,29 @@ public class Functionality implements IFunctionality {
 	}
 
 	@Override
-	public void updateOpr(int oprId) {
-		// TODO Auto-generated method stub
-		for (){
-			if (valg==1)//hvis det er navnet der skal ændres
-				operatoerer.get(navn).setNavn();
-			else if (valg==2)//hvis det er cpr der skal ændres
-				operatoerer.get(cpr).setCpr();
-			else if (valg==2)//hvis det er opr status der skal ændres
-				operatoerer.get(oprStatus).setStatus();
-		}
-		// mulige ændringer
+	public boolean updateOpr(int oprID, String name, int cpr, int rank) {
+            for(OperatorDTO oprDTO: operatoerer){
+                    if(oprDTO.getoprId()==oprID){
+                        
+                        OperatorDTO updatedOpr = oprDTO;
+                        if(name != null)
+                            oprDTO.setName(name);
+                        if(cpr != -1)
+                            oprDTO.setCpr(cpr);
+                        if(rank != -1)
+                            oprDTO.setRank(rank);
+                        
+                        try {
+                            dao.updateOperatoer(updatedOpr);
+                            return true;
+                        } catch (DALException ex) {
+                            ex.printStackTrace();
+                            return false;
+                        }
+                    }
+            }
+            return false;
+		// mulige ï¿½ndringer
 		// 1. Navn
 		// 2. Cpr
 		// 3. Status ( om det er en alm opr el admin )
@@ -53,26 +78,49 @@ public class Functionality implements IFunctionality {
 	}
 
 	@Override
-	public boolean changePass(int oprId) {
-		// TODO Auto-generated method stub
-		for(OperatoerDTO oprDTO: operatoerer){
-			if(oprDTO.oprId==oprId){
-				operatoerer.get(password).setPassword();
-				return true;
-			}
-		}
-		return false;
+	public boolean changePass(int oprID, String oldPassword, String newPassowrd1, String newPassword2) {
+            // TODO Auto-generated method stub
+            OperatorDTO opr;
+            try {
+                opr = dao.getOperator(oprID);
+                
+                if(newPassowrd1.equals(newPassword2)) {
+                    if(opr.getPassword().equals(oldPassword)) {
+                        opr.setPassword(newPassowrd1);
+                        return true;
+                    }
+                }
+            } catch (DALException ex) {
+                ex.printStackTrace();
+            }
+            
+            return false;
 	}
-	double measure(int tara, int weight) {
+        
+        @Override
+	public double measure(double tara, double brutto) {
 		// TODO Auto-generated method stub
-		return weight-tara;
+		return brutto - tara;
 
 	}
 
 	@Override
-	public void login() {
-		// TODO Auto-generated method stub
-
+	public boolean login(int userId, String password) {
+            try {
+                if (dao.getOperator(userId).getPassword().equals(password)) {
+                    return true;
+                }
+                else
+                    return false;
+            } catch (DALException ex) {
+                ex.printStackTrace();
+            }
+            return false;
 	}
+
+    @Override
+    public OperatorDTO readOpr(OperatorDTO opr) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }
