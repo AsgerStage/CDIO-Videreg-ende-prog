@@ -175,7 +175,7 @@ public class OperatorDTOTest
     }
 
     /**
-     * Test of setoprId method, of class OperatorDTO.
+     * Test of setOprID method, of class OperatorDTO.
      */
     @Test
     public void testSetOprId() {
@@ -188,7 +188,7 @@ public class OperatorDTOTest
             instance = new OperatorDTO(55, "Temp", "TMP", 1234567890, "QWerty12", 0);
             oprID = 99;
             expResult = oprID;
-            instance.setoprId(oprID);
+            instance.setOprID(oprID);
             result = instance.getOprID();
             assertEquals(expResult, result);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
@@ -199,7 +199,7 @@ public class OperatorDTOTest
             instance = new OperatorDTO(55, "Temp", "TMP", 1234567890, "QWerty12", 0);
             oprID = 11;
             expResult = oprID;
-            instance.setoprId(oprID);
+            instance.setOprID(oprID);
             result = instance.getOprID();
             assertEquals(expResult, result);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
@@ -210,7 +210,7 @@ public class OperatorDTOTest
         try {
             instance = new OperatorDTO(55, "Temp", "TMP", 1234567890, "QWerty12", 0);
             oprID = 10;
-            instance.setoprId(oprID);
+            instance.setOprID(oprID);
             assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
@@ -219,7 +219,7 @@ public class OperatorDTOTest
         try {
             instance = new OperatorDTO(55, "Temp", "TMP", 1234567890, "QWerty12", 0);
             oprID = 100;
-            instance.setoprId(oprID);
+            instance.setOprID(oprID);
             assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);

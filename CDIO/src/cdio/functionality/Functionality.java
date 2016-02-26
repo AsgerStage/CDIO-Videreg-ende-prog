@@ -17,46 +17,7 @@ public class Functionality implements IFunctionality
 
     @Override
     public int createOpr(String oprNavn, String ini, long cpr, int rank) {
-//        Random random = new Random();
-        
         int oprID = generateID();
-
-//        Character[] chars = new Character[69];
-//        chars[0] = (char) 33;
-//        chars[1] = (char) 43;
-//        chars[2] = (char) 45;
-//        chars[3] = (char) 46;
-//        chars[4] = (char) 61;
-//        chars[5] = (char) 63;
-//        chars[6] = (char) 95;
-//        
-//        int c = 0;
-//        for (int i = 7; c < 17; i++) {
-//            chars[i] = Character.forDigit(c, 10);
-//            c++;
-//        }
-//        
-//        c = 65;
-//        for (int i = 17; i < 43; i++) {
-//            chars[i] = (char) c;
-//            c++;
-//        }
-//        
-//        c = 97;
-//        for (int i = 43; i < 69; i++) {
-//            chars[i] = (char) c;
-//            c++;
-//        }
-//        
-//        System.out.println("Chars: " + Arrays.toString(chars));
-//        
-//        StringBuilder pass = new StringBuilder();
-//        for(int i = 0; i < 10; i++) {
-//            pass.append(chars[random.nextInt(68)]);
-//        }
-//        pass.append(chars[random.nextInt(6)]);
-//        pass.append(chars[random.nextInt(17) + 7]);
-//        pass.append(chars[random.nextInt(43) + 18]);
         String pass = generatePassword();
 
         try {

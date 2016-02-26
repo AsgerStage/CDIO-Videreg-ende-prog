@@ -23,7 +23,7 @@ public final class OperatorDTO
     private int rank;
 
     public OperatorDTO(int oprID, String oprNavn, String ini, long cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
-        setoprId(oprID);
+        setOprID(oprID);
         setName(oprNavn);
         setIni(ini);
         setCpr(cpr);
@@ -50,7 +50,7 @@ public final class OperatorDTO
         return this.rank;
     }
 
-    public void setoprId(int oprID) throws OpIdException {
+    public void setOprID(int oprID) throws OpIdException {
         if(oprID >= ID_MINIMUM_VALUE && oprID <= ID_MAXIMUM_VALUE)
             this.oprID = oprID;
         else

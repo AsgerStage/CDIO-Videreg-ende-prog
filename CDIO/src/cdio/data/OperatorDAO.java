@@ -9,12 +9,12 @@ import java.util.List;
 
 public class OperatorDAO implements IOperatorDAO 
 {
-    ArrayList<OperatorDTO> Oplist = new ArrayList<>();
+    private final ArrayList<OperatorDTO> oprList = new ArrayList<>();
 
     public OperatorDAO() {
         try {
-            Oplist.add(new OperatorDTO(99, "Admin", "ADM", 0000000000L, "Abc0234", 1));
-            Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "123Abc", 0));
+            oprList.add(new OperatorDTO(99, "Admin", "ADM", 0000000000L, "Abc0234", 1));
+            oprList.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "123Abc", 0));
         } catch (OpPasswordException | OpNameException | OpIdException | DALException  ex) {
             ex.printStackTrace();
         }
@@ -22,25 +22,25 @@ public class OperatorDAO implements IOperatorDAO
 
     @Override
     public OperatorDTO getOperator(int oprId) throws DALException {
-        for(int i=0;i<Oplist.size();i++) {
-            if (Oplist.get(i).getOprID()==oprId)
-                return Oplist.get(i);
+        for(int i=0;i<oprList.size();i++) {
+            if (oprList.get(i).getOprID()==oprId)
+                return oprList.get(i);
         }
         return null;
     }
 
     @Override
     public List<OperatorDTO> getOperatorList() throws DALException {
-        return Oplist;
+        return oprList;
     }
 
     @Override
     public void createOperatoer(OperatorDTO opr) throws DALException {
-        for (OperatorDTO operatoer : Oplist) {
+        for (OperatorDTO operatoer : oprList) {
             if(opr.getOprID() == operatoer.getOprID())
                 throw new DALException("Brugeren eksisterer allerede");
         }
-        Oplist.add(opr);
+        oprList.add(opr);
     }
 
     @Override
@@ -52,10 +52,10 @@ public class OperatorDAO implements IOperatorDAO
 
     @Override
     public void deleteOperatoer(OperatorDTO opr) throws DALException {
-        ArrayList<OperatorDTO> tempList = (ArrayList<OperatorDTO>) Oplist.clone();
+        ArrayList<OperatorDTO> tempList = (ArrayList<OperatorDTO>) oprList.clone();
         for(OperatorDTO operatoer : tempList) {
             if(opr.getOprID() == operatoer.getOprID())
-                Oplist.remove(operatoer);
+                oprList.remove(operatoer);
         }
     }
 }
