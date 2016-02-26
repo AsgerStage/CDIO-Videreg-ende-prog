@@ -1,5 +1,8 @@
 package cdio.data;
 import cdio.exceptions.DALException;
+import cdio.exceptions.OpIdException;
+import cdio.exceptions.OpNameException;
+import cdio.exceptions.OpPasswordException;
 import cdio.models.OperatorDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +12,12 @@ public class OperatorDAO implements IOperatorDAO
     ArrayList<OperatorDTO> Oplist = new ArrayList<>();
 
     public OperatorDAO() {
-        Oplist.add(new OperatorDTO(99, "Admin", "Abc0234", 0000000000L, "Abc0234", 1));
-        Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "1122", 0));
+        try {
+            Oplist.add(new OperatorDTO(99, "Admin", "Abc0234", 0000000000L, "Abc0234", 1));
+            Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "123Abc", 0));
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException  ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

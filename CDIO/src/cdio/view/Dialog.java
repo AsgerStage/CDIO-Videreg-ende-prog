@@ -1,5 +1,7 @@
 package cdio.view;
 import cdio.exceptions.DALException;
+import cdio.exceptions.OpNameException;
+import cdio.exceptions.OpPasswordException;
 import cdio.functionality.IFunctionality;
 import cdio.models.OperatorDTO;
 import java.util.InputMismatchException;
@@ -172,6 +174,9 @@ public class Dialog implements Runnable
                         scanner.next();
                         scanner.reset();
                         System.out.println("Ugyldig indtastning: " + ex);
+                    } 
+                    catch (OpPasswordException ex) {
+                        System.out.println("Kunne ikke skifte dit password da det ikke overholder reglerne for passwords");
                     }
                     break;
                 }
@@ -227,6 +232,8 @@ public class Dialog implements Runnable
                             scanner.next();
                             scanner.reset();
                             System.out.println("Ugyldig indtastning: " + ex);
+                        } catch (OpNameException ex) {
+                            System.out.println("Navnet overholder ikke reglerne for operatør navne");
                         }
                     }
                     else
@@ -330,7 +337,7 @@ public class Dialog implements Runnable
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
-    private void changePassword(int oprID) throws DALException, InputMismatchException {
+    private void changePassword(int oprID) throws DALException, OpPasswordException {
         scanner = new Scanner(System.in);
         String oldPass, newPass1, newPass2;
         
@@ -343,6 +350,7 @@ public class Dialog implements Runnable
         newPass1 = scanner.nextLine();
         System.out.print("\tNyt password: ");
         newPass2 = scanner.nextLine();
+        
         
         if(functionality.changePass(oprID, oldPass, newPass1, newPass2))
             System.out.println("Dit password blev ændret");
@@ -424,7 +432,7 @@ public class Dialog implements Runnable
      * @throws InputMismatchException 
      *      Smider en input mismatch exception hvis brugeren indtaster ugyldig data.
      */
-    private void updateUser() throws DALException, InputMismatchException {
+    private void updateUser() throws DALException, InputMismatchException, OpNameException {
         scanner = new Scanner(System.in);
         String name;
         int cpr, oprId, rank;

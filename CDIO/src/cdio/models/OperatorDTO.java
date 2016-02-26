@@ -1,7 +1,19 @@
 package cdio.models;
+import cdio.exceptions.DALException;
+import cdio.exceptions.OpIdException;
+import cdio.exceptions.OpNameException;
+import cdio.exceptions.OpPasswordException;
 
-public class OperatorDTO 
+public final class OperatorDTO 
 {
+    private final int ID_MINIMUM_VALUE = 11;
+    private final int ID_MAXIMUM_VALUE = 99;
+    private final int RANK_MINIMUM_VALUE = -1;
+    private final int RANK_MAXIMUM_VALUE = 1;
+    private final int NAME_MINIMUM_LENGTH = 2;
+    private final int PASSWORD_MINIMUM_LENGTH = 6;
+    private final int NUMBER_OF_SPECIAL_CHARACTERS = 3;
+    
     private int oprID;
     private String oprNavn;
     private String ini;
@@ -13,13 +25,20 @@ public class OperatorDTO
         oprID = opr;
     }
 
-    public OperatorDTO(int oprID, String oprNavn, String ini, long cpr, String password, int rank) {
-        this.oprID = oprID;
-        this.oprNavn = oprNavn;
-        this.ini = ini;
-        this.cpr = cpr;
-        this.password = password;
-        this.rank = rank;
+    public OperatorDTO(int oprID, String oprNavn, String ini, long cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
+        setoprId(oprID);
+        setName(oprNavn);
+        setIni(ini);
+        setCpr(cpr);
+        setPassword(password);
+        setRank(rank);
+        
+//        this.oprID = oprID;
+//        this.oprNavn = oprNavn;
+//        this.ini = ini;
+//        this.cpr = cpr;
+//        this.password = password;
+//        this.rank = rank;
     }
     
     public void setIni(String ini) {
@@ -30,44 +49,85 @@ public class OperatorDTO
         return this.ini;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setRank(int rank) throws DALException {
+        if(rank >= RANK_MINIMUM_VALUE && rank <= RANK_MAXIMUM_VALUE)
+            this.rank = rank;
+        else 
+            throw new DALException("Operatørens rank overholder ikke kravende");
     }
 
     public int getRank() {
-            return this.rank;
+        return this.rank;
     }
 
-    public void setoprId(int oprID) {
+    public void setoprId(int oprID) throws OpIdException {
+        if(oprID >= ID_MINIMUM_VALUE && oprID <= ID_MAXIMUM_VALUE)
             this.oprID = oprID;
+        else
+            throw new OpIdException(oprID);
     }
 
     public int getoprID() {
-            return this.oprID;
+        return this.oprID;
     }
 
-    public void setName(String name) {
-            this.oprNavn = name;
+    public void setName(String name) throws OpNameException {
+        if(name != null) {
+            if(name.length() >= NAME_MINIMUM_LENGTH)
+                this.oprNavn = name;
+            else
+                throw new OpNameException("Operatør navnet overholder ikke kravende");
+            }
+        else
+            throw new OpNameException("Operatør navnet overholder ikke kravende");
     }
 
     public void setCpr(long cpr) {
-            this.cpr = cpr;
+        this.cpr = cpr;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws OpPasswordException {
+        if(valPass(password))
             this.password = password;
+        else
+            throw new OpPasswordException("Passwordet overholder ikke de opstillede krav");
     }
 
     public String getName() {
-            return this.oprNavn;
+        return this.oprNavn;
     }
 
     public long getCpr() {
-            return this.cpr;
+        return this.cpr;
     }
 
     public String getPassword() {
-            return this.password;
+        return this.password;
+    }
+    
+    private boolean valPass(String pass) {
+        if(pass.length() < PASSWORD_MINIMUM_LENGTH)
+            return false;
+        
+        byte lowerCase = 0;
+        byte upperCase = 0;
+        byte digit = 0;
+        byte specialChar = 0;
+        char[] passChar = pass.toCharArray();
+        
+        for (char c : passChar) {
+            if(Character.isLowerCase(c)) 
+                lowerCase = 1;
+            else if(Character.isUpperCase(c))
+                upperCase = 1;
+            else if(Character.isDigit(c)) 
+                digit = 1;
+            else if(c == 46 || c == 45 || c == 95 || c == 43 || c ==33 || c == 63 || c == 61) 
+                specialChar = 1;
+            else 
+                return false;
+        }
+        return (lowerCase + upperCase + digit + specialChar) >= NUMBER_OF_SPECIAL_CHARACTERS;
     }
 
     @Override
