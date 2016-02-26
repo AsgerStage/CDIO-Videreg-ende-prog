@@ -1,25 +1,19 @@
 package cdio;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  * MainTest
  * @author Lasse
  * @version 26-02-2016
  */
-public class MainTest {
-    
-    public MainTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
+public class MainTest 
+{
     /**
      * Test of main method, of class Main.
      */
+    @Ignore
     @Test
     public void testMain() throws Exception {
         System.out.println("main");
@@ -27,5 +21,4 @@ public class MainTest {
         Main.main(args);
         fail("The test case is a prototype.");
     }
-    
 }

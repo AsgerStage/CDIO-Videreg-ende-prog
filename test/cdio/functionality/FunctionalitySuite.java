@@ -1,5 +1,4 @@
 package cdio.functionality;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -10,10 +9,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({cdio.functionality.FunctionalityTest.class})
-public class FunctionalitySuite {
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
+public class FunctionalitySuite 
+{
+    
 }

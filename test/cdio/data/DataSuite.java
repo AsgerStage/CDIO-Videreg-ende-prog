@@ -1,5 +1,4 @@
 package cdio.data;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -10,10 +9,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({cdio.data.OperatorDAOTest.class})
-public class DataSuite {
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
+public class DataSuite 
+{
+    
 }

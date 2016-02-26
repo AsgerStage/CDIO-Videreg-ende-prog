@@ -1,5 +1,4 @@
 package cdio.models;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -8,15 +7,8 @@ import static org.junit.Assert.*;
  * @author Lasse
  * @version 26-02-2016
  */
-public class OperatorDTOTest {
-    
-    public OperatorDTOTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
+public class OperatorDTOTest 
+{
     /**
      * Test of setIni method, of class OperatorDTO.
      */
@@ -179,5 +171,4 @@ public class OperatorDTOTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
-    
 }

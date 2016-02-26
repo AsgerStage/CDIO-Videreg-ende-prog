@@ -1,6 +1,5 @@
 package cdio.functionality;
 import cdio.models.OperatorDTO;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -9,15 +8,8 @@ import static org.junit.Assert.*;
  * @author Lasse
  * @version 26-02-2016
  */
-public class FunctionalityTest {
-    
-    public FunctionalityTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
+public class FunctionalityTest 
+{
     /**
      * Test of createOpr method, of class Functionality.
      */
@@ -126,5 +118,4 @@ public class FunctionalityTest {
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }
-    
 }

@@ -1,7 +1,6 @@
 package cdio.data;
 import cdio.models.OperatorDTO;
 import java.util.List;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,15 +9,8 @@ import static org.junit.Assert.*;
  * @author Lasse
  * @version 26-02-2016
  */
-public class OperatorDAOTest {
-    
-    public OperatorDAOTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
+public class OperatorDAOTest 
+{
     /**
      * Test of getOperator method, of class OperatorDAO.
      */
@@ -81,5 +73,4 @@ public class OperatorDAOTest {
         instance.deleteOperatoer(opr);
         fail("The test case is a prototype.");
     }
-    
 }

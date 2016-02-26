@@ -8,15 +8,8 @@ import static org.junit.Assert.*;
  * @author Lasse
  * @version 26-02-2016
  */
-public class DialogTest {
-    
-    public DialogTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
+public class DialogTest 
+{
     /**
      * Test of run method, of class Dialog.
      */
@@ -27,5 +20,4 @@ public class DialogTest {
         instance.run();
         fail("The test case is a prototype.");
     }
-    
 }

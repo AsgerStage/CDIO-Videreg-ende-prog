@@ -1,5 +1,4 @@
 package cdio.view;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -8,15 +7,8 @@ import static org.junit.Assert.*;
  * @author Lasse
  * @version 26-02-2016
  */
-public class ViewTest {
-    
-    public ViewTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
+public class ViewTest 
+{
     /**
      * Test of dialog method, of class View.
      */
@@ -38,5 +30,4 @@ public class ViewTest {
         instance.exit();
         fail("The test case is a prototype.");
     }
-    
 }

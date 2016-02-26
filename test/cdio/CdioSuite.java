@@ -1,5 +1,4 @@
 package cdio;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -10,10 +9,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({cdio.data.DataSuite.class,cdio.view.ViewSuite.class,cdio.MainTest.class,cdio.exceptions.ExceptionsSuite.class,cdio.functionality.FunctionalitySuite.class,cdio.models.ModelsSuite.class})
-public class CdioSuite {
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
+public class CdioSuite 
+{
+    
 }
