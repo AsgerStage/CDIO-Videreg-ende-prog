@@ -1,6 +1,13 @@
 package cdio.data;
+import cdio.exceptions.DALException;
+import cdio.exceptions.OpIdException;
+import cdio.exceptions.OpNameException;
+import cdio.exceptions.OpPasswordException;
 import cdio.models.OperatorDTO;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -15,62 +22,236 @@ public class OperatorDAOTest
      * Test of getOperator method, of class OperatorDAO.
      */
     @Test
-    public void testGetOperator() throws Exception {
+    public void testGetOperator() throws AssertionError {
         System.out.println("getOperator");
-        int oprId = 0;
         OperatorDAO instance = new OperatorDAO();
-        OperatorDTO expResult = null;
-        OperatorDTO result = instance.getOperator(oprId);
+        OperatorDTO expResult, result;
+        int oprId;
+        
+        //Positiv
+        try {
+            oprId = 99;
+            expResult = new OperatorDTO(99, "Admin", "ADM", 0000000000L, "Abc0234", 1);
+            result = instance.getOperator(oprId);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
+        try {
+            oprId = 55;
+            expResult = null;
+            result = instance.getOperator(oprId);
+        } catch (DALException ex) {
+            throw new AssertionError(ex);
+        }
+        assertEquals(expResult, result);
+        
+        //Negativ
+        try {
+            oprId = -1;
+            expResult = null;
+            result = instance.getOperator(oprId);
+        } catch (DALException ex) {
+            throw new AssertionError(ex);
+        }
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of getOperatorList method, of class OperatorDAO.
      */
     @Test
-    public void testGetOperatorList() throws Exception {
+    public void testGetOperatorList() throws AssertionError {
         System.out.println("getOperatorList");
         OperatorDAO instance = new OperatorDAO();
-        List<OperatorDTO> expResult = null;
-        List<OperatorDTO> result = instance.getOperatorList();
+        List<OperatorDTO> expResult = new ArrayList<>();
+        List<OperatorDTO> result;
+        
+        //Positiv
+        try {
+            expResult.add(new OperatorDTO(99, "Admin", "ADM", 0000000000L, "Abc0234", 1));
+            expResult.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "123Abc", 0));
+            result = instance.getOperatorList();
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
         assertEquals(expResult, result);
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of createOperatoer method, of class OperatorDAO.
      */
     @Test
-    public void testCreateOperatoer() throws Exception {
+    public void testCreateOperatoer() throws AssertionError {
         System.out.println("createOperatoer");
-        OperatorDTO opr = null;
         OperatorDAO instance = new OperatorDAO();
-        instance.createOperatoer(opr);
-        fail("The test case is a prototype.");
+        OperatorDTO opr, expResult, result;
+        
+        //Positiv
+        try {
+            opr = new OperatorDTO(66, "Test Bruger", "TB", 1234567890, "Abc321", 0);
+            expResult = opr;
+            instance.createOperatoer(opr);
+            result = instance.getOperator(opr.getoprID());
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
+        assertEquals(expResult, result);
+        
+        try {
+            opr = new OperatorDTO(6, "Test Bruger", null, -1, "Abc321", 0);
+            expResult = opr;
+            instance.createOperatoer(opr);
+            result = instance.getOperator(opr.getoprID());
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        assertEquals(expResult, result);
+        
+        //Negativ
+        try {
+            opr = new OperatorDTO(-1, "Test Bruger", "TB", 1234567890, "Abc321", 0);
+            instance.createOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = new OperatorDTO(6, "A", "TB", 1234567890, "Abc321", 0);
+            instance.createOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "abc1234", 0);
+            instance.createOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "Abc321", -1);
+            instance.createOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
     }
 
     /**
      * Test of updateOperatoer method, of class OperatorDAO.
      */
     @Test
-    public void testUpdateOperatoer() throws Exception {
+    public void testUpdateOperatoer() throws AssertionError {
         System.out.println("updateOperatoer");
-        OperatorDTO opr = null;
         OperatorDAO instance = new OperatorDAO();
-        instance.updateOperatoer(opr);
-        fail("The test case is a prototype.");
+        OperatorDTO opr, expResult, result;
+        
+        try {
+            instance.createOperatoer(new OperatorDTO(77, "Test Operatør", "TO", 7654321L, "321Abc", 1));
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
+        
+        //Positiv
+        try {
+            opr = new OperatorDTO(66, "Test Bruger", "TB", 1234567890, "Abc321", 0);
+            expResult = opr;
+            instance.updateOperatoer(opr);
+            result = instance.getOperator(opr.getoprID());
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
+        assertEquals(expResult, result);
+        
+        try {
+            opr = new OperatorDTO(6, "Test Bruger", null, -1, "Abc321", 0);
+            expResult = opr;
+            instance.updateOperatoer(opr);
+            result = instance.getOperator(opr.getoprID());
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        assertEquals(expResult, result);
+        
+        //Negativ
+        try {
+            opr = new OperatorDTO(-1, "Test Bruger", "TB", 1234567890, "Abc321", 0);
+            instance.updateOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = new OperatorDTO(6, "A", "TB", 1234567890, "Abc321", 0);
+            instance.updateOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "abc1234", 0);
+            instance.updateOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "Abc321", -1);
+            instance.updateOperatoer(opr);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            assertTrue(true);
+        }
     }
 
     /**
      * Test of deleteOperatoer method, of class OperatorDAO.
      */
     @Test
-    public void testDeleteOperatoer() throws Exception {
+    public void testDeleteOperatoer() throws AssertionError {
         System.out.println("deleteOperatoer");
-        OperatorDTO opr = null;
         OperatorDAO instance = new OperatorDAO();
-        instance.deleteOperatoer(opr);
-        fail("The test case is a prototype.");
+        OperatorDTO opr, expResult, result;
+        
+        try {
+            opr = new OperatorDTO(88, "Slet Mig", "SM", 123567, "12ABcd", 0);
+            expResult = opr;
+
+            instance.createOperatoer(opr);
+            result = instance.getOperator(opr.getoprID());
+            assertEquals(expResult, result);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
+        
+        //Positiv
+        try {
+            expResult = null;
+            instance.deleteOperatoer(opr);
+            result = instance.getOperator(opr.getoprID());
+            assertEquals(expResult, result);
+        } catch (DALException ex) {
+            throw new AssertionError(ex);
+        }
+        
+        //Negativ
+        try {
+            opr = new OperatorDTO(22, "Ny Slet Mig", "NSM", 7654321, "AB12cd", 1);
+            instance.deleteOperatoer(opr);
+        } catch (DALException | OpPasswordException | OpNameException | OpIdException ex) {
+            throw new AssertionError(ex);
+        } catch (NullPointerException ex) {
+            assertTrue(true);
+        }
+        
+        try {
+            opr = null;
+            instance.deleteOperatoer(opr);
+        } catch (DALException ex) {
+            throw new AssertionError(ex);
+        } catch (NullPointerException ex) {
+            assertTrue(true);
+        }
     }
 }

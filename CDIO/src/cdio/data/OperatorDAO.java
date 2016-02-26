@@ -13,7 +13,7 @@ public class OperatorDAO implements IOperatorDAO
 
     public OperatorDAO() {
         try {
-            Oplist.add(new OperatorDTO(99, "Admin", "Abc0234", 0000000000L, "Abc0234", 1));
+            Oplist.add(new OperatorDTO(99, "Admin", "ADM", 0000000000L, "Abc0234", 1));
             Oplist.add(new OperatorDTO(11, "Lasse H Nilesen", "LHN", 2909912191L, "123Abc", 0));
         } catch (OpPasswordException | OpNameException | OpIdException | DALException  ex) {
             ex.printStackTrace();

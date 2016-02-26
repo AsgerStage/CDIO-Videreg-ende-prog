@@ -3,6 +3,7 @@ import cdio.exceptions.DALException;
 import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
+import java.util.Objects;
 
 public final class OperatorDTO 
 {
@@ -21,10 +22,6 @@ public final class OperatorDTO
     private String password;
     private int rank;
 
-    public OperatorDTO(int opr) {
-        oprID = opr;
-    }
-
     public OperatorDTO(int oprID, String oprNavn, String ini, long cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
         setoprId(oprID);
         setName(oprNavn);
@@ -32,13 +29,6 @@ public final class OperatorDTO
         setCpr(cpr);
         setPassword(password);
         setRank(rank);
-        
-//        this.oprID = oprID;
-//        this.oprNavn = oprNavn;
-//        this.ini = ini;
-//        this.cpr = cpr;
-//        this.password = password;
-//        this.rank = rank;
     }
     
     public void setIni(String ini) {
@@ -133,5 +123,31 @@ public final class OperatorDTO
     @Override
     public String toString() {
         return "OperatorDTO{" + "oprID=" + oprID + ", oprNavn=" + oprNavn + ", ini=" + ini + ", cpr=" + cpr + ", password=" + password + ", rank=" + rank + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) 
+            return false;
+        final OperatorDTO other = (OperatorDTO) obj;
+        
+        return this.oprID == other.oprID &&
+               Objects.equals(this.oprNavn, other.oprNavn) &&
+               Objects.equals(this.ini, other.ini) &&
+               this.cpr == other.cpr &&
+               Objects.equals(this.password, other.password) && 
+               this.rank == other.rank;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + this.oprID;
+        hash = 61 * hash + Objects.hashCode(this.oprNavn);
+        hash = 61 * hash + Objects.hashCode(this.ini);
+        hash = 61 * hash + (int) (this.cpr ^ (this.cpr >>> 32));
+        hash = 61 * hash + Objects.hashCode(this.password);
+        hash = 61 * hash + this.rank;
+        return hash;
     }
 }
