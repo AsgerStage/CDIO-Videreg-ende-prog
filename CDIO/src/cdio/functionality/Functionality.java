@@ -14,9 +14,10 @@ public class Functionality implements IFunctionality
 
     @Override
     public int createOpr(String oprNavn, String ini, long cpr, int rank) {
-        int oprID = generateID ();
-
         Random random = new Random();
+        
+        int oprID = generateID();
+
         StringBuilder pass = new StringBuilder();
         for(int i = 0; i < 20; i++) {
             pass.append((char) (random.nextInt(122 - 33) + 33));
@@ -118,8 +119,9 @@ public class Functionality implements IFunctionality
         int oprID = 11 + random.nextInt(89);
 
         try {
-            if(dao.getOperator(oprID) != null)
+            if(dao.getOperator(oprID) == null) {
                 return oprID;
+            }
             else
                 return generateID();
         } 

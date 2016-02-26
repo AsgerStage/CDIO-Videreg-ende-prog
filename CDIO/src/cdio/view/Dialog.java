@@ -410,7 +410,7 @@ public class Dialog implements Runnable
         oprId = functionality.createOpr(name, ini, cpr, rank);
         
         if(oprId != -1)
-            System.out.println("Bruger oprattet med operatør id: " + oprId);
+            System.out.println("Bruger oprettet med operatør id: " + oprId);
         else
             System.out.println("Kunne ikke oprette operatøren");
     }

@@ -29,6 +29,10 @@ public class OperatorDAO implements IOperatorDAO
 
     @Override
     public void createOperatoer(OperatorDTO opr) throws DALException {
+        for (OperatorDTO operatoer : Oplist) {
+            if(opr.getoprID() == operatoer.getoprID())
+                throw new DALException("Brugeren eksisterer allerede");
+        }
         Oplist.add(opr);
     }
 
@@ -42,7 +46,7 @@ public class OperatorDAO implements IOperatorDAO
     @Override
     public void deleteOperatoer(OperatorDTO opr) throws DALException {
         ArrayList<OperatorDTO> tempList = (ArrayList<OperatorDTO>) Oplist.clone();
-        for (OperatorDTO operatoer : tempList) {
+        for(OperatorDTO operatoer : tempList) {
             if(opr.getoprID() == operatoer.getoprID())
                 Oplist.remove(operatoer);
         }
