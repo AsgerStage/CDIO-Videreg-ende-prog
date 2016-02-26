@@ -6,8 +6,6 @@ import cdio.exceptions.OpPasswordException;
 import cdio.models.OperatorDTO;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -22,7 +20,7 @@ public class OperatorDAOTest
      * Test of getOperator method, of class OperatorDAO.
      */
     @Test
-    public void testGetOperator() throws AssertionError {
+    public void testGetOperator() {
         System.out.println("getOperator");
         OperatorDAO instance = new OperatorDAO();
         OperatorDTO expResult, result;
@@ -62,7 +60,7 @@ public class OperatorDAOTest
      * Test of getOperatorList method, of class OperatorDAO.
      */
     @Test
-    public void testGetOperatorList() throws AssertionError {
+    public void testGetOperatorList() {
         System.out.println("getOperatorList");
         OperatorDAO instance = new OperatorDAO();
         List<OperatorDTO> expResult = new ArrayList<>();
@@ -83,7 +81,7 @@ public class OperatorDAOTest
      * Test of createOperatoer method, of class OperatorDAO.
      */
     @Test
-    public void testCreateOperatoer() throws AssertionError {
+    public void testCreateOperatoer() {
         System.out.println("createOperatoer");
         OperatorDAO instance = new OperatorDAO();
         OperatorDTO opr, expResult, result;
@@ -143,7 +141,7 @@ public class OperatorDAOTest
      * Test of updateOperatoer method, of class OperatorDAO.
      */
     @Test
-    public void testUpdateOperatoer() throws AssertionError {
+    public void testUpdateOperatoer() {
         System.out.println("updateOperatoer");
         OperatorDAO instance = new OperatorDAO();
         OperatorDTO opr, expResult, result;
@@ -209,7 +207,7 @@ public class OperatorDAOTest
      * Test of deleteOperatoer method, of class OperatorDAO.
      */
     @Test
-    public void testDeleteOperatoer() throws AssertionError {
+    public void testDeleteOperatoer() {
         System.out.println("deleteOperatoer");
         OperatorDAO instance = new OperatorDAO();
         OperatorDTO opr, expResult, result;
