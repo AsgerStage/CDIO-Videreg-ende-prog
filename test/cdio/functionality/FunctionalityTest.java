@@ -5,8 +5,6 @@ import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
 import cdio.models.OperatorDTO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -181,6 +179,7 @@ public class FunctionalityTest
             
             result = instance.updateOpr(oprID, name, cpr, rank);
             assertEquals(expResult, result);
+            assertFalse(true);
         } catch (OpNameException ex) {
             assertTrue(true);
         }
@@ -194,6 +193,7 @@ public class FunctionalityTest
             
             result = instance.updateOpr(oprID, name, cpr, rank);
             assertEquals(expResult, result);
+            assertFalse(true);
         } catch (OpNameException ex) {
             assertTrue(true);
         }
@@ -224,7 +224,7 @@ public class FunctionalityTest
             assertEquals(expResult, result);
             assertEquals(newPassword1, newPassword);
         } catch (OpPasswordException ex) {
-            Logger.getLogger(FunctionalityTest.class.getName()).log(Level.SEVERE, null, ex);
+            throw new AssertionError(ex);
         }
         
         //Negativ
@@ -241,7 +241,7 @@ public class FunctionalityTest
             assertEquals(expResult, result);
             assertNotSame(newPassword1, newPassword);
         } catch (OpPasswordException ex) {
-            Logger.getLogger(FunctionalityTest.class.getName()).log(Level.SEVERE, null, ex);
+            throw new AssertionError(ex);
         }
         
         try {
@@ -257,7 +257,7 @@ public class FunctionalityTest
             assertEquals(expResult, result);
             assertNotSame(newPassword1, newPassword);
         } catch (OpPasswordException ex) {
-            Logger.getLogger(FunctionalityTest.class.getName()).log(Level.SEVERE, null, ex);
+            throw new AssertionError(ex);
         }
         
         try {
@@ -273,7 +273,7 @@ public class FunctionalityTest
             assertEquals(expResult, result);
             assertNotSame(newPassword1, newPassword);
         } catch (OpPasswordException ex) {
-            Logger.getLogger(FunctionalityTest.class.getName()).log(Level.SEVERE, null, ex);
+            throw new AssertionError(ex);
         }
     }
 

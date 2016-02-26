@@ -102,6 +102,7 @@ public class OperatorDAOTest
             expResult = opr;
             instance.createOperatoer(opr);
             result = instance.getOperator(opr.getOprID());
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -111,6 +112,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(-1, "Test Bruger", "TB", 1234567890, "Abc321", 0);
             instance.createOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -118,6 +120,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(6, "A", "TB", 1234567890, "Abc321", 0);
             instance.createOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -125,6 +128,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "abc1234", 0);
             instance.createOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -132,6 +136,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "Abc321", -1);
             instance.createOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -168,6 +173,7 @@ public class OperatorDAOTest
             expResult = opr;
             instance.updateOperatoer(opr);
             result = instance.getOperator(opr.getOprID());
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -177,6 +183,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(-1, "Test Bruger", "TB", 1234567890, "Abc321", 0);
             instance.updateOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -184,6 +191,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(6, "A", "TB", 1234567890, "Abc321", 0);
             instance.updateOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -191,6 +199,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "abc1234", 0);
             instance.updateOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -198,6 +207,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(6, "Test Bruger", "TB", 1234567890, "Abc321", -1);
             instance.updateOperatoer(opr);
+            assertFalse(true);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -237,6 +247,7 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(22, "Ny Slet Mig", "NSM", 7654321, "AB12cd", 1);
             instance.deleteOperatoer(opr);
+            assertFalse(true);
         } catch (DALException | OpPasswordException | OpNameException | OpIdException ex) {
             throw new AssertionError(ex);
         } catch (NullPointerException ex) {
@@ -246,6 +257,7 @@ public class OperatorDAOTest
         try {
             opr = null;
             instance.deleteOperatoer(opr);
+            assertFalse(true);
         } catch (DALException ex) {
             throw new AssertionError(ex);
         } catch (NullPointerException ex) {
