@@ -103,14 +103,14 @@ public class Functionality implements IFunctionality
     }
 
     @Override
-    public boolean changePass(int oprID, String oldPassword, String newPassowrd1, String newPassword2) throws OpPasswordException {
+    public boolean changePass(int oprID, String oldPassword, String newPassword1, String newPassword2) throws OpPasswordException {
         OperatorDTO opr;
         try {
             opr = dao.getOperator(oprID);
 
-            if(newPassowrd1.equals(newPassword2) && opr != null) {
+            if(newPassword1.equals(newPassword2) && opr != null) {
                 if(opr.getPassword().equals(oldPassword)) {
-                    opr.setPassword(newPassowrd1);
+                    opr.setPassword(newPassword1);
                     return true;
                 }
             }

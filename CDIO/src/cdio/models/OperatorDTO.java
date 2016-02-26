@@ -57,7 +57,7 @@ public final class OperatorDTO
             throw new OpIdException(oprID);
     }
 
-    public int getoprID() {
+    public int getOprID() {
         return this.oprID;
     }
 

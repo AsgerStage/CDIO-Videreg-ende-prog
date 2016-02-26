@@ -91,7 +91,7 @@ public class OperatorDAOTest
             opr = new OperatorDTO(66, "Test Bruger", "TB", 1234567890, "Abc321", 0);
             expResult = opr;
             instance.createOperatoer(opr);
-            result = instance.getOperator(opr.getoprID());
+            result = instance.getOperator(opr.getOprID());
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             throw new AssertionError(ex);
         }
@@ -101,7 +101,7 @@ public class OperatorDAOTest
             opr = new OperatorDTO(6, "Test Bruger", null, -1, "Abc321", 0);
             expResult = opr;
             instance.createOperatoer(opr);
-            result = instance.getOperator(opr.getoprID());
+            result = instance.getOperator(opr.getOprID());
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -157,7 +157,7 @@ public class OperatorDAOTest
             opr = new OperatorDTO(66, "Test Bruger", "TB", 1234567890, "Abc321", 0);
             expResult = opr;
             instance.updateOperatoer(opr);
-            result = instance.getOperator(opr.getoprID());
+            result = instance.getOperator(opr.getOprID());
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             throw new AssertionError(ex);
         }
@@ -167,7 +167,7 @@ public class OperatorDAOTest
             opr = new OperatorDTO(6, "Test Bruger", null, -1, "Abc321", 0);
             expResult = opr;
             instance.updateOperatoer(opr);
-            result = instance.getOperator(opr.getoprID());
+            result = instance.getOperator(opr.getOprID());
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             assertTrue(true);
         }
@@ -217,7 +217,7 @@ public class OperatorDAOTest
             expResult = opr;
 
             instance.createOperatoer(opr);
-            result = instance.getOperator(opr.getoprID());
+            result = instance.getOperator(opr.getOprID());
             assertEquals(expResult, result);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             throw new AssertionError(ex);
@@ -227,7 +227,7 @@ public class OperatorDAOTest
         try {
             expResult = null;
             instance.deleteOperatoer(opr);
-            result = instance.getOperator(opr.getoprID());
+            result = instance.getOperator(opr.getOprID());
             assertEquals(expResult, result);
         } catch (DALException ex) {
             throw new AssertionError(ex);

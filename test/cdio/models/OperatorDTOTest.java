@@ -72,14 +72,14 @@ public class OperatorDTOTest
     }
 
     /**
-     * Test of getoprID method, of class OperatorDTO.
+     * Test of getOprID method, of class OperatorDTO.
      */
     @Test
     public void testGetoprID() {
         System.out.println("getoprID");
         OperatorDTO instance = null;
         int expResult = 0;
-        int result = instance.getoprID();
+        int result = instance.getOprID();
         assertEquals(expResult, result);
         fail("The test case is a prototype.");
     }

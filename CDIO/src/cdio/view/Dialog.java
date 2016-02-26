@@ -99,7 +99,7 @@ public class Dialog implements Runnable
      */
     private int login(int userID, String password) {
         if(functionality.login(userID, password))
-            return functionality.readOpr(userID).getoprID();
+            return functionality.readOpr(userID).getOprID();
         else
             return -1;
     }
@@ -318,7 +318,7 @@ public class Dialog implements Runnable
         final OperatorDTO userDTO = functionality.readOpr(oprID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t\t" + userDTO.getName());
-            System.out.println("\tID:\t\t" + userDTO.getoprID());
+            System.out.println("\tID:\t\t" + userDTO.getOprID());
             System.out.println("\tInitialer:\t" + userDTO.getIni());
             System.out.println("\tCPR:\t\t" + userDTO.getCpr());
             System.out.println("\tRank:\t\t" + userDTO.getRank());
@@ -379,7 +379,7 @@ public class Dialog implements Runnable
         final OperatorDTO userDTO = functionality.readOpr(userID);
         if(userDTO != null) {
             System.out.println("\tNavn:\t\t" + userDTO.getName());
-            System.out.println("\tID:\t\t" + userDTO.getoprID());
+            System.out.println("\tID:\t\t" + userDTO.getOprID());
             System.out.println("\tInitialer:\t" + userDTO.getIni());
             System.out.println("\tCPR:\t\t" + userDTO.getCpr());
             System.out.println("\tRank:\t\t" + userDTO.getRank());
