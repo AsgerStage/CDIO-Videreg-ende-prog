@@ -247,11 +247,9 @@ public class OperatorDAOTest
         try {
             opr = new OperatorDTO(22, "Ny Slet Mig", "NSM", 7654321, "AB12cd", 1);
             instance.deleteOperatoer(opr);
-            assertFalse(true);
+            assertTrue(true);
         } catch (DALException | OpPasswordException | OpNameException | OpIdException ex) {
             throw new AssertionError(ex);
-        } catch (NullPointerException ex) {
-            assertTrue(true);
         }
         
         try {
