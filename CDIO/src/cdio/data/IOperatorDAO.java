@@ -1,6 +1,6 @@
 package cdio.data;
 import cdio.exceptions.DALException;
-import cdio.models.OperatorDTO;
+
 import java.util.List;
 
 public interface IOperatorDAO 

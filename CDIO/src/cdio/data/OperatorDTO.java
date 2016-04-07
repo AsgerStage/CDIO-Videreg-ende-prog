@@ -1,4 +1,4 @@
-package cdio.models;
+package cdio.data;
 import cdio.exceptions.DALException;
 import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;

@@ -1,7 +1,7 @@
 package cdio.functionality;
+import cdio.data.OperatorDTO;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
-import cdio.models.OperatorDTO;
 
 public interface IFunctionality 
 {
