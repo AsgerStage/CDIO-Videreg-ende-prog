@@ -30,8 +30,15 @@ public class VsCon {
 		printmenu();
 		try{
 			while (!(inline = instream.readLine().toUpperCase()).isEmpty()){ //her ventes på input
-				if (inline.startsWith("RM")){                        
-					// ikke implimenteret
+				if (inline.startsWith("RM20 8")){                        
+					indtDisp =inline.substring(8, inline.indexOf("\"",8));
+					outstream.writeBytes("RM20 B\r\n");
+					Scanner scanner =new Scanner(System.in);
+					String userinput =scanner.nextLine();
+					outstream.writeBytes("RM20 A "+userinput+"\r\n");
+					
+					
+					
 
 				}
 				else if (inline.startsWith("D")){
