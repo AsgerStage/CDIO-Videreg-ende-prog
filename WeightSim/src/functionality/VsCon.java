@@ -21,15 +21,16 @@ public class VsCon {
 
 	public static void main(String[] args) throws IOException{
 		listener = new ServerSocket(portdst);
-		System.out.println("Venter paa connection på port " + portdst );
+		System.out.println("Venter paa connection pï¿½ port " + portdst );
 		System.out.println("Indtast eventuel portnummer som 1. argument");
+                portdst = new Scanner(System.in).nextInt();
 		System.out.println("paa kommando linien for andet portnr");
 		sock = listener.accept();
 		instream = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 		outstream = new DataOutputStream(sock.getOutputStream());
 		printmenu();
 		try{
-			while (!(inline = instream.readLine().toUpperCase()).isEmpty()){ //her ventes på input
+			while (!(inline = instream.readLine().toUpperCase()).isEmpty()){ //her ventes pï¿½ input
 				if (inline.startsWith("RM20 8")){                        
 					indtDisp =inline.substring(8, inline.indexOf("\"",8));
 					outstream.writeBytes("RM20 B\r\n");
@@ -45,7 +46,7 @@ public class VsCon {
 					if (inline.equals("DW"))
 						indtDisp="";
 					else
-						indtDisp=(inline.substring(2, inline.length()));//her skal anførselstegn udm.
+						indtDisp=(inline.substring(2, inline.length()));//her skal anfï¿½rselstegn udm.
 					printmenu();
 					outstream.writeBytes("DB"+"\r\n");
 				}
@@ -58,7 +59,7 @@ public class VsCon {
 					printmenu();
 					outstream.writeBytes("S S " + (brutto-tara)+ " kg "  +"\r\n");//HVOR MANGE SPACE?
 				}
-				else if (inline.startsWith("B")){ //denne ordre findes ikke på en fysisk vægt
+				else if (inline.startsWith("B")){ //denne ordre findes ikke pï¿½ en fysisk vï¿½gt
 					String temp= inline.substring(2,inline.length());
 					brutto = Double.parseDouble(temp);
 					printmenu();
@@ -102,20 +103,20 @@ public class VsCon {
 		System.out.println("Brutto: " + (brutto)+ " kg"                       );
 		System.out.println("Streng modtaget: "+inline)                         ;
 		System.out.println("                                                 ");
-		System.out.println("Denne vægt simulator lytter på ordrene           ");
+		System.out.println("Denne vï¿½gt simulator lytter pï¿½ ordrene           ");
 		System.out.println("S, T, D 'TEST', DW, RM20 8 .... , B og Q         ");
-		System.out.println("på kommunikationsporten.                         ");
+		System.out.println("pï¿½ kommunikationsporten.                         ");
 		System.out.println("******")                             ;
 		System.out.println("Tast T for tara (svarende til knaptryk paa vegt)") ;
-		System.out.println("Tast B for ny brutto (svarende til at belastningen paa vegt ændres)");
+		System.out.println("Tast B for ny brutto (svarende til at belastningen paa vegt ï¿½ndres)");
 		System.out.println("Tast Q for at afslutte program program");
-		System.out.println("Indtast (T/B/Q for knaptryk / brutto ændring / quit)");
+		System.out.println("Indtast (T/B/Q for knaptryk / brutto ï¿½ndring / quit)");
 		System.out.print  ("Tast her: ");
 	}
 	/**
 	 * @author Mariam
-	 * @return Her ændres og retuneres brutto vægten, efter at en kommando er indsatet og det er kontrolleret at 
-	 * kommandoen starter med et stort B og at den indtastet vægt ligger imellem 0-6.00 kg.
+	 * @return Her ï¿½ndres og retuneres brutto vï¿½gten, efter at en kommando er indsatet og det er kontrolleret at 
+	 * kommandoen starter med et stort B og at den indtastet vï¿½gt ligger imellem 0-6.00 kg.
 	 */
 	static double changeMeasurement() {
 		resetWeight();
@@ -130,7 +131,7 @@ public class VsCon {
 				newBrutto = newBrutto.substring(0, newBrutto.length()-2).trim();
 			}
 		}else {
-			System.out.println("Den indtastet kommando er ikke gyldig, prøv igen");
+			System.out.println("Den indtastet kommando er ikke gyldig, prï¿½v igen");
 		}
 		double brutto = Double.parseDouble(newBrutto);	
 
@@ -145,16 +146,16 @@ public class VsCon {
 	/**
 	 * @author Mariam
 	 * @return 
-	 * 	Her bliver vægten tareret og der retuneres et 0, ved at brugerne taster T vha. scanner
+	 * 	Her bliver vï¿½gten tareret og der retuneres et 0, ved at brugerne taster T vha. scanner
 	 */
 	static double resetWeight(){ 
-		System.out.println("Indtast T for at nulstille vægten");
+		System.out.println("Indtast T for at nulstille vï¿½gten");
 		Scanner scan2 = new Scanner (System.in);
 		String userInput= scan2.nextLine();	
 
 		if (userInput.equals("T")){
 
-			System.out.println("Vægten er nu nulstillet: " + "TS " + tara +" kg");
+			System.out.println("Vï¿½gten er nu nulstillet: " + "TS " + tara +" kg");
 		}else {		
 			resetWeight();
 
