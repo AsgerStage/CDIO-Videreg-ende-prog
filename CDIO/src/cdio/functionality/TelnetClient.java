@@ -5,18 +5,26 @@ import java.util.ArrayList;
 
 public class TelnetClient
 {
+    public static final String CMD_WEIGHT_GET = "S";
+    public static final String CMD_WEIGHT_SET = "B";
+    public static final String CMD_TARA = "T";
+    public static final String CMD_DISPLAY_WRITE = "D";
+    public static final String CMD_DISPLAY_CLEAR = "DW";
+    public static final String CMD_DISPLAY_AND_WAIT = "RM20 8";
+    public static final String CMD_QUIT = "Q";
+    
     private final Socket s = new Socket();
     private final String host;
     private final int port;
     private PrintWriter s_out;
     private BufferedReader s_in;
     
-    public TelnetClient(String host, int port) {
+    protected TelnetClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
     
-    public void connect() throws IOException {
+    protected void connect() throws IOException {
         try {
             s.connect(new InetSocketAddress(host, port));
             System.out.println("Connected to " + host + " on port " + port);
@@ -30,7 +38,11 @@ public class TelnetClient
         }
     }
     
-    public ArrayList<String> getData(String command, int expectedReplies, String... params) throws IOException {
+    protected String getData(String command, String... params) throws IOException {
+        return getData(command, 1, params).get(0);
+    }
+    
+    protected ArrayList<String> getData(String command, int expectedReplies, String... params) throws IOException {
         ArrayList<String> result = new ArrayList<>();
         
         StringBuilder request = new StringBuilder(command);
@@ -48,13 +60,6 @@ public class TelnetClient
                 response = s_in.readLine();
                 result.add(response);
             }
-////            while(!(response = s_in.readLine()).isEmpty()) {
-//            while (true) {
-//                System.out.println(s_in.readLine());
-////                response = s_in.readLine();
-////                System.out.println("Resp=" + response);
-////                result.add(response);
-//            }
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -65,7 +70,7 @@ public class TelnetClient
         return result;
     }
     
-    public void close() throws IOException {        
+    protected void close() throws IOException {        
         try {
             if(s_out != null) {
                 s_out.flush();
