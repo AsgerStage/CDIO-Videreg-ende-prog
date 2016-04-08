@@ -1,6 +1,7 @@
 package cdio.functionality;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class TelnetClient
 {
@@ -10,12 +11,12 @@ public class TelnetClient
     private PrintWriter s_out;
     private BufferedReader s_in;
     
-    protected TelnetClient(String host, int port) {
+    public TelnetClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
     
-    protected void connect() throws IOException {
+    public void connect() throws IOException {
         try {
             s.connect(new InetSocketAddress(host, port));
             System.out.println("Connected to " + host + " on port " + port);
@@ -29,15 +30,30 @@ public class TelnetClient
         }
     }
     
-    protected String getData(String msg) throws IOException {
+    public ArrayList<String> getData(String command, int expectedReplies, String... params) throws IOException {
+        ArrayList<String> result = new ArrayList<>();
+        
+        StringBuilder request = new StringBuilder(command);
+        if(params.length > 0)
+            for (String param : params) {
+                request.append(' ').append(param);
+            }
+        
         String response = null;
-        s_out.println(msg);
-        System.out.println("Request:\t\"" + msg + '\"');
+        s_out.println(request.toString());
+        System.out.println("Request:\t\"" + request.toString() + '\"');
         
         try {
-//            while((response= s_in.readLine()) != null) {
-            response = s_in.readLine();
-            System.out.println("Response:\t\"" + response + '\"');
+            for (int i = 0; i < expectedReplies; i++) {
+                response = s_in.readLine();
+                result.add(response);
+            }
+////            while(!(response = s_in.readLine()).isEmpty()) {
+//            while (true) {
+//                System.out.println(s_in.readLine());
+////                response = s_in.readLine();
+////                System.out.println("Resp=" + response);
+////                result.add(response);
 //            }
         }
         catch(IOException e) {
@@ -46,10 +62,10 @@ public class TelnetClient
             close();
         }
         
-        return response;
+        return result;
     }
     
-    protected void close() throws IOException {        
+    public void close() throws IOException {        
         try {
             if(s_out != null) {
                 s_out.flush();
