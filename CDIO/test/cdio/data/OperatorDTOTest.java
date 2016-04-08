@@ -178,7 +178,7 @@ public class OperatorDTOTest
      * Test of setOprID method, of class OperatorDTO.
      */
     @Test
-    public void testSetOprId() {
+    public void testSetOprID() {
         System.out.println("setOprId");
         OperatorDTO instance;
         int oprID, expResult, result;
@@ -230,7 +230,7 @@ public class OperatorDTOTest
      * Test of getOprID method, of class OperatorDTO.
      */
     @Test
-    public void testGetoprID() {
+    public void testGetOprID() {
         System.out.println("getoprID");
         OperatorDTO instance;
         int expResult, result;
@@ -451,5 +451,20 @@ public class OperatorDTOTest
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             throw new AssertionError(ex);
         }
+    }
+
+    /**
+     * Test of equals method, of class OperatorDTO.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object obj = null;
+        OperatorDTO instance = null;
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 }

@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
  * @version 26-02-2016
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({cdio.functionality.FunctionalityTest.class})
+@Suite.SuiteClasses({FunctionalityTest.class, TelnetClientTest.class})
 public class FunctionalitySuite 
 {
     

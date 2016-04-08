@@ -15,7 +15,7 @@ public class DialogTest
      */
     @Ignore
     @Test
-    public void testRun() {
+    public void testStart() {
         System.out.println("run");
         Dialog instance = null;
         instance.start();
