@@ -104,7 +104,8 @@ public class VsCon
             }
         }
         catch (Exception e){
-            e.printStackTrace();
+            System.out.println(e);
+            quit();
         }
     }
     
@@ -156,19 +157,24 @@ public class VsCon
     private static void quit() {
         try {
             System.out.println("");
-            System.out.println("Program stoppet Q modtaget");
-            System.in.close();
-//            System.out.close();
-            userInputScanner.close();
-            instream.reset();
-//            instream.close();
+            System.out.println("Program stoppes");
+            
+            if(sock != null)
+                sock.close();
+            
+            userInputThread.stop();
+            instream.close();
+            
+            outstream.flush();
             outstream.close();
+            
+            System.out.flush();
+            System.out.close();
         } 
         catch (IOException e) {
             e.printStackTrace();
         }
         finally {
-            System.out.println("check e2");
             System.exit(0);
         }
     }
