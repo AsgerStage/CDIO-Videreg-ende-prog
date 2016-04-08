@@ -3,6 +3,7 @@ import cdio.exceptions.DALException;
 import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
+import java.awt.Point;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -459,12 +460,68 @@ public class OperatorDTOTest
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Object obj = null;
-        OperatorDTO instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        OperatorDTO instance;
+        Object obj;
+        boolean expResult, result;
+        
+        try {
+            //Positiv
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            expResult = true;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = instance;
+            expResult = true;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            //Negativ
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new Point();
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(22, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "eOP", 1098764321, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764320, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "Trewq12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 1);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
     }
 }
