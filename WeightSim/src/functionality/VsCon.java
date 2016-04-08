@@ -17,11 +17,26 @@ public class VsCon
     private static boolean rm20flag = false;
     
     public static void main(String[] args) throws IOException {
+        if(args.length != 0 && args[0] != null) {
+            try {
+                int newPort = Integer.parseInt(args[0]);
+                System.out.println("New port = " + newPort);
+                
+                if(newPort > -1 && newPort < 65536)
+                    portdst = Integer.parseInt(args[0]);
+                else
+                    throw new IllegalArgumentException("Port number must in the range 0 - 65535. Using default port " + portdst);
+            } 
+            catch(NumberFormatException e) {
+                throw new NumberFormatException("Port number must be an integer between 0 and 65535. Using default port " + portdst);
+            }
+            catch(IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
+        
         listener = new ServerSocket(portdst);
-        System.out.println("Venter paa connection på port " + portdst );
-        System.out.println("Indtast eventuel portnummer som 1. argument");
-        portdst = new Scanner(System.in).nextInt();
-        System.out.println("paa kommando linien for andet portnr");
+        System.out.println("Venter paa connection på port " + portdst);
         sock = listener.accept();
         instream = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         outstream = new DataOutputStream(sock.getOutputStream());
