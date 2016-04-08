@@ -1,10 +1,10 @@
 package cdio.functionality;
 import cdio.data.OperatorDAO;
+import cdio.data.OperatorDTO;
 import cdio.exceptions.DALException;
 import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
-import cdio.models.OperatorDTO;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
