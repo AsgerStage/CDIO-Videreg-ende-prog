@@ -35,7 +35,7 @@ public class Dialog
         this.functionality = functionality;
     }
     
-    public void start() {
+    protected void start() {
         while(running) {
             scanner = new Scanner(System.in);
             int userID;
