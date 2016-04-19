@@ -1,24 +1,26 @@
-package cdio;
+package functionality;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 
 /**
- * MainTest
- * @author Lasse
- * @version 26-02-2016
+ * VsConTest
+ * @author SteamedCow
+ * @version 08-04-2016
  */
-public class MainTest 
+public class VsConTest 
 {
+
     /**
-     * Test of main method, of class Main.
+     * Test of main method, of class VsCon.
      */
     @Ignore
     @Test
     public void testMain() {
         System.out.println("main");
         String[] args = null;
-        Main.main(args);
+        VsCon.main(args);
+        // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 }

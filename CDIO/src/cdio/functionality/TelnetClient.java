@@ -1,9 +1,18 @@
 package cdio.functionality;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 public class TelnetClient
 {
+    public static final String CMD_WEIGHT_GET = "S";
+    public static final String CMD_WEIGHT_SET = "B";
+    public static final String CMD_TARA = "T";
+    public static final String CMD_DISPLAY_WRITE = "D";
+    public static final String CMD_DISPLAY_CLEAR = "DW";
+    public static final String CMD_DISPLAY_AND_WAIT = "RM20 8";
+    public static final String CMD_QUIT = "Q";
+    
     private final Socket s = new Socket();
     private final String host;
     private final int port;
@@ -29,16 +38,28 @@ public class TelnetClient
         }
     }
     
-    protected String getData(String msg) throws IOException {
+    protected String getData(String command, String... params) throws IOException {
+        return getData(command, 1, params).get(0);
+    }
+    
+    protected ArrayList<String> getData(String command, int expectedReplies, String... params) throws IOException {
+        ArrayList<String> result = new ArrayList<>();
+        
+        StringBuilder request = new StringBuilder(command);
+        if(params.length > 0)
+            for (String param : params) {
+                request.append(' ').append(param);
+            }
+        
         String response = null;
-        s_out.println(msg);
-        System.out.println("Request:\t\"" + msg + '\"');
+        s_out.println(request.toString());
+        System.out.println("Request:\t\"" + request.toString() + '\"');
         
         try {
-//            while((response= s_in.readLine()) != null) {
-            response = s_in.readLine();
-            System.out.println("Response:\t\"" + response + '\"');
-//            }
+            for (int i = 0; i < expectedReplies; i++) {
+                response = s_in.readLine();
+                result.add(response);
+            }
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -46,7 +67,7 @@ public class TelnetClient
             close();
         }
         
-        return response;
+        return result;
     }
     
     protected void close() throws IOException {        

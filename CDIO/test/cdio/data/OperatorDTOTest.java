@@ -1,8 +1,9 @@
-package cdio.models;
+package cdio.data;
 import cdio.exceptions.DALException;
 import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
+import java.awt.Point;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -178,7 +179,7 @@ public class OperatorDTOTest
      * Test of setOprID method, of class OperatorDTO.
      */
     @Test
-    public void testSetOprId() {
+    public void testSetOprID() {
         System.out.println("setOprId");
         OperatorDTO instance;
         int oprID, expResult, result;
@@ -230,7 +231,7 @@ public class OperatorDTOTest
      * Test of getOprID method, of class OperatorDTO.
      */
     @Test
-    public void testGetoprID() {
+    public void testGetOprID() {
         System.out.println("getoprID");
         OperatorDTO instance;
         int expResult, result;
@@ -447,6 +448,77 @@ public class OperatorDTOTest
             System.out.println(instance.toString());
             expResult = "OperatorDTO{oprID=55, oprNavn=Temp, ini=TMP, cpr=1234567890, password=QWerty12, rank=0}";
             result = instance.toString();
+            assertEquals(expResult, result);
+        } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
+            throw new AssertionError(ex);
+        }
+    }
+
+    /**
+     * Test of equals method, of class OperatorDTO.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        OperatorDTO instance;
+        Object obj;
+        boolean expResult, result;
+        
+        try {
+            //Positiv
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            expResult = true;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = instance;
+            expResult = true;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            //Negativ
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new Point();
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(22, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "eOP", 1098764321, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764320, "trewQ12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "Trewq12", 0);
+            expResult = false;
+            result = instance.equals(obj);
+            assertEquals(expResult, result);
+            
+            instance = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 0);
+            obj = new OperatorDTO(23, "Egon Operatør", "EOP", 1098764321, "trewQ12", 1);
+            expResult = false;
+            result = instance.equals(obj);
             assertEquals(expResult, result);
         } catch (OpPasswordException | OpNameException | OpIdException | DALException ex) {
             throw new AssertionError(ex);

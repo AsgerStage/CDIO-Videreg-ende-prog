@@ -4,7 +4,6 @@ import cdio.exceptions.DALException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
 import cdio.functionality.IFunctionality;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,7 +13,7 @@ import java.util.Scanner;
  * @author Lasse Holm Nielsen - S123954
  * @version 24-02-2016
  */
-public class Dialog implements Runnable
+public class Dialog
 {
     protected boolean running = true;
     protected boolean loggedIn = false;
@@ -36,8 +35,7 @@ public class Dialog implements Runnable
         this.functionality = functionality;
     }
     
-    @Override
-    public void run() {
+    protected void start() {
         while(running) {
             scanner = new Scanner(System.in);
             int userID;
@@ -52,7 +50,7 @@ public class Dialog implements Runnable
                 System.out.print("\tPassword:\t");
                 password = new Scanner(System.in).nextLine();
             }
-            catch (InputMismatchException ex) {
+            catch (InputMismatchException e) {
                 System.out.println("Ugyldigt input!");
                 continue;
             }

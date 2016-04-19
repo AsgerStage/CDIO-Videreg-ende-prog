@@ -1,14 +1,14 @@
-package cdio.functionality;
+package functionality;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
  * FunctionalitySuite
- * @author Lasse
- * @version 26-02-2016
+ * @author SteamedCow
+ * @version 08-04-2016
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({FunctionalityTest.class, TelnetClientTest.class})
+@Suite.SuiteClasses({functionality.VsConTest.class})
 public class FunctionalitySuite 
 {
     

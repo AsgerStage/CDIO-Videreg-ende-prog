@@ -3,7 +3,6 @@ import cdio.exceptions.DALException;
 import cdio.exceptions.OpIdException;
 import cdio.exceptions.OpNameException;
 import cdio.exceptions.OpPasswordException;
-import cdio.models.OperatorDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;

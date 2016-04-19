@@ -1,4 +1,8 @@
 package cdio;
+import cdio.data.DataSuite;
+import cdio.exceptions.ExceptionsSuite;
+import cdio.functionality.FunctionalitySuite;
+import cdio.view.ViewSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -8,7 +12,7 @@ import org.junit.runners.Suite;
  * @version 26-02-2016
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({cdio.data.DataSuite.class,cdio.view.ViewSuite.class,cdio.MainTest.class,cdio.exceptions.ExceptionsSuite.class,cdio.functionality.FunctionalitySuite.class,cdio.models.ModelsSuite.class})
+@Suite.SuiteClasses({DataSuite.class, ViewSuite.class, MainTest.class, FunctionalitySuite.class, ExceptionsSuite.class})
 public class CdioSuite 
 {
     

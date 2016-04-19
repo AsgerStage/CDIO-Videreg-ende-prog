@@ -21,9 +21,11 @@ public class View implements IView
     public void dialog() {
         dialog = new Dialog(functionality);
         
-        dialogThread = new Thread(dialog);
-        dialogThread.setDaemon(false);
-        dialogThread.start();
+        dialog.start();
+        
+//        dialogThread = new Thread(dialog);
+//        dialogThread.setDaemon(false);
+//        dialogThread.start();
     }
 
     @Override
@@ -31,17 +33,17 @@ public class View implements IView
         dialog.running = false;
         dialog.loggedIn = false;
         
-        try {
-            Thread.sleep(3000);
-            if(dialogThread.isAlive())
-                throw new ThreadDeath();
-        } 
-        catch (InterruptedException | ThreadDeath ex) {
-            System.err.println("Dialogen sluttede ikke normalt. Afslutter dialogen" + ex);
-            dialogThread.stop();
-        }
-        
-        if(dialogThread.isAlive())
-            System.err.println("Kunne ikke stoppe dialogen i brugergrænsefladen.");
+//        try {
+//            Thread.sleep(3000);
+//            if(dialogThread.isAlive())
+//                throw new ThreadDeath();
+//        } 
+//        catch (InterruptedException | ThreadDeath ex) {
+//            System.err.println("Dialogen sluttede ikke normalt. Afslutter dialogen" + ex);
+//            dialogThread.stop();
+//        }
+//        
+//        if(dialogThread.isAlive())
+//            System.err.println("Kunne ikke stoppe dialogen i brugergrænsefladen.");
     }
 }
