@@ -1,0 +1,69 @@
+package cdio.data;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
+
+import connector01917.Connector;
+
+import daointerfaces01917.DALException;
+import daointerfaces01917.RaavareBatchDAO;
+import dto01917.RaavareBatchDTO;
+
+public class MySQLRaavareBatchDAO implements RaavareBatchDAO {
+	
+	public RaavareBatchDTO getRaavareBatch(int raavareId) throws DALException {
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE raavare_id = " + raavareId);
+	    try {
+	    	if (!rs.first()) throw new DALException("RaavareBatch " + raavareId + " findes ikke");
+			return new RaavareBatchDTO (rs.getInt("rbId"), rs.getInt("raavareId"), rs.getDouble("maengde"));
+	    }
+	    catch (SQLException e) {throw new DALException(e); }
+		
+	}
+	
+	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {		
+			Connector.doUpdate(
+				"INSERT INTO raavarebatch(raavare_id, rb_id, maengde) VALUES " +
+				"(" + raavarebatch.getRaavareId() + ", '" + raavarebatch.getRbId() + ", '" + raavarebatch.getMaengde() + "')"
+			);
+	}
+	
+	public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
+		Connector.doUpdate(
+				"UPDATE raavarebatch SET  raavare_id = '" + raavarebatch.getRaavareId() + "', rb_id =  '" + raavarebatch.getRbId() + 
+				"', maengde = '" + raavarebatch.getMaengde()
+		);
+	}
+	
+	public List<RaavareBatchDTO> getRaavareBatchList() throws DALException {
+		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch");
+		try
+		{
+			while (rs.next()) 
+			{
+				list.add(new RaavareBatchDTO(rs.getInt("rbId"), rs.getInt("raavareId"), rs.getDouble("maengde")));
+			}
+		}
+		catch (SQLException e) { throw new DALException(e); }
+		return list;
+	}
+
+	public List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException {
+		List<RaavareBatchDTO> list = new ArrayList<RaavareBatchDTO>();
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch");
+		try
+		{
+			while (rs.next()) 
+			{
+				list.add(new RaavareBatchDTO(rs.getInt("rbId"), rs.getInt("raavareId"), rs.getDouble("maengde")));
+			}
+		}
+		catch (SQLException e) { throw new DALException(e); }
+		return list;
+	}
+		
+}
+	
