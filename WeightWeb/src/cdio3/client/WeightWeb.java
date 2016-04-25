@@ -14,17 +14,17 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class WeightWeb implements EntryPoint {
-	Label myLbl;
-	Grid opTable;
-	Button delButton;
+	Label myLbl =new Label("Operatoer");
+	Grid opTable=new Grid(1,5);
+	Button delButton =new Button("Delete");
 	public void addOp(int ID, String name, String ini, int Rank){
 		opTable.getRowCount();
 		opTable.resize(opTable.getRowCount()+1, 5);
-		opTable.setText(opTable.getRowCount()+1, 0, ""+ID);
-		opTable.setText(opTable.getRowCount()+1, 1, name);
-		opTable.setText(opTable.getRowCount()+1, 2, ini);
-		opTable.setText(opTable.getRowCount()+1, 3, ""+Rank);
-		opTable.setWidget(opTable.getRowCount()+1, 4, delButton);
+		opTable.setText(opTable.getRowCount()-1, 0, ""+ID);
+		opTable.setText(opTable.getRowCount()-1, 1, name);
+		opTable.setText(opTable.getRowCount()-1, 2, ini);
+		opTable.setText(opTable.getRowCount()-1, 3, ""+Rank);
+		opTable.setWidget(opTable.getRowCount()-1, 4, new Button("Delete"));
 	}
 	/**
 	 * This is the entry point method.
@@ -35,9 +35,9 @@ public class WeightWeb implements EntryPoint {
 		VerticalPanel vPanel=new VerticalPanel();
 		HorizontalPanel hPanel=new HorizontalPanel();
 		
-		myLbl =new Label("Operatoer");
+		
 		 myLbl.getElement().setPropertyString("id", "opLabel");
-		 delButton =new Button("Delete");
+		 
 	
 		 
 		hPanel.add(myLbl);
@@ -46,24 +46,21 @@ public class WeightWeb implements EntryPoint {
 		 hPanel.add(normalText);
 		 normalText.setText("Dette er et soegefelt");
 		
-		 opTable =new Grid(1,5);
 		 opTable.setText(0, 0, "ID");
 		 opTable.setText(0, 1, "Navn");
 		 opTable.setText(0, 2, "Ini");
 		 opTable.setText(0, 3, "Rank");
 		 opTable.setText(0, 4, "Slet og rediger");
-		 opTable.resize(2, 5);
-		 opTable.setText(1, 0, "1");
-		 opTable.setText(1, 1, "Asger");
-		 opTable.setText(1, 2, "AS");
-		 opTable.setText(1, 3, "1");
-		 opTable.setWidget(1, 4, delButton);
 		 
 		 opTable.setBorderWidth(1);
 		 vPanel.add(opTable);
 		 opTable.setCellPadding(10);
 		 opTable.getRowCount();
-		 //addOp(2,"Test","T",2);
+		 addOp(2,"Test","T1",0);
+		 addOp(3,"Test2","T2",1);
+		 addOp(4,"Test3","T3",0);
+		 addOp(5,"Test4","T4",0);
+		 
 		RootPanel.get().add(vPanel);
 		
 		
