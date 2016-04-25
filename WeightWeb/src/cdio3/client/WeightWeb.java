@@ -63,7 +63,7 @@ public class WeightWeb implements EntryPoint {
 		 vPanel.add(opTable);
 		 opTable.setCellPadding(10);
 		 opTable.getRowCount();
-		 addOp(2,"Test","T",2);
+		 //addOp(2,"Test","T",2);
 		RootPanel.get().add(vPanel);
 		
 		
