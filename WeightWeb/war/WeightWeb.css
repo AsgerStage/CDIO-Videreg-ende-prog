@@ -10,6 +10,36 @@ h1 {
   text-align: center;
 }
 
+.h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  text-align: left;
+}
+
+.button {
+  display: block;
+  font-size: 16pt;
+  margin-right: 20px;
+}
+
+.paddedVerticalPanel {
+   padding-top: 20px;
+}
+
+.paddedHorizontalPanel {
+    padding-left: 20px;
+}
+
+.infoBox_panel {
+    padding-left: 20px;
+}
+
+.infoBox_label {
+  	font-weight: bold;
+	width: 100px;
+}
+
 .sendButton {
   display: block;
   font-size: 16pt;

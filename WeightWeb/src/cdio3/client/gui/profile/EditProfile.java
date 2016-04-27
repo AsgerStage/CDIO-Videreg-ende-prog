@@ -5,11 +5,11 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
-import cdio3.profile.client.models.User;
+import cdio3.client.temp.OperatorDTO;
 
 public class EditProfile extends ProfilePage 
 {
-	private User user;
+	private OperatorDTO user;
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -19,15 +19,15 @@ public class EditProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 	
-	public EditProfile(String title, User user) {
+	public EditProfile(String title, OperatorDTO user) {
 		super(title);
 
 		this.user = user;
 		
 		init();
 		
-		setContent(user.getName(), user.getInitials(), user.getCpr(), user.getID(), User.rankToString(user.getRank()));
-		if(user.getRank() != User.RANK_ADMIN) {
+		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), OperatorDTO.rankToString(user.getRank()));
+		if(user.getRank() != OperatorDTO.RANK_ADMIN) {
 			TextBox tbID = (TextBox) idField.getWidget();
 			tbID.setEnabled(false);
 			
@@ -44,8 +44,8 @@ public class EditProfile extends ProfilePage
 		idField = new InfoBox("ID", new TextBox());
 		
 		ListBox rankList = new ListBox();
-		rankList.addItem(User.rankToString(User.RANK_OPR));
-		rankList.addItem(User.rankToString(User.RANK_ADMIN));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
 		contentPanel.add(nameField);
@@ -143,7 +143,7 @@ public class EditProfile extends ProfilePage
 		//TODO: Write method!
 	}
 	
-	public User getUser() {
+	public OperatorDTO getUser() {
 		return user;
 	}
 	

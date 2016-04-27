@@ -1,7 +1,7 @@
 package cdio3.client.gui.profile;
 import com.google.gwt.user.client.ui.*;
 
-public abstract class ProfilePage extends Composite implements ProfilePanel 
+public abstract class ProfilePage extends Composite implements IProfilePage 
 {
 	protected final VerticalPanel mainPanel;
 	protected final Label pageTitle;
@@ -30,8 +30,6 @@ public abstract class ProfilePage extends Composite implements ProfilePanel
 		mainPanel.setSize("100%", "100%");
 
 		pageTitle.addStyleName("h1");
-		
-		contentPanel.addStyleName("paddedVerticalPanel");
 		
 		buttonContainerPanel.setWidth("100%");
 		buttonContainerPanel.setHorizontalAlignment(HasAlignment.ALIGN_RIGHT);

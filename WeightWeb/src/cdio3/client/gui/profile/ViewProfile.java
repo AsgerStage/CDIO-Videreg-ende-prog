@@ -4,11 +4,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
-import cdio3.profile.client.models.User;
+import cdio3.client.temp.OperatorDTO;
 
 public class ViewProfile extends ProfilePage 
 {
-	private User user;
+	private OperatorDTO user;
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -18,7 +18,7 @@ public class ViewProfile extends ProfilePage
 	private Button editButton;
 	private Button cancelButton;
 	
-	public ViewProfile(String title, User user) {
+	public ViewProfile(String title, OperatorDTO user) {
 		super(title);
 
 		this.user = user;
@@ -29,10 +29,10 @@ public class ViewProfile extends ProfilePage
 	private void init() {
 		//Content
 		nameField = new InfoBox("Navn", new Label(user.getName()));
-		initialsField = new InfoBox("Initialer", new Label(user.getInitials()));
+		initialsField = new InfoBox("Initialer", new Label(user.getIni()));
 		cprField = new InfoBox("CPR Nr.", new Label(user.getCpr() + ""));
-		idField = new InfoBox("ID", new Label(user.getID() + ""));
-		rankField = new InfoBox("Rank", new Label(User.rankToString(user.getRank())));
+		idField = new InfoBox("ID", new Label(user.getOprID() + ""));
+		rankField = new InfoBox("Rank", new Label(OperatorDTO.rankToString(user.getRank())));
 		
 		contentPanel.add(nameField);
 		contentPanel.add(initialsField);

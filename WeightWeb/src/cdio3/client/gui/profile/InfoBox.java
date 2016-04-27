@@ -37,7 +37,6 @@ public class InfoBox extends HorizontalPanel {
 	
 	public void setWidget(Widget widget) {
 		this.widget = widget;
-		widget.addStyleName("paddedHorizontalPanel");
 	}
 	
 	public Widget getWidget() {

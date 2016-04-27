@@ -1,6 +1,6 @@
 package cdio3.client.gui.profile;
 
-public interface ProfilePanel 
+public interface IProfilePage 
 {
 	public void setContent(String name, String initials, long cpr, int id, String rank);
 	

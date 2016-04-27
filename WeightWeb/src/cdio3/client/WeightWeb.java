@@ -1,11 +1,10 @@
 package cdio3.client;
 
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -13,11 +12,22 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class WeightWeb implements EntryPoint {
+public class WeightWeb extends Composite { //implements EntryPoint {
+	
+	//--------- LAVET OM TIL COMPOSITE ------------
+	private VerticalPanel vPanel=new VerticalPanel();
+	
+	public WeightWeb() {
+		initWidget(this.vPanel);
+		onModuleLoad();
+	}
+	//---------------------------------------------
+	
 	Label myLbl =new Label("Operatoer");
 	Grid opTable=new Grid(1,5);
 	Button delButton =new Button("Delete");
-	public void addOp(int ID, String name, String ini, int Rank){
+	
+	public void addOp(int ID, String name, String ini, int Rank) {
 		opTable.getRowCount();
 		opTable.resize(opTable.getRowCount()+1, 5);
 		opTable.setText(opTable.getRowCount()-1, 0, ""+ID);
@@ -32,7 +42,6 @@ public class WeightWeb implements EntryPoint {
 	
 	
 	public void onModuleLoad() {
-		VerticalPanel vPanel=new VerticalPanel();
 		HorizontalPanel hPanel=new HorizontalPanel();
 		
 		
@@ -61,7 +70,7 @@ public class WeightWeb implements EntryPoint {
 		 addOp(4,"Test3","T3",0);
 		 addOp(5,"Test4","T4",0);
 		 
-		RootPanel.get().add(vPanel);
+//		RootPanel.get().add(vPanel);
 		
 		
 	}

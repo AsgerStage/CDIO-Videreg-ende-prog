@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
-import cdio3.profile.client.models.User;
+import cdio3.client.temp.OperatorDTO;
 
 public class CreateProfile extends ProfilePage 
 {
@@ -32,8 +32,8 @@ public class CreateProfile extends ProfilePage
 		idField = new InfoBox("ID", new TextBox());
 		
 		ListBox rankList = new ListBox();
-		rankList.addItem(User.rankToString(User.RANK_OPR));
-		rankList.addItem(User.rankToString(User.RANK_ADMIN));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
 		contentPanel.add(nameField);
@@ -41,6 +41,7 @@ public class CreateProfile extends ProfilePage
 		contentPanel.add(cprField);
 		contentPanel.add(idField);
 		contentPanel.add(rankField);
+		contentPanel.add(new InfoBox("Password", new Button("Skift Password")));
 
 		//Buttons
 		saveButton = new Button();
