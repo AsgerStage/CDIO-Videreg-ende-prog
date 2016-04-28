@@ -21,7 +21,7 @@ public class Startskaerm extends Composite {
 		onModuleLoad();
 	}
 
-	/*
+	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
