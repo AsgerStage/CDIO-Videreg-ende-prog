@@ -4,6 +4,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import cdio3.client.gui.profile.*;
+import cdio3.client.login.Login;
+import cdio3.client.login.Startskaerm;
 import cdio3.client.operatoerList.OperatoerList;
 import cdio3.client.overlay.Banner;
 import cdio3.client.overlay.MenuWidget;
@@ -24,7 +26,10 @@ public class MainClient implements EntryPoint
 //		page = new CreateProfile("Opret Profil");
 //		page = new EditProfile("Rediger Profil", user2);
 		
-		page = new OperatoerList();
+		//page = new OperatoerList();
+		page = new Startskaerm();
+		//page = new Login();
+		
 		
 		RootPanel.get().add(page);
 		

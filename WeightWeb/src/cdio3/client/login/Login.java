@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -16,18 +17,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class VaegtUsers implements EntryPoint {
+public class Login extends Composite {
 
-	// private String brugerID;
-	// private String password;
-	
+
+	VerticalPanel vPanel = new VerticalPanel();
 	private Label lbltest;
 
 	/**
 	 * This is the entry point method.
 	 */
+	public Login(){
+		initWidget(vPanel);
+		onModuleLoad();
+	}
+	
 	public void onModuleLoad() {
-		VerticalPanel vPanel = new VerticalPanel();
 
 		// Add a normal textbox
 		Label bruger = new Label("Bruger ID:");
@@ -51,8 +55,6 @@ public class VaegtUsers implements EntryPoint {
 		lbltest = new Label("Test:");
 		vPanel.add(lbltest);
 	
-
-		RootPanel.get().add(vPanel);
 
 	}
 
