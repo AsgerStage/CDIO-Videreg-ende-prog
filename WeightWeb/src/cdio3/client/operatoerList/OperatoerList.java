@@ -1,4 +1,4 @@
-package cdio3.client;
+package cdio3.client.operatoerList;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -12,12 +12,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class WeightWeb extends Composite { //implements EntryPoint {
+public class OperatoerList extends Composite { //implements EntryPoint {
 	
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private VerticalPanel vPanel=new VerticalPanel();
 	
-	public WeightWeb() {
+	public OperatoerList() {
 		initWidget(this.vPanel);
 		onModuleLoad();
 	}

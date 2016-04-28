@@ -1,4 +1,4 @@
-package cdio3.client;
+package cdio3.client.overlay;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Composite;
@@ -6,11 +6,11 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class StaticPage2 extends Composite{
+public class MenuWidget extends Composite{
 
 	private VerticalPanel vPanel= new VerticalPanel();
 
-	public StaticPage2(){
+	public MenuWidget(){
 		initWidget(this.vPanel);
 
 

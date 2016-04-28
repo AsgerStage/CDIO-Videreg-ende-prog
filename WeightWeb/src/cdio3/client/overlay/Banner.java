@@ -1,4 +1,4 @@
-package cdio3.client;
+package cdio3.client.overlay;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -6,12 +6,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 
-public class StaticPage extends Composite { //implements EntryPoint {
+public class Banner extends Composite { //implements EntryPoint {
 	
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private HorizontalPanel hPanel= new HorizontalPanel();
 	
-	public StaticPage() {
+	public Banner() {
 		initWidget(this.hPanel);
 		onModuleLoad();
 	}
