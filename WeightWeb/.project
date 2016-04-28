@@ -31,46 +31,4 @@
 		<nature>com.google.gwt.eclipse.core.gwtNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/cdio3/client/gui</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile/CreateProfile.java</name>
-			<type>1</type>
-			<location>D:/GWT/CDIO/src/cdio3/profile/client/gui/profile/CreateProfile.java</location>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile/EditProfile.java</name>
-			<type>1</type>
-			<location>D:/GWT/CDIO/src/cdio3/profile/client/gui/profile/EditProfile.java</location>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile/InfoBox.java</name>
-			<type>1</type>
-			<location>D:/GWT/CDIO/src/cdio3/profile/client/gui/profile/InfoBox.java</location>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile/ProfilePage.java</name>
-			<type>1</type>
-			<location>D:/GWT/CDIO/src/cdio3/profile/client/gui/profile/ProfilePage.java</location>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile/ProfilePanel.java</name>
-			<type>1</type>
-			<location>D:/GWT/CDIO/src/cdio3/profile/client/gui/profile/ProfilePanel.java</location>
-		</link>
-		<link>
-			<name>src/cdio3/client/gui/profile/ViewProfile.java</name>
-			<type>1</type>
-			<location>D:/GWT/CDIO/src/cdio3/profile/client/gui/profile/ViewProfile.java</location>
-		</link>
-	</linkedResources>
 </projectDescription>

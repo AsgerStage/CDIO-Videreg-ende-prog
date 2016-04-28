@@ -147,5 +147,4 @@ public class CreateProfile extends ProfilePage
 			// TODO Auto-generated method stub
 		}
 	}
-	
 }
