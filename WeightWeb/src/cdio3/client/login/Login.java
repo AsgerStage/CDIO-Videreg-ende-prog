@@ -33,7 +33,7 @@ public class Login extends Composite {
 	
 	public void onModuleLoad() {
 
-		// Add a normal textbox
+		// Add a normal textbo
 		Label bruger = new Label("Bruger ID:");
 		vPanel.add(bruger);
 		TextBox normalText = new TextBox();
