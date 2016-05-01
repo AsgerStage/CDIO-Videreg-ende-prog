@@ -1,4 +1,4 @@
-package cdio3.client.operatoerList;
+package cdio3.client.gui.operatoerList;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;

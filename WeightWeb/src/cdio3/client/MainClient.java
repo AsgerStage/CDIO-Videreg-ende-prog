@@ -3,9 +3,11 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import cdio3.client.gui.login.Startskaerm;
+import cdio3.client.gui.overlay.Banner;
+import cdio3.client.gui.profile.CreateProfile;
+import cdio3.client.gui.profile.EditProfile;
 import cdio3.client.gui.profile.ViewProfile;
-import cdio3.client.login.Startskaerm;
-import cdio3.client.overlay.Banner;
 import cdio3.client.temp.OperatorDTO;
 
 /**
@@ -15,25 +17,24 @@ public class MainClient implements EntryPoint
 {
 	@Override
 	public void onModuleLoad() {
-		Banner page = null;
+		Composite page = null;
 		
 		OperatorDTO user1 = new OperatorDTO(13, "Lasse Holm Nielsen", "LHN", 2909911234L, "1234Abc", 1);
-//		OperatorDTO user2 = new OperatorDTO(32, "Essal Mohl Lennise", "EML", 1990924321L, "cbA4321", 0);
+		OperatorDTO user2 = new OperatorDTO(32, "Essal Mohl Lennise", "EML", 1990924321L, "cbA4321", 0);
 //		page = new ViewProfile("Se Profil", user1);
 //		page = new CreateProfile("Opret Profil");
-//		page = new EditProfile("Rediger Profil", user2);
+		page = new EditProfile("Rediger Profil", user2);
 		
-		//page = new OperatoerList();
+//		page = new OperatoerList();
 //		page = new Startskaerm();
-		page = new Banner();
-		page.setContentPanel(new ViewProfile("Se Profil", user1));
+
+//		Banner banner = new Banner();
+//		banner.setContentPanel(new ViewProfile("Se Profil", user1));
+//		RootPanel.get().add(banner);
+		
 		//page = new Login();
 		
 		
 		RootPanel.get().add(page);
-		
-//		RootPanel.get().add(new Banner());
-//		RootPanel.get().add(new MenuWidget());
-		
 	}
 }

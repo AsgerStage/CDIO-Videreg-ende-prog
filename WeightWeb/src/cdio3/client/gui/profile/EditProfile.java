@@ -15,6 +15,7 @@ public class EditProfile extends ProfilePage
 	private InfoBox cprField;
 	private InfoBox idField;
 	private InfoBox rankField;
+	private InfoBox passwordField;
 	
 	private Button saveButton;
 	private Button cancelButton;
@@ -48,11 +49,18 @@ public class EditProfile extends ProfilePage
 		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
+		Button passwordButton = new Button();
+		passwordButton.setText("Change Password");
+//		passwordButton.setStyleName("button");
+		passwordButton.addClickHandler(new PasswordClickHandler());
+		passwordField = new InfoBox("Password", passwordButton);
+		
 		contentPanel.add(nameField);
 		contentPanel.add(initialsField);
 		contentPanel.add(cprField);
 		contentPanel.add(idField);
 		contentPanel.add(rankField);
+		contentPanel.add(passwordField);
 
 		//Buttons
 		saveButton = new Button();
@@ -145,6 +153,14 @@ public class EditProfile extends ProfilePage
 	
 	public OperatorDTO getUser() {
 		return user;
+	}
+	
+	private class PasswordClickHandler implements ClickHandler 
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+		}
 	}
 	
 	private class SaveClickHandler implements ClickHandler 
