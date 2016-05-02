@@ -1,7 +1,7 @@
 package cdio;
-import cdio.data.OperatorDAO;
 import cdio.functionality.Functionality;
 import cdio.view.View;
+import edu.example.server.database.OperatorDAO;
 import cdio.view.IView;
 
 public class Main 

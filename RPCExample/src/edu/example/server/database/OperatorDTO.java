@@ -1,4 +1,4 @@
-package cdio.data;
+package edu.example.server.database;
 import java.util.Objects;
 
 import edu.example.server.database.exceptions.DALException;

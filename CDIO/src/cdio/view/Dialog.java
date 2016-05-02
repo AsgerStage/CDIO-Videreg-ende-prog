@@ -1,9 +1,10 @@
 package cdio.view;
-import cdio.data.OperatorDTO;
-import cdio.exceptions.DALException;
-import cdio.exceptions.OpNameException;
-import cdio.exceptions.OpPasswordException;
 import cdio.functionality.IFunctionality;
+import edu.example.server.database.OperatorDTO;
+import edu.example.server.database.exceptions.DALException;
+import edu.example.server.database.exceptions.OpNameException;
+import edu.example.server.database.exceptions.OpPasswordException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

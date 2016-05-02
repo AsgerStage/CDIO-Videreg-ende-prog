@@ -1,7 +1,7 @@
 package cdio.functionality;
-import cdio.data.OperatorDTO;
-import cdio.exceptions.OpNameException;
-import cdio.exceptions.OpPasswordException;
+import edu.example.server.database.OperatorDTO;
+import edu.example.server.database.exceptions.OpNameException;
+import edu.example.server.database.exceptions.OpPasswordException;
 
 public interface IFunctionality 
 {
@@ -44,7 +44,7 @@ public interface IFunctionality
      *      Operatørens rank/tilladelser. set -1 hvis feltet ikke skal opdateres.
      * @return 
      *      Returner true hvis operatøren blev opdateret.
-     * @throws cdio.exceptions.OpNameException
+     * @throws edu.example.server.database.exceptions.OpNameException
      *      Operatør navnet skal være lngere end to karaktere.
      */
     public boolean updateOpr(int oprID, String name, long cpr, int rank) throws OpNameException;
@@ -72,7 +72,7 @@ public interface IFunctionality
      *      Gentagelse af det nye password.
      * @return 
      *      returnerer sandt hvis passwordet blev ændret.
-     * @throws cdio.exceptions.OpPasswordException
+     * @throws edu.example.server.database.exceptions.OpPasswordException
      *      Operatør passwordet skal være mindt 6 karaktere langt og indeholde mindst 3 karaktergrupper integers, lower case, upper case og .,-,_,!,?,=,+.
      */
     public boolean changePass(int oprID, String oldPass, String newPass1, String newPass2) throws OpPasswordException;

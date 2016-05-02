@@ -1,11 +1,12 @@
 package cdio.data;
-import cdio.exceptions.DALException;
-import cdio.exceptions.OpIdException;
-import cdio.exceptions.OpNameException;
-import cdio.exceptions.OpPasswordException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.example.server.database.IOperatorDAO;
+import edu.example.server.database.exceptions.DALException;
+import edu.example.server.database.exceptions.OpIdException;
+import edu.example.server.database.exceptions.OpNameException;
+import edu.example.server.database.exceptions.OpPasswordException;
 
 public class OperatorDAO implements IOperatorDAO 
 {
