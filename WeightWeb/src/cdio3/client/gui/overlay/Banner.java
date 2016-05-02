@@ -7,16 +7,21 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import cdio3.client.service.ServiceClientImpl;
+
 
 public class Banner extends Composite { //implements EntryPoint {
 	
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private VerticalPanel vPanel= new VerticalPanel(); //Hovedpanelet som indeholder hPanel1 og hPanel2
 	HorizontalPanel hPanel4;
+	private ServiceClientImpl serverComm;
 	
-	public Banner() {
+	public Banner(ServiceClientImpl serverComm) {
 		initWidget(this.vPanel);
+		this.serverComm = serverComm;
 		onModuleLoad();
+		
 	}
 	//---------------------------------------------
 

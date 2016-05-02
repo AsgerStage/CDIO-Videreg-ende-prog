@@ -1,5 +1,6 @@
 package cdio3.client;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -8,6 +9,7 @@ import cdio3.client.gui.overlay.Banner;
 import cdio3.client.gui.profile.CreateProfile;
 import cdio3.client.gui.profile.EditProfile;
 import cdio3.client.gui.profile.ViewProfile;
+import cdio3.client.service.ServiceClientImpl;
 import cdio3.client.temp.OperatorDTO;
 
 /**
@@ -17,6 +19,11 @@ public class MainClient implements EntryPoint
 {
 	@Override
 	public void onModuleLoad() {
+		ServiceClientImpl ClientImpl = new ServiceClientImpl(GWT.getModuleBaseURL() + "cdioservice");
+		RootPanel.get().add(ClientImpl.getMainGUI());
+		
+		
+		/*
 		Composite page = null;
 		
 		OperatorDTO user1 = new OperatorDTO(13, "Lasse Holm Nielsen", "LHN", 2909911234L, "1234Abc", 1);
@@ -36,5 +43,7 @@ public class MainClient implements EntryPoint
 		
 		
 		RootPanel.get().add(page);
+	
+	*/
 	}
 }
