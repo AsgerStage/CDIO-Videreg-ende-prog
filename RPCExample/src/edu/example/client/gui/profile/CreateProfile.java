@@ -5,10 +5,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import edu.example.client.service.ExampleServiceClientImpl;
 import edu.example.client.temp.OperatorDTO;
+import edu.example.server.database.dto.OperatoerDTO;
 
 public class CreateProfile extends ProfilePage 
 {
+	private ExampleServiceClientImpl serverComm;
+	
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -18,8 +22,9 @@ public class CreateProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 
-	public CreateProfile(String title) {
+	public CreateProfile(String title, ExampleServiceClientImpl serverComm) {
 		super(title);
+		this.serverComm = serverComm;
 
 		init();
 	}
@@ -136,7 +141,7 @@ public class CreateProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
+			serverComm.createOperatoer(new OperatoerDTO());
 		}
 	}
 	
@@ -144,7 +149,7 @@ public class CreateProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
+			//TODO: Cancel
 		}
 	}
 }
