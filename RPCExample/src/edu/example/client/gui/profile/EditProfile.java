@@ -5,11 +5,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import edu.example.client.service.ExampleServiceClientImpl;
 import edu.example.client.temp.OperatorDTO;
+import edu.example.server.database.dto.OperatoerDTO;
 
 public class EditProfile extends ProfilePage 
 {
-	private OperatorDTO user;
+	private ExampleServiceClientImpl serverComm;
+	
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -20,10 +23,11 @@ public class EditProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 	
-	public EditProfile(String title, OperatorDTO user) {
+	public EditProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
 		super(title);
+		this.serverComm = serverComm;
 
-		this.user = user;
+		user = this.serverComm.getOperatoer(userID);
 		
 		init();
 		
@@ -167,7 +171,7 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
+			serverComm.updateOperatoer(new OperatoerDTO());
 		}
 	}
 	

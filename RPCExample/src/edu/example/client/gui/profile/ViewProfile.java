@@ -4,11 +4,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
+import edu.example.client.service.ExampleServiceClientImpl;
 import edu.example.client.temp.OperatorDTO;
 
 public class ViewProfile extends ProfilePage 
 {
-	private OperatorDTO user;
+	private ExampleServiceClientImpl serverComm;
+	
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -18,10 +20,10 @@ public class ViewProfile extends ProfilePage
 	private Button editButton;
 	private Button cancelButton;
 	
-	public ViewProfile(String title, OperatorDTO user) {
+	public ViewProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
 		super(title);
-
-		this.user = user;
+		this.serverComm = serverComm;
+		user = this.serverComm.getOperatoer(userID);
 		
 		init();
 	}
