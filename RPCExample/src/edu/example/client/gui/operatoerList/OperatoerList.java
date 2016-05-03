@@ -57,7 +57,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	public void onModuleLoad() {
 		
 		HorizontalPanel hPanel=new HorizontalPanel();
-		serverComm.getOpList();
+		//serverComm.getOpList();
 		
 		 myLbl.getElement().setPropertyString("id", "opLabel");
 		 

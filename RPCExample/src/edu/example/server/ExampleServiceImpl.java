@@ -21,7 +21,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	public int addTwonumbers(int num1, int num2) {
 		return num1 + num2;
 	}
-	public List<OperatorDTO> getOpList(){
+	/*public List<OperatorDTO> getOpList(){
 		try {
 			return opDAO.getOperatorList();
 		} catch (DALException e) {
@@ -32,9 +32,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.example.client.service.ExampleService#getOperator(int)
-	 */
+	
 	@Override
 	public OperatorDTO getOperator(int oprID) {
 		try {
@@ -47,9 +45,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.example.client.service.ExampleService#createOperator(edu.example.server.database.OperatorDTO)
-	 */
+	
 	@Override
 	public void createOperator(OperatorDTO opr) {
 		try {
@@ -60,9 +56,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see edu.example.client.service.ExampleService#updateOperator(edu.example.server.database.OperatorDTO)
-	 */
+	
 	@Override
 	public void updateOperator(OperatorDTO opr) {
 	try {
@@ -72,5 +66,5 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		e.printStackTrace();
 	}
 		
-	}
+	}*/
 }

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
 import edu.example.client.gui.profile.ViewProfile;
-import edu.example.client.temp.OperatorDTO;
+import edu.example.server.database.OperatorDTO;
 
 public class MenuWidget extends Composite{
 
@@ -61,9 +61,9 @@ public class MenuWidget extends Composite{
 
 		public void execute() {
 
-			OperatorDTO user2 = new OperatorDTO(32, "Essal Mohl Lennise", "EML", 1990924321L, "cbA4321", 0);
+		//	OperatorDTO user2 = new OperatorDTO(32, "Essal Mohl Lennise", "EML", 1990924321L, "cbA4321", 0);
 
-			parent.setContentPanel(new ViewProfile("Se Profil", user2));
+			//parent.setContentPanel(new ViewProfile("Se Profil", user2));
 		}
 	};
 	Command cmd_Soeg = new Command(){

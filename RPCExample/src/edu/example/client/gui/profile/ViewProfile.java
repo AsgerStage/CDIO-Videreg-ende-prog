@@ -24,7 +24,7 @@ public class ViewProfile extends ProfilePage
 	public ViewProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
 		super(title);
 		this.serverComm = serverComm;
-		user = this.serverComm.getOperator(userID);
+	//	user = this.serverComm.getOperator(userID);
 		
 		init();
 	}

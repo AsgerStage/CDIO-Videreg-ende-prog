@@ -140,7 +140,7 @@ public class CreateProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			serverComm.createOperatoer(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", -1));
+		//	serverComm.createOperatoer(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", -1));
 		}
 	}
 	

@@ -9,9 +9,9 @@ public interface ExampleServiceIClient
 	void addTwonumbers(int num1, int num2);
 
 
-	void getOpList();
+	//void getOpList();
 	
-	void getOperator(int oprID);
-	void createOperator(OperatorDTO opr);
-	void updateOperator(OperatorDTO opr);
+//	void getOperator(int oprID);
+//	void createOperator(OperatorDTO opr);
+	//void updateOperator(OperatorDTO opr);
 }

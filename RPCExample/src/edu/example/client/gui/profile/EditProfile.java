@@ -27,7 +27,7 @@ public class EditProfile extends ProfilePage
 		super(title);
 		this.serverComm = serverComm;
 
-		user = this.serverComm.getOperator(userID);
+	//	user = this.serverComm.getOperator(userID);
 		
 		init();
 		
@@ -172,7 +172,7 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "MISSING EDIT PROFILE PANEL", -1));
+	//		serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "MISSING EDIT PROFILE PANEL", -1));
 		}
 	}
 	

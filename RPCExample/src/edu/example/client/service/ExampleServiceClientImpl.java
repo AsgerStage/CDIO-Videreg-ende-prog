@@ -34,7 +34,7 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	public void addTwonumbers(int num1, int num2) {
 		this.service.addTwonumbers(num1, num2, new DefaultCallback());
 	}
-	@Override
+	/*@Override
 	public void getOpList()
 	{
 			this.service.getOpList(new DefaultCallback());
@@ -53,7 +53,7 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	public void updateOperator(OperatorDTO opr){
 		this.service.updateOperator(opr, new DefaultCallback());
 		
-	}
+	}*/
 	
 	private class DefaultCallback implements AsyncCallback 
 	{
