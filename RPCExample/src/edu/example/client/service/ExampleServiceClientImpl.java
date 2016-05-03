@@ -4,7 +4,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
-import edu.example.client.gui.MainGui;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
 {
@@ -33,6 +32,12 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	@Override
 	public void addTwonumbers(int num1, int num2) {
 		this.service.addTwonumbers(num1, num2, new DefaultCallback());
+	}
+	@Override
+	public void getOpList()
+	{
+			this.service.getOpList(new DefaultCallback());
+		
 	}
 	
 	private class DefaultCallback implements AsyncCallback 

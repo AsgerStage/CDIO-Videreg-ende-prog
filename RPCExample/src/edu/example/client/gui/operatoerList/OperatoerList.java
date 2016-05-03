@@ -1,5 +1,7 @@
 package edu.example.client.gui.operatoerList;
 
+import java.sql.SQLException;
+
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -8,17 +10,23 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.example.client.service.ExampleServiceClientImpl;
+
+
+
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class OperatoerList extends Composite { //implements EntryPoint {
 	
+	
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private VerticalPanel vPanel=new VerticalPanel();
-	
-	public OperatoerList() {
+	private ExampleServiceClientImpl serverComm;
+	public OperatoerList(ExampleServiceClientImpl serverComm)  {
 		initWidget(this.vPanel);
+		this.serverComm=serverComm;
 		onModuleLoad();
 	}
 	//---------------------------------------------
@@ -38,12 +46,18 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	}
 	/**
 	 * This is the entry point method.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws DALException 
 	 */
 	
 	
 	public void onModuleLoad() {
-		HorizontalPanel hPanel=new HorizontalPanel();
 		
+		HorizontalPanel hPanel=new HorizontalPanel();
+		serverComm.getOpList();
 		
 		 myLbl.getElement().setPropertyString("id", "opLabel");
 		 

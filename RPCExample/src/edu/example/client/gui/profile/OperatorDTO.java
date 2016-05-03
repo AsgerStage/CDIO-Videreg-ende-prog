@@ -1,4 +1,4 @@
-package edu.example.server.database;
+package edu.example.client.gui.profile;
 import java.util.Objects;
 
 import edu.example.server.database.exceptions.DALException;
@@ -19,11 +19,11 @@ public final class OperatorDTO
     private int oprID;
     private String oprNavn;
     private String ini;
-    private String cpr;
+    private long cpr;
     private String password;
     private int rank;
 
-    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
+    public OperatorDTO(int oprID, String oprNavn, String ini, long cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
         setOprID(oprID);
         setName(oprNavn);
         setIni(ini);
@@ -32,26 +32,7 @@ public final class OperatorDTO
         setRank(rank);
     }
     
-    /**
-	 * @param int1
-	 * @param string
-	 * @param string2
-	 * @param string3
-	 * @param string4
-     * @throws OpNameException 
-     * @throws OpIdException 
-     * @throws OpPasswordException 
-	 */
-	public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password) throws OpNameException, OpIdException, OpPasswordException {
-		setOprID(oprID);
-		setName(oprNavn);
-		setIni(ini);
-		setCpr(cpr);
-		setPassword(password);
-	}
-	
-	
-	public void setIni(String ini) {
+    public void setIni(String ini) {
         this.ini = ini;
     }
 
@@ -59,11 +40,10 @@ public final class OperatorDTO
         return this.ini;
     }
 
-    public void setRank(int rank) throws DALException {
+    public void setRank(int rank){
         if(rank >= RANK_MINIMUM_VALUE && rank <= RANK_MAXIMUM_VALUE)
             this.rank = rank;
-        else 
-            throw new DALException("Operatørens rank overholder ikke kravende");
+       
     }
 
     public int getRank() {
@@ -81,33 +61,28 @@ public final class OperatorDTO
         return this.oprID;
     }
 
-    public void setName(String name) throws OpNameException {
+    public void setName(String name){
         if(name != null) {
             if(name.length() >= NAME_MINIMUM_LENGTH)
                 this.oprNavn = name;
-            else
-                throw new OpNameException("Operatør navnet overholder ikke kravende");
-            }
-        else
-            throw new OpNameException("Operatør navnet overholder ikke kravende");
+        }
     }
 
-    public void setCpr(String cpr) {
+    public void setCpr(long cpr) {
         this.cpr = cpr;
     }
 
-    public void setPassword(String password) throws OpPasswordException {
+    public void setPassword(String password){
         if(valPass(password))
             this.password = password;
-        else
-            throw new OpPasswordException("Passwordet overholder ikke de opstillede krav");
+        
     }
 
     public String getName() {
         return this.oprNavn;
     }
 
-    public String getCpr() {
+    public long getCpr() {
         return this.cpr;
     }
 
@@ -165,7 +140,7 @@ public final class OperatorDTO
         hash = 61 * hash + this.oprID;
         hash = 61 * hash + Objects.hashCode(this.oprNavn);
         hash = 61 * hash + Objects.hashCode(this.ini);
-        hash = 61 * hash + Objects.hashCode(this.cpr);
+        hash = 61 * hash + (int) (this.cpr ^ (this.cpr >>> 32));
         hash = 61 * hash + Objects.hashCode(this.password);
         hash = 61 * hash + this.rank;
         return hash;
