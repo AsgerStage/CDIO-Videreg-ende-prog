@@ -6,10 +6,12 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.server.database.OperatorDTO;
 
 public class EditProfile extends ProfilePage 
 {
 	private ExampleServiceClientImpl serverComm;
+	private OperatorDTO user;
 	
 	private InfoBox nameField;
 	private InfoBox initialsField;
@@ -25,7 +27,7 @@ public class EditProfile extends ProfilePage
 		super(title);
 		this.serverComm = serverComm;
 
-	/*	user = this.serverComm.getOperatoer(userID);
+		user = this.serverComm.getOperator(userID);
 		
 		init();
 		
@@ -37,11 +39,11 @@ public class EditProfile extends ProfilePage
 			ListBox lbRank = (ListBox) rankField.getWidget();
 			lbRank.setEnabled(false);
 		}
-		*/
+		
 	}
 	
 	private final void init() {
-		/*//Content
+		//Content
 		nameField = new InfoBox("Navn", new TextBox());
 		initialsField = new InfoBox("Initialer", new TextBox());
 		cprField = new InfoBox("CPR Nr.", new TextBox());
@@ -78,7 +80,6 @@ public class EditProfile extends ProfilePage
 		
 		buttonPanel.add(saveButton);
 		buttonPanel.add(cancelButton);
-		*/
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class EditProfile extends ProfilePage
 	}
 
 	@Override
-	public void setContent(String name, String initials, long cpr, int id, String rank) {
+	public void setContent(String name, String initials, String cpr, int id, String rank) {
 		setName(name);
 		setInitials(initials);
 		setCPR(cpr);
@@ -121,15 +122,15 @@ public class EditProfile extends ProfilePage
 	}
 
 	@Override
-	public long getCPR() {
+	public String getCPR() {
 		TextBox tbCPR = (TextBox) cprField.getWidget();
-		return Long.parseLong(tbCPR.getText());
+		return tbCPR.getText();
 	}
 
 	@Override
-	public void setCPR(long cpr) {
+	public void setCPR(String cpr) {
 		TextBox tbCPR = (TextBox) cprField.getWidget();
-		tbCPR.setText(cpr + "");
+		tbCPR.setText(cpr);
 	}
 
 	@Override
@@ -171,7 +172,7 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			serverComm.updateOperatoer(new OperatoerDTO());
+			serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "MISSING EDIT PROFILE PANEL", -1));
 		}
 	}
 	

@@ -2,7 +2,7 @@ package edu.example.client.gui.profile;
 
 public interface IProfilePage 
 {
-	public void setContent(String name, String initials, long cpr, int id, String rank);
+	public void setContent(String name, String initials, String cpr, int id, String rank);
 	
 	public String getName();
 	
@@ -12,9 +12,9 @@ public interface IProfilePage
 	
 	public void setInitials(String initials);
 	
-	public long getCPR();
+	public String getCPR();
 	
-	public void setCPR(long cpr);
+	public void setCPR(String cpr);
 	
 	public int getID();
 	

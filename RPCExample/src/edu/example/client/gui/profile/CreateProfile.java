@@ -6,8 +6,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.client.temp.OperatorDTO;
-import edu.example.server.database.dto.OperatoerDTO;
+import edu.example.server.database.OperatorDTO;
 
 public class CreateProfile extends ProfilePage 
 {
@@ -70,7 +69,7 @@ public class CreateProfile extends ProfilePage
 	}
 
 	@Override
-	public void setContent(String name, String initials, long cpr, int id, String rank) {
+	public void setContent(String name, String initials, String cpr, int id, String rank) {
 		setName(name);
 		setInitials(initials);
 		setCPR(cpr);
@@ -103,15 +102,15 @@ public class CreateProfile extends ProfilePage
 	}
 
 	@Override
-	public long getCPR() {
+	public String getCPR() {
 		TextBox tbCPR = (TextBox) cprField.getWidget();
-		return Long.parseLong(tbCPR.getText());
+		return tbCPR.getText();
 	}
 
 	@Override
-	public void setCPR(long cpr) {
+	public void setCPR(String cpr) {
 		TextBox tbCPR = (TextBox) cprField.getWidget();
-		tbCPR.setText(cpr + "");
+		tbCPR.setText(cpr);
 	}
 
 	@Override
@@ -141,7 +140,7 @@ public class CreateProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			serverComm.createOperatoer(new OperatoerDTO());
+			serverComm.createOperatoer(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", -1));
 		}
 	}
 	

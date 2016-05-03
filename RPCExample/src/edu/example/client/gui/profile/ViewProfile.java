@@ -5,11 +5,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.client.temp.OperatorDTO;
+import edu.example.server.database.OperatorDTO;
 
 public class ViewProfile extends ProfilePage 
 {
 	private ExampleServiceClientImpl serverComm;
+	private OperatorDTO user;
 	
 	private InfoBox nameField;
 	private InfoBox initialsField;
@@ -23,7 +24,7 @@ public class ViewProfile extends ProfilePage
 	public ViewProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
 		super(title);
 		this.serverComm = serverComm;
-		user = this.serverComm.getOperatoer(userID);
+		user = this.serverComm.getOperator(userID);
 		
 		init();
 	}
@@ -58,7 +59,7 @@ public class ViewProfile extends ProfilePage
 	}
 	
 	@Override
-	public void setContent(String name, String initials, long cpr, int id, String rank) {
+	public void setContent(String name, String initials, String cpr, int id, String rank) {
 		setName(name);
 		setInitials(initials);
 		setCPR(cpr);
@@ -91,15 +92,15 @@ public class ViewProfile extends ProfilePage
 	}
 
 	@Override
-	public long getCPR() {
+	public String getCPR() {
 		Label lblCpr = (Label) cprField.getWidget();
-		return Long.parseLong(lblCpr.getText());
+		return lblCpr.getText();
 	}
 
 	@Override
-	public void setCPR(long cpr) {
+	public void setCPR(String cpr) {
 		Label lblCpr = (Label) cprField.getWidget();
-		lblCpr.setText(cpr + "");
+		lblCpr.setText(cpr);
 	}
 
 	@Override

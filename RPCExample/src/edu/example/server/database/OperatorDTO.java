@@ -8,6 +8,10 @@ import edu.example.server.database.exceptions.OpPasswordException;
 
 public final class OperatorDTO 
 {
+	public static final int RANK_OPR = 0;
+	public static final int RANK_ADMIN = 1;
+	
+	
     private final int ID_MINIMUM_VALUE = 11;
     private final int ID_MAXIMUM_VALUE = 99;
     private final int RANK_MINIMUM_VALUE = -1;
@@ -138,6 +142,17 @@ public final class OperatorDTO
                 return false;
         }
         return (lowerCase + upperCase + digit + specialChar) >= NUMBER_OF_SPECIAL_CHARACTERS;
+    }
+    
+    public static String rankToString(int rank) {
+    	switch (rank) {
+		case RANK_OPR:
+			return "Operator";
+		case RANK_ADMIN:
+			return "Administrator";
+		default:
+			return "Undefined";
+		}
     }
 
     @Override
