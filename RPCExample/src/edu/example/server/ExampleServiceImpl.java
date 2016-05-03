@@ -31,4 +31,46 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		}
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see edu.example.client.service.ExampleService#getOperator(int)
+	 */
+	@Override
+	public OperatorDTO getOperator(int oprID) {
+		try {
+			return opDAO.getOperator(oprID);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.example.client.service.ExampleService#createOperator(edu.example.server.database.OperatorDTO)
+	 */
+	@Override
+	public void createOperator(OperatorDTO opr) {
+		try {
+			opDAO.createOperator(opr);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.example.client.service.ExampleService#updateOperator(edu.example.server.database.OperatorDTO)
+	 */
+	@Override
+	public void updateOperator(OperatorDTO opr) {
+	try {
+		opDAO.updateOperator(opr);
+	} catch (DALException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
 }

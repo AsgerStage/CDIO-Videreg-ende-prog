@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
+import edu.example.server.database.OperatorDTO;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
 {
@@ -37,6 +38,20 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	public void getOpList()
 	{
 			this.service.getOpList(new DefaultCallback());
+		
+	}
+	@Override
+	public void getOperator(int oprID){
+		this.service.getOperator(oprID, new DefaultCallback());
+	}
+	@Override
+	public void createOperator(OperatorDTO opr){
+		this.service.createOperator(opr, new DefaultCallback());
+		
+	}
+	@Override
+	public void updateOperator(OperatorDTO opr){
+		this.service.updateOperator(opr, new DefaultCallback());
 		
 	}
 	

@@ -6,8 +6,6 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.client.temp.OperatorDTO;
-import edu.example.server.database.dto.OperatoerDTO;
 
 public class EditProfile extends ProfilePage 
 {
@@ -27,7 +25,7 @@ public class EditProfile extends ProfilePage
 		super(title);
 		this.serverComm = serverComm;
 
-		user = this.serverComm.getOperatoer(userID);
+	/*	user = this.serverComm.getOperatoer(userID);
 		
 		init();
 		
@@ -39,10 +37,11 @@ public class EditProfile extends ProfilePage
 			ListBox lbRank = (ListBox) rankField.getWidget();
 			lbRank.setEnabled(false);
 		}
+		*/
 	}
 	
 	private final void init() {
-		//Content
+		/*//Content
 		nameField = new InfoBox("Navn", new TextBox());
 		initialsField = new InfoBox("Initialer", new TextBox());
 		cprField = new InfoBox("CPR Nr.", new TextBox());
@@ -79,6 +78,7 @@ public class EditProfile extends ProfilePage
 		
 		buttonPanel.add(saveButton);
 		buttonPanel.add(cancelButton);
+		*/
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package edu.example.client.service;
 
+import edu.example.server.database.OperatorDTO;
+
 public interface ExampleServiceIClient 
 {
 	void sayHello(String name);
@@ -8,4 +10,8 @@ public interface ExampleServiceIClient
 
 
 	void getOpList();
+	
+	void getOperator(int oprID);
+	void createOperator(OperatorDTO opr);
+	void updateOperator(OperatorDTO opr);
 }
