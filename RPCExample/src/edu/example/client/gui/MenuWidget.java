@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.MenuItem;
 
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.server.database.OperatorDTO;
 
 public class MenuWidget extends Composite{
 
@@ -67,7 +66,7 @@ public class MenuWidget extends Composite{
 
 	Command cmd_MinSide = new Command() {
 		public void execute() {
-			ViewProfile viewPanel = new ViewProfile("Se Profil", 2, serverComm);
+			ViewProfile viewPanel = new ViewProfile("Se Profil", 25, serverComm);
 			currentPanel = viewPanel;
 			
 			parent.setContentPanel(viewPanel);

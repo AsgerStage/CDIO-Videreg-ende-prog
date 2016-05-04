@@ -5,8 +5,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.server.database.OperatorDTO;
 
 public class EditProfile extends ProfilePage 
 {
@@ -31,14 +31,14 @@ public class EditProfile extends ProfilePage
 		
 		init();
 		
-		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), OperatorDTO.rankToString(user.getRank()));
-		if(user.getRank() != OperatorDTO.RANK_ADMIN) {
-			TextBox tbID = (TextBox) idField.getWidget();
-			tbID.setEnabled(false);
-			
-			ListBox lbRank = (ListBox) rankField.getWidget();
-			lbRank.setEnabled(false);
-		}
+//		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), OperatorDTO.rankToString(user.getRank()));
+//		if(user.getRank() != OperatorDTO.RANK_ADMIN) {
+//			TextBox tbID = (TextBox) idField.getWidget();
+//			tbID.setEnabled(false);
+//			
+//			ListBox lbRank = (ListBox) rankField.getWidget();
+//			lbRank.setEnabled(false);
+//		}
 		
 	}
 	
@@ -50,8 +50,8 @@ public class EditProfile extends ProfilePage
 		idField = new InfoBox("ID", new TextBox());
 		
 		ListBox rankList = new ListBox();
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
+//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
+//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
 		Button passwordButton = new Button();

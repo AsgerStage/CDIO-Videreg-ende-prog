@@ -1,6 +1,8 @@
-package edu.example.server.database.exceptions;
+package edu.example.client.exceptions;
 
-public class OpNameException extends Exception 
+import java.io.Serializable;
+
+public class OpNameException extends Exception  implements Serializable
 {
     private static final long serialVersionUID = 3L;
     private final String name;

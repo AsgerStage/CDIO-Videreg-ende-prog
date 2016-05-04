@@ -2,8 +2,8 @@ package edu.example.server.database;
 
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.dto.ReceptKompDTO;
-import edu.example.server.database.exceptions.DALException;
 
 public interface ReceptKompDAO {
 	ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException;

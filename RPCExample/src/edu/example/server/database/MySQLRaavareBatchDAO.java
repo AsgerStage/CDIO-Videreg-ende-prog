@@ -4,13 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 
 import edu.example.server.database.dto.RaavareBatchDTO;
-import edu.example.server.database.exceptions.DALException;
 
-public class MySQLRaavareBatchDAO implements RaavareBatchDAO {
-	
+public class MySQLRaavareBatchDAO implements RaavareBatchDAO 
+{	
 	public RaavareBatchDTO getRaavareBatch(int raavareId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE raavare_id = " + raavareId);
 	    try {
@@ -18,7 +19,6 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO {
 			return new RaavareBatchDTO (rs.getInt("rbId"), rs.getInt("raavareId"), rs.getDouble("maengde"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
-		
 	}
 	
 	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {		

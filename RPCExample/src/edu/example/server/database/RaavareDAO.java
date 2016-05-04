@@ -2,8 +2,8 @@ package edu.example.server.database;
 
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.dto.RaavareDTO;
-import edu.example.server.database.exceptions.DALException;
 
 public interface RaavareDAO {
 	RaavareDTO getRaavare(int raavareId) throws DALException;

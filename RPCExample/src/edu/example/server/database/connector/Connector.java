@@ -6,10 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import edu.example.server.database.exceptions.DALException;
-
-
-
+import edu.example.client.exceptions.DALException;
 
 public class Connector
 {

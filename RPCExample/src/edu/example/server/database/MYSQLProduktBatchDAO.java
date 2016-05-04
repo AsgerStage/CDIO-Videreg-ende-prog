@@ -5,14 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 import edu.example.server.database.dto.ProduktBatchDTO;
-import edu.example.server.database.exceptions.DALException;
 
-public class MYSQLProduktBatchDAO implements ProduktBatchDAO {
-
-	
-
+public class MYSQLProduktBatchDAO implements ProduktBatchDAO 
+{
 	@Override
 	public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch WHERE pbId= "+pbId);
@@ -22,7 +20,6 @@ public class MYSQLProduktBatchDAO implements ProduktBatchDAO {
 			return new ProduktBatchDTO (rs.getInt("pbId"),rs.getInt("status"),rs.getInt("receptId"));
 		}
 		catch(SQLException e){throw new DALException(e);}
-		
 	}
 	
 	@Override
@@ -47,7 +44,6 @@ public class MYSQLProduktBatchDAO implements ProduktBatchDAO {
 			);
 	}
 
-
 	@Override
 	public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
 		Connector.doUpdate(
@@ -56,5 +52,4 @@ public class MYSQLProduktBatchDAO implements ProduktBatchDAO {
 				produktbatch.getPbId()
 		);
 	}
-
 }

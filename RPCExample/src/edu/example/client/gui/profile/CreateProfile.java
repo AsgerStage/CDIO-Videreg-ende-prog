@@ -5,8 +5,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.server.database.OperatorDTO;
 
 public class CreateProfile extends ProfilePage 
 {
@@ -36,8 +36,8 @@ public class CreateProfile extends ProfilePage
 		idField = new InfoBox("ID", new TextBox());
 		
 		ListBox rankList = new ListBox();
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
+//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
+//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
 		contentPanel.add(nameField);

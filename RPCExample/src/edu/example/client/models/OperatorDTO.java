@@ -1,24 +1,25 @@
-package edu.example.server.database;
+package edu.example.client.models;
+import java.io.Serializable;
 import java.util.Objects;
 
-import edu.example.server.database.exceptions.DALException;
-import edu.example.server.database.exceptions.OpIdException;
-import edu.example.server.database.exceptions.OpNameException;
-import edu.example.server.database.exceptions.OpPasswordException;
+import edu.example.client.exceptions.DALException;
+import edu.example.client.exceptions.OpIdException;
+import edu.example.client.exceptions.OpNameException;
+import edu.example.client.exceptions.OpPasswordException;
 
-public final class OperatorDTO implements IOperatorDTO
+public final class OperatorDTO implements Serializable
 {
 	public static final int RANK_OPR = 0;
 	public static final int RANK_ADMIN = 1;
 	
-	
-    private final int ID_MINIMUM_VALUE = 11;
-    private final int ID_MAXIMUM_VALUE = 99;
-    private final int RANK_MINIMUM_VALUE = -1;
-    private final int RANK_MAXIMUM_VALUE = 1;
-    private final int NAME_MINIMUM_LENGTH = 2;
-    private final int PASSWORD_MINIMUM_LENGTH = 6;
-    private final int NUMBER_OF_SPECIAL_CHARACTERS = 3;
+    private static final long serialVersionUID = 1L;
+	private int ID_MINIMUM_VALUE = 11;
+    private int ID_MAXIMUM_VALUE = 99;
+    private int RANK_MINIMUM_VALUE = -1;
+    private int RANK_MAXIMUM_VALUE = 1;
+    private int NAME_MINIMUM_LENGTH = 2;
+    private int PASSWORD_MINIMUM_LENGTH = 6;
+    private int NUMBER_OF_SPECIAL_CHARACTERS = 3;
     
     private int oprID;
     private String oprNavn;
@@ -26,6 +27,10 @@ public final class OperatorDTO implements IOperatorDTO
     private String cpr;
     private String password;
     private int rank;
+    
+    public OperatorDTO() {
+    	
+    }
 
     public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
         setOprID(oprID);
@@ -36,17 +41,7 @@ public final class OperatorDTO implements IOperatorDTO
         setRank(rank);
     }
     
-    /**
-	 * @param int1
-	 * @param string
-	 * @param string2
-	 * @param string3
-	 * @param string4
-     * @throws OpNameException 
-     * @throws OpIdException 
-     * @throws OpPasswordException 
-	 */
-	public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password) throws OpNameException, OpIdException, OpPasswordException {
+    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password) throws OpNameException, OpIdException, OpPasswordException {
 		setOprID(oprID);
 		setName(oprNavn);
 		setIni(ini);
@@ -54,30 +49,25 @@ public final class OperatorDTO implements IOperatorDTO
 		setPassword(password);
 	}
 	
-	@Override
 	public void setIni(String ini) {
         this.ini = ini;
     }
 
-	@Override
     public String getIni() {
         return this.ini;
     }
 
-	@Override
     public void setRank(int rank) throws DALException {
         if(rank >= RANK_MINIMUM_VALUE && rank <= RANK_MAXIMUM_VALUE)
             this.rank = rank;
         else 
-            throw new DALException("Operatørens rank overholder ikke kravende");
+            throw new DALException("Operatoerens rank overholder ikke kravende");
     }
 
-	@Override
     public int getRank() {
         return this.rank;
     }
 
-	@Override
     public void setOprID(int oprID) throws OpIdException {
         if(oprID >= ID_MINIMUM_VALUE && oprID <= ID_MAXIMUM_VALUE)
             this.oprID = oprID;
@@ -85,29 +75,25 @@ public final class OperatorDTO implements IOperatorDTO
             throw new OpIdException(oprID);
     }
 
-	@Override
     public int getOprID() {
         return this.oprID;
     }
 
-	@Override
     public void setName(String name) throws OpNameException {
         if(name != null) {
             if(name.length() >= NAME_MINIMUM_LENGTH)
                 this.oprNavn = name;
             else
-                throw new OpNameException("Operatør navnet overholder ikke kravende");
+                throw new OpNameException("Operatoer navnet overholder ikke kravende");
             }
         else
-            throw new OpNameException("Operatør navnet overholder ikke kravende");
+            throw new OpNameException("Operatoer navnet overholder ikke kravende");
     }
 
-	@Override
     public void setCpr(String cpr) {
         this.cpr = cpr;
     }
 
-	@Override
     public void setPassword(String password) throws OpPasswordException {
         if(valPass(password))
             this.password = password;
@@ -115,17 +101,14 @@ public final class OperatorDTO implements IOperatorDTO
             throw new OpPasswordException("Passwordet overholder ikke de opstillede krav");
     }
 
-	@Override
     public String getName() {
         return this.oprNavn;
     }
 
-	@Override
     public String getCpr() {
         return this.cpr;
     }
 
-	@Override
     public String getPassword() {
         return this.password;
     }

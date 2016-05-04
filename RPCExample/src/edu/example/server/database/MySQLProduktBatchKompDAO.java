@@ -5,14 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 import edu.example.server.database.dto.ProduktBatchKompDTO;
-import edu.example.server.database.exceptions.DALException;
 
-
-
-public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO {
-
+public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO
+{
 	@Override
 	public ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatchkomponent WHERE pb_id= "+pbId+" AND rb_id="+rbId);

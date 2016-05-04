@@ -3,16 +3,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.thoughtworks.xstream.XStream;
 
+import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.client.service.IOperatorDTO;
 
 public class ViewProfile extends ProfilePage 
 {
-	private XStream xStream = new XStream();
 	private ExampleServiceClientImpl serverComm;
-	private IOperatorDTO user;
+	private OperatorDTO user;
 	
 	private InfoBox nameField;
 	private InfoBox initialsField;
@@ -31,12 +29,9 @@ public class ViewProfile extends ProfilePage
 		init();
 	}
 	
-	public void updateUser(String user) {
-		this.user = (IOperatorDTO) xStream.fromXML(user);
-		
-//		this.user = user;
-		
-		setName(this.user.getName());
+	public void updateUser(OperatorDTO user) {		
+		this.user = user;
+		setContent(this.user.getName(), this.user.getIni(), this.user.getCpr(), this.user.getOprID(), OperatorDTO.rankToString(this.user.getRank()));
 	}
 	
 	private void init() {

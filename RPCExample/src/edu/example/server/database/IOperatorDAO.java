@@ -1,7 +1,8 @@
 package edu.example.server.database;
 import java.util.List;
 
-import edu.example.server.database.exceptions.DALException;
+import edu.example.client.exceptions.DALException;
+import edu.example.client.models.OperatorDTO;
 
 public interface IOperatorDAO 
 {

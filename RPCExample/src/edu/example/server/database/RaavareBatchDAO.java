@@ -2,8 +2,8 @@ package edu.example.server.database;
 
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.dto.RaavareBatchDTO;
-import edu.example.server.database.exceptions.DALException;
 
 public interface RaavareBatchDAO {
 	RaavareBatchDTO getRaavareBatch(int rbId) throws DALException;
@@ -12,4 +12,3 @@ public interface RaavareBatchDAO {
 	void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException;
 	void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException;
 }
-

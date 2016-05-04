@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
 import edu.example.client.gui.profile.ViewProfile;
-import edu.example.server.database.OperatorDTO;
+import edu.example.client.models.OperatorDTO;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
 {
@@ -26,41 +26,41 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 		return mainGui;
 	}
 	
-	@Override
-	public void sayHello(String name) {
-		this.service.sayHello(name, new DefaultCallback());
-	}
-
-	@Override
-	public void addTwonumbers(int num1, int num2) {
-		this.service.addTwonumbers(num1, num2, new DefaultCallback());
-	}
-	
-	@Override
-	public void getOpList()
-	{
-		this.service.getOpList(new DefaultCallback());
-	}
+//	@Override
+//	public void sayHello(String name) {
+//		this.service.sayHello(name, new DefaultCallback());
+//	}
+//
+//	@Override
+//	public void addTwonumbers(int num1, int num2) {
+//		this.service.addTwonumbers(num1, num2, new DefaultCallback());
+//	}
+//	
+//	@Override
+//	public void getOpList()
+//	{
+//		this.service.getOpList(new DefaultCallback());
+//	}
 	
 	@Override
 	public void getOperator(int oprID){
 		this.service.getOperator(oprID, new DefaultCallback());
 	}
 	
-	@Override
-	public void createOperator(String XMLopr){
-		this.service.createOperator(XMLopr, new DefaultCallback());
-		
-	}
-	@Override
-	public void updateOperator(String XMLopr){
-		this.service.updateOperator(XMLopr, new DefaultCallback());
-		
-	}
-	@Override
-	public void getPassword(int oprID){
-		this.service.getPassword(oprID, new DefaultCallback());
-	}
+//	@Override
+//	public void createOperator(String XMLopr){
+//		this.service.createOperator(XMLopr, new DefaultCallback());
+//		
+//	}
+//	@Override
+//	public void updateOperator(String XMLopr){
+//		this.service.updateOperator(XMLopr, new DefaultCallback());
+//		
+//	}
+//	@Override
+//	public void getPassword(int oprID){
+//		this.service.getPassword(oprID, new DefaultCallback());
+//	}
 	
 	private class DefaultCallback implements AsyncCallback 
 	{
@@ -76,7 +76,7 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 			
 			if(currentPanel instanceof ViewProfile) {
 				ViewProfile viewProfile = (ViewProfile) currentPanel;
-				viewProfile.updateUser((String) result);
+				viewProfile.updateUser((OperatorDTO) result);
 			}
 		}
 	}

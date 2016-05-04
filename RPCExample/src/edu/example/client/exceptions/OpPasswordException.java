@@ -1,6 +1,9 @@
-package edu.example.server.database.exceptions;
+package edu.example.client.exceptions;
 
-public class OpPasswordException extends Exception{
+import java.io.Serializable;
+
+public class OpPasswordException extends Exception  implements Serializable
+{
     private static final long serialVersionUID = 4L;
     private final String password;
 

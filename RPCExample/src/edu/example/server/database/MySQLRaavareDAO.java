@@ -4,12 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 
 import edu.example.server.database.dto.RaavareDTO;
-import edu.example.server.database.exceptions.DALException;
 
-public class MySQLRaavareDAO implements RaavareDAO {
+public class MySQLRaavareDAO implements RaavareDAO 
+{
 	@Override
 	public RaavareDTO getRaavare(int raavareId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM raavare WHERE raavareId = " + raavareId);
@@ -18,7 +20,6 @@ public class MySQLRaavareDAO implements RaavareDAO {
 	    	return new RaavareDTO (rs.getInt("raavareId"), rs.getString("raavareNavn"), rs.getString("leverandoer"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
-		
 	}
 
 	@Override
@@ -38,10 +39,10 @@ public class MySQLRaavareDAO implements RaavareDAO {
 
 	@Override
 	public void createRaavare(RaavareDTO raavare) throws DALException{		
-			Connector.doUpdate(
-				"INSERT INTO raavare(raavareId, raavareNavn, leverandoer) VALUES " +
-				"(" + raavare.getRaavareId() + ", '" + raavare.getRaavareNavn() + "', '" + raavare.getLeverandoer() + "',)"
-			);
+		Connector.doUpdate(
+			"INSERT INTO raavare(raavareId, raavareNavn, leverandoer) VALUES " +
+			"(" + raavare.getRaavareId() + ", '" + raavare.getRaavareNavn() + "', '" + raavare.getLeverandoer() + "',)"
+		);
 	}
 
 	@Override

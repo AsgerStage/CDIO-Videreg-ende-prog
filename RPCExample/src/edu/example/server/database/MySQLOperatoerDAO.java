@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.server.database.connector.Connector;
-import edu.example.server.database.exceptions.DALException;
-import edu.example.server.database.exceptions.OpIdException;
-import edu.example.server.database.exceptions.OpNameException;
-import edu.example.server.database.exceptions.OpPasswordException;
+import edu.example.client.exceptions.DALException;
+import edu.example.client.exceptions.OpIdException;
+import edu.example.client.exceptions.OpNameException;
+import edu.example.client.exceptions.OpPasswordException;
+import edu.example.client.models.OperatorDTO;
 
 
 public class MySQLOperatoerDAO implements OperatoerDAO {
@@ -20,6 +21,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 	    	if (!rs.first()) throw new DALException("Operatoeren " + oprId + " findes ikke");
 	    	return new OperatorDTO (rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"));
 	    }
+//	    catch (SQLException e)  {throw new DALException(e); }
 	    catch (SQLException | OpNameException | OpIdException | OpPasswordException e) {throw new DALException(e); }
 		
 	}
@@ -50,6 +52,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 				list.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password")));
 			}
 		}
+//		catch (SQLException e) { throw new DALException(e); }
 		catch (SQLException | OpNameException | OpIdException | OpPasswordException e) { throw new DALException(e); }
 		return list;
 	}

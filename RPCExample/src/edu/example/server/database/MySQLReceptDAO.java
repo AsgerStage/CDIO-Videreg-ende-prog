@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 import edu.example.server.database.dto.ReceptDTO;
-import edu.example.server.database.exceptions.DALException;
 
-public class MySQLReceptDAO implements ReceptDAO {
-
+public class MySQLReceptDAO implements ReceptDAO 
+{
 	@Override
 	public ReceptDTO getRecept(int receptId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM recept WHERE receptId = " + receptId);
@@ -19,7 +19,6 @@ public class MySQLReceptDAO implements ReceptDAO {
 	    	return new ReceptDTO (rs.getInt("receptId"), rs.getString("receptNavn"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
-		
 	}
 
 	@Override
@@ -35,6 +34,7 @@ public class MySQLReceptDAO implements ReceptDAO {
 		}
 		return list;
 	}
+	
 	@Override
 	public void createRecept(ReceptDTO recept) throws DALException {		
 			Connector.doUpdate(

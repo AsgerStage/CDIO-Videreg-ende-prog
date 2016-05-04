@@ -8,17 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 import edu.example.server.database.dto.ReceptKompDTO;
-import edu.example.server.database.exceptions.DALException;
 
 /**
  * @author Asger
  *
  * 28/04/2016
  */
-public class MYSQLReceptKompDAO implements ReceptKompDAO {
-
+public class MYSQLReceptKompDAO implements ReceptKompDAO
+{
 	/**
 	 * 
 	 */

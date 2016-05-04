@@ -1,8 +1,9 @@
-package edu.example.server.database.exceptions;
+package edu.example.client.exceptions;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 
-public class DALException extends Throwable 
+public class DALException extends Throwable implements Serializable
 {
     private static final long serialVersionUID = 2L;
     private final String DALEx;

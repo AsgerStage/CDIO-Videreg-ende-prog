@@ -1,6 +1,8 @@
-package edu.example.server.database.exceptions;
+package edu.example.client.exceptions;
 
-public class OpIdException extends Exception
+import java.io.Serializable;
+
+public class OpIdException extends Exception implements Serializable
 {
     private static final long serialVersionUID = 5L;
     private final int oprId;
