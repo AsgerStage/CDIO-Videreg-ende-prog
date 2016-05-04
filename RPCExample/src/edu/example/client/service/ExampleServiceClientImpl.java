@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
+import edu.example.client.gui.profile.ViewProfile;
 import edu.example.server.database.OperatorDTO;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
@@ -71,9 +72,12 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 		@Override
 		public void onSuccess(Object result) {
 			System.out.println("Response received");
+			Object currentPanel = mainGui.getCurrentPanel();
 			
-//			if(result instanceof String)
-//				mainGui.updateLabel((String) result);
+			if(currentPanel instanceof ViewProfile) {
+				ViewProfile viewProfile = (ViewProfile) currentPanel;
+				viewProfile.updateUser((String) result);
+			}
 		}
 	}
 }

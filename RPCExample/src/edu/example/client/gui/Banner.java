@@ -14,8 +14,9 @@ public class Banner extends Composite { //implements EntryPoint {
 	
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private VerticalPanel vPanel= new VerticalPanel(); //Hovedpanelet som indeholder hPanel1 og hPanel2
-	HorizontalPanel hPanel4;
+	private HorizontalPanel hPanel4;
 	private ExampleServiceClientImpl serverComm;
+	private MenuWidget menuWidget;
 	
 	public Banner(ExampleServiceClientImpl serverComm) {
 		initWidget(this.vPanel);
@@ -27,7 +28,7 @@ public class Banner extends Composite { //implements EntryPoint {
 
 	public void onModuleLoad() {
 
-		MenuWidget MW = new MenuWidget(this);
+		menuWidget = new MenuWidget(this, serverComm);
 
 		
 		vPanel.setBorderWidth(1);
@@ -57,11 +58,15 @@ public class Banner extends Composite { //implements EntryPoint {
 		vPanel.add(hPanel1);
 		hPanel1.add(img);
 		vPanel.add(hPanel2);
-		hPanel2.add(MW);
+		hPanel2.add(menuWidget);
 		hPanel2.add(hPanel4);
 
 //		RootPanel.get().add(hPanel);
 //		RootPanel.get().add(page);
+	}
+	
+	public Object getCurrentPanel() {
+		return menuWidget.getCurrentPanel();
 	}
 	
 	public void setContentPanel(Composite Content){

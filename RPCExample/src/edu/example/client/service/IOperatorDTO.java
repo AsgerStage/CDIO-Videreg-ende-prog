@@ -1,29 +1,24 @@
 package edu.example.client.service;
 
-import edu.example.server.database.exceptions.DALException;
-import edu.example.server.database.exceptions.OpIdException;
-import edu.example.server.database.exceptions.OpNameException;
-import edu.example.server.database.exceptions.OpPasswordException;
-
 public interface IOperatorDTO 
 {
 	public void setIni(String ini);
 
     public String getIni();
 
-    public void setRank(int rank) throws DALException;
+    public void setRank(int rank);
 
     public int getRank();
 
-    public void setOprID(int oprID) throws OpIdException;
+    public void setOprID(int oprID);
 
     public int getOprID();
 
-    public void setName(String name) throws OpNameException;
+    public void setName(String name);
 
     public void setCpr(String cpr);
 
-    public void setPassword(String password) throws OpPasswordException;
+    public void setPassword(String password);
 
     public String getName();
 

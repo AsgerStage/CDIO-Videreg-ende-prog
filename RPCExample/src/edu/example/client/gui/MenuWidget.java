@@ -7,12 +7,15 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
 import edu.example.client.gui.profile.ViewProfile;
+import edu.example.client.service.ExampleServiceClientImpl;
 import edu.example.server.database.OperatorDTO;
 
 public class MenuWidget extends Composite{
 
 	private HorizontalPanel hPanel= new HorizontalPanel();
 	private Banner parent;
+	private Object currentPanel = null;
+	private ExampleServiceClientImpl serverComm;
 	public MenuWidget(){
 //		initWidget(this.hPanel);
 //
@@ -32,9 +35,10 @@ public class MenuWidget extends Composite{
 		
 	}
 
-	public MenuWidget(Banner banner) {
+	public MenuWidget(Banner banner, ExampleServiceClientImpl serverComm) {
 		initWidget(this.hPanel);
 		parent = banner;
+		this.serverComm = serverComm;
 		
 		hPanel.setBorderWidth(1);
 		hPanel.setWidth("100%");
@@ -49,6 +53,10 @@ public class MenuWidget extends Composite{
 		hPanel.add(menu);
 		menu.setHeight("200px");
 	}
+	
+	public Object getCurrentPanel() {
+		return currentPanel;
+	}
 
 	Command cmd_NyAfvejning = new Command(){
 
@@ -57,15 +65,15 @@ public class MenuWidget extends Composite{
 		}
 	};
 
-	Command cmd_MinSide = new Command(){
-
+	Command cmd_MinSide = new Command() {
 		public void execute() {
-
-		//	OperatorDTO user2 = new OperatorDTO(32, "Essal Mohl Lennise", "EML", 1990924321L, "cbA4321", 0);
-
-			//parent.setContentPanel(new ViewProfile("Se Profil", user2));
+			ViewProfile viewPanel = new ViewProfile("Se Profil", 2, serverComm);
+			currentPanel = viewPanel;
+			
+			parent.setContentPanel(viewPanel);
 		}
 	};
+	
 	Command cmd_Soeg = new Command(){
 
 		public void execute() {

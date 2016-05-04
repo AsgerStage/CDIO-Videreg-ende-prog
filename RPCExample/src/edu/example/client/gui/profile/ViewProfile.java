@@ -3,14 +3,16 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
+import com.thoughtworks.xstream.XStream;
 
 import edu.example.client.service.ExampleServiceClientImpl;
-import edu.example.server.database.OperatorDTO;
+import edu.example.client.service.IOperatorDTO;
 
 public class ViewProfile extends ProfilePage 
 {
+	private XStream xStream = new XStream();
 	private ExampleServiceClientImpl serverComm;
-	private OperatorDTO user;
+	private IOperatorDTO user;
 	
 	private InfoBox nameField;
 	private InfoBox initialsField;
@@ -24,18 +26,26 @@ public class ViewProfile extends ProfilePage
 	public ViewProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
 		super(title);
 		this.serverComm = serverComm;
-	//	user = this.serverComm.getOperator(userID);
+		this.serverComm.getOperator(userID);
 		
 		init();
 	}
 	
+	public void updateUser(String user) {
+		this.user = (IOperatorDTO) xStream.fromXML(user);
+		
+//		this.user = user;
+		
+		setName(this.user.getName());
+	}
+	
 	private void init() {
 		//Content
-		nameField = new InfoBox("Navn", new Label(user.getName()));
-		initialsField = new InfoBox("Initialer", new Label(user.getIni()));
-		cprField = new InfoBox("CPR Nr.", new Label(user.getCpr() + ""));
-		idField = new InfoBox("ID", new Label(user.getOprID() + ""));
-		rankField = new InfoBox("Rank", new Label(OperatorDTO.rankToString(user.getRank())));
+		nameField = new InfoBox("Navn", new Label("Loading.."));
+		initialsField = new InfoBox("Initialer", new Label("Loading.."));
+		cprField = new InfoBox("CPR Nr.", new Label("Loading.."));
+		idField = new InfoBox("ID", new Label("Loading.."));
+		rankField = new InfoBox("Rank", new Label("Loading.."));
 		
 		contentPanel.add(nameField);
 		contentPanel.add(initialsField);
