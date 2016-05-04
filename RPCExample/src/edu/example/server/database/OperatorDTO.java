@@ -6,7 +6,7 @@ import edu.example.server.database.exceptions.OpIdException;
 import edu.example.server.database.exceptions.OpNameException;
 import edu.example.server.database.exceptions.OpPasswordException;
 
-public final class OperatorDTO 
+public final class OperatorDTO implements IOperatorDTO
 {
 	public static final int RANK_OPR = 0;
 	public static final int RANK_ADMIN = 1;
@@ -54,15 +54,17 @@ public final class OperatorDTO
 		setPassword(password);
 	}
 	
-	
+	@Override
 	public void setIni(String ini) {
         this.ini = ini;
     }
 
+	@Override
     public String getIni() {
         return this.ini;
     }
 
+	@Override
     public void setRank(int rank) throws DALException {
         if(rank >= RANK_MINIMUM_VALUE && rank <= RANK_MAXIMUM_VALUE)
             this.rank = rank;
@@ -70,10 +72,12 @@ public final class OperatorDTO
             throw new DALException("Operatørens rank overholder ikke kravende");
     }
 
+	@Override
     public int getRank() {
         return this.rank;
     }
 
+	@Override
     public void setOprID(int oprID) throws OpIdException {
         if(oprID >= ID_MINIMUM_VALUE && oprID <= ID_MAXIMUM_VALUE)
             this.oprID = oprID;
@@ -81,10 +85,12 @@ public final class OperatorDTO
             throw new OpIdException(oprID);
     }
 
+	@Override
     public int getOprID() {
         return this.oprID;
     }
 
+	@Override
     public void setName(String name) throws OpNameException {
         if(name != null) {
             if(name.length() >= NAME_MINIMUM_LENGTH)
@@ -96,10 +102,12 @@ public final class OperatorDTO
             throw new OpNameException("Operatør navnet overholder ikke kravende");
     }
 
+	@Override
     public void setCpr(String cpr) {
         this.cpr = cpr;
     }
 
+	@Override
     public void setPassword(String password) throws OpPasswordException {
         if(valPass(password))
             this.password = password;
@@ -107,14 +115,17 @@ public final class OperatorDTO
             throw new OpPasswordException("Passwordet overholder ikke de opstillede krav");
     }
 
+	@Override
     public String getName() {
         return this.oprNavn;
     }
 
+	@Override
     public String getCpr() {
         return this.cpr;
     }
 
+	@Override
     public String getPassword() {
         return this.password;
     }
