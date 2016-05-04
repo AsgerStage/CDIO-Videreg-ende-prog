@@ -18,9 +18,9 @@ public interface ExampleService extends RemoteService
 	
 	int addTwonumbers(int num1, int num2);
 	
-	/*List<OperatorDTO> getOpList();
+//	List<OperatorDTO> getOpList();
 	
-	OperatorDTO getOperator(int oprID);
-	void createOperator(OperatorDTO opr);
-	void updateOperator(OperatorDTO opr);*/
+	String getOperator(int oprID);
+//	void createOperator(OperatorDTO opr);
+//	void updateOperator(OperatorDTO opr);*/
 }

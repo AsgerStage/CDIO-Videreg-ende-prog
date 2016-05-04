@@ -3,6 +3,7 @@ package edu.example.server;
 import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.thoughtworks.xstream.XStream;
 
 import edu.example.client.service.ExampleService;
 import edu.example.server.database.MySQLOperatoerDAO;
@@ -21,22 +22,26 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	public int addTwonumbers(int num1, int num2) {
 		return num1 + num2;
 	}
-	/*public List<OperatorDTO> getOpList(){
-		try {
-			return opDAO.getOperatorList();
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		
-	}
+	
+//	public List<OperatorDTO> getOpList(){
+//		try {
+//			return opDAO.getOperatorList();
+//		} catch (DALException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
+//		
+//	}
 
 	
 	@Override
-	public OperatorDTO getOperator(int oprID) {
+	public String getOperator(int oprID) {
 		try {
-			return opDAO.getOperator(oprID);
+			XStream xstream = new XStream();
+			return xstream.toXML(opDAO.getOperator(oprID));
+			
+//			return opDAO.getOperator(oprID);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,7 +50,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		
 	}
 
-	
+	/*
 	@Override
 	public void createOperator(OperatorDTO opr) {
 		try {

@@ -34,17 +34,20 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	public void addTwonumbers(int num1, int num2) {
 		this.service.addTwonumbers(num1, num2, new DefaultCallback());
 	}
+	
 	/*@Override
 	public void getOpList()
 	{
 			this.service.getOpList(new DefaultCallback());
 		
-	}
+	}*/
+	
 	@Override
 	public void getOperator(int oprID){
 		this.service.getOperator(oprID, new DefaultCallback());
 	}
-	@Override
+	
+	/*@Override
 	public void createOperator(OperatorDTO opr){
 		this.service.createOperator(opr, new DefaultCallback());
 		
