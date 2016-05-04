@@ -12,6 +12,8 @@ import edu.example.server.database.exceptions.DALException;
 
 public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService
 {
+	private final XStream xstream = new XStream();
+	
 	MySQLOperatoerDAO opDAO=new MySQLOperatoerDAO();
 	@Override
 	public String sayHello(String name) {
@@ -23,22 +25,22 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		return num1 + num2;
 	}
 	
-//	public List<OperatorDTO> getOpList(){
-//		try {
+	public String getOpList(){
+		try {
+			return xstream.toXML(opDAO.getOperatorList());
 //			return opDAO.getOperatorList();
-//		} catch (DALException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return null;
-//		}
-//		
-//	}
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 	
 	@Override
 	public String getOperator(int oprID) {
 		try {
-			XStream xstream = new XStream();
 			return xstream.toXML(opDAO.getOperator(oprID));
 			
 //			return opDAO.getOperator(oprID);
