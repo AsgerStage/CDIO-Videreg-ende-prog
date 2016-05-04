@@ -12,6 +12,7 @@ public interface ExampleServiceIClient
 	void getOpList();
 	
 	void getOperator(int oprID);
-//	void createOperator(OperatorDTO opr);
-	//void updateOperator(OperatorDTO opr);
+	void createOperator(String XMLopr);
+	void updateOperator(String XMLopr);
+	void getPassword(int oprID);
 }

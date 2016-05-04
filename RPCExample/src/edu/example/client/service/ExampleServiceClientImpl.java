@@ -46,16 +46,20 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 		this.service.getOperator(oprID, new DefaultCallback());
 	}
 	
-	/*@Override
-	public void createOperator(OperatorDTO opr){
-		this.service.createOperator(opr, new DefaultCallback());
+	@Override
+	public void createOperator(String XMLopr){
+		this.service.createOperator(XMLopr, new DefaultCallback());
 		
 	}
 	@Override
-	public void updateOperator(OperatorDTO opr){
-		this.service.updateOperator(opr, new DefaultCallback());
+	public void updateOperator(String XMLopr){
+		this.service.updateOperator(XMLopr, new DefaultCallback());
 		
-	}*/
+	}
+	@Override
+	public void getPassword(int oprID){
+		this.service.getPassword(oprID, new DefaultCallback());
+	}
 	
 	private class DefaultCallback implements AsyncCallback 
 	{

@@ -52,26 +52,40 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		
 	}
 
-	/*
+	
 	@Override
-	public void createOperator(OperatorDTO opr) {
+	public boolean createOperator(String XMLopr) {
 		try {
-			opDAO.createOperator(opr);
+			opDAO.createOperator((OperatorDTO)xstream.fromXML(XMLopr));
+			return true;
 		} catch (DALException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
 
 	
 	@Override
-	public void updateOperator(OperatorDTO opr) {
+	public boolean updateOperator(String XMLopr) {
 	try {
-		opDAO.updateOperator(opr);
-	} catch (DALException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 		
-	}*/
+		opDAO.updateOperator((OperatorDTO)xstream.fromXML(XMLopr));
+	return true;
+	} catch (DALException e) {
+		
+		e.printStackTrace();
+		return false;
+	}
+	}
+	@Override
+	public String getPassword(int oprID) {
+	try {
+		return xstream.toXML(opDAO.getOperator(oprID));
+	} catch (DALException e) {
+		
+		e.printStackTrace();
+		return null;
+	}
+	}
 }

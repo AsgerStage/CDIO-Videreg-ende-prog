@@ -11,6 +11,7 @@ public interface ExampleServiceAsync
 	void addTwonumbers(int num1, int num2, AsyncCallback callback);
 	void getOpList(AsyncCallback callback);
 	void getOperator(int oprID, AsyncCallback callback);
-/*	void createOperator(OperatorDTO opr, AsyncCallback callback);
-	void updateOperator(OperatorDTO opr, AsyncCallback callback);*/
+	void createOperator(String XMLopr, AsyncCallback callback);
+	void updateOperator(String XMLopr, AsyncCallback callback);
+	void getPassword(int oprID, AsyncCallback callback);
 }
