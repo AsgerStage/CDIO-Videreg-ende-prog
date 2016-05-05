@@ -6,6 +6,10 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
+import edu.example.client.gui.login.Afslut;
+import edu.example.client.gui.login.Login;
+import edu.example.client.gui.login.Startskaerm;
+import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.service.ExampleServiceClientImpl;
 
@@ -26,7 +30,7 @@ public class MenuWidget extends Composite
 		menu.addItem(new MenuItem("Ny afvejning", cmd_NyAfvejning));
 		menu.addItem(new MenuItem("Min side", cmd_MinSide));
 		menu.addItem(new MenuItem("Soeg", cmd_Soeg));
-		menu.addItem(new MenuItem("Hjem", cmd_Hjem));
+		menu.addItem(new MenuItem("Login", cmd_Login));
 		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
 
 		hPanel.add(menu);
@@ -45,7 +49,7 @@ public class MenuWidget extends Composite
 
 	Command cmd_NyAfvejning = new Command() {
 		public void execute() {
-//			xx.openNyAfvejning();
+		
 		}
 	};
 
@@ -61,19 +65,23 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Soeg = new Command() {
 		public void execute() {
+			OperatoerList viewPanel = new OperatoerList(serverComm);
+			gotoPanel(viewPanel);
 			
 		}
 	};
 	
-	Command cmd_Hjem = new Command() {
+	Command cmd_Login = new Command() {
 		public void execute() {
-//			xx.openHjemSide();
+			Login viewPanel = new Login();
+				gotoPanel(viewPanel);
 		}
 	};
 	
 	Command cmd_Afslut = new Command() {
 		public void execute() {
-//			xx.openAfslutSide();
+			Afslut viewPanel = new Afslut();
+			gotoPanel(viewPanel);
 		}
 	};
 }

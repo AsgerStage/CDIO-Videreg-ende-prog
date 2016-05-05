@@ -30,7 +30,7 @@ public class Login extends Composite {
 		initWidget(vPanel);
 		onModuleLoad();
 	}
-	
+
 	public void onModuleLoad() {
 
 		// Add a normal textbox
@@ -38,9 +38,11 @@ public class Login extends Composite {
 		vPanel.add(bruger);
 		TextBox normalText = new TextBox();
 
-		
+
 
 		vPanel.add(normalText);
+
+
 
 		// Add a normal password text box
 		Label pass = new Label("Password:");
@@ -51,20 +53,20 @@ public class Login extends Composite {
 		Button Authenticate = new Button("Log ind");
 		Authenticate.addClickHandler(new ButtonClickHandler());
 		vPanel.add(Authenticate);
-		
+
 		lbltest = new Label("Test:");
 		vPanel.add(lbltest);
-	
+
 
 	}
 
 	private class ButtonClickHandler implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
-		
+
 			lbltest.setText("!!");
-			
-		
+
+
 
 		}
 
