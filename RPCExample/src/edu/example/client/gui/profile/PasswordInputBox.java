@@ -21,7 +21,7 @@ public class PasswordInputBox extends DialogBox
 		super();
 		this.setTitle("Change Password");
 		this.setText("Change Password");
-
+ 
 //		this.setAnimationEnabled(true);
 		this.setGlassEnabled(true);
          
