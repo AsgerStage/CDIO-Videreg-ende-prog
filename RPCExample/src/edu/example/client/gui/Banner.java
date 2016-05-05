@@ -14,7 +14,7 @@ public class Banner extends Composite { //implements EntryPoint {
 	
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private VerticalPanel vPanel = new VerticalPanel(); //Hovedpanelet som indeholder hPanel1 og hPanel2
-	private HorizontalPanel hPanel4;
+	private HorizontalPanel contentPanel;
 	private ExampleServiceClientImpl serverComm;
 	private MenuWidget menuWidget;
 	
@@ -30,22 +30,20 @@ public class Banner extends Composite { //implements EntryPoint {
 	public void init() {
 
 		menuWidget = new MenuWidget(this, serverComm);
+		menuWidget.setWidth("15%");
 
-		
 		vPanel.setBorderWidth(1);
 
 		HorizontalPanel bannerPanel = new HorizontalPanel(); // Panelet som indeholder billedet
 		bannerPanel.setWidth("100%");
 		bannerPanel.setBorderWidth(1);
 		
-		HorizontalPanel hPanel2= new HorizontalPanel(); // Skal indeholde to mindre paneler et med menu og et med et tomt vindue
-		hPanel2.setBorderWidth(1);
-		hPanel2.setWidth("100%");
+		HorizontalPanel contentHolderPanel= new HorizontalPanel(); // Skal indeholde to mindre paneler et med menu og et med et tomt vindue
+		contentHolderPanel.setBorderWidth(1);
+//		contentHolderPanel.setWidth("100%");
 
-		hPanel4 = new HorizontalPanel(); // skal indeholde tomt vindue
-		hPanel4.setWidth("100%");
-		
-		
+		contentPanel = new HorizontalPanel(); // skal indeholde tomt vindue
+		contentPanel.setSize("100%", "100%");
 		
 		Image img = new Image("Billeder/B.png");  
 
@@ -53,15 +51,15 @@ public class Banner extends Composite { //implements EntryPoint {
 			public void onClick(ClickEvent event) {
 //				xx.openHjemSide();				
 			}
-		}
-				);
-		
+		});
 
-		vPanel.add(bannerPanel);
 		bannerPanel.add(img);
-		vPanel.add(hPanel2);
-		hPanel2.add(menuWidget);
-		hPanel2.add(hPanel4);
+		vPanel.add(bannerPanel);
+		
+		contentHolderPanel.add(menuWidget);
+		contentHolderPanel.add(contentPanel);
+		contentHolderPanel.setCellWidth(menuWidget, "10%");
+		vPanel.add(contentHolderPanel);
 	}
 	
 	public Object getCurrentPanel() {
@@ -69,7 +67,7 @@ public class Banner extends Composite { //implements EntryPoint {
 	}
 	
 	public void setContentPanel(Composite Content){
-		hPanel4.clear();
-		hPanel4.add(Content);
+		contentPanel.clear();
+		contentPanel.add(Content);
 	}
 }
