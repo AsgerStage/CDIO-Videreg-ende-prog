@@ -19,7 +19,7 @@ public static void connect() throws InstantiationException, IllegalAccessExcepti
 	
 	Connector.connectToDatabase("jdbc:mysql:///nasie.diskstation.me", "DTU", "Gruppe16");
 }
-	/**
+	/**s
 	 * 
 	 */
 	public DatabaseConnection() {
