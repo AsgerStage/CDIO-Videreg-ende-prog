@@ -5,6 +5,10 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import edu.example.client.exceptions.DALException;
+import edu.example.client.exceptions.OpIdException;
+import edu.example.client.exceptions.OpNameException;
+import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
@@ -36,8 +40,8 @@ public class CreateProfile extends ProfilePage
 		idField = new InfoBox("ID", new TextBox());
 		
 		ListBox rankList = new ListBox();
-//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
-//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
 		contentPanel.add(nameField);
@@ -140,7 +144,11 @@ public class CreateProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-		//	serverComm.createOperatoer(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", -1));
+			try {
+				serverComm.createOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", -1));
+			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
