@@ -1,15 +1,26 @@
 package edu.example.client.gui.profile;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.example.client.exceptions.DALException;
+import edu.example.client.exceptions.OpIdException;
+import edu.example.client.exceptions.OpNameException;
+import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
 public class EditProfile extends ProfilePage 
 {
+	private ViewProfile parent;
 	private ExampleServiceClientImpl serverComm;
 	private OperatorDTO user;
 	
@@ -23,22 +34,23 @@ public class EditProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 	
-	public EditProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
+	public EditProfile(String title, OperatorDTO user, ViewProfile parent, ExampleServiceClientImpl serverComm) {
 		super(title);
+		this.parent = parent;
 		this.serverComm = serverComm;
-
-	//	user = this.serverComm.getOperator(userID);
+		this.user = user;
 		
 		init();
 		
-//		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), OperatorDTO.rankToString(user.getRank()));
-//		if(user.getRank() != OperatorDTO.RANK_ADMIN) {
-//			TextBox tbID = (TextBox) idField.getWidget();
-//			tbID.setEnabled(false);
-//			
-//			ListBox lbRank = (ListBox) rankField.getWidget();
-//			lbRank.setEnabled(false);
-//		}
+		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), OperatorDTO.rankToString(user.getRank()));
+		setRank(user.getRank());
+		if(user.getRank() != OperatorDTO.RANK_ADMIN) {
+			TextBox tbID = (TextBox) idField.getWidget();
+			tbID.setEnabled(false);
+			
+			ListBox lbRank = (ListBox) rankField.getWidget();
+			lbRank.setEnabled(false);
+		}
 		
 	}
 	
@@ -50,13 +62,12 @@ public class EditProfile extends ProfilePage
 		idField = new InfoBox("ID", new TextBox());
 		
 		ListBox rankList = new ListBox();
-//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
-//		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
+		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
 		rankField = new InfoBox("Rank", rankList);
 		
 		Button passwordButton = new Button();
 		passwordButton.setText("Change Password");
-//		passwordButton.setStyleName("button");
 		passwordButton.addClickHandler(new PasswordClickHandler());
 		passwordField = new InfoBox("Password", passwordButton);
 		
@@ -156,15 +167,40 @@ public class EditProfile extends ProfilePage
 		//TODO: Write method!
 	}
 	
+	public void setRank(int rank) {
+		ListBox lbRank = (ListBox) rankField.getWidget();
+		lbRank.setSelectedIndex(rank);
+	}
+	
 	public OperatorDTO getUser() {
 		return user;
 	}
-	
+
 	private class PasswordClickHandler implements ClickHandler 
 	{
 		@Override
+		public void onClick(ClickEvent event) 
+		{
+			PasswordInputBox passwordPopup = new PasswordInputBox();
+			passwordPopup.addClickHandler(new ClosePasswordBox(passwordPopup));
+			
+	        passwordPopup.setPopupPosition(Window.getClientWidth() / 2, Window.getClientHeight() / 2);
+			passwordPopup.show();
+		}
+	}
+	
+	private class ClosePasswordBox implements ClickHandler 
+	{
+		private PasswordInputBox passwordBox;
+		private ClosePasswordBox(PasswordInputBox passwordBox) {
+			this.passwordBox = passwordBox;
+		}
+
+		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
+			
+			
+			passwordBox.hide();
 		}
 	}
 	
@@ -172,7 +208,14 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-	//		serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "MISSING EDIT PROFILE PANEL", -1));
+			try {
+				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "Abc123", 0));
+				
+				ViewProfile viewPanel = new ViewProfile("Se Profil", getID(), parent.parent, serverComm);
+				parent.parent.gotoPanel(viewPanel);
+			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -180,7 +223,7 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
+			parent.parent.gotoPanel(parent);
 		}
 	}
 }

@@ -1,14 +1,18 @@
 package edu.example.client.gui.profile;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
+import edu.example.client.gui.MenuWidget;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
 public class ViewProfile extends ProfilePage 
 {
+//	private ViewProfile me = this;
+	protected MenuWidget parent;
 	private ExampleServiceClientImpl serverComm;
 	private OperatorDTO user;
 	
@@ -21,8 +25,9 @@ public class ViewProfile extends ProfilePage
 	private Button editButton;
 	private Button cancelButton;
 	
-	public ViewProfile(String title, int userID, ExampleServiceClientImpl serverComm) {
+	public ViewProfile(String title, int userID, MenuWidget parent, ExampleServiceClientImpl serverComm) {
 		super(title);
+		this.parent = parent;
 		this.serverComm = serverComm;
 		this.serverComm.getOperator(userID);
 		
@@ -54,7 +59,7 @@ public class ViewProfile extends ProfilePage
 		
 		editButton.setText("Rediger");
 		editButton.setStyleName("button");
-		editButton.addClickHandler(new EditClickHandler());
+		editButton.addClickHandler(new EditClickHandler(this));
 		cancelButton.setText("Tilbage");
 		cancelButton.setStyleName("button");
 		cancelButton.addClickHandler(new CancelClickHandler());
@@ -134,9 +139,16 @@ public class ViewProfile extends ProfilePage
 	
 	private class EditClickHandler implements ClickHandler 
 	{
+		private ViewProfile parent;
+		
+		private EditClickHandler(ViewProfile parent) {
+			this.parent = parent;
+		}
+		
 		@Override
 		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
+			ProfilePage editProfilePanel = new EditProfile("Rediger Profil", user, parent, serverComm);
+			parent.parent.gotoPanel(editProfilePanel);
 		}
 	}
 	
