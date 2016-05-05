@@ -17,7 +17,7 @@ public class DatabaseConnection {
 	
 public static void connect() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 	
-	Connector.connectToDatabase("jdbc:mysql://nasie.diskstation.me/DTU", "DTU", "Gruppe16");
+	Connector.connectToDatabase("jdbc:mysql:///nasie.diskstation.me", "DTU", "Gruppe16");
 }
 	/**
 	 * 
