@@ -9,11 +9,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.service.ExampleServiceClientImpl;
 
-
-public class Banner extends Composite { //implements EntryPoint {
-	
-	//--------- LAVET OM TIL COMPOSITE ------------
-	private VerticalPanel vPanel = new VerticalPanel(); //Hovedpanelet som indeholder hPanel1 og hPanel2
+public class Banner extends Composite 
+{
+	private VerticalPanel vPanel = new VerticalPanel(); //Hovedpanelet
 	private HorizontalPanel contentPanel;
 	private ExampleServiceClientImpl serverComm;
 	private MenuWidget menuWidget;
@@ -28,19 +26,15 @@ public class Banner extends Composite { //implements EntryPoint {
 	}
 
 	public void init() {
-
 		menuWidget = new MenuWidget(this, serverComm);
-		menuWidget.setWidth("15%");
 
 		vPanel.setBorderWidth(1);
 
 		HorizontalPanel bannerPanel = new HorizontalPanel(); // Panelet som indeholder billedet
 		bannerPanel.setWidth("100%");
-		bannerPanel.setBorderWidth(1);
 		
 		HorizontalPanel contentHolderPanel= new HorizontalPanel(); // Skal indeholde to mindre paneler et med menu og et med et tomt vindue
 		contentHolderPanel.setBorderWidth(1);
-//		contentHolderPanel.setWidth("100%");
 
 		contentPanel = new HorizontalPanel(); // skal indeholde tomt vindue
 		contentPanel.setSize("100%", "100%");
@@ -58,7 +52,7 @@ public class Banner extends Composite { //implements EntryPoint {
 		
 		contentHolderPanel.add(menuWidget);
 		contentHolderPanel.add(contentPanel);
-		contentHolderPanel.setCellWidth(menuWidget, "10%");
+		contentHolderPanel.setCellWidth(menuWidget, "11%");
 		vPanel.add(contentHolderPanel);
 	}
 	

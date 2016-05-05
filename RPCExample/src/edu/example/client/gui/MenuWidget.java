@@ -21,9 +21,6 @@ public class MenuWidget extends Composite
 		parent = banner;
 		this.serverComm = serverComm;
 		
-		hPanel.setBorderWidth(1);
-		hPanel.setWidth("15%");
-		
 		MenuBar menu = new MenuBar(true);
 		menu.addItem(new MenuItem("Ny afvejning", cmd_NyAfvejning));
 		menu.addItem(new MenuItem("Min side", cmd_MinSide));
@@ -32,7 +29,7 @@ public class MenuWidget extends Composite
 		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
 
 		hPanel.add(menu);
-		menu.setHeight("200px");
+		menu.setHeight("100%");
 	}
 	
 	public Object getCurrentPanel() {
