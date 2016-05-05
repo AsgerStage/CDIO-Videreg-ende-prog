@@ -29,7 +29,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	@Override
 	public OperatorDTO getOperator(int oprID) {
 		try {
-			return new OperatorDTO(oprID, "Test Person", "TSP", "123456-7890", "Abc123", 0);
+			return new OperatorDTO(oprID, "Test Person", "TSP", "123456-7890", "Abc123", 1);
 //			return opDAO.getOperator(oprID);
 		} catch (DALException | OpPasswordException | OpNameException | OpIdException e) {
 			e.printStackTrace();

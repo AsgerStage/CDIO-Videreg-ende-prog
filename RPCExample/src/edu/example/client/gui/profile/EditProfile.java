@@ -180,26 +180,51 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) 
-		{
+		{			
 			PasswordInputBox passwordPopup = new PasswordInputBox();
-			passwordPopup.addClickHandler(new ClosePasswordBox(passwordPopup));
-			
-	        passwordPopup.setPopupPosition(Window.getClientWidth() / 2, Window.getClientHeight() / 2);
+			passwordPopup.setExecuteClickHandler(new UpdatePassword(passwordPopup));
+			passwordPopup.setCancelClickHandler(new ClosePasswordBox(passwordPopup));
 			passwordPopup.show();
+		}
+	}
+	
+	private class UpdatePassword implements ClickHandler 
+	{
+		private PasswordInputBox passwordBox;
+		
+		private UpdatePassword(PasswordInputBox passwordBox) {
+			this.passwordBox = passwordBox;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			String oldPass = passwordBox.getOldPassword();
+			String newPass1 = passwordBox.getNewPassword1();
+			String newPass2 = passwordBox.getNewPassword2();
+			
+			if(!(oldPass.isEmpty() || newPass1.isEmpty() || newPass2.isEmpty())) {
+				if(newPass1.endsWith(newPass2) && oldPass.equals(user.getPassword())) {
+					try {
+						user.setPassword(newPass1);
+						passwordBox.hide();
+					} catch (OpPasswordException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 		}
 	}
 	
 	private class ClosePasswordBox implements ClickHandler 
 	{
 		private PasswordInputBox passwordBox;
+		
 		private ClosePasswordBox(PasswordInputBox passwordBox) {
 			this.passwordBox = passwordBox;
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			
-			
 			passwordBox.hide();
 		}
 	}
@@ -209,7 +234,7 @@ public class EditProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "Abc123", 0));
+				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), 0));
 				
 				ViewProfile viewPanel = new ViewProfile("Se Profil", getID(), parent.parent, serverComm);
 				parent.parent.gotoPanel(viewPanel);
