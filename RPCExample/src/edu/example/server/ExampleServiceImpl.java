@@ -16,16 +16,6 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 {
 	private final MySQLOperatoerDAO opDAO = new MySQLOperatoerDAO();
 	
-//	@Override
-//	public String sayHello(String name) {
-//		return "Hello " + name;
-//	}
-
-//	@Override
-//	public int addTwonumbers(int num1, int num2) {
-//		return num1 + num2;
-//	}
-	
 	@Override
 	public ArrayList<OperatorDTO> getOpList(){
 		try {
@@ -39,7 +29,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	@Override
 	public OperatorDTO getOperator(int oprID) {
 		try {
-			return new OperatorDTO(oprID, "Test Person", "TSP", "123456-7890", "Abc123", 1);
+			return new OperatorDTO(oprID, "Test Person", "TSP", "123456-7890", "Abc123", 0);
 //			return opDAO.getOperator(oprID);
 		} catch (DALException | OpPasswordException | OpNameException | OpIdException e) {
 			e.printStackTrace();

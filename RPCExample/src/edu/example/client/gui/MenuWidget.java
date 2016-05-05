@@ -11,6 +11,7 @@ import edu.example.client.service.ExampleServiceClientImpl;
 
 public class MenuWidget extends Composite
 {
+	private MenuWidget me = this;
 	private HorizontalPanel hPanel= new HorizontalPanel();
 	private Banner parent;
 	private Object currentPanel = null;
@@ -35,6 +36,12 @@ public class MenuWidget extends Composite
 	public Object getCurrentPanel() {
 		return currentPanel;
 	}
+	
+	public void gotoPanel(Composite panel) {
+		currentPanel = panel;
+		
+		parent.setContentPanel(panel);
+	}
 
 	Command cmd_NyAfvejning = new Command() {
 		public void execute() {
@@ -44,10 +51,11 @@ public class MenuWidget extends Composite
 
 	Command cmd_MinSide = new Command() {
 		public void execute() {
-			ViewProfile viewPanel = new ViewProfile("Se Profil", 25, serverComm);
-			currentPanel = viewPanel;
-			
-			parent.setContentPanel(viewPanel);
+			ViewProfile viewPanel = new ViewProfile("Se Profil", 25, me, serverComm);
+			gotoPanel(viewPanel);
+//			currentPanel = viewPanel;
+//			
+//			parent.setContentPanel(viewPanel);
 		}
 	};
 	
