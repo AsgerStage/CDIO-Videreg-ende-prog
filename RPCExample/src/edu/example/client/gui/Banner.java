@@ -13,28 +13,30 @@ import edu.example.client.service.ExampleServiceClientImpl;
 public class Banner extends Composite { //implements EntryPoint {
 	
 	//--------- LAVET OM TIL COMPOSITE ------------
-	private VerticalPanel vPanel= new VerticalPanel(); //Hovedpanelet som indeholder hPanel1 og hPanel2
+	private VerticalPanel vPanel = new VerticalPanel(); //Hovedpanelet som indeholder hPanel1 og hPanel2
 	private HorizontalPanel hPanel4;
 	private ExampleServiceClientImpl serverComm;
 	private MenuWidget menuWidget;
 	
 	public Banner(ExampleServiceClientImpl serverComm) {
 		initWidget(this.vPanel);
-		this.serverComm = serverComm;
-		onModuleLoad();
+		vPanel.setSize("100%", "100%");
 		
+		this.serverComm = serverComm;
+		
+		init();
 	}
-	//---------------------------------------------
 
-	public void onModuleLoad() {
+	public void init() {
 
 		menuWidget = new MenuWidget(this, serverComm);
 
 		
 		vPanel.setBorderWidth(1);
 
-		HorizontalPanel hPanel1= new HorizontalPanel(); // Panelet som indeholder billedet
-		hPanel1.setBorderWidth(1);
+		HorizontalPanel bannerPanel = new HorizontalPanel(); // Panelet som indeholder billedet
+		bannerPanel.setWidth("100%");
+		bannerPanel.setBorderWidth(1);
 		
 		HorizontalPanel hPanel2= new HorizontalPanel(); // Skal indeholde to mindre paneler et med menu og et med et tomt vindue
 		hPanel2.setBorderWidth(1);
@@ -55,14 +57,11 @@ public class Banner extends Composite { //implements EntryPoint {
 				);
 		
 
-		vPanel.add(hPanel1);
-		hPanel1.add(img);
+		vPanel.add(bannerPanel);
+		bannerPanel.add(img);
 		vPanel.add(hPanel2);
 		hPanel2.add(menuWidget);
 		hPanel2.add(hPanel4);
-
-//		RootPanel.get().add(hPanel);
-//		RootPanel.get().add(page);
 	}
 	
 	public Object getCurrentPanel() {
