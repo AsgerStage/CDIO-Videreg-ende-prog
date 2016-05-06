@@ -32,7 +32,7 @@ public class MenuWidget extends Composite
 		menu.addItem(new MenuItem("Ny afvejning", cmd_NyAfvejning));
 		menu.addItem(new MenuItem("Min side", cmd_MinSide));
 		menu.addItem(new MenuItem("Soeg", cmd_Soeg));
-		//menu.addItem(new MenuItem("Login", cmd_Login));
+		menu.addItem(new MenuItem("Login", cmd_Login));
 		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
 		
 		hPanel.add(menu);
@@ -77,12 +77,12 @@ public class MenuWidget extends Composite
 		}
 	};
 	
-//	Command cmd_Login = new Command() {
-//		public void execute() {
-//			Login viewPanel = new Login(me, serverComm);
-//				gotoPanel(viewPanel);
-//		}
-//	};
+	Command cmd_Login = new Command() {
+		public void execute() {
+			Login viewPanel = new Login(me, serverComm);
+				gotoPanel(viewPanel);
+		}
+	};
 	
 	Command cmd_Afslut = new Command() {
 		public void execute() {
