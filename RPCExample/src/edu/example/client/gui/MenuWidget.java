@@ -26,15 +26,18 @@ public class MenuWidget extends Composite
 		parent = banner;
 		this.serverComm = serverComm;
 		
+		
 		MenuBar menu = new MenuBar(true);
 		menu.addItem(new MenuItem("Ny afvejning", cmd_NyAfvejning));
 		menu.addItem(new MenuItem("Min side", cmd_MinSide));
 		menu.addItem(new MenuItem("Soeg", cmd_Soeg));
-		menu.addItem(new MenuItem("Login", cmd_Login));
+		//menu.addItem(new MenuItem("Login", cmd_Login));
 		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
-
+		
 		hPanel.add(menu);
 		menu.setHeight("100%");
+		
+		
 	}
 	
 	public Object getCurrentPanel() {
@@ -73,7 +76,7 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Login = new Command() {
 		public void execute() {
-			Login viewPanel = new Login(serverComm);
+			Login viewPanel = new Login(me, serverComm);
 				gotoPanel(viewPanel);
 		}
 	};

@@ -64,10 +64,24 @@ h1 {
 }
 .gwt-TextBox {
     margin-left: 50px;
+
   
+}
+.usernamelogin {
+	margin-left: 5px;
+	width: 160px;
+	height: 20px;
+	
 }
 .loginTextarea{
 	resize: none;
+}
+.loginbutton{
+	width: 100px;
+	height: 25px;
+	margin-top: 5px;
+	margin-left: 40px;
+	margin-bottom: 5px;
 }
 .gwt-Button {
    font-size: 250%; 
