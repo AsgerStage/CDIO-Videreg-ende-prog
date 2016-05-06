@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.example.client.exceptions.DALException;
-import edu.example.client.exceptions.OpIdException;
-import edu.example.client.exceptions.OpNameException;
-import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleService;
 import edu.example.server.database.MySQLOperatoerDAO;
@@ -28,14 +25,12 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 
 	@Override
 	public OperatorDTO getOperator(int oprID) {
-//		trs {
-//			return new OperatorDTO(oprID, "Test Person", "TSP", "123456-7890", "Abc123", 1);
+		try {
 			return opDAO.getOperator(oprID);
-//		} catch (DALException e) {
-//		} catch (DALException | OpPasswordException | OpNameException | OpIdException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
+		} catch (DALException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override
@@ -62,11 +57,11 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	
 	@Override
 	public String getPassword(int oprID) {
-//		try {
+		try {
 			return opDAO.getOperator(oprID).getPassword();
-//		} catch (DALException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
+		} catch (DALException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
