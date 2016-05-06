@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Asger/Dropbox/DTU Software Teknologi/2. Semester/CDIO/mysql-connector-java-5.1.38-bin - Copy.jar"/>
+	<classpathentry kind="lib" path="D:/Programmer/NetBeans/mysql-connector-java-5.1.35-bin.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
