@@ -73,7 +73,7 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Login = new Command() {
 		public void execute() {
-			Login viewPanel = new Login();
+			Login viewPanel = new Login(serverComm);
 				gotoPanel(viewPanel);
 		}
 	};

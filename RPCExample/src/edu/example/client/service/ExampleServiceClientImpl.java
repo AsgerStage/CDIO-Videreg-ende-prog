@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
+import edu.example.client.gui.login.Login;
 import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
@@ -84,6 +85,10 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 			if(currentPanel instanceof OperatoerList) {
 				OperatoerList oplist = (OperatoerList) currentPanel;
 				oplist.getOperatoerList((List<OperatorDTO>) result);
+			}
+			if(currentPanel instanceof Login) {
+				Login viewProfile = (Login) currentPanel;
+				viewProfile.CompareLogin((OperatorDTO) result);
 			}
 		}
 	}
