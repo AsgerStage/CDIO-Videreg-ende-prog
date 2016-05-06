@@ -12,6 +12,7 @@ import edu.example.client.gui.login.Startskaerm;
 import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.weightPage.WeightPage;
 
 public class MenuWidget extends Composite
 {
@@ -51,7 +52,9 @@ public class MenuWidget extends Composite
 	}
 
 	Command cmd_NyAfvejning = new Command() {
-		public void execute() {
+		public void execute() {			
+			WeightPage  viewPanel = new WeightPage();
+			gotoPanel(viewPanel);
 		
 		}
 	};
@@ -74,12 +77,12 @@ public class MenuWidget extends Composite
 		}
 	};
 	
-	Command cmd_Login = new Command() {
-		public void execute() {
-			Login viewPanel = new Login(me, serverComm);
-				gotoPanel(viewPanel);
-		}
-	};
+//	Command cmd_Login = new Command() {
+//		public void execute() {
+//			Login viewPanel = new Login(me, serverComm);
+//				gotoPanel(viewPanel);
+//		}
+//	};
 	
 	Command cmd_Afslut = new Command() {
 		public void execute() {

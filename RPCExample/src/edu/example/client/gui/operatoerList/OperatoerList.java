@@ -74,6 +74,8 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		 TextBox normalText = new TextBox();
 		 hPanel.add(normalText);
 		 normalText.setText("Dette er et soegefelt");
+		 Button SoegBtn =new Button("Soeg");
+		 hPanel.add(SoegBtn);
 		
 		 opTable.setText(0, 0, "ID");
 		 opTable.setText(0, 1, "Navn");
