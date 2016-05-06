@@ -11,6 +11,7 @@ import edu.example.client.gui.login.Login;
 import edu.example.client.gui.login.Startskaerm;
 import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
+import edu.example.client.logUd.Afslut;
 import edu.example.client.service.ExampleServiceClientImpl;
 import edu.example.client.weightPage.WeightPage;
 
@@ -86,8 +87,8 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Afslut = new Command() {
 		public void execute() {
-//			Afslut viewPanel = new Afslut();
-//			gotoPanel(viewPanel);
+			Afslut viewPanel = new Afslut();
+			gotoPanel(viewPanel);
 		}
 	};
 }

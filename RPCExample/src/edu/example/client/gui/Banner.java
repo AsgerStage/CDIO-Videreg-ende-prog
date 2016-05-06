@@ -1,14 +1,11 @@
 package edu.example.client.gui;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.login.Login;
-import edu.example.client.gui.login.Startskaerm;
 import edu.example.client.service.ExampleServiceClientImpl;
 
 public class Banner extends Composite {
@@ -45,14 +42,6 @@ public class Banner extends Composite {
 		contentPanel.add(logI);
 
 		Image img = new Image("Billeder/B.png");  
-
-		img.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-		
-			}				
-
-		});
-
 
 		bannerPanel.add(img);
 		vPanel.add(bannerPanel);
