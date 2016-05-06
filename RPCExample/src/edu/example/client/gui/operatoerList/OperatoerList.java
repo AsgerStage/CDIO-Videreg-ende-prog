@@ -1,6 +1,7 @@
 package edu.example.client.gui.operatoerList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -10,6 +11,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
 
@@ -32,17 +34,21 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	//---------------------------------------------
 	
 	Label myLbl =new Label("Operatoer");
-	Grid opTable=new Grid(1,5);
+	static Grid opTable=new Grid(1,7);
 	Button delButton =new Button("Delete");
 	
-	public void addOp(int ID, String name, String ini, int Rank) {
+	
+	
+	public static void addOp(OperatorDTO operator) {
 		opTable.getRowCount();
-		opTable.resize(opTable.getRowCount()+1, 5);
-		opTable.setText(opTable.getRowCount()-1, 0, ""+ID);
-		opTable.setText(opTable.getRowCount()-1, 1, name);
-		opTable.setText(opTable.getRowCount()-1, 2, ini);
-		opTable.setText(opTable.getRowCount()-1, 3, ""+Rank);
-		opTable.setWidget(opTable.getRowCount()-1, 4, new Button("Delete"));
+		opTable.resize(opTable.getRowCount()+1, 7);
+		opTable.setText(opTable.getRowCount()-1, 0, ""+operator.getOprID());
+		opTable.setText(opTable.getRowCount()-1, 1, operator.getName());
+		opTable.setText(opTable.getRowCount()-1, 2, operator.getIni());
+		opTable.setText(opTable.getRowCount()-1, 3, ""+operator.getRank());
+		opTable.setText(opTable.getRowCount()-1, 4, ""+operator.getCpr());
+		opTable.setText(opTable.getRowCount()-1, 5, ""+operator.getPassword());
+		opTable.setWidget(opTable.getRowCount()-1, 6, new Button("Delete"));
 	}
 	/**
 	 * This is the entry point method.
@@ -57,11 +63,11 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	public void onModuleLoad() {
 		
 		HorizontalPanel hPanel=new HorizontalPanel();
-		//serverComm.getOpList();
+		serverComm.getOpList();
 		
 		 myLbl.getElement().setPropertyString("id", "opLabel");
 		 
-	
+		 
 		 
 		hPanel.add(myLbl);
 		vPanel.add(hPanel);
@@ -73,19 +79,28 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		 opTable.setText(0, 1, "Navn");
 		 opTable.setText(0, 2, "Ini");
 		 opTable.setText(0, 3, "Rank");
-		 opTable.setText(0, 4, "Slet og rediger");
+		 opTable.setText(0, 4, "CPR");
+		 opTable.setText(0, 5, "Password");
+		 opTable.setText(0, 6, "Slet og rediger");
 		 
 		 opTable.setBorderWidth(1);
 		 vPanel.add(opTable);
 		 opTable.setCellPadding(10);
 		 opTable.getRowCount();
-		 addOp(2,"Test","T1",0);
-		 addOp(3,"Test2","T2",1);
-		 addOp(4,"Test3","T3",0);
-		 addOp(5,"Test4","T4",0);
+		 
 		 
 //		RootPanel.get().add(vPanel);
 		
+		
+	}
+	/**
+	 * @param result
+	 */
+	public static void getOperatoerList(List<OperatorDTO> result) {
+		for (int i=0;i<result.size();i++){
+			addOp(result.get(i));
+			
+		}
 		
 	}
 }

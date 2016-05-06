@@ -1,9 +1,12 @@
 package edu.example.client.service;
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
+import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 
@@ -77,6 +80,10 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 			if(currentPanel instanceof ViewProfile) {
 				ViewProfile viewProfile = (ViewProfile) currentPanel;
 				viewProfile.updateUser((OperatorDTO) result);
+			}
+			if(currentPanel instanceof OperatoerList) {
+				OperatoerList oplist = (OperatoerList) currentPanel;
+				oplist.getOperatoerList((List<OperatorDTO>) result);
 			}
 		}
 	}
