@@ -1,17 +1,22 @@
-package WeightPage.client;
+package edu.example.client.weightPage;
 
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class WeightPage implements EntryPoint {
+public class WeightPage extends Composite 
+{
+	VerticalPanel vPanel = new VerticalPanel();
+	
+	public WeightPage() {
+		initWidget(vPanel);
+		
+		init();
+	}
 
-
-	public void onModuleLoad() {
-		VerticalPanel vPanel = new VerticalPanel();
+	public void init() {
 		Label LabelWeightDisplay = new Label();
 		Label LabelTextDisplay = new Label();
 		LabelWeightDisplay.setText("0.0000 KG");
@@ -47,7 +52,5 @@ public class WeightPage implements EntryPoint {
 		grid.setWidget(3, 1, bt0);
 		grid.setWidget(3, 2, btEnter);
 		vPanel.add(grid);
-		RootPanel.get().add(vPanel);
-		
 	}		
 }
