@@ -48,7 +48,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		opTable.setText(opTable.getRowCount()-1, 3, ""+operator.getRank());
 		opTable.setText(opTable.getRowCount()-1, 4, ""+operator.getCpr());
 		opTable.setText(opTable.getRowCount()-1, 5, ""+operator.getPassword());
-		opTable.setWidget(opTable.getRowCount()-1, 6, new Button("Delete"));
+		opTable.setWidget(opTable.getRowCount()-1, 6, new Button("Rediger")); //ingen funktionalitet atm
 	}
 	/**
 	 * This is the entry point method.
@@ -83,7 +83,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		 opTable.setText(0, 3, "Rank");
 		 opTable.setText(0, 4, "CPR");
 		 opTable.setText(0, 5, "Password");
-		 opTable.setText(0, 6, "Slet og rediger");
+		 opTable.setText(0, 6, "Rediger");
 		 
 		 opTable.setBorderWidth(1);
 		 vPanel.add(opTable);
@@ -99,10 +99,14 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	 * @param result
 	 */
 	public static void getOperatoerList(List<OperatorDTO> result) {
+		clear();
 		for (int i=0;i<result.size();i++){
 			addOp(result.get(i));
 			
 		}
 		
+	}
+	public static void clear(){
+		opTable.resize(1, 7);
 	}
 }
