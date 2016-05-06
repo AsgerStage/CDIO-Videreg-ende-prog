@@ -38,32 +38,28 @@ public class Connector
 	private static Connection conn;
 	private static Statement stm;
 	
-	public Connector(String server, int port, String database,
-			String username, String password)
-				throws InstantiationException, IllegalAccessException,
-					ClassNotFoundException, SQLException
-	{
-		conn	= connectToDatabase("jdbc:mysql://"+server+":"+port+"/"+database,
-					username, password);
-		stm		= conn.createStatement();
+	public Connector(String server, int port, String database, String username, String password) throws InstantiationException, IllegalAccessException,	ClassNotFoundException, SQLException {
+		conn = connectToDatabase("jdbc:mysql://"+server+":"+port+"/"+database, username, password);
+		stm	= conn.createStatement();
 	}
 	
-	public Connector() throws InstantiationException, IllegalAccessException,
-			ClassNotFoundException, SQLException
-	{
-		this(Constant.server, Constant.port, Constant.database,
-				Constant.username, Constant.password);
+	public Connector() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		this(Constant.server, Constant.port, Constant.database,	Constant.username, Constant.password);
 	}
 	
 	public static ResultSet doQuery(String cmd) throws DALException
 	{
-		try { return stm.executeQuery(cmd); }
+		try { 
+			return stm.executeQuery(cmd); 
+		}
 		catch (SQLException e) { throw new DALException(e); }
 	}
 	
 	public static int doUpdate(String cmd) throws DALException
 	{
-		try { return stm.executeUpdate(cmd); }
+		try { 
+			return stm.executeUpdate(cmd);
+		}
 		catch (SQLException e) { throw new DALException(e); }
 	}
 	

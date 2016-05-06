@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
-import edu.example.client.gui.login.Afslut;
+//import edu.example.client.gui.login.Afslut;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.login.Startskaerm;
 import edu.example.client.gui.operatoerList.OperatoerList;
@@ -80,8 +80,8 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Afslut = new Command() {
 		public void execute() {
-			Afslut viewPanel = new Afslut();
-			gotoPanel(viewPanel);
+//			Afslut viewPanel = new Afslut();
+//			gotoPanel(viewPanel);
 		}
 	};
 }
