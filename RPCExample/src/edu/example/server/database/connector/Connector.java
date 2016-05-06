@@ -24,14 +24,8 @@ public class Connector
 	 * @throws InstantiationException 
 	 * @throws SQLException 
 	 */
-	public static Connection connectToDatabase(String url, String username, String password)
-			throws InstantiationException, IllegalAccessException,
-					ClassNotFoundException, SQLException
-	{
-		// call the driver class' no argument constructor
+	public static Connection connectToDatabase(String url, String username, String password) throws InstantiationException, IllegalAccessException,	ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		
-		// get Connection-object via DriverManager
 		return (Connection) DriverManager.getConnection(url, username, password);
 	}
 	

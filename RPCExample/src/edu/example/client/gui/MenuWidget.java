@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.MenuItem;
 
 //import edu.example.client.gui.login.Afslut;
 import edu.example.client.gui.login.Login;
-import edu.example.client.gui.login.Startskaerm;
 import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.logUd.Afslut;
