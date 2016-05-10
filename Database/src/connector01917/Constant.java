@@ -1,8 +1,5 @@
 package connector01917;
 
-
-// erstat konstanterne nedenfor
-
 public abstract class Constant
 {
 	public static final String
