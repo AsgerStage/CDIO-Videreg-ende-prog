@@ -29,7 +29,7 @@ public class ProduktBatchKompDTO
     public int getOprId() { return oprId; }
     public void setOprId(int oprId) { this.oprId = oprId; }
     public String toString() {
-        return pbId + "\t" + rbId +"\t" + tara +"\t" + netto + "\t" + oprId ;
+        return "[" + pbId + ", " + rbId +", " + tara +", " + netto + ", " + oprId + ']';
     }
 
     @Override

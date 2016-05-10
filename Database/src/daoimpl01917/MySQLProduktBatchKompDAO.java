@@ -16,10 +16,13 @@ public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO
     public ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException {
         ResultSet rs = Connector.doQuery("SELECT * FROM produktbatchkomponent WHERE pb_id=? AND rb_id=?", pbId, rbId);
         try {
-            if(!rs.first()) throw new DALException("Produktbatchkomponent"+pbId+"Findes ikke");
+            if(!rs.first()) 
+                throw new DALException("Produktbatchkomponent"+pbId+"Findes ikke");
             return new ProduktBatchKompDTO (rs.getInt("pb_id"),rs.getInt("rb_id"),rs.getDouble("tara"),rs.getDouble("netto"),rs.getInt("opr_id"));
         }
-        catch(SQLException e){throw new DALException(e);}
+        catch(SQLException e) {
+            throw new DALException(e);
+        }
     }
     
     @Override
@@ -27,12 +30,13 @@ public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO
         List<ProduktBatchKompDTO> list = new ArrayList<>();
         ResultSet rs = Connector.doQuery("SELECT * FROM produktbatchkomponent WHERE pb_id=?", pbId);
         try {
-            while (rs.next())
-            {
+            while (rs.next()) {
                 list.add(new ProduktBatchKompDTO(rs.getInt("pb_id"),rs.getInt("rb_id"),rs.getDouble("tara"),rs.getDouble("netto"),rs.getInt("opr_id")));
             }
         }
-        catch (SQLException e) { throw new DALException(e); }
+        catch (SQLException e) { 
+            throw new DALException(e);
+        }
         return list;
     }
     
@@ -41,18 +45,19 @@ public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO
         List<ProduktBatchKompDTO> list = new ArrayList<>();
         ResultSet rs = Connector.doQuery("SELECT * FROM produktbatchkomponent");
         try {
-            while (rs.next())
-            {
+            while (rs.next()) {
                 list.add(new ProduktBatchKompDTO(rs.getInt("pb_id"),rs.getInt("rb_id"),rs.getDouble("tara"),rs.getDouble("netto"),rs.getInt("opr_id")));
             }
         }
-        catch (SQLException e) { throw new DALException(e); }
+        catch (SQLException e) { 
+            throw new DALException(e);
+        }
         return list;
     }
     
     @Override
     public void createProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException {
-        Connector.doUpdate("INSERT INTO produktbatchkomponent(pb_id,rb_id,tara,netto,opr_id) VALUES (?, ?, ?, ?, ?)",
+        Connector.doUpdate("INSERT INTO produktbatchkomponent(pb_id, rb_id, tara, netto, opr_id) VALUES (?, ?, ?, ?, ?)",
                 produktbatchkomponent.getPbId(), produktbatchkomponent.getRbId(), produktbatchkomponent.getTara(), produktbatchkomponent.getNetto(), produktbatchkomponent.getOprId());
 //        Connector.doUpdate (
 //                "INSERT INTO produktbatchkomponent(pb_id,rb_id,tara,netto,opr_id) VALUES" + "(" + produktbatchkomponent.getPbId() + ", '" + produktbatchkomponent.getRbId() + "', '"+produktbatchkomponent.getTara() + "', '"+produktbatchkomponent.getNetto() + "', '"+produktbatchkomponent.getOprId() + "'"
@@ -61,8 +66,8 @@ public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO
     
     @Override
     public void updateProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException {
-        Connector.doUpdate("UPDATE produktbatch SET  pbId=?, rb_id=?, tara=?, netto=?, opr_id=? WHERE pbId=?",
-                produktbatchkomponent.getPbId(), produktbatchkomponent.getRbId(), produktbatchkomponent.getTara(), produktbatchkomponent.getNetto(), produktbatchkomponent.getOprId(), produktbatchkomponent.getPbId());
+        Connector.doUpdate("UPDATE produktbatchkomponent SET tara=?, netto=?, opr_id=? WHERE pb_id=? AND rb_id=?",
+                produktbatchkomponent.getTara(), produktbatchkomponent.getNetto(), produktbatchkomponent.getOprId(), produktbatchkomponent.getPbId(), produktbatchkomponent.getRbId());
 //        Connector.doUpdate (
 //                "UPDATE produktbatch SET  pbId = '" + produktbatchkomponent.getPbId() + "', rb_id =  '" + produktbatchkomponent.getRbId() +
 //                        "', tara = '" + produktbatchkomponent.getTara() + "', netto='"+produktbatchkomponent.getNetto() + "', opr_id= '" + produktbatchkomponent.getOprId()+ "' WHERE pbId = " +
