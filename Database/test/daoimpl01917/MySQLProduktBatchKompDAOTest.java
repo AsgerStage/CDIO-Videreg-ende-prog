@@ -139,7 +139,6 @@ public class MySQLProduktBatchKompDAOTest
             instance = new MySQLProduktBatchKompDAO();
             instance.createProduktBatchKomp(expResult);
             result = instance.getProduktBatchKomp(pbId, rbId);
-            
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
             System.err.println(e);
