@@ -13,14 +13,14 @@ public class MYSQLReceptKompDAOTest
 {
 
     /**
-     * Test of getReceptKomp method, of class MYSQLReceptKompDAO.
+     * Test of getReceptKomp method, of class MySQLReceptKompDAO.
      */
     @Test
     public void testGetReceptKomp() throws Exception {
         System.out.println("getReceptKomp");
         int receptId = 0;
         int raavareId = 0;
-        MYSQLReceptKompDAO instance = new MYSQLReceptKompDAO();
+        MySQLReceptKompDAO instance = new MySQLReceptKompDAO();
         ReceptKompDTO expResult = null;
         ReceptKompDTO result = instance.getReceptKomp(receptId, raavareId);
         assertEquals(expResult, result);
@@ -29,13 +29,13 @@ public class MYSQLReceptKompDAOTest
     }
 
     /**
-     * Test of getReceptKompList method, of class MYSQLReceptKompDAO.
+     * Test of getReceptKompList method, of class MySQLReceptKompDAO.
      */
     @Test
     public void testGetReceptKompList_int() throws Exception {
         System.out.println("getReceptKompList");
         int receptId = 0;
-        MYSQLReceptKompDAO instance = new MYSQLReceptKompDAO();
+        MySQLReceptKompDAO instance = new MySQLReceptKompDAO();
         List<ReceptKompDTO> expResult = null;
         List<ReceptKompDTO> result = instance.getReceptKompList(receptId);
         assertEquals(expResult, result);
@@ -44,12 +44,12 @@ public class MYSQLReceptKompDAOTest
     }
 
     /**
-     * Test of getReceptKompList method, of class MYSQLReceptKompDAO.
+     * Test of getReceptKompList method, of class MySQLReceptKompDAO.
      */
     @Test
     public void testGetReceptKompList_0args() throws Exception {
         System.out.println("getReceptKompList");
-        MYSQLReceptKompDAO instance = new MYSQLReceptKompDAO();
+        MySQLReceptKompDAO instance = new MySQLReceptKompDAO();
         List<ReceptKompDTO> expResult = null;
         List<ReceptKompDTO> result = instance.getReceptKompList();
         assertEquals(expResult, result);
@@ -58,26 +58,26 @@ public class MYSQLReceptKompDAOTest
     }
 
     /**
-     * Test of createReceptKomp method, of class MYSQLReceptKompDAO.
+     * Test of createReceptKomp method, of class MySQLReceptKompDAO.
      */
     @Test
     public void testCreateReceptKomp() throws Exception {
         System.out.println("createReceptKomp");
         ReceptKompDTO receptkomponent = null;
-        MYSQLReceptKompDAO instance = new MYSQLReceptKompDAO();
+        MySQLReceptKompDAO instance = new MySQLReceptKompDAO();
         instance.createReceptKomp(receptkomponent);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of updateReceptKomp method, of class MYSQLReceptKompDAO.
+     * Test of updateReceptKomp method, of class MySQLReceptKompDAO.
      */
     @Test
     public void testUpdateReceptKomp() throws Exception {
         System.out.println("updateReceptKomp");
         ReceptKompDTO receptkomponent = null;
-        MYSQLReceptKompDAO instance = new MYSQLReceptKompDAO();
+        MySQLReceptKompDAO instance = new MySQLReceptKompDAO();
         instance.updateReceptKomp(receptkomponent);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
