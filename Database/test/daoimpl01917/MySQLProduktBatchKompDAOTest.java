@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
  * MySQLProduktBatchKompDAOTest
  * @author Lasse Holm Nielsen
  * @version 10-05-2016
+ * <b>HUSK AT SLETTE ENTRY PB_ID = 1, RB_ID = 3 og PB_ID = 2, RB_ID = 3 EFTER KØRELSE!</b>
  */
 public class MySQLProduktBatchKompDAOTest 
 {
