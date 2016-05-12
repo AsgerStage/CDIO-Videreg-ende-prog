@@ -93,6 +93,7 @@ public class MySQLProduktBatchKompDAOTest
     @Test
     public void testGetProduktBatchKompList_0args() throws Exception {
         System.out.println("getProduktBatchKompList");
+        
         MySQLProduktBatchKompDAO instance;
         Connector con = null;
         List<ProduktBatchKompDTO> result = null;

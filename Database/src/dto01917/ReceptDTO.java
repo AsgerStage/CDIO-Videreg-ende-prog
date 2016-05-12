@@ -29,4 +29,15 @@ public class ReceptDTO
 	public String toString() { 
 		return receptId + "\t" + receptNavn; 
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        final ReceptDTO other = (ReceptDTO) obj;
+        
+        return this.receptId == other.receptId &&
+                this.receptNavn.equals(other.receptNavn);
+
+    }
 }
