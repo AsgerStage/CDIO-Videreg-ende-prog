@@ -49,4 +49,17 @@ public class OperatoerDTO
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
 	public String toString() { return oprId + "\t" + oprNavn + "\t" + ini + "\t" + cpr + "\t" + password; }
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        final OperatoerDTO other = (OperatoerDTO) obj;
+        
+        return this.oprId == other.oprId &&
+                this.oprNavn.equals(other.oprNavn) &&
+                this.ini.equals(other.ini) &&
+                this.cpr.equals(other.cpr) &&
+                this.password.equals(other.password);
+    }
 }

@@ -12,6 +12,7 @@ import daointerfaces01917.OperatoerDAO;
 import dto01917.OperatoerDTO;
 
 public class MySQLOperatoerDAO implements OperatoerDAO {
+	 @Override
 	public OperatoerDTO getOperatoer(int oprId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer WHERE opr_id = " + oprId);
 	    try {
@@ -21,7 +22,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 	    catch (SQLException e) {throw new DALException(e); }
 		
 	}
-	
+	 @Override
 	public void createOperatoer(OperatoerDTO opr) throws DALException {		
 			Connector.doUpdate(
 				"INSERT INTO operatoer(opr_id, opr_navn, ini, cpr, password) VALUES " +
@@ -29,7 +30,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 				opr.getCpr() + "', '" + opr.getPassword() + "')"
 			);
 	}
-	
+	 @Override
 	public void updateOperatoer(OperatoerDTO opr) throws DALException {
 		Connector.doUpdate(
 				"UPDATE operatoer SET  opr_navn = '" + opr.getOprNavn() + "', ini =  '" + opr.getIni() + 
@@ -37,7 +38,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 				opr.getOprId()
 		);
 	}
-	
+	 @Override
 	public List<OperatoerDTO> getOperatoerList() throws DALException {
 		List<OperatoerDTO> list = new ArrayList<OperatoerDTO>();
 		ResultSet rs = Connector.doQuery("SELECT * FROM operatoer");
@@ -51,6 +52,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO {
 		catch (SQLException e) { throw new DALException(e); }
 		return list;
 	}
+	 
 	public void deleteOperatoer(int opr) throws DALException {		
 		Connector.doUpdate(
 			"DELETE FROM operatoer where opr_id="+opr
