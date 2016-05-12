@@ -32,4 +32,15 @@ public class RaavareDTO
     public String toString() { 
 		return raavareId + "\t" + raavareNavn +"\t" + leverandoer; 
 	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        final RaavareDTO other = (RaavareDTO) obj;
+        
+        return this.raavareId == other.raavareId &&
+                this.raavareNavn.equals(other.raavareNavn) &&
+                this.leverandoer.equals(other.leverandoer);
+
+    }
 }

@@ -180,7 +180,7 @@ public class MySQLReceptDAOTest {
 
 		int receptId = 55;
 		String receptNavn = "sjovpizza";
-		ReceptDTO expResult = new ReceptDTO(receptId, receptNavn);
+		ReceptDTO expResult = new ReceptDTO(receptId,"updatedsjovpizza");
 		ReceptDTO result;
 
 		try {

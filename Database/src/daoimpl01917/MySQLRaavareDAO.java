@@ -9,15 +9,16 @@ import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RaavareDAO;
 import dto01917.RaavareDTO;
+import dto01917.ReceptDTO;
 
 public class MySQLRaavareDAO implements RaavareDAO 
 {
 	@Override
 	public RaavareDTO getRaavare(int raavareId) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM raavare WHERE raavareId = " + raavareId);
+		ResultSet rs = Connector.doQuery("SELECT * FROM raavare WHERE raavare_id = " + raavareId);
 	    try {
 	    	if (!rs.first()) throw new DALException("raavaren " + raavareId + " findes ikke");
-	    	return new RaavareDTO (rs.getInt("raavareId"), rs.getString("raavareNavn"), rs.getString("leverandoer"));
+	    	return new RaavareDTO (rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 	}
@@ -28,7 +29,7 @@ public class MySQLRaavareDAO implements RaavareDAO
 		ResultSet rs = Connector.doQuery("SELECT * FROM raavare");
 		try {
 			while (rs.next()) {
-				list.add(new RaavareDTO(rs.getInt("raavareId"), rs.getString("raavareNavn"),
+				list.add(new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"),
 						rs.getString("leverandoer")));
 			}
 		} catch (SQLException e) {
@@ -37,18 +38,24 @@ public class MySQLRaavareDAO implements RaavareDAO
 		return list;
 	}
 
-	@Override
-	public void createRaavare(RaavareDTO raavare) throws DALException{		
-		Connector.doUpdate(
-			"INSERT INTO raavare(raavareId, raavareNavn, leverandoer) VALUES " +
-			"(" + raavare.getRaavareId() + ", '" + raavare.getRaavareNavn() + "', '" + raavare.getLeverandoer() + "',)"
-		);
-	}
+	
+	 @Override
+	    public void createRaavare(RaavareDTO raavare) throws DALException {
+	        Connector.doUpdate("INSERT INTO raavare(raavare_id, raavare_navn, leverandoer) VALUES(?, ?, ?)",
+	                raavare.getRaavareId(),raavare.getRaavareNavn(), raavare.getLeverandoer());
+
+	    }
 
 	@Override
 	public void updateRaavare(RaavareDTO raavare) throws DALException {
-		Connector.doUpdate("UPDATE ravaare SET  raavareNavn = '" + raavare.getRaavareNavn() + "', leverandoer =  '"
-				+ raavare.getLeverandoer() + "', WHERE raavareId = " + raavare.getRaavareId());
+		Connector.doUpdate("UPDATE raavare SET raavare_navn=?, leverandoer=? WHERE raavare_id=?",
+                raavare.getRaavareNavn(), raavare.getLeverandoer(),raavare.getRaavareId());
 	}
+	
+	public void deleteRaavare(int RaavareId) throws DALException {		
+		Connector.doUpdate(
+			"DELETE FROM raavare where raavare_id="+RaavareId
+		);
+}
 
 }
