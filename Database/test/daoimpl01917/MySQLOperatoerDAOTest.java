@@ -92,11 +92,33 @@ public class MySQLOperatoerDAOTest
     @Test
     public void testUpdateOperatoer() throws Exception {
         System.out.println("updateOperatoer");
-        OperatoerDTO opr = null;
-        MySQLOperatoerDAO instance = new MySQLOperatoerDAO();
-        instance.updateOperatoer(opr);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MySQLOperatoerDAO instance;
+        Connector con = null;
+        OperatoerDTO expResult, result;
+        int oprId = 1;
+        try {
+            con = new Connector();
+            instance = new MySQLOperatoerDAO();
+            expResult = new OperatoerDTO(oprId,"Angelo A","AA","070770-7007","lKje4fa");
+            instance.updateOperatoer(expResult);
+            result = instance.getOperatoer(oprId);
+            
+            
+        } 
+        
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+        	
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+        assertEquals(expResult, result);
+        
     }
 
     /**
@@ -105,11 +127,32 @@ public class MySQLOperatoerDAOTest
     @Test
     public void testGetOperatoerList() throws Exception {
         System.out.println("getOperatoerList");
-        MySQLOperatoerDAO instance = new MySQLOperatoerDAO();
-        List<OperatoerDTO> expResult = null;
-        List<OperatoerDTO> result = instance.getOperatoerList();
+        MySQLOperatoerDAO instance;
+        Connector con = null;
+        OperatoerDTO expResult, result;
+        int oprId = 1;
+        try {
+            con = new Connector();
+            instance = new MySQLOperatoerDAO();
+            expResult = new OperatoerDTO(oprId,"Angelo A","AA","070770-7007","lKje4fa");
+            
+            result = instance.getOperatoerList().get(0);
+            
+            
+        } 
+        
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+        	
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 }

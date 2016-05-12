@@ -26,4 +26,15 @@ public class ReceptKompDTO
 	public String toString() { 
 		return receptId + "\t" + raavareId + "\t" + nomNetto + "\t" + tolerance; 
 	}
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        final ReceptKompDTO other = (ReceptKompDTO) obj;
+        
+        return this.receptId == other.receptId &&
+                this.raavareId==other.raavareId &&
+                this.nomNetto==nomNetto &&
+                this.tolerance==tolerance;
+    }
 }
