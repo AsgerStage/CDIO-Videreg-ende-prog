@@ -95,11 +95,11 @@ public class MySQLReceptKompDAO implements ReceptKompDAO
 	 */
 	@Override
 	public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
-		Connector.doUpdate(
-				"UPDATE receptkomponent SET  recept_id = " + receptkomponent.getReceptId() + ", raavare_id =  " + receptkomponent.getRaavareId()+ 
-				", nom_netto = " + receptkomponent.getNomNetto() + ", tolerance="+receptkomponent.getTolerance()+" WHERE recept_id = " +
-				receptkomponent.getReceptId()
-		);
+
+				 Connector.doUpdate("UPDATE receptkomponent SET nom_netto=?, tolerance=? WHERE recept_id=? AND raavare_id=?",
+			                receptkomponent.getNomNetto(), receptkomponent.getTolerance(), receptkomponent.getReceptId(), receptkomponent.getRaavareId());
+				
+		
 	}
 
 	public void deleteReceptKomp(int receptId, int raavareId) throws DALException {		
