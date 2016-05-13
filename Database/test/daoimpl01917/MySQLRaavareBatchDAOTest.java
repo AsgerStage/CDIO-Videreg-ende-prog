@@ -3,10 +3,11 @@ import dto01917.RaavareBatchDTO;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  * MySQLRaavareBatchDAOTest
- * @author SteamedCow
+ * @author Lasse H Nielsen
  * @version 10-05-2016
  */
 public class MySQLRaavareBatchDAOTest 
@@ -14,8 +15,10 @@ public class MySQLRaavareBatchDAOTest
 
     /**
      * Test of getRaavareBatch method, of class MySQLRaavareBatchDAO.
+     * @throws java.lang.Exception
      */
     @Test
+    @Ignore
     public void testGetRaavareBatch() throws Exception {
         System.out.println("getRaavareBatch");
         int raavareId = 0;
@@ -29,8 +32,10 @@ public class MySQLRaavareBatchDAOTest
 
     /**
      * Test of createRaavareBatch method, of class MySQLRaavareBatchDAO.
+     * @throws java.lang.Exception
      */
     @Test
+    @Ignore
     public void testCreateRaavareBatch() throws Exception {
         System.out.println("createRaavareBatch");
         RaavareBatchDTO raavarebatch = null;
@@ -42,8 +47,10 @@ public class MySQLRaavareBatchDAOTest
 
     /**
      * Test of updateRaavareBatch method, of class MySQLRaavareBatchDAO.
+     * @throws java.lang.Exception
      */
     @Test
+    @Ignore
     public void testUpdateRaavareBatch() throws Exception {
         System.out.println("updateRaavareBatch");
         RaavareBatchDTO raavarebatch = null;
@@ -55,8 +62,10 @@ public class MySQLRaavareBatchDAOTest
 
     /**
      * Test of getRaavareBatchList method, of class MySQLRaavareBatchDAO.
+     * @throws java.lang.Exception
      */
     @Test
+    @Ignore
     public void testGetRaavareBatchList_0args() throws Exception {
         System.out.println("getRaavareBatchList");
         MySQLRaavareBatchDAO instance = new MySQLRaavareBatchDAO();
@@ -69,8 +78,10 @@ public class MySQLRaavareBatchDAOTest
 
     /**
      * Test of getRaavareBatchList method, of class MySQLRaavareBatchDAO.
+     * @throws java.lang.Exception
      */
     @Test
+    @Ignore
     public void testGetRaavareBatchList_int() throws Exception {
         System.out.println("getRaavareBatchList");
         int raavareId = 0;
