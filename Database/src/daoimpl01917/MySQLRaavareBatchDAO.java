@@ -13,11 +13,11 @@ import dto01917.RaavareBatchDTO;
 public class MySQLRaavareBatchDAO implements RaavareBatchDAO
 {
     @Override
-    public RaavareBatchDTO getRaavareBatch(int raavareId) throws DALException {
-        ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE rb_id=?", raavareId);
+    public RaavareBatchDTO getRaavareBatch(int rb_id) throws DALException {
+        ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE rb_id=?", rb_id);
         try {
             if (!rs.first())
-                throw new DALException("RaavareBatch " + raavareId + " findes ikke");
+                throw new DALException("RaavareBatch " + rb_id + " findes ikke");
             return new RaavareBatchDTO (rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"));
         }
         catch (SQLException e) {
@@ -65,5 +65,9 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO
         }
         catch (SQLException e) { throw new DALException(e); }
         return list;
+    }
+
+    public void deleteRaavareBatch(int rb_id) throws DALException {
+        Connector.doUpdate("CALL `DTU`.`delete_raavare_batch`(?)", rb_id);
     }
 }

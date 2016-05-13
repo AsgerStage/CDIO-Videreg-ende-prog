@@ -26,13 +26,13 @@ public class MySQLRaavareBatchDAOTest
         MySQLRaavareBatchDAO instance;
         Connector con = null;
         RaavareBatchDTO expResult, result;
-        int raavareId = 4;
+        int rb_id = 4;
         
         try {
             con = new Connector();
             instance = new MySQLRaavareBatchDAO();
-            result = instance.getRaavareBatch(raavareId);
-            expResult = new RaavareBatchDTO(raavareId, 5, 100);
+            result = instance.getRaavareBatch(rb_id);
+            expResult = new RaavareBatchDTO(rb_id, 5, 100);
         } 
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
             System.err.println(e);
@@ -53,14 +53,34 @@ public class MySQLRaavareBatchDAOTest
      * @throws java.lang.Exception
      */
     @Test
-    @Ignore
     public void testCreateRaavareBatch() throws Exception {
         System.out.println("createRaavareBatch");
-        RaavareBatchDTO raavarebatch = null;
-        MySQLRaavareBatchDAO instance = new MySQLRaavareBatchDAO();
-        instance.createRaavareBatch(raavarebatch);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MySQLRaavareBatchDAO instance;
+        Connector con = null;
+        int rb_id = 9;
+        RaavareBatchDTO expResult = new RaavareBatchDTO(rb_id, 6, 999);
+        RaavareBatchDTO result;
+        
+        try {
+            con = new Connector();
+            instance = new MySQLRaavareBatchDAO();
+            instance.createRaavareBatch(expResult);
+            result = instance.getRaavareBatch(rb_id);
+            
+            assertEquals(expResult, result);
+            
+            instance.deleteRaavareBatch(rb_id);
+        } 
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
     }
 
     /**
