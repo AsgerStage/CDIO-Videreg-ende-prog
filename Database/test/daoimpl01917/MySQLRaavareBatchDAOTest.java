@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 
 /**
  * MySQLRaavareBatchDAOTest
@@ -88,14 +87,35 @@ public class MySQLRaavareBatchDAOTest
      * @throws java.lang.Exception
      */
     @Test
-    @Ignore
     public void testUpdateRaavareBatch() throws Exception {
         System.out.println("updateRaavareBatch");
-        RaavareBatchDTO raavarebatch = null;
-        MySQLRaavareBatchDAO instance = new MySQLRaavareBatchDAO();
-        instance.updateRaavareBatch(raavarebatch);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MySQLRaavareBatchDAO instance;
+        Connector con = null;
+        int rb_id = 8;
+        RaavareBatchDTO expResult = new RaavareBatchDTO(rb_id, 7, 888);
+        RaavareBatchDTO result;
+        
+        try {
+            con = new Connector();
+            instance = new MySQLRaavareBatchDAO();
+            instance.createRaavareBatch(new RaavareBatchDTO(rb_id, 4, 444));
+            instance.updateRaavareBatch(expResult);
+            result = instance.getRaavareBatch(rb_id);
+            
+            assertEquals(expResult, result);
+            
+            instance.deleteRaavareBatch(rb_id);
+        }
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
     }
 
     /**
@@ -103,15 +123,36 @@ public class MySQLRaavareBatchDAOTest
      * @throws java.lang.Exception
      */
     @Test
-    @Ignore
-    public void testGetRaavareBatchList_0args() throws Exception {
+    public void testGetRaavareBatchList() throws Exception {
         System.out.println("getRaavareBatchList");
-        MySQLRaavareBatchDAO instance = new MySQLRaavareBatchDAO();
-        List<RaavareBatchDTO> expResult = null;
-        List<RaavareBatchDTO> result = instance.getRaavareBatchList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MySQLRaavareBatchDAO instance;
+        Connector con = null;
+        List<RaavareBatchDTO> result = null;
+        
+        try {
+            con = new Connector();
+            instance = new MySQLRaavareBatchDAO();
+            result = instance.getRaavareBatchList();
+        }
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+        
+        assertFalse(result == null);
+        assertTrue(result.size() >= 7);
+        for (RaavareBatchDTO pbkDTO : result) {
+            assertFalse(pbkDTO == null);
+        }
+        result.contains(new RaavareBatchDTO(1, 1, 1000));
+        result.contains(new RaavareBatchDTO(4, 5, 100));
+        result.contains(new RaavareBatchDTO(7, 7, 100));
     }
 
     /**
@@ -119,15 +160,35 @@ public class MySQLRaavareBatchDAOTest
      * @throws java.lang.Exception
      */
     @Test
-    @Ignore
     public void testGetRaavareBatchList_int() throws Exception {
         System.out.println("getRaavareBatchList");
-        int raavareId = 0;
-        MySQLRaavareBatchDAO instance = new MySQLRaavareBatchDAO();
-        List<RaavareBatchDTO> expResult = null;
-        List<RaavareBatchDTO> result = instance.getRaavareBatchList(raavareId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MySQLRaavareBatchDAO instance;
+        Connector con = null;
+        List<RaavareBatchDTO> result = null;
+        int raavareId = 5;
+        
+        try {
+            con = new Connector();
+            instance = new MySQLRaavareBatchDAO();
+            result = instance.getRaavareBatchList(raavareId);
+        }
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+        
+        assertFalse(result == null);
+        assertTrue(result.size() >= 2);
+        for (RaavareBatchDTO pbkDTO : result) {
+            assertFalse(pbkDTO == null);
+        }
+        result.contains(new RaavareBatchDTO(4, raavareId, 100));
+        result.contains(new RaavareBatchDTO(5, raavareId, 100));
     }
 }
