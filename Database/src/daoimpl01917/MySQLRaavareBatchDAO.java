@@ -27,17 +27,15 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO
     
     @Override
     public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
-        Connector.doUpdate(
-                "INSERT INTO raavarebatch(raavare_id, rb_id, maengde) VALUES " +
-                        "(" + raavarebatch.getRaavareId() + ", '" + raavarebatch.getRbId() + ", '" + raavarebatch.getMaengde() + "')"
+        Connector.doUpdate("INSERT INTO raavarebatch(raavare_id, rb_id, maengde) VALUES(?, ?, ?)",
+                raavarebatch.getRaavareId(), raavarebatch.getRbId(), raavarebatch.getMaengde()
         );
     }
     
     @Override
     public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
-        Connector.doUpdate(
-                "UPDATE raavarebatch SET  raavare_id = '" + raavarebatch.getRaavareId() + "', rb_id =  '" + raavarebatch.getRbId() +
-                        "', maengde = '" + raavarebatch.getMaengde()
+        Connector.doUpdate("UPDATE raavarebatch SET raavare_id=?, maengde=? WHERE rb_id=?",
+                raavarebatch.getRaavareId(), raavarebatch.getMaengde(), raavarebatch.getRbId()
         );
     }
     
