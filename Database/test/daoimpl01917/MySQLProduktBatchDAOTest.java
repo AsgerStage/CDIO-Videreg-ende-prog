@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
  * MySQLProduktBatchDAOTest
  * @author Lasse Holm Nielsen
  * @version 10-05-2016
- * <b>HUSK AT SLETTE ENTRY PB_ID = 6 og PB_ID = 7 EFTER KØRELSE!</b>
  */
 public class MySQLProduktBatchDAOTest 
 {
@@ -100,6 +99,10 @@ public class MySQLProduktBatchDAOTest
             instance = new MySQLProduktBatchDAO();
             instance.createProduktBatch(expResult);
             result = instance.getProduktBatch(pbId);
+            
+            assertEquals(expResult, result);
+            
+            instance.deleteProduktBatch(pbId);
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
             System.err.println(e);
@@ -111,8 +114,6 @@ public class MySQLProduktBatchDAOTest
                     con.closeConnection();
                 } catch (SQLException e) { }
         }
-        
-        assertEquals(expResult, result);
     }
 
     /**
@@ -134,6 +135,10 @@ public class MySQLProduktBatchDAOTest
             instance.createProduktBatch(new ProduktBatchDTO(pbId, 2, 1));
             instance.updateProduktBatch(expResult);
             result = instance.getProduktBatch(pbId);
+            
+            assertEquals(expResult, result);
+            
+            instance.deleteProduktBatch(pbId);
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
             System.err.println(e);
@@ -145,7 +150,5 @@ public class MySQLProduktBatchDAOTest
                     con.closeConnection();
                 } catch (SQLException e) { }
         }
-        
-        assertEquals(expResult, result);
     }
 }

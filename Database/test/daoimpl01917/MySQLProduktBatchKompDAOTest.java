@@ -12,7 +12,6 @@ import static org.junit.Assert.*;
  * MySQLProduktBatchKompDAOTest
  * @author Lasse Holm Nielsen
  * @version 10-05-2016
- * <b>HUSK AT SLETTE ENTRY PB_ID = 1, RB_ID = 3 og PB_ID = 2, RB_ID = 3 EFTER KØRELSE!</b>
  */
 public class MySQLProduktBatchKompDAOTest 
 {
@@ -140,6 +139,10 @@ public class MySQLProduktBatchKompDAOTest
             instance = new MySQLProduktBatchKompDAO();
             instance.createProduktBatchKomp(expResult);
             result = instance.getProduktBatchKomp(pbId, rbId);
+        
+            assertEquals(expResult, result);
+            
+            instance.deleteProduktBatchKomp(pbId, rbId);
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
             System.err.println(e);
@@ -151,8 +154,6 @@ public class MySQLProduktBatchKompDAOTest
                     con.closeConnection();
                 } catch (SQLException e) { }
         }
-        
-        assertEquals(expResult, result);
     }
 
     /**
@@ -175,6 +176,10 @@ public class MySQLProduktBatchKompDAOTest
             instance.createProduktBatchKomp(new ProduktBatchKompDTO(pbId, rbId, 22.22, 2.22, 1));
             instance.updateProduktBatchKomp(expResult);
             result = instance.getProduktBatchKomp(pbId, rbId);
+        
+            assertEquals(expResult, result);
+            
+            instance.deleteProduktBatchKomp(pbId, rbId);
         }
         catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
             System.err.println(e);
@@ -186,7 +191,5 @@ public class MySQLProduktBatchKompDAOTest
                     con.closeConnection();
                 } catch (SQLException e) { }
         }
-        
-        assertEquals(expResult, result);
     }
 }

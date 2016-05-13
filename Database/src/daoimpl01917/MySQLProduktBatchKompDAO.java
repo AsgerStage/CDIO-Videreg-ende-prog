@@ -59,19 +59,15 @@ public class MySQLProduktBatchKompDAO implements ProduktBatchKompDAO
     public void createProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException {
         Connector.doUpdate("INSERT INTO produktbatchkomponent(pb_id, rb_id, tara, netto, opr_id) VALUES(?, ?, ?, ?, ?)",
                 produktbatchkomponent.getPbId(), produktbatchkomponent.getRbId(), produktbatchkomponent.getTara(), produktbatchkomponent.getNetto(), produktbatchkomponent.getOprId());
-//        Connector.doUpdate (
-//                "INSERT INTO produktbatchkomponent(pb_id,rb_id,tara,netto,opr_id) VALUES" + "(" + produktbatchkomponent.getPbId() + ", '" + produktbatchkomponent.getRbId() + "', '"+produktbatchkomponent.getTara() + "', '"+produktbatchkomponent.getNetto() + "', '"+produktbatchkomponent.getOprId() + "'"
-//        );
     }
     
     @Override
     public void updateProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException {
         Connector.doUpdate("UPDATE produktbatchkomponent SET tara=?, netto=?, opr_id=? WHERE pb_id=? AND rb_id=?",
                 produktbatchkomponent.getTara(), produktbatchkomponent.getNetto(), produktbatchkomponent.getOprId(), produktbatchkomponent.getPbId(), produktbatchkomponent.getRbId());
-//        Connector.doUpdate (
-//                "UPDATE produktbatch SET  pbId = '" + produktbatchkomponent.getPbId() + "', rb_id =  '" + produktbatchkomponent.getRbId() +
-//                        "', tara = '" + produktbatchkomponent.getTara() + "', netto='"+produktbatchkomponent.getNetto() + "', opr_id= '" + produktbatchkomponent.getOprId()+ "' WHERE pbId = " +
-//                        produktbatchkomponent.getPbId()
-//        );
+    }
+
+    public void deleteProduktBatchKomp(int pbId, int rbId) throws DALException {
+        Connector.doUpdate("CALL `DTU`.`delete_produkt_batch_komp`(?, ?)", pbId, rbId);
     }
 }

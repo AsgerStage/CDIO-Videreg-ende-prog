@@ -44,19 +44,15 @@ public class MySQLProduktBatchDAO implements ProduktBatchDAO
     public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
         Connector.doUpdate("INSERT INTO produktbatch(pb_id, status, recept_id) VALUES(?, ?, ?)",
                 produktbatch.getPbId(), produktbatch.getStatus(), produktbatch.getReceptId());
-//        Connector.doUpdate(
-//                "INSERT INTO produktbatch(pbID,status,receptId) VALUES" +"("+produktbatch.getPbId()+", '"+produktbatch.getStatus()+"', '"+produktbatch.getReceptId()+"'"
-//        );
     }
     
     @Override
     public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
         Connector.doUpdate("UPDATE produktbatch SET status=?, recept_id=? WHERE pb_id=?",
                 produktbatch.getStatus(), produktbatch.getReceptId(), produktbatch.getPbId());
-//        Connector.doUpdate(
-//                "UPDATE produktbatch SET  pbId = '" + produktbatch.getPbId() + "', status =  '" + produktbatch.getStatus() +
-//                        "', receptId = '" + produktbatch.getReceptId() + "' WHERE pbId = " +
-//                        produktbatch.getPbId()
-//        );
+    }
+
+    public void deleteProduktBatch(int pbId) throws DALException {
+        Connector.doUpdate("CALL `DTU`.`delete_produkt_batch`(?)", pbId);
     }
 }
