@@ -14,11 +14,11 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO
 {
     @Override
     public RaavareBatchDTO getRaavareBatch(int raavareId) throws DALException {
-        ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE raavare_id = " + raavareId);
+        ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE rb_id=?", raavareId);
         try {
             if (!rs.first())
                 throw new DALException("RaavareBatch " + raavareId + " findes ikke");
-            return new RaavareBatchDTO (rs.getInt("rbId"), rs.getInt("raavareId"), rs.getDouble("maengde"));
+            return new RaavareBatchDTO (rs.getInt("rb_id"), rs.getInt("raavare_id"), rs.getDouble("maengde"));
         }
         catch (SQLException e) {
             throw new DALException(e);

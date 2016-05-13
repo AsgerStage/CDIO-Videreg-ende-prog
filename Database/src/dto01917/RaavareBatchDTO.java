@@ -2,8 +2,8 @@ package dto01917;
 
 public class RaavareBatchDTO
 {
-    int rbId;                     // i omraadet 1-99999999
-    int raavareId;             // i omraadet 1-99999999
+    int rbId;                   // i omraadet 1-99999999
+    int raavareId;              // i omraadet 1-99999999
     double maengde;             // kan vaere negativ
     
     public RaavareBatchDTO(int rbId, int raavareId, double maengde)
@@ -23,7 +23,7 @@ public class RaavareBatchDTO
     public String toString() {
         return rbId + "\t" + raavareId +"\t" + maengde;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -32,7 +32,7 @@ public class RaavareBatchDTO
         hash = 43 * hash + (int) (Double.doubleToLongBits(this.maengde) ^ (Double.doubleToLongBits(this.maengde) >>> 32));
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null || getClass() != obj.getClass())

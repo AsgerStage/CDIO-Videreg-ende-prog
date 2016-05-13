@@ -1,5 +1,8 @@
 package daoimpl01917;
+import connector01917.Connector;
+import daointerfaces01917.DALException;
 import dto01917.RaavareBatchDTO;
+import java.sql.SQLException;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,16 +21,31 @@ public class MySQLRaavareBatchDAOTest
      * @throws java.lang.Exception
      */
     @Test
-    @Ignore
     public void testGetRaavareBatch() throws Exception {
         System.out.println("getRaavareBatch");
-        int raavareId = 0;
-        MySQLRaavareBatchDAO instance = new MySQLRaavareBatchDAO();
-        RaavareBatchDTO expResult = null;
-        RaavareBatchDTO result = instance.getRaavareBatch(raavareId);
+        MySQLRaavareBatchDAO instance;
+        Connector con = null;
+        RaavareBatchDTO expResult, result;
+        int raavareId = 4;
+        
+        try {
+            con = new Connector();
+            instance = new MySQLRaavareBatchDAO();
+            result = instance.getRaavareBatch(raavareId);
+            expResult = new RaavareBatchDTO(raavareId, 5, 100);
+        } 
+        catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+            System.err.println(e);
+            throw e;
+        }
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
