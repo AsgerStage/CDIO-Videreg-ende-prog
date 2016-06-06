@@ -3,6 +3,9 @@ package edu.example.client.gui.operatoerList;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -11,6 +14,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.example.client.exceptions.DALException;
+import edu.example.client.exceptions.OpIdException;
+import edu.example.client.exceptions.OpNameException;
+import edu.example.client.exceptions.OpPasswordException;
+import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
@@ -26,6 +34,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	//--------- LAVET OM TIL COMPOSITE ------------
 	private VerticalPanel vPanel=new VerticalPanel();
 	private ExampleServiceClientImpl serverComm;
+	
 	public OperatoerList(ExampleServiceClientImpl serverComm)  {
 		initWidget(this.vPanel);
 		this.serverComm=serverComm;
@@ -36,6 +45,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	Label myLbl =new Label("Operatoer");
 	static Grid opTable=new Grid(1,7);
 	Button delButton =new Button("Delete");
+	static TextBox searchBox=new TextBox();
 	
 	
 	
@@ -71,9 +81,10 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		 
 		hPanel.add(myLbl);
 		vPanel.add(hPanel);
-		 TextBox normalText = new TextBox();
-		 hPanel.add(normalText);
-		 normalText.setText("Dette er et soegefelt");
+		 
+		 hPanel.add(searchBox);
+		 searchBox.setText("Dette er et soegefelt");
+		 searchBox.addClickHandler(new SearchClickHandler());
 		 Button SoegBtn =new Button("Soeg");
 		 hPanel.add(SoegBtn);
 		
@@ -100,13 +111,38 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	 */
 	public static void getOperatoerList(List<OperatorDTO> result) {
 		clear();
+		if (searchBox.getText().equals("Dette er et soegefelt")|| searchBox.getText().equals("")){
 		for (int i=0;i<result.size();i++){
 			addOp(result.get(i));
-			
 		}
 		
+		}
+		else {
+			for (int i=0;i<result.size();i++)
+			{
+				if (!(result.get(i).getCpr().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getName().contains(searchBox.getText()))){
+					result.remove(i);
+					i=0;
+				}				
+			}
+			for (int i=0;i<result.size();i++){
+				addOp(result.get(i));
+			}	
+		}
+		
+		
 	}
+	
 	public static void clear(){
 		opTable.resize(1, 7);
 	}
+	private class SearchClickHandler implements ClickHandler 
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			serverComm.getOpList();
+		}
+	}
+
 }
+
