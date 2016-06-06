@@ -9,14 +9,14 @@ import edu.example.client.exceptions.OpPasswordException;
 
 public final class OperatorDTO implements Serializable
 {
-	public static final int RANK_OPR = 0;
+	public static final int RANK_OPR = 4;
 	public static final int RANK_ADMIN = 1;
 	
     private static final long serialVersionUID = 1L;
 	private int ID_MINIMUM_VALUE = 1;
     private int ID_MAXIMUM_VALUE = 99;
-    private int RANK_MINIMUM_VALUE = -1;
-    private int RANK_MAXIMUM_VALUE = 1;
+    private int RANK_MINIMUM_VALUE = 1;
+    private int RANK_MAXIMUM_VALUE = 4;
     private int NAME_MINIMUM_LENGTH = 2;
     private int PASSWORD_MINIMUM_LENGTH = 6;
     private int NUMBER_OF_SPECIAL_CHARACTERS = 3;

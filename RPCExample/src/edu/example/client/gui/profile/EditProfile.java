@@ -229,12 +229,14 @@ public class EditProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), 0));
+				System.out.println("CHECK");
+				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), 1));
 				
 				ViewProfile viewPanel = new ViewProfile("Se Profil", getID(), parent.parent, serverComm);
 				parent.parent.gotoPanel(viewPanel);
 			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
 				e.printStackTrace();
+				saveButton.setText(e.getLocalizedMessage());
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package edu.example.server;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -8,60 +9,120 @@ import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleService;
 import edu.example.server.database.MySQLOperatoerDAO;
+import edu.example.server.database.connector.Connector;
 
 public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService
 {
+	private static final long serialVersionUID = 5550980922485907926L;
 	private final MySQLOperatoerDAO opDAO = new MySQLOperatoerDAO();
 	
 	@Override
 	public ArrayList<OperatorDTO> getOpList(){
+		Connector con = null;
+		ArrayList<OperatorDTO> result = null;
+		
 		try {
-			return new ArrayList<OperatorDTO>(opDAO.getOperatorList());
-		} catch (DALException e) {
+			con = new Connector();
+			result = new ArrayList<OperatorDTO>(opDAO.getOperatorList());
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public OperatorDTO getOperator(int oprID) {
+		OperatorDTO result = null;
+		Connector con = null;
+		
 		try {
-			return opDAO.getOperator(oprID);
-		} catch (DALException e) {
+			con = new Connector();
+			result = opDAO.getOperator(oprID);
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 	
 	@Override
 	public boolean createOperator(OperatorDTO opr) {
+		boolean result = false;
+		Connector con = null;
+		
 		try {
+			con = new Connector();
 			opDAO.createOperator(opr);
-			return true;
-		} catch (DALException e) {
-			e.printStackTrace();
-			return false;
+			result = true;
 		}
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		return result;
 	}
 	
 	@Override
 	public boolean updateOperator(OperatorDTO opr) {
+		boolean result = false;
+		Connector con = null;
+		
 		try {
+			con = new Connector();
 			opDAO.updateOperator(opr);
-			return true;
-		} catch (DALException e) {
+			result = true;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 	
 	@Override
 	public String getPassword(int oprID) {
+		String result = null;
+		Connector con = null;
+		
 		try {
-			return opDAO.getOperator(oprID).getPassword();
-		} catch (DALException e) {
+			con = new Connector();
+			result = opDAO.getOperator(oprID).getPassword();
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		return result;
 	}
 }
