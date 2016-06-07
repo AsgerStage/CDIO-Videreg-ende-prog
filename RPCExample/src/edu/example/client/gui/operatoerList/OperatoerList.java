@@ -129,7 +129,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 				}
 				
 			}
-			catch(NumberFormatException e){
+			catch(Exception e){
 			for (int i=0;i<result.size();i++)
 			{
 				if (!(result.get(i).getName().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getCpr().contains(searchBox.getText()))){
