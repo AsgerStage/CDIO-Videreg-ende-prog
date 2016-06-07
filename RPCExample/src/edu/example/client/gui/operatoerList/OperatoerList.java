@@ -118,15 +118,28 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		
 		}
 		else {
+			try{
+				int searchBoxInt;
+				for(int i=0;i<result.size();i++){
+					searchBoxInt=Integer.parseInt(searchBox.getText());
+					if(!(result.get(i).getOprID()==searchBoxInt)){
+						result.remove(i);
+						i=-1;
+					}
+				}
+				
+			}
+			catch(NumberFormatException e){
 			for (int i=0;i<result.size();i++)
 			{
-				if (!(result.get(i).getCpr().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getName().contains(searchBox.getText()))){
+				if (!(result.get(i).getName().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getCpr().contains(searchBox.getText()))){
 					result.remove(i);
-					i=0;
+					i=-1;
 				}				
 			}
-			for (int i=0;i<result.size();i++){
-				addOp(result.get(i));
+			}
+			for (int j=0;j<result.size();j++){
+				addOp(result.get(j));
 			}	
 		}
 		
