@@ -218,15 +218,15 @@ public class RaavarePanel extends Composite
 
 		@Override
 		public void onClick(ClickEvent event) {
-			String raavareName = popup.getRaavareName();
-			String leverandør = popup.getRaavareLeverandoer();
-			
-			if(popup.isCreate()) {
-				
-			}
-			else {
-				
-			}
+//			String raavareName = popup.getRaavareName();
+//			String leverandør = popup.getRaavareLeverandoer();
+//			
+//			if(popup.isCreate()) {
+//				
+//			}
+//			else {
+//				
+//			}
 		}
 	}
 	
