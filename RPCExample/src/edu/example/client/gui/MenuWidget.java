@@ -36,7 +36,7 @@ public class MenuWidget extends Composite
 		menu.addItem(new MenuItem("Soeg", cmd_Soeg));
 		
 		MenuItem miRaavere = new MenuItem("", cmd_Raavare);
-		miRaavere.setHTML("R&aring;vare");
+		miRaavere.setHTML("R&aring;varer");
 		menu.addItem(miRaavere);
 		
 		menu.addItem(new MenuItem("Login", cmd_Login));
