@@ -18,6 +18,8 @@ import edu.example.client.exceptions.DALException;
 import edu.example.client.exceptions.OpIdException;
 import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
+import edu.example.client.gui.profile.EditProfile;
+import edu.example.client.gui.profile.ProfilePage;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
@@ -46,7 +48,9 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 	static Grid opTable=new Grid(1,7);
 	Button delButton =new Button("Delete");
 	static TextBox searchBox=new TextBox();
-	
+	 static Button editButton = new Button("Rediger");
+	 
+	 static List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
 	
 	
 	public static void addOp(OperatorDTO operator) {
@@ -58,7 +62,8 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		opTable.setText(opTable.getRowCount()-1, 3, ""+operator.getRank());
 		opTable.setText(opTable.getRowCount()-1, 4, ""+operator.getCpr());
 		opTable.setText(opTable.getRowCount()-1, 5, ""+operator.getPassword());
-		opTable.setWidget(opTable.getRowCount()-1, 6, new Button("Rediger")); //ingen funktionalitet atm
+		opTable.setWidget(opTable.getRowCount()-1, 6,  editButton);
+		
 	}
 	/**
 	 * This is the entry point method.
@@ -77,7 +82,8 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		
 		 myLbl.getElement().setPropertyString("id", "opLabel");
 		 
-		 
+		
+			editButton.addClickHandler(new EditClickHandler(this));
 		 
 		hPanel.add(myLbl);
 		vPanel.add(hPanel);
@@ -115,7 +121,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		for (int i=0;i<result.size();i++){
 			addOp(result.get(i));
 		}
-		
+		currentDisp=result;
 		}
 		else {
 			try{
@@ -141,6 +147,7 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 			for (int j=0;j<result.size();j++){
 				addOp(result.get(j));
 			}	
+			currentDisp=result;
 		}
 		
 		
@@ -156,6 +163,28 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 			serverComm.getOpList();
 		}
 	}
+	
+	 public static class EditClickHandler implements ClickHandler 
+	{
+	
+			private OperatoerList parent;
+			OperatorDTO user;
+			private EditClickHandler(OperatoerList parent) {
+				this.parent = parent;
+			}
+	
+	 public void onClick(ClickEvent event) {   
+	           
+		            user = currentDisp.get(opTable.getCellForEvent(event).getRowIndex()-1);
 
-}
+		            ProfilePage editProfilePanel = new EditProfile("Rediger Profil", user, parent, serverComm);
+		            parent.parent.gotoPanel(editProfilePanel);
+		            
+		            
+
+		        }
+		    };
+	}
+
+
 
