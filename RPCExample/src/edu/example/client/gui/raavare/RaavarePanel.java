@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -94,8 +95,14 @@ public class RaavarePanel extends Composite
 	}
 
 	public void statusUpdate(Boolean result) {
-		// TODO Auto-generated method stub
+		String reply = "something went wrong!";
+		if(result == true)
+			reply = "Handlingen blev udført";
+		else
+			reply = "Handlingen kunne ikke udføres!";
 		
+		
+		Window.alert(reply);
 	}
 	
 	public void updateTable(List<RaavareDTO> raavarer) {
@@ -208,7 +215,10 @@ public class RaavarePanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
+			RaavareDTO raavare = dispRaavareList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
+			if(Window.confirm("Er du sikker paa at du vil slette raavare " + raavare.getRaavareID() + ", " + raavare.getRaavareNavn() + " af " + raavare.getLeverandoer()))
+				serverComm.deleteRaavare(raavare);
 		}
 	}
 	
@@ -228,6 +238,7 @@ public class RaavarePanel extends Composite
 			
 			RaavareDTO raavare = new RaavareDTO(raavareID, raavareName, leverandoer);
 			
+			popup.hide();
 			if(popup.isCreate()) 
 				serverComm.createRaavare(raavare);
 			else 

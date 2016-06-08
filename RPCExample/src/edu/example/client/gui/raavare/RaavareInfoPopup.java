@@ -1,6 +1,8 @@
 package edu.example.client.gui.raavare;
 
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -13,6 +15,7 @@ import edu.example.client.models.RaavareDTO;
 
 public class RaavareInfoPopup extends DialogBox 
 {	
+	private TextBox idBox = new TextBox();
 	private TextBox nameBox = new TextBox();
 	private TextBox leverandoerBox = new TextBox();
 	
@@ -34,6 +37,15 @@ public class RaavareInfoPopup extends DialogBox
 			this.setText("Opret Raavare");
 			
 			title.setHTML("Opret R&aring;vare");
+			
+			idBox.addKeyPressHandler(new KeyPressHandler() {
+				@Override
+				public void onKeyPress(KeyPressEvent event) {
+					if(!Character.isDigit(event.getCharCode()))
+						idBox.cancelKey();
+				}
+			});
+			
 			execute.setText("Opret");
 		}
 		else {
@@ -41,19 +53,24 @@ public class RaavareInfoPopup extends DialogBox
 			this.setText("Rediger Raavare");
 			
 			title.setHTML("Rediger R&aring;vare");
+			idBox.setText("" + raavare.getRaavareID());
+			idBox.setEnabled(false);
 			nameBox.setText(raavare.getRaavareNavn());
 			leverandoerBox.setText(raavare.getLeverandoer());
 			execute.setText("Gem");
 		}
 		
+		HTML labelID = new HTML("R&aring;vare ID");
 		HTML labelNavn = new HTML("R&aring;vare Navn");
 		HTML labelLeverandoer = new HTML("Leverand&oslash;r");
 		
 		FlexTable flxTable = new FlexTable();
-        flxTable.setWidget(0, 0, labelNavn);
-        flxTable.setWidget(0, 1, nameBox);
-        flxTable.setWidget(1, 0, labelLeverandoer);
-        flxTable.setWidget(1, 1, leverandoerBox);
+        flxTable.setWidget(0, 0, labelID);
+        flxTable.setWidget(0, 1, idBox);
+        flxTable.setWidget(1, 0, labelNavn);
+        flxTable.setWidget(1, 1, nameBox);
+        flxTable.setWidget(2, 0, labelLeverandoer);
+        flxTable.setWidget(2, 1, leverandoerBox);
 		
 		HorizontalPanel buttonPanel = new HorizontalPanel();
         buttonPanel.setSpacing(10);
@@ -65,6 +82,10 @@ public class RaavareInfoPopup extends DialogBox
         mainPanel.add(buttonPanel);
         
         this.setWidget(mainPanel);
+	}
+
+	public int getRaavareID() {
+		return Integer.parseInt(idBox.getText());
 	}
 	
 	protected String getRaavareName() {
@@ -85,10 +106,5 @@ public class RaavareInfoPopup extends DialogBox
 	
 	protected void setCancelClickHandler(ClickHandler clickHandler) {
         cancel.addClickHandler(clickHandler);
-	}
-
-	public int getRaavareID() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

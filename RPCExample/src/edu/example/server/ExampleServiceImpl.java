@@ -157,19 +157,70 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 
 	@Override
 	public boolean createRaavare(RaavareDTO raavare) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			raDAO.createRaavare(raavare);
+			result = true;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public boolean updateRaavare(RaavareDTO raavare) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			raDAO.updateRaavare(raavare);
+			result = true;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public boolean deleteRaavare(RaavareDTO raavare) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			raDAO.deleteRaavare(raavare);
+			result = true;
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 }
