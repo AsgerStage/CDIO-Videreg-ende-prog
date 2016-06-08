@@ -1,12 +1,12 @@
 package edu.example.client.service;
 
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.RaavareDTO;
 
 public interface ExampleServiceIClient 
 {
+	//operators
 	void getOpList();
-	
-	void getRaavareList();
 	
 	void getOperator(int oprID);
 	
@@ -15,4 +15,13 @@ public interface ExampleServiceIClient
 	void updateOperator(OperatorDTO opr);
 	
 	void getPassword(int oprID);
+	
+	//Raavarer
+	void getRaavareList();
+	
+	void createRaavare(RaavareDTO raavare);
+	
+	void updateRaavare(RaavareDTO raavare);
+	
+	void deleteRaavare(RaavareDTO raavare);
 }

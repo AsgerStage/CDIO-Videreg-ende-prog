@@ -17,7 +17,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.MenuWidget;
-import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
@@ -92,6 +91,11 @@ public class RaavarePanel extends Composite
 		mainPanel.add(topPanel);
 		mainPanel.add(tableList);
 		mainPanel.add(buttonPanel);
+	}
+
+	public void statusUpdate(Boolean result) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	public void updateTable(List<RaavareDTO> raavarer) {
@@ -210,7 +214,7 @@ public class RaavarePanel extends Composite
 	
 	private class PopupHandlerExecute implements ClickHandler 
 	{
-		private RaavareInfoPopup popup;
+		private final RaavareInfoPopup popup;
 		
 		protected PopupHandlerExecute(RaavareInfoPopup popup) {
 			this.popup = popup;
@@ -218,15 +222,16 @@ public class RaavarePanel extends Composite
 
 		@Override
 		public void onClick(ClickEvent event) {
-//			String raavareName = popup.getRaavareName();
-//			String leverandør = popup.getRaavareLeverandoer();
-//			
-//			if(popup.isCreate()) {
-//				
-//			}
-//			else {
-//				
-//			}
+			int raavareID = popup.getRaavareID();
+			String raavareName = popup.getRaavareName();
+			String leverandoer = popup.getRaavareLeverandoer();
+			
+			RaavareDTO raavare = new RaavareDTO(raavareID, raavareName, leverandoer);
+			
+			if(popup.isCreate()) 
+				serverComm.createRaavare(raavare);
+			else 
+				serverComm.updateRaavare(raavare);
 		}
 	}
 	

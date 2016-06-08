@@ -23,8 +23,8 @@ public final class RaavareDTO implements Serializable
     	
     }
     
-    public RaavareDTO(int raavareId, String raavareNavn, String leverandoer) {
-		this.raavareID = raavareId;
+    public RaavareDTO(int raavareID, String raavareNavn, String leverandoer) {
+		this.raavareID = raavareID;
 		this.raavareNavn = raavareNavn;
 		this.leverandoer = leverandoer;
 	}

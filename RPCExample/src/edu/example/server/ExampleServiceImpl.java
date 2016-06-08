@@ -16,8 +16,9 @@ import edu.example.server.database.connector.Connector;
 public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService
 {
 	private static final long serialVersionUID = 5550980922485907926L;
+	
+	//Operators
 	private final MySQLOperatoerDAO opDAO = new MySQLOperatoerDAO();
-	private final MySQLRaavareDAO raDAO = new MySQLRaavareDAO();
 	
 	@Override
 	public ArrayList<OperatorDTO> getOpList() {
@@ -129,6 +130,9 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		return result;
 	}
 
+	//Raavarer
+	private final MySQLRaavareDAO raDAO = new MySQLRaavareDAO();
+	
 	@Override
 	public ArrayList<RaavareDTO> getRaavareList() {
 		Connector con = null;
@@ -149,5 +153,23 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
         }
 		
 		return result;
+	}
+
+	@Override
+	public boolean createRaavare(RaavareDTO raavare) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateRaavare(RaavareDTO raavare) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteRaavare(RaavareDTO raavare) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

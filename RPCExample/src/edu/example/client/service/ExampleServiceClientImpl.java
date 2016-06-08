@@ -32,24 +32,10 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 		return mainGui;
 	}
 	
-//	@Override
-//	public void sayHello(String name) {
-//		this.service.sayHello(name, new DefaultCallback());
-//	}
-//
-//	@Override
-//	public void addTwonumbers(int num1, int num2) {
-//		this.service.addTwonumbers(num1, num2, new DefaultCallback());
-//	}
-	
+	//Operators
 	@Override
 	public void getOpList()	{
 		this.service.getOpList(new DefaultCallback());
-	}
-
-	@Override
-	public void getRaavareList() {
-		this.service.getRaavareList(new DefaultCallback());
 	}
 	
 	@Override
@@ -71,7 +57,31 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	public void getPassword(int oprID) {
 		this.service.getPassword(oprID, new DefaultCallback());
 	}
+
+	//Raavarer
+	@Override
+	public void getRaavareList() {
+		this.service.getRaavareList(new DefaultCallback());
+	}
+
+	@Override
+	public void createRaavare(RaavareDTO raavare) {
+		this.service.createRaavare(raavare, new DefaultCallback());
+	}
+
+	@Override
+	public void updateRaavare(RaavareDTO raavare) {
+		this.service.updateRaavare(raavare, new DefaultCallback());
+	}
+
+	@Override
+	public void deleteRaavare(RaavareDTO raavare) {
+		this.service.deleteRaavare(raavare, new DefaultCallback());
+	}
 	
+	/**
+	 * Async Callback
+	 */
 	private class DefaultCallback implements AsyncCallback 
 	{
 		@Override
@@ -97,7 +107,11 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 			}
 			else if (currentPanel instanceof RaavarePanel) {
 				RaavarePanel raavarePanel = (RaavarePanel) currentPanel;
-				raavarePanel.updateTable((List<RaavareDTO>) result);
+				
+				if(result instanceof Boolean) 
+					raavarePanel.statusUpdate((Boolean) result);
+				else
+					raavarePanel.updateTable((List<RaavareDTO>) result);
 			}
 		}
 	}

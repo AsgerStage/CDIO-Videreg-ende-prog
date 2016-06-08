@@ -86,4 +86,9 @@ public class RaavareInfoPopup extends DialogBox
 	protected void setCancelClickHandler(ClickHandler clickHandler) {
         cancel.addClickHandler(clickHandler);
 	}
+
+	public int getRaavareID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

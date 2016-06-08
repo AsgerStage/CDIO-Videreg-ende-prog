@@ -11,9 +11,8 @@ import edu.example.client.models.RaavareDTO;
 @RemoteServiceRelativePath("exampleservice")
 public interface ExampleService extends RemoteService
 {
+	//operators
 	ArrayList<OperatorDTO> getOpList();
-	
-	ArrayList<RaavareDTO> getRaavareList();
 	
 	OperatorDTO getOperator(int oprID);
 	
@@ -22,4 +21,13 @@ public interface ExampleService extends RemoteService
 	boolean updateOperator(OperatorDTO opr);
 	
 	String getPassword(int oprID);
+	
+	//Raavarer
+	ArrayList<RaavareDTO> getRaavareList();
+	
+	boolean createRaavare(RaavareDTO raavare);
+	
+	boolean updateRaavare(RaavareDTO raavare);
+	
+	boolean deleteRaavare(RaavareDTO raavare);
 }
