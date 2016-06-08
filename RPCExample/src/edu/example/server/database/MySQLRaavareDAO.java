@@ -47,6 +47,9 @@ public class MySQLRaavareDAO implements RaavareDAO
 
 	@Override
 	public void updateRaavare(RaavareDTO raavare) throws DALException {
+		System.out.println(raavare.getRaavareNavn());
+		System.out.println(raavare.getLeverandoer());
+		System.out.println(raavare.getRaavareID());
 		Connector.doUpdate("CALL `update_raavare`(?, ?, ?)",
 				raavare.getRaavareID(), raavare.getRaavareNavn(), raavare.getLeverandoer());
 	}
