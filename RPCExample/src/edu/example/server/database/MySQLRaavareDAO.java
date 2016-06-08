@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
+import edu.example.client.models.RaavareDTO;
 import edu.example.server.database.connector.Connector;
-
-import edu.example.server.database.dto.RaavareDTO;
 
 public class MySQLRaavareDAO implements RaavareDAO 
 {

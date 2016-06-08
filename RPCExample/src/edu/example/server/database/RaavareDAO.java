@@ -3,7 +3,7 @@ package edu.example.server.database;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
-import edu.example.server.database.dto.RaavareDTO;
+import edu.example.client.models.RaavareDTO;
 
 public interface RaavareDAO {
 	RaavareDTO getRaavare(int raavareId) throws DALException;
