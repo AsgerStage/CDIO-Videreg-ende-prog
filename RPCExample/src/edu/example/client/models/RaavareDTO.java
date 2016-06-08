@@ -21,7 +21,7 @@ public class RaavareDTO
 		this.leverandoer = leverandoer;
 	}
 	
-    public int getRaavareId() { 
+    public int getRaavareID() { 
     	return raavareId; 
     }
     

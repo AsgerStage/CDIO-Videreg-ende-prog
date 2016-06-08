@@ -7,17 +7,20 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.RaavareDTO;
 import edu.example.client.service.ExampleService;
 import edu.example.server.database.MySQLOperatoerDAO;
+import edu.example.server.database.MySQLRaavareDAO;
 import edu.example.server.database.connector.Connector;
 
 public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService
 {
 	private static final long serialVersionUID = 5550980922485907926L;
 	private final MySQLOperatoerDAO opDAO = new MySQLOperatoerDAO();
+	private final MySQLRaavareDAO raDAO = new MySQLRaavareDAO();
 	
 	@Override
-	public ArrayList<OperatorDTO> getOpList(){
+	public ArrayList<OperatorDTO> getOpList() {
 		Connector con = null;
 		ArrayList<OperatorDTO> result = null;
 		
@@ -123,6 +126,28 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
                     con.closeConnection();
                 } catch (SQLException e) { }
         }
+		return result;
+	}
+
+	@Override
+	public ArrayList<RaavareDTO> getRaavareList() {
+		Connector con = null;
+		ArrayList<RaavareDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<RaavareDTO>(raDAO.getRaavareList());
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
 		return result;
 	}
 }

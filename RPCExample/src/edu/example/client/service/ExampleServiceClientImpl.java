@@ -45,6 +45,12 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	{
 		this.service.getOpList(new DefaultCallback());
 	}
+
+	@Override
+	public void getRaavareList() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public void getOperator(int oprID){

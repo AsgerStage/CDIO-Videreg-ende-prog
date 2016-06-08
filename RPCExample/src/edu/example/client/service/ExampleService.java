@@ -6,15 +6,14 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.RaavareDTO;
 
 @RemoteServiceRelativePath("exampleservice")
 public interface ExampleService extends RemoteService
 {
-//	String sayHello(String name);
-//	
-//	int addTwonumbers(int num1, int num2);
-	
 	ArrayList<OperatorDTO> getOpList();
+	
+	ArrayList<RaavareDTO> getRaavareList();
 	
 	OperatorDTO getOperator(int oprID);
 	
