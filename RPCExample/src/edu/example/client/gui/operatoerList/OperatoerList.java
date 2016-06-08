@@ -1,11 +1,9 @@
 package edu.example.client.gui.operatoerList;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -14,68 +12,50 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import edu.example.client.exceptions.DALException;
-import edu.example.client.exceptions.OpIdException;
-import edu.example.client.exceptions.OpNameException;
-import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.EditProfile;
 import edu.example.client.gui.profile.ProfilePage;
-import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
 public class OperatoerList extends Composite 
 {
 	public MenuWidget parent;
-	private VerticalPanel vPanel=new VerticalPanel();
+	private VerticalPanel vPanel = new VerticalPanel();
 	private ExampleServiceClientImpl serverComm;
 	
-	public OperatoerList(MenuWidget parent, ExampleServiceClientImpl serverComm)  {
+	private Label myLbl = new Label("Operatoer");
+	private Grid opTable = new Grid(1,7);
+	private TextBox searchBox = new TextBox();
+	private final String searchBoxDefaultText = "Dette er et soegefelt";
+	
+	private List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
+	
+	public OperatoerList(MenuWidget parent, ExampleServiceClientImpl serverComm) {
 		this.parent = parent;
+		this.serverComm = serverComm;
 		initWidget(this.vPanel);
-		this.serverComm=serverComm;
 		onModuleLoad();
 	}
 	
-	Label myLbl = new Label("Operatoer");
-	static Grid opTable = new Grid(1,7);
-	Button delButton = new Button("Delete");
-	static TextBox searchBox = new TextBox();
-	static Button editButton = new Button("Rediger");
-	 
-	static List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
-	
-	
-	public static void addOp(OperatorDTO operator) {
-		opTable.getRowCount();
-		opTable.resize(opTable.getRowCount()+1, 7);
-		opTable.setText(opTable.getRowCount()-1, 0, ""+operator.getOprID());
-		opTable.setText(opTable.getRowCount()-1, 1, operator.getName());
-		opTable.setText(opTable.getRowCount()-1, 2, operator.getIni());
-		opTable.setText(opTable.getRowCount()-1, 3, ""+operator.getRank());
-		opTable.setText(opTable.getRowCount()-1, 4, ""+operator.getCpr());
-		opTable.setText(opTable.getRowCount()-1, 5, ""+operator.getPassword());
-		opTable.setWidget(opTable.getRowCount()-1, 6,  editButton);
-		
-	}	
-	
 	public void onModuleLoad() {
-		HorizontalPanel hPanel=new HorizontalPanel();
+		HorizontalPanel hPanel = new HorizontalPanel();
 		serverComm.getOpList();
 		
 		myLbl.getElement().setPropertyString("id", "opLabel");
-		
-		editButton.addClickHandler(new EditClickHandler(this));
 	 
 		hPanel.add(myLbl);
 		vPanel.add(hPanel);
-		 
+
+		searchBox.setText(searchBoxDefaultText);
 		hPanel.add(searchBox);
-		searchBox.setText("Dette er et soegefelt");
-		searchBox.addClickHandler(new SearchClickHandler());
-		Button SoegBtn =new Button("Soeg");
+		Button SoegBtn = new Button("Soeg");
+		SoegBtn.addClickHandler(new SearchClickHandler());
 		hPanel.add(SoegBtn);
+		
+		Button refreshButton = new Button("Opdater");
+		refreshButton.addClickHandler(new RefreshClickHandler());
+		hPanel.add(refreshButton);
 		
 		opTable.setText(0, 0, "ID");
 		opTable.setText(0, 1, "Navn");
@@ -91,15 +71,31 @@ public class OperatoerList extends Composite
 		opTable.getRowCount();		
 	}
 	
-	public static void getOperatoerList(List<OperatorDTO> result) {
+	public void addOp(OperatorDTO operator) {		
+		opTable.resize(opTable.getRowCount() + 1, 7);
+		int rowIndex = opTable.getRowCount() - 1;
+		
+		opTable.setText(rowIndex, 0, "" + operator.getOprID());
+		opTable.setText(rowIndex, 1, operator.getName());
+		opTable.setText(rowIndex, 2, operator.getIni());
+		opTable.setText(rowIndex, 3, "" + operator.getRank());
+		opTable.setText(rowIndex, 4, "" + operator.getCpr());
+		opTable.setText(rowIndex, 5, "" + operator.getPassword());
+		
+		Button editButton = new Button("Rediger");
+		editButton.addClickHandler(new EditClickHandler(this));
+		opTable.setWidget(rowIndex, 6, editButton);
+	}	
+	
+	public void updateOperatoerList(List<OperatorDTO> result) {
 		clear();
 		
-		if (searchBox.getText().equals("Dette er et soegefelt")|| searchBox.getText().equals("")) {
-			for (int i=0;i<result.size();i++){
+		if (searchBox.getText().equals(searchBoxDefaultText) || searchBox.getText().equals("")) {
+			for (int i = 0; i < result.size(); i++){
 				addOp(result.get(i));
 			}
 			
-			currentDisp=result;
+			currentDisp = result;
 		}
 		else {
 			try {
@@ -108,32 +104,42 @@ public class OperatoerList extends Composite
 				for(int i = 0; i < result.size(); i++) {
 					searchBoxInt=Integer.parseInt(searchBox.getText());
 					
-					if(!(result.get(i).getOprID()==searchBoxInt)){
+					if(!(result.get(i).getOprID() == searchBoxInt)){
 						result.remove(i);
-						i=-1;
+						i = -1;
 					}
 				}
 			}
 			catch(Exception e) {
-			for (int i = 0; i < result.size(); i++) {
+				for (int i = 0; i < result.size(); i++) {
 					if (!(result.get(i).getName().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getCpr().contains(searchBox.getText()))) {
 						result.remove(i);
-						i=-1;
+						i = -1;
 					}				
 				}
 			}
+			
 			for (int j = 0; j < result.size(); j++){
 				addOp(result.get(j));
 			}	
-			currentDisp=result;
+			currentDisp = result;
 		}
 	}
 	
-	public static void clear() {
+	public void clear() {
 		opTable.resize(1, 7);
 	}
 	
 	private class SearchClickHandler implements ClickHandler 
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			searchBox.setText(searchBoxDefaultText);
+			serverComm.getOpList();
+		}
+	}
+	
+	private class RefreshClickHandler implements ClickHandler 
 	{
 		@Override
 		public void onClick(ClickEvent event) {

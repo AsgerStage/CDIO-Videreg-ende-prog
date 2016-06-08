@@ -70,23 +70,22 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	{
 		@Override
 		public void onFailure(Throwable caught) {
-			System.out.println("An error has occured");
+			
 		}
 
 		@Override
 		public void onSuccess(Object result) {
-			System.out.println("Response received");
 			Object currentPanel = mainGui.getCurrentPanel();
 			
 			if(currentPanel instanceof ViewProfile) {
 				ViewProfile viewProfile = (ViewProfile) currentPanel;
 				viewProfile.updateUser((OperatorDTO) result);
 			}
-			if(currentPanel instanceof OperatoerList) {
+			else if(currentPanel instanceof OperatoerList) {
 				OperatoerList oplist = (OperatoerList) currentPanel;
-				oplist.getOperatoerList((List<OperatorDTO>) result);
+				oplist.updateOperatoerList((List<OperatorDTO>) result);
 			}
-			if(currentPanel instanceof Login) {
+			else if(currentPanel instanceof Login) {
 				Login viewProfile = (Login) currentPanel;
 				viewProfile.CompareLogin((OperatorDTO) result);
 			}
