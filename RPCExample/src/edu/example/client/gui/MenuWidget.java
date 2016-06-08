@@ -71,7 +71,7 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Soeg = new Command() {
 		public void execute() {
-			OperatoerList viewPanel = new OperatoerList(serverComm);
+			OperatoerList viewPanel = new OperatoerList(me, serverComm);
 			gotoPanel(viewPanel);
 			
 		}

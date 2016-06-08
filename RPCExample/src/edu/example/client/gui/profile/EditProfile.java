@@ -3,6 +3,7 @@ package edu.example.client.gui.profile;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -10,12 +11,13 @@ import edu.example.client.exceptions.DALException;
 import edu.example.client.exceptions.OpIdException;
 import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
+import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
 public class EditProfile extends ProfilePage 
 {
-	private ViewProfile parent;
+	private Object parent;
 	private ExampleServiceClientImpl serverComm;
 	private OperatorDTO user;
 	
@@ -29,7 +31,7 @@ public class EditProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 	
-	public EditProfile(String title, OperatorDTO user, ViewProfile parent, ExampleServiceClientImpl serverComm) {
+	public EditProfile(String title, OperatorDTO user, Object parent, ExampleServiceClientImpl serverComm) {
 		super(title);
 		this.parent = parent;
 		this.serverComm = serverComm;
@@ -229,11 +231,18 @@ public class EditProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				System.out.println("CHECK");
 				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), 1));
 				
-				ViewProfile viewPanel = new ViewProfile("Se Profil", getID(), parent.parent, serverComm);
-				parent.parent.gotoPanel(viewPanel);
+				if(parent instanceof ViewProfile) {
+					ViewProfile viewParent = (ViewProfile) parent;
+					ViewProfile viewPanel = new ViewProfile("Se Profil", getID(), viewParent.parent, serverComm);
+					viewParent.parent.gotoPanel(viewPanel);
+				}
+				else if(parent instanceof OperatoerList) {
+					OperatoerList listParent = (OperatoerList) parent;
+					listParent.parent.gotoPanel(new OperatoerList(listParent.parent, serverComm));
+				}
+				
 			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
 				e.printStackTrace();
 				saveButton.setText(e.getLocalizedMessage());
@@ -245,7 +254,18 @@ public class EditProfile extends ProfilePage
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			parent.parent.gotoPanel(parent);
+			if(parent instanceof ViewProfile) {
+				saveButton.setText("Goto viewPanel");
+				ViewProfile viewParent = (ViewProfile) parent;
+				viewParent.parent.gotoPanel(viewParent);
+			}
+			else if(parent instanceof OperatoerList) {
+				saveButton.setText("Goto opList");
+				OperatoerList listParent = (OperatoerList) parent;
+				listParent.parent.gotoPanel(listParent);
+			}
+			else
+				saveButton.setText("Ikke nogen type: " + parent.getClass());
 		}
 	}
 }

@@ -18,39 +18,33 @@ import edu.example.client.exceptions.DALException;
 import edu.example.client.exceptions.OpIdException;
 import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
+import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.EditProfile;
 import edu.example.client.gui.profile.ProfilePage;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 
-
-
-
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
-public class OperatoerList extends Composite { //implements EntryPoint {
-	
-	
-	//--------- LAVET OM TIL COMPOSITE ------------
+public class OperatoerList extends Composite 
+{
+	public MenuWidget parent;
 	private VerticalPanel vPanel=new VerticalPanel();
 	private ExampleServiceClientImpl serverComm;
 	
-	public OperatoerList(ExampleServiceClientImpl serverComm)  {
+	public OperatoerList(MenuWidget parent, ExampleServiceClientImpl serverComm)  {
+		this.parent = parent;
 		initWidget(this.vPanel);
 		this.serverComm=serverComm;
 		onModuleLoad();
 	}
-	//---------------------------------------------
 	
-	Label myLbl =new Label("Operatoer");
-	static Grid opTable=new Grid(1,7);
-	Button delButton =new Button("Delete");
-	static TextBox searchBox=new TextBox();
-	 static Button editButton = new Button("Rediger");
+	Label myLbl = new Label("Operatoer");
+	static Grid opTable = new Grid(1,7);
+	Button delButton = new Button("Delete");
+	static TextBox searchBox = new TextBox();
+	static Button editButton = new Button("Rediger");
 	 
-	 static List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
+	static List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
 	
 	
 	public static void addOp(OperatorDTO operator) {
@@ -64,98 +58,81 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		opTable.setText(opTable.getRowCount()-1, 5, ""+operator.getPassword());
 		opTable.setWidget(opTable.getRowCount()-1, 6,  editButton);
 		
-	}
-	/**
-	 * This is the entry point method.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws DALException 
-	 */
-	
+	}	
 	
 	public void onModuleLoad() {
-		
 		HorizontalPanel hPanel=new HorizontalPanel();
 		serverComm.getOpList();
 		
-		 myLbl.getElement().setPropertyString("id", "opLabel");
-		 
+		myLbl.getElement().setPropertyString("id", "opLabel");
 		
-			editButton.addClickHandler(new EditClickHandler(this));
-		 
+		editButton.addClickHandler(new EditClickHandler(this));
+	 
 		hPanel.add(myLbl);
 		vPanel.add(hPanel);
 		 
-		 hPanel.add(searchBox);
-		 searchBox.setText("Dette er et soegefelt");
-		 searchBox.addClickHandler(new SearchClickHandler());
-		 Button SoegBtn =new Button("Soeg");
-		 hPanel.add(SoegBtn);
+		hPanel.add(searchBox);
+		searchBox.setText("Dette er et soegefelt");
+		searchBox.addClickHandler(new SearchClickHandler());
+		Button SoegBtn =new Button("Soeg");
+		hPanel.add(SoegBtn);
 		
-		 opTable.setText(0, 0, "ID");
-		 opTable.setText(0, 1, "Navn");
-		 opTable.setText(0, 2, "Ini");
-		 opTable.setText(0, 3, "Rank");
-		 opTable.setText(0, 4, "CPR");
-		 opTable.setText(0, 5, "Password");
-		 opTable.setText(0, 6, "Rediger");
+		opTable.setText(0, 0, "ID");
+		opTable.setText(0, 1, "Navn");
+		opTable.setText(0, 2, "Ini");
+		opTable.setText(0, 3, "Rank");
+		opTable.setText(0, 4, "CPR");
+		opTable.setText(0, 5, "Password");
+		opTable.setText(0, 6, "Rediger");
 		 
-		 opTable.setBorderWidth(1);
-		 vPanel.add(opTable);
-		 opTable.setCellPadding(10);
-		 opTable.getRowCount();
-		 
-		 
-//		RootPanel.get().add(vPanel);
-		
-		
+		opTable.setBorderWidth(1);
+		vPanel.add(opTable);
+		opTable.setCellPadding(10);
+		opTable.getRowCount();		
 	}
-	/**
-	 * @param result
-	 */
+	
 	public static void getOperatoerList(List<OperatorDTO> result) {
 		clear();
-		if (searchBox.getText().equals("Dette er et soegefelt")|| searchBox.getText().equals("")){
-		for (int i=0;i<result.size();i++){
-			addOp(result.get(i));
-		}
-		currentDisp=result;
+		
+		if (searchBox.getText().equals("Dette er et soegefelt")|| searchBox.getText().equals("")) {
+			for (int i=0;i<result.size();i++){
+				addOp(result.get(i));
+			}
+			
+			currentDisp=result;
 		}
 		else {
-			try{
+			try {
 				int searchBoxInt;
-				for(int i=0;i<result.size();i++){
+				
+				for(int i = 0; i < result.size(); i++) {
 					searchBoxInt=Integer.parseInt(searchBox.getText());
+					
 					if(!(result.get(i).getOprID()==searchBoxInt)){
 						result.remove(i);
 						i=-1;
 					}
 				}
-				
 			}
-			catch(Exception e){
-			for (int i=0;i<result.size();i++)
-			{
-				if (!(result.get(i).getName().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getCpr().contains(searchBox.getText()))){
-					result.remove(i);
-					i=-1;
-				}				
+			catch(Exception e) {
+			for (int i = 0; i < result.size(); i++) {
+					if (!(result.get(i).getName().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getCpr().contains(searchBox.getText()))) {
+						result.remove(i);
+						i=-1;
+					}				
+				}
 			}
-			}
-			for (int j=0;j<result.size();j++){
+			for (int j = 0; j < result.size(); j++){
 				addOp(result.get(j));
 			}	
 			currentDisp=result;
 		}
-		
-		
 	}
 	
-	public static void clear(){
+	public static void clear() {
 		opTable.resize(1, 7);
 	}
+	
 	private class SearchClickHandler implements ClickHandler 
 	{
 		@Override
@@ -164,27 +141,19 @@ public class OperatoerList extends Composite { //implements EntryPoint {
 		}
 	}
 	
-	 public static class EditClickHandler implements ClickHandler 
+	public class EditClickHandler implements ClickHandler 
 	{
+		private OperatoerList parent;
+		private EditClickHandler(OperatoerList parent) {
+			this.parent = parent;
+		}
 	
-			private OperatoerList parent;
-			OperatorDTO user;
-			private EditClickHandler(OperatoerList parent) {
-				this.parent = parent;
-			}
-	
-	 public void onClick(ClickEvent event) {   
-	           
-		            user = currentDisp.get(opTable.getCellForEvent(event).getRowIndex()-1);
+		@Override
+		public void onClick(ClickEvent event) {      
+			OperatorDTO user = currentDisp.get(opTable.getCellForEvent(event).getRowIndex()-1);
 
-		            ProfilePage editProfilePanel = new EditProfile("Rediger Profil", user, parent, serverComm);
-		            parent.parent.gotoPanel(editProfilePanel);
-		            
-		            
-
-		        }
-		    };
-	}
-
-
-
+            ProfilePage editProfilePanel = new EditProfile("Rediger Profil", user, parent, serverComm);
+            parent.parent.gotoPanel(editProfilePanel);
+        }
+	};
+}
