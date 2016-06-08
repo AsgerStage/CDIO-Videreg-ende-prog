@@ -97,10 +97,9 @@ public class RaavarePanel extends Composite
 	public void statusUpdate(Boolean result) {
 		String reply = "something went wrong!";
 		if(result == true)
-			reply = "Handlingen blev udført";
+			reply = "Handlingen blev udfoert";
 		else
-			reply = "Handlingen kunne ikke udføres!";
-		
+			reply = "Handlingen kunne ikke udfoeres!";
 		
 		Window.alert(reply);
 	}

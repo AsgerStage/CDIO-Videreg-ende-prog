@@ -40,9 +40,9 @@ public class MySQLRaavareDAO implements RaavareDAO
 	}
 
 	@Override
-	public void createRaavare(RaavareDTO raavare) throws DALException {		
-		Connector.doUpdate("INSERT INTO raavare(raavare_id, raavare_navn, leverandoer) VALUES " + "(" + 
-				raavare.getRaavareID() + ", '" + raavare.getRaavareNavn() + "', '" + raavare.getLeverandoer() + "',)");
+	public void createRaavare(RaavareDTO raavare) throws DALException {	
+		Connector.doUpdate("CALL create_raavare(?, ?, ?)", 
+				raavare.getRaavareID(), raavare.getRaavareNavn(), raavare.getLeverandoer());
 	}
 
 	@Override
@@ -52,6 +52,7 @@ public class MySQLRaavareDAO implements RaavareDAO
 	}
 
 	public void deleteRaavare(RaavareDTO raavare) throws DALException {
-		
+		Connector.doUpdate("CALL `delete_raavare`(?)", 
+				raavare.getRaavareID());
 	}
 }
