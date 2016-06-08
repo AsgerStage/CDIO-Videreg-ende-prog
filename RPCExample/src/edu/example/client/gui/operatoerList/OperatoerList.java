@@ -130,7 +130,7 @@ public class OperatoerList extends Composite
 		opTable.resize(1, 7);
 	}
 	
-	private class SearchClickHandler implements ClickHandler 
+	private class RefreshClickHandler implements ClickHandler 
 	{
 		@Override
 		public void onClick(ClickEvent event) {
@@ -139,7 +139,7 @@ public class OperatoerList extends Composite
 		}
 	}
 	
-	private class RefreshClickHandler implements ClickHandler 
+	private class SearchClickHandler implements ClickHandler 
 	{
 		@Override
 		public void onClick(ClickEvent event) {
