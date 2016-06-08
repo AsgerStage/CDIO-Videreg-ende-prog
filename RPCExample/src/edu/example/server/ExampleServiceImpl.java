@@ -138,7 +138,7 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 			con = new Connector();
 			result = new ArrayList<RaavareDTO>(raDAO.getRaavareList());
 		} 
-		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
 			e.printStackTrace();
 		}
         finally {

@@ -9,7 +9,9 @@ import edu.example.client.gui.Banner;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
+import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.RaavareDTO;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
 {
@@ -41,34 +43,32 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 //	}
 	
 	@Override
-	public void getOpList()
-	{
+	public void getOpList()	{
 		this.service.getOpList(new DefaultCallback());
 	}
 
 	@Override
 	public void getRaavareList() {
-		// TODO Auto-generated method stub
-		
+		this.service.getRaavareList(new DefaultCallback());
 	}
 	
 	@Override
-	public void getOperator(int oprID){
+	public void getOperator(int oprID) {
 		this.service.getOperator(oprID, new DefaultCallback());
 	}
 	
 	@Override
-	public void createOperator(OperatorDTO opr){
+	public void createOperator(OperatorDTO opr) {
 		this.service.createOperator(opr, new DefaultCallback());
 	}
 	
 	@Override
-	public void updateOperator(OperatorDTO opr){
+	public void updateOperator(OperatorDTO opr) {
 		this.service.updateOperator(opr, new DefaultCallback());
 	}
 	
 	@Override
-	public void getPassword(int oprID){
+	public void getPassword(int oprID) {
 		this.service.getPassword(oprID, new DefaultCallback());
 	}
 	
@@ -94,6 +94,10 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 			else if(currentPanel instanceof Login) {
 				Login viewProfile = (Login) currentPanel;
 				viewProfile.CompareLogin((OperatorDTO) result);
+			}
+			else if (currentPanel instanceof RaavarePanel) {
+				RaavarePanel raavarePanel = (RaavarePanel) currentPanel;
+				raavarePanel.updateTable((List<RaavareDTO>) result);
 			}
 		}
 	}

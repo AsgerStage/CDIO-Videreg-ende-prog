@@ -1,5 +1,8 @@
 package edu.example.client.models;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 import edu.example.client.exceptions.DALException;
 
 /**
@@ -9,27 +12,32 @@ import edu.example.client.exceptions.DALException;
  * @version 1.2
  */
 
-public class RaavareDTO 
+public final class RaavareDTO implements Serializable
 {
-    private int raavareId; 		//i omraadet 1-99999999 vaelges af brugerne
+	private static final long serialVersionUID = -5377060714932261571L;
+	private int raavareID; 		//i omraadet 1-99999999 vaelges af brugerne
     private String raavareNavn; //min. 2 max. 20 karakterer
     private String leverandoer; //min. 2 max. 20 karakterer
 	
-	public RaavareDTO(int raavareId, String raavareNavn, String leverandoer) {
-		this.raavareId = raavareId;
+    public RaavareDTO() {
+    	
+    }
+    
+    public RaavareDTO(int raavareId, String raavareNavn, String leverandoer) {
+		this.raavareID = raavareId;
 		this.raavareNavn = raavareNavn;
 		this.leverandoer = leverandoer;
 	}
 	
     public int getRaavareID() { 
-    	return raavareId; 
+    	return raavareID; 
     }
     
     public void setRaavareId(int raavareId) throws DALException { 
     	if(raavareId < 1 || raavareId > 99999999)
     		throw new DALException("Råvare ID skal være mellem 1 og 99999999, den var " + raavareId);
     	else
-    		this.raavareId = raavareId; 
+    		this.raavareID = raavareId; 
     }
     
     public String getRaavareNavn() { 
@@ -58,7 +66,30 @@ public class RaavareDTO
     		this.leverandoer = leverandoer; 
     }
     
+    @Override
     public String toString() { 
-		return raavareId + "\t" + raavareNavn +"\t" + leverandoer; 
+		return raavareID + "\t" + raavareNavn +"\t" + leverandoer; 
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || getClass() != obj.getClass()) 
+            return false;
+        final RaavareDTO other = (RaavareDTO) obj;
+        
+        return this.raavareID == other.raavareID &&
+               Objects.equals(this.raavareNavn, other.raavareNavn) &&
+               Objects.equals(this.leverandoer, other.leverandoer);
+		
+//		// TODO Auto-generated method stub
+//		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+    
+    
 }
