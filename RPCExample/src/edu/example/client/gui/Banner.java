@@ -35,11 +35,11 @@ public class Banner extends Composite {
 		HorizontalPanel contentHolderPanel= new HorizontalPanel(); // Skal indeholde to mindre paneler et med menu og et med et tomt vindue
 		contentHolderPanel.setBorderWidth(1);
 
-		Login logI = new Login(menuWidget, serverComm);
+//		Login logI = new Login(menuWidget, serverComm);
 
 		contentPanel = new HorizontalPanel(); // skal indeholde tomt vindue
 		contentPanel.setSize("100%", "100%");
-		contentPanel.add(logI);
+//		contentPanel.add(logI);
 
 		Image img = new Image("Billeder/B.png");  
 
@@ -50,6 +50,8 @@ public class Banner extends Composite {
 		contentHolderPanel.add(contentPanel);
 		contentHolderPanel.setCellWidth(menuWidget, "11%");
 		vPanel.add(contentHolderPanel);
+		
+		menuWidget.gotoPanel(new Login(menuWidget, serverComm));
 	}
 
 	public Object getCurrentPanel() {

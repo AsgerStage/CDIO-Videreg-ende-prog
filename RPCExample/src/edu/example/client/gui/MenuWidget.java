@@ -44,8 +44,6 @@ public class MenuWidget extends Composite
 		
 		hPanel.add(menu);
 		menu.setHeight("100%");
-		
-		
 	}
 	
 	public Object getCurrentPanel() {

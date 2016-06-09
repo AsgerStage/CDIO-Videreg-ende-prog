@@ -71,7 +71,6 @@ public class Login extends Composite {
 		//label for pass error
 		lbltest = new Label("Fejl:");
 		vPanel.add(lbltest);
-		lbltest.setVisible(false);
 
 		//Add a button
 		Button Authenticate = new Button("Log ind");
@@ -90,7 +89,7 @@ public class Login extends Composite {
 			pass = normalPassword.getText();
 			 
 			
-
+			
 			
 			
 		}//s
@@ -99,20 +98,20 @@ public class Login extends Composite {
 	public void CompareLogin(OperatorDTO result) {
 
 		String pw = normalPassword.getText();
-		
+		lbltest.setText("Salt=" + result.getSalt() + ", Hash=" + result.getHash());
 		
         boolean pwMatch = result.getHash().equals(get_SHA_512_SecurePassword(pw, result.getSalt()));
 
 		if (pwMatch == true) {
-			lbltest.setVisible(true);
-			lbltest.setText("rigtigt password");
+			lbltest.setText(lbltest.getText() + ": rigtigt password");
 			//ViewProfile viewPanel = new ViewProfile("Se Profil", 25, parent, serverComm);
 			//parent.gotoPanel(viewPanel);
 		} else if (pwMatch == false) {
-			lbltest.setVisible(true);
 			lbltest.setText("Forkert password");
 			normalPassword.setFocus(true);
 		}
+		else
+			lbltest.setText("test2");
 	}
 
 

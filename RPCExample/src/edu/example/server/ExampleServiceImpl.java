@@ -44,12 +44,14 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 
 	@Override
 	public OperatorDTO getOperator(int oprID) {
+		System.err.println("ID = " + oprID);
 		OperatorDTO result = null;
 		Connector con = null;
 		
 		try {
 			con = new Connector();
 			result = opDAO.getOperator(oprID);
+			System.err.println("Result = " + result.toString());
 		} 
 		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

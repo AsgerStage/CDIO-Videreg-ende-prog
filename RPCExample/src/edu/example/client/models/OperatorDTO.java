@@ -169,7 +169,7 @@ public final class OperatorDTO implements Serializable
 
     @Override
     public String toString() {
-        return "OperatorDTO{" + "oprID=" + oprID + ", oprNavn=" + oprNavn + ", ini=" + ini + ", cpr=" + cpr + ", password=" + password + ", rank=" + rank + '}';
+        return "OperatorDTO{" + "oprID=" + oprID + ", oprNavn=" + oprNavn + ", ini=" + ini + ", cpr=" + cpr + ", password=" + password + ", rank=" + rank + ", hash=" + hash + ", salt=" + salt + '}';
     }
 
     @Override
@@ -199,7 +199,7 @@ public final class OperatorDTO implements Serializable
     }
 
 	public String getHash() {
-		return this.getHash();
+		return this.hash;
 		
 	}
 	public void setHash(String hash){
@@ -207,7 +207,7 @@ public final class OperatorDTO implements Serializable
 	}
 
 	public String getSalt() {
-		return this.getSalt();
+		return this.salt;
 	}
 	public void setSalt(String salt){
 		this.salt = salt;
