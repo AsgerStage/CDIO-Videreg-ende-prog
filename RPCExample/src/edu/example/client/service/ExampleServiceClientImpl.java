@@ -102,8 +102,8 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 				oplist.updateOperatoerList((List<OperatorDTO>) result);
 			}
 			else if(currentPanel instanceof Login) {
-				Login viewProfile = (Login) currentPanel;
-				viewProfile.CompareLogin((OperatorDTO) result);
+				Login login = (Login) currentPanel;
+				login.CompareLogin((OperatorDTO) result);
 			}
 			else if (currentPanel instanceof RaavarePanel) {
 				RaavarePanel raavarePanel = (RaavarePanel) currentPanel;

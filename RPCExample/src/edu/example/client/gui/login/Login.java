@@ -12,6 +12,9 @@ import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
+import java.security.MessageDigest;
+import java.util.UUID;
+
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -26,6 +29,17 @@ public class Login extends Composite {
 	PasswordTextBox normalPassword = new PasswordTextBox();
 	private ExampleServiceClientImpl serverComm;
 	private MenuWidget parent;
+	
+    class User {
+        public String user;
+        public String hash;
+        public String salt;
+        public User(String username, String salt, String hash) {
+            this.user = username;
+            this.hash = hash;
+            this.salt = salt;
+        }
+    }
 
 	/**
 	 * This is the entry point method.
@@ -72,24 +86,52 @@ public class Login extends Composite {
 		@Override
 		public void onClick(ClickEvent e) {
 			int ID = Integer.parseInt(normalText.getText());
-
 			serverComm.getOperator(ID);
 			pass = normalPassword.getText();
+			 
+			
 
-		}
+			
+			
+		}//s
 	}
 
 	public void CompareLogin(OperatorDTO result) {
 
-		if (result.getPassword().equals(normalPassword.getText()) == true) {
+		String pw = normalPassword.getText();
+		
+		
+        boolean pwMatch = result.getHash().equals(get_SHA_512_SecurePassword(pw, result.getSalt()));
 
-			ViewProfile viewPanel = new ViewProfile("Se Profil", 25, parent, serverComm);
-			parent.gotoPanel(viewPanel);
-		} else if (result.getPassword().equals(normalPassword.getText()) == false) {
+		if (pwMatch == true) {
+			lbltest.setVisible(true);
+			lbltest.setText("rigtigt password");
+			//ViewProfile viewPanel = new ViewProfile("Se Profil", 25, parent, serverComm);
+			//parent.gotoPanel(viewPanel);
+		} else if (pwMatch == false) {
 			lbltest.setVisible(true);
 			lbltest.setText("Forkert password");
 			normalPassword.setFocus(true);
 		}
+	}
+
+
+	public String get_SHA_512_SecurePassword(String passwordToHash, String   salt){
+	String generatedPassword = null;
+	    try {
+	         MessageDigest md = MessageDigest.getInstance("SHA-512");
+	         md.update(salt.getBytes("UTF-8"));
+	         byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
+	         StringBuilder sb = new StringBuilder();
+	         for(int i=0; i< bytes.length ;i++){
+	            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+	         }
+	         generatedPassword = sb.toString();
+	        } 
+	       catch (Exception e){
+	        e.printStackTrace(); 
+	       }
+	    return generatedPassword;
 	}
 
 } 
