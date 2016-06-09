@@ -5,6 +5,10 @@ import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -53,6 +57,20 @@ public class RaavarePanel extends Composite
 		pageTitle.addStyleName("h1");
 		
 		searchBox.setText(searchBoxDefaultText);
+		searchBox.addKeyPressHandler(new KeyPressHandler() {
+			@Override
+			public void onKeyPress(KeyPressEvent event) {
+				if(event.getUnicodeCharCode() == 13)
+					search(searchBox.getText());
+			}
+		});
+		searchBox.addFocusHandler(new FocusHandler() {
+			@Override
+			public void onFocus(FocusEvent event) {
+				if(searchBox.getText().equals(searchBoxDefaultText))
+					searchBox.setText("");
+			}
+		});
 		
 		Button buttonSearch = new Button();
 		buttonSearch.setHTML("S&oslash;g");
@@ -94,14 +112,14 @@ public class RaavarePanel extends Composite
 		mainPanel.add(buttonPanel);
 	}
 
-	public void statusUpdate(Boolean result) {
+	public void statusUpdate(String result) {
 		String reply = "something went wrong!";
-		if(result == true)
-			reply = "Handlingen blev udfoert";
-		else
-			reply = "Handlingen kunne ikke udfoeres!";
+//		if(result == true)
+//			reply = "Handlingen blev udfoert";
+//		else
+//			reply = "Handlingen kunne ikke udfoeres!";
 		
-		Window.alert(reply);
+		Window.alert(result);
 	}
 	
 	public void updateTable(List<RaavareDTO> raavarer) {
@@ -142,39 +160,41 @@ public class RaavarePanel extends Composite
 		tableList.resize(size, 4);
 	}
 	
+	private void search(String searchText) {		
+		if(raavareList != null) {
+			ArrayList<RaavareDTO> result = new ArrayList<>();
+			
+			try {
+				int searhID = Integer.parseInt(searchText);
+				
+				for (RaavareDTO raavare : raavareList) {
+					if(raavare.getRaavareID() == searhID) {
+						result.add(raavare);
+						break;
+					}
+				}
+			}
+			catch(NumberFormatException e) {
+				searchText = searchText.toUpperCase();
+				
+				for (RaavareDTO raavare : raavareList) {
+					if(raavare.getRaavareNavn().toUpperCase().contains(searchText) || raavare.getLeverandoer().toUpperCase().contains(searchText)) {
+						result.add(raavare);
+					}
+				}
+			}
+			finally {
+				if(result != null)
+					update(result);
+			}
+		}
+	}
+	
 	private class ClickHandlerSearch implements ClickHandler
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			String searchText = searchBox.getText();
-			
-			if(raavareList != null) {
-				ArrayList<RaavareDTO> result = new ArrayList<>();
-				
-				try {
-					int searhID = Integer.parseInt(searchText);
-					
-					for (RaavareDTO raavare : raavareList) {
-						if(raavare.getRaavareID() == searhID) {
-							result.add(raavare);
-							break;
-						}
-					}
-				}
-				catch(NumberFormatException e) {
-					for (RaavareDTO raavare : raavareList) {
-						if(raavare.getRaavareNavn().contains(searchText) || raavare.getLeverandoer().contains(searchText)) {
-							result.add(raavare);
-						}
-					}
-				}
-				finally {
-					if(result != null)
-						update(result);
-				}
-			}
-			
-			
+			search(searchBox.getText());			
 		}
 	}
 	
@@ -217,7 +237,7 @@ public class RaavarePanel extends Composite
 			RaavareDTO raavare = dispRaavareList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
 			if(Window.confirm("Er du sikker paa at du vil slette raavare " + raavare.getRaavareID() + ", " + raavare.getRaavareNavn() + " af " + raavare.getLeverandoer()))
-				serverComm.deleteRaavare(raavare);
+				serverComm.deleteRaavare(raavare.getRaavareID());
 		}
 	}
 	

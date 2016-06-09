@@ -25,5 +25,5 @@ public interface ExampleServiceAsync
 	
 	void updateRaavare(RaavareDTO raavare, AsyncCallback callback);
 	
-	void deleteRaavare(RaavareDTO raavare, AsyncCallback callback);
+	void deleteRaavare(int raavareID, AsyncCallback callback);
 }

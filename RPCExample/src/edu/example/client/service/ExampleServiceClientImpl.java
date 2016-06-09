@@ -75,8 +75,8 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 	}
 
 	@Override
-	public void deleteRaavare(RaavareDTO raavare) {
-		this.service.deleteRaavare(raavare, new DefaultCallback());
+	public void deleteRaavare(int raavareID) {
+		this.service.deleteRaavare(raavareID, new DefaultCallback());
 	}
 	
 	/**
@@ -108,8 +108,8 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 			else if (currentPanel instanceof RaavarePanel) {
 				RaavarePanel raavarePanel = (RaavarePanel) currentPanel;
 				
-				if(result instanceof Boolean) 
-					raavarePanel.statusUpdate((Boolean) result);
+				if(result instanceof String) 
+					raavarePanel.statusUpdate((String) result);
 				else
 					raavarePanel.updateTable((List<RaavareDTO>) result);
 			}

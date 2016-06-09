@@ -25,9 +25,9 @@ public interface ExampleService extends RemoteService
 	//Raavarer
 	ArrayList<RaavareDTO> getRaavareList();
 	
-	boolean createRaavare(RaavareDTO raavare);
+	String createRaavare(RaavareDTO raavare);
 	
-	boolean updateRaavare(RaavareDTO raavare);
+	String updateRaavare(RaavareDTO raavare);
 	
-	boolean deleteRaavare(RaavareDTO raavare);
+	String deleteRaavare(int raavareID);
 }

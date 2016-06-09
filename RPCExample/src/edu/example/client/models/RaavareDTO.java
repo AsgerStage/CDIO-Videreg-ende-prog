@@ -68,7 +68,7 @@ public final class RaavareDTO implements Serializable
     
     @Override
     public String toString() { 
-		return raavareID + "\t" + raavareNavn +"\t" + leverandoer; 
+		return "{ID=" + raavareID + ", Navn=" + raavareNavn + ", Leverandør=" + leverandoer + '}'; 
 	}
 
 	@Override
@@ -80,16 +80,10 @@ public final class RaavareDTO implements Serializable
         return this.raavareID == other.raavareID &&
                Objects.equals(this.raavareNavn, other.raavareNavn) &&
                Objects.equals(this.leverandoer, other.leverandoer);
-		
-//		// TODO Auto-generated method stub
-//		return super.equals(obj);
 	}
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
-    
-    
 }

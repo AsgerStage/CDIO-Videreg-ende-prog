@@ -158,17 +158,18 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	}
 
 	@Override
-	public boolean createRaavare(RaavareDTO raavare) {
-		boolean result = false;
+	public String createRaavare(RaavareDTO raavare) {
+		String result = null;
 		Connector con = null;
 		
 		try {
 			con = new Connector();
 			raDAO.createRaavare(raavare);
-			result = true;
+			result = "Råvare " + raavare.toString() + " blev oprettet";
 		} 
 		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			result = "Råvare " + raavare.toString() + " kunne ikke oprettes: " + e.getMessage();
 		}
         finally {
             if(con != null)
@@ -181,17 +182,18 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	}
 
 	@Override
-	public boolean updateRaavare(RaavareDTO raavare) {
-		boolean result = false;
+	public String updateRaavare(RaavareDTO raavare) {
+		String result = null;
 		Connector con = null;
 		
 		try {
 			con = new Connector();
 			raDAO.updateRaavare(raavare);
-			result = true;
+			result = "Råvare " + raavare.getRaavareID() + " blev opateret";
 		} 
 		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			result = "Råvare " + raavare.getRaavareID() + " kunne ikke opdateres: " + e.getMessage();
 		}
         finally {
             if(con != null)
@@ -204,17 +206,18 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 	}
 
 	@Override
-	public boolean deleteRaavare(RaavareDTO raavare) {
-		boolean result = false;
+	public String deleteRaavare(int raavareID) {
+		String result = null;
 		Connector con = null;
 		
 		try {
 			con = new Connector();
-			raDAO.deleteRaavare(raavare);
-			result = true;
+			raDAO.deleteRaavare(raavareID);
+			result = "Råvaren " + raavareID + " blev slettet";
 		} 
 		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
 			e.printStackTrace();
+			result = "Råvaren " + raavareID + " kunne ikke slettes: " + e.getMessage();
 		}
         finally {
             if(con != null)

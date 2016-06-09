@@ -54,8 +54,8 @@ public class MySQLRaavareDAO implements RaavareDAO
 				raavare.getRaavareID(), raavare.getRaavareNavn(), raavare.getLeverandoer());
 	}
 
-	public void deleteRaavare(RaavareDTO raavare) throws DALException {
+	public void deleteRaavare(int raavareID) throws DALException {
 		Connector.doUpdate("CALL `delete_raavare`(?)", 
-				raavare.getRaavareID());
+				raavareID);
 	}
 }

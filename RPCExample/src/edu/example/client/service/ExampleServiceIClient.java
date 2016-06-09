@@ -23,5 +23,5 @@ public interface ExampleServiceIClient
 	
 	void updateRaavare(RaavareDTO raavare);
 	
-	void deleteRaavare(RaavareDTO raavare);
+	void deleteRaavare(int raavareID);
 }
