@@ -5,7 +5,7 @@ import java.util.List;
 import edu.example.client.exceptions.DALException;
 import edu.example.server.database.dto.ProduktBatchDTO;
 
-public interface ProduktBatchDAO {
+public interface ProduktbatchDAO {
 	ProduktBatchDTO getProduktBatch(int pbId) throws DALException;
 	List<ProduktBatchDTO> getProduktBatchList() throws DALException;
 	void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException;

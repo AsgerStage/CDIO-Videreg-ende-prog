@@ -9,7 +9,7 @@ import edu.example.client.exceptions.DALException;
 import edu.example.server.database.connector.Connector;
 import edu.example.server.database.dto.ProduktBatchDTO;
 
-public class MYSQLProduktBatchDAO implements ProduktBatchDAO 
+public class MYSQLProduktBatchDAO implements ProduktbatchDAO 
 {
 	@Override
 	public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {

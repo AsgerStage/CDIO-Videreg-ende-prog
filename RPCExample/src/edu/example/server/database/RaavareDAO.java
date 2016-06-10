@@ -6,8 +6,9 @@ import edu.example.client.exceptions.DALException;
 import edu.example.client.models.RaavareDTO;
 
 public interface RaavareDAO {
-	RaavareDTO getRaavare(int raavareId) throws DALException;
+	RaavareDTO getRaavare(int raavareID) throws DALException;
 	List<RaavareDTO> getRaavareList() throws DALException;
 	void createRaavare(RaavareDTO raavare) throws DALException;
 	void updateRaavare(RaavareDTO raavare) throws DALException;
+	void deleteRaavare(int raavareID) throws DALException;
 }

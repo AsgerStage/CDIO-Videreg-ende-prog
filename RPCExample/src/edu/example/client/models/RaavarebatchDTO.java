@@ -1,23 +1,24 @@
 package edu.example.client.models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import edu.example.client.exceptions.DALException;
 
-public class RaavareBatchDTO implements Serializable
+public class RaavarebatchDTO implements Serializable
 {
 	private static final long serialVersionUID = -5690218368376087354L;
 	private int rbID;			// i omraadet 1-99999999
-	private int raavareID;		// i omraadet 1-99999999
+	private RaavareDTO raavare;	// i omraadet 1-99999999
 	private double maengde;		// kan vaere negativ 
 	
-	public RaavareBatchDTO() {
+	public RaavarebatchDTO() {
 		
 	}
 	
-	public RaavareBatchDTO(int rbId, int raavareId, double maengde)	{
-		this.rbID = rbId;
-		this.raavareID = raavareId;
+	public RaavarebatchDTO(int rbID, RaavareDTO raavare, double maengde)	{
+		this.rbID = rbID;
+		this.raavare = raavare;
 		this.maengde = maengde;
 	}
 	
@@ -32,15 +33,15 @@ public class RaavareBatchDTO implements Serializable
     		this.rbID = rbID; 
 	}
 	
-	public int getRaavareID() {
-		return raavareID; 
+	public RaavareDTO getRaavare() {
+		return raavare; 
 	}
 	
-	public void setRaavareID(int raavareID) throws DALException {		
-		if(raavareID < 1 || raavareID > 99999999)
-    		throw new DALException("Råvare ID skal være mellem 1 og 99999999, den var " + raavareID);
+	public void setRaavare(RaavareDTO raavare) throws DALException {		
+		if(raavare.getRaavareID() < 1 || raavare.getRaavareID() > 99999999)
+    		throw new DALException("Råvare ID skal være mellem 1 og 99999999, den var " + raavare);
     	else
-    		this.raavareID = raavareID; 
+    		this.raavare = raavare; 
 	}
 	
 	public double getMaengde() {
@@ -52,17 +53,17 @@ public class RaavareBatchDTO implements Serializable
 	}
 	
 	public String toString() { 
-		return "{ID=" + rbID + ", RåvareID=" + raavareID + ", Mængde=" + maengde + '}';
+		return "{ID=" + rbID + ", Råvare=" + raavare + ", Mængde=" + maengde + '}';
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null || getClass() != obj.getClass()) 
             return false;
-        final RaavareBatchDTO other = (RaavareBatchDTO) obj;
+        final RaavarebatchDTO other = (RaavarebatchDTO) obj;
         
         return this.rbID == other.rbID &&
-        		this.raavareID == other.raavareID &&
+        		Objects.equals(this.raavare, other.raavare) &&
         		this.maengde == other.maengde;
 	}
 
