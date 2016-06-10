@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
+import edu.example.client.models.RaavareBatchDTO;
 import edu.example.server.database.connector.Connector;
-
-import edu.example.server.database.dto.RaavareBatchDTO;
 
 public class MySQLRaavareBatchDAO implements RaavareBatchDAO 
 {	
@@ -24,13 +23,13 @@ public class MySQLRaavareBatchDAO implements RaavareBatchDAO
 	public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {		
 			Connector.doUpdate(
 				"INSERT INTO raavarebatch(raavare_id, rb_id, maengde) VALUES " +
-				"(" + raavarebatch.getRaavareId() + ", '" + raavarebatch.getRbId() + ", '" + raavarebatch.getMaengde() + "')"
+				"(" + raavarebatch.getRaavareID() + ", '" + raavarebatch.getRbID() + ", '" + raavarebatch.getMaengde() + "')"
 			);
 	}
 	
 	public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
 		Connector.doUpdate(
-				"UPDATE raavarebatch SET  raavare_id = '" + raavarebatch.getRaavareId() + "', rb_id =  '" + raavarebatch.getRbId() + 
+				"UPDATE raavarebatch SET  raavare_id = '" + raavarebatch.getRaavareID() + "', rb_id =  '" + raavarebatch.getRbID() + 
 				"', maengde = '" + raavarebatch.getMaengde()
 		);
 	}
