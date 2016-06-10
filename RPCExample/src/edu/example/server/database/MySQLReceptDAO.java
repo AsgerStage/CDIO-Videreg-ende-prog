@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
+import edu.example.client.models.ReceptDTO;
 import edu.example.server.database.connector.Connector;
-import edu.example.server.database.dto.ReceptDTO;
 
 public class MySQLReceptDAO implements ReceptDAO 
 {
@@ -48,5 +48,9 @@ public class MySQLReceptDAO implements ReceptDAO
 		Connector.doUpdate("UPDATE recept SET  receptId = '" + recept.getReceptId() + "', receptNavn =  '"
 				+ recept.getReceptNavn() + "' WHERE receptId = " + recept.getReceptId());
 	}
-
+@Override
+	public void deleteRecept(int receptID) throws DALException {
+		Connector.doUpdate("CALL `delete_recept`(?)", 
+				receptID);
+	}
 }

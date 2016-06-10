@@ -10,7 +10,7 @@ import edu.example.client.exceptions.DALException;
 import edu.example.client.exceptions.OpIdException;
 import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
-import edu.example.client.gui.operatoerList.OperatoerList;
+import edu.example.client.gui.Lists.OperatoerList;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.ExampleServiceClientImpl;
 

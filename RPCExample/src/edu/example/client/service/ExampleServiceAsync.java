@@ -4,6 +4,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.ReceptDTO;
 
 public interface ExampleServiceAsync 
 {
@@ -26,4 +27,14 @@ public interface ExampleServiceAsync
 	void updateRaavare(RaavareDTO raavare, AsyncCallback callback);
 	
 	void deleteRaavare(int raavareID, AsyncCallback callback);
+	
+	//Recept
+	void getReceptList(AsyncCallback callback);
+	
+	void createRecept(ReceptDTO recept, AsyncCallback callback);
+	
+	void updateRecept(ReceptDTO recept, AsyncCallback callback);
+	
+	void deleteRecept(int receptID, AsyncCallback callback);
+	
 }

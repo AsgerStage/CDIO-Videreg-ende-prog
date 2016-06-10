@@ -6,12 +6,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
+import edu.example.client.gui.Lists.OperatoerList;
+import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
-import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.ReceptDTO;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
 {
@@ -79,6 +81,28 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 		this.service.deleteRaavare(raavareID, new DefaultCallback());
 	}
 	
+	
+	//Recepter
+	@Override
+	public void getReceptList() {
+		this.service.getReceptList(new DefaultCallback());
+	}
+
+	@Override
+	public void createRecept(ReceptDTO recept) {
+		this.service.createRecept(recept, new DefaultCallback());
+	}
+
+	@Override
+	public void updateRecept(ReceptDTO raavare) {
+		this.service.updateRecept(raavare, new DefaultCallback());
+	}
+
+	@Override
+	public void deleteRecept(int receptID) {
+		this.service.deleteRecept(receptID, new DefaultCallback());
+	}
+	
 	/**
 	 * Async Callback
 	 */
@@ -112,6 +136,15 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 					raavarePanel.statusUpdate((String) result);
 				else
 					raavarePanel.updateTable((List<RaavareDTO>) result);
+			}
+			else if(currentPanel instanceof ReceptList) {
+				ReceptList recept = (ReceptList) currentPanel;
+				
+				if(result instanceof String) 
+					recept.statusUpdate((String) result);
+				else
+					recept.updateTable((List<ReceptDTO>) result);
+				
 			}
 		}
 	}
