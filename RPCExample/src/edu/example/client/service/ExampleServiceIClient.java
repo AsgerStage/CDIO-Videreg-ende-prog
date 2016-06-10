@@ -2,6 +2,7 @@ package edu.example.client.service;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.ReceptDTO;
 
 public interface ExampleServiceIClient 
 {
@@ -24,4 +25,14 @@ public interface ExampleServiceIClient
 	void updateRaavare(RaavareDTO raavare);
 	
 	void deleteRaavare(int raavareID);
+	
+	//Recepter
+	void getReceptList();
+	
+	void createRecept(ReceptDTO recept);
+	
+	void updateRecept(ReceptDTO recept);
+	
+	void deleteRecept(int receptID);
+	
 }

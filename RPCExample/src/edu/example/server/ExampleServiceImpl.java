@@ -8,9 +8,11 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.ReceptDTO;
 import edu.example.client.service.ExampleService;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLRaavareDAO;
+import edu.example.server.database.MySQLReceptDAO;
 import edu.example.server.database.connector.Connector;
 
 public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService
@@ -218,6 +220,103 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
 			e.printStackTrace();
 			result = "Råvaren " + raavareID + " kunne ikke slettes: " + e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+	
+	//Recepter
+private final MySQLReceptDAO receptDAO = new MySQLReceptDAO();
+	
+	@Override
+	public ArrayList<ReceptDTO> getReceptList() {
+		Connector con = null;
+		ArrayList<ReceptDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<ReceptDTO>(receptDAO.getReceptList());
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String createRecept(ReceptDTO recept) {
+		String result = null;
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			receptDAO.createRecept(recept);
+			result = "Recept " + recept.toString() + " blev oprettet";
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = "Recept " + recept.toString() + " kunne ikke oprettes: " + e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String updateRecept(ReceptDTO recept) {
+		String result = null;
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			receptDAO.updateRecept(recept);
+			result = "Recepten " + recept.getReceptId() + " blev opateret";
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = "Recepten " + recept.getReceptId() + " kunne ikke opdateres: " + e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String deleteRecept(int receptID) {
+		String result = null;
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			receptDAO.deleteRecept(receptID);
+			result = "Recepten " + receptID + " blev slettet";
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+			result = "Recepten " + receptID + " kunne ikke slettes: " + e.getMessage();
 		}
         finally {
             if(con != null)

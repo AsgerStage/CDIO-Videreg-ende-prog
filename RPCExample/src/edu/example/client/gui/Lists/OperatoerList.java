@@ -1,4 +1,4 @@
-package edu.example.client.gui.operatoerList;
+package edu.example.client.gui.Lists;
 
 import java.util.List;
 

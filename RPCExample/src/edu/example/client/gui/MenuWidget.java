@@ -7,9 +7,10 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
+import edu.example.client.gui.Lists.OperatoerList;
+import edu.example.client.gui.Lists.ReceptList;
 //import edu.example.client.gui.login.Afslut;
 import edu.example.client.gui.login.Login;
-import edu.example.client.gui.operatoerList.OperatoerList;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.logUd.Afslut;
@@ -38,7 +39,9 @@ public class MenuWidget extends Composite
 		MenuItem miRaavere = new MenuItem("", cmd_Raavare);
 		miRaavere.setHTML("R&aring;varer");
 		menu.addItem(miRaavere);
+		MenuItem receptList = new MenuItem("Recepter",cmd_Recept);
 		
+		menu.addItem(receptList);
 		menu.addItem(new MenuItem("Login", cmd_Login));
 		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
 		
@@ -100,6 +103,13 @@ public class MenuWidget extends Composite
 	Command cmd_Afslut = new Command() {
 		public void execute() {
 			Afslut viewPanel = new Afslut();
+			gotoPanel(viewPanel);
+		}
+	};
+	
+	Command cmd_Recept = new Command() {
+		public void execute() {
+			ReceptList viewPanel = new ReceptList(me, serverComm);
 			gotoPanel(viewPanel);
 		}
 	};
