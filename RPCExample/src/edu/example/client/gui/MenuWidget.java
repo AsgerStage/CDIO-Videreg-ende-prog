@@ -13,6 +13,7 @@ import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
+import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.logUd.Afslut;
 import edu.example.client.service.ExampleServiceClientImpl;
 import edu.example.client.weightPage.WeightPage;
@@ -39,6 +40,12 @@ public class MenuWidget extends Composite
 		MenuItem miRaavere = new MenuItem("", cmd_Raavare);
 		miRaavere.setHTML("R&aring;varer");
 		menu.addItem(miRaavere);
+		
+
+		MenuItem miRaaverebatch = new MenuItem("", cmd_Raavarebatch);
+		miRaaverebatch.setHTML("R&aring;varebatchs");
+		menu.addItem(miRaaverebatch);
+		
 		MenuItem receptList = new MenuItem("Recepter",cmd_Recept);
 		
 		menu.addItem(receptList);
@@ -71,9 +78,6 @@ public class MenuWidget extends Composite
 		public void execute() {
 			ViewProfile viewPanel = new ViewProfile("Se Profil", 25, me, serverComm);
 			gotoPanel(viewPanel);
-//			currentPanel = viewPanel;
-//			
-//			parent.setContentPanel(viewPanel);
 		}
 	};
 	
@@ -89,6 +93,14 @@ public class MenuWidget extends Composite
 		public void execute() {
 			RaavarePanel raavarePanel = new RaavarePanel(me, serverComm);
 			gotoPanel(raavarePanel);
+			
+		}
+	};
+	
+	Command cmd_Raavarebatch = new Command() {
+		public void execute() {
+			RaavarebatchPanel raavarebatchPanel = new RaavarebatchPanel(me, serverComm);
+			gotoPanel(raavarebatchPanel);
 			
 		}
 	};
