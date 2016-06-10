@@ -13,10 +13,10 @@ public class MySQLReceptDAO implements ReceptDAO
 {
 	@Override
 	public ReceptDTO getRecept(int receptId) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM recept WHERE receptId = " + receptId);
+		ResultSet rs = Connector.doQuery("SELECT * FROM recept WHERE recept_id = " + receptId);
 	    try {
 	    	if (!rs.first()) throw new DALException("recepten " + receptId + " findes ikke");
-	    	return new ReceptDTO (rs.getInt("receptId"), rs.getString("receptNavn"));
+	    	return new ReceptDTO (rs.getInt("recept_id"), rs.getString("recept_navn"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 	}
@@ -27,7 +27,7 @@ public class MySQLReceptDAO implements ReceptDAO
 		ResultSet rs = Connector.doQuery("SELECT * FROM recept");
 		try {
 			while (rs.next()) {
-				list.add(new ReceptDTO(rs.getInt("receptId"), rs.getString("receptNavn")));
+				list.add(new ReceptDTO(rs.getInt("recept_id"), rs.getString("recept_navn")));
 			}
 		} catch (SQLException e) {
 			throw new DALException(e);
@@ -38,15 +38,15 @@ public class MySQLReceptDAO implements ReceptDAO
 	@Override
 	public void createRecept(ReceptDTO recept) throws DALException {		
 			Connector.doUpdate(
-				"INSERT INTO recept(receptId, receptNavn) VALUES " +
-				"(" + recept.getReceptId() + ", '" + recept.getReceptNavn() + "',)"
+				"INSERT INTO recept(recept_id, recept_navn) VALUES " +
+				"(" + recept.getReceptId() + ", '" + recept.getReceptNavn() + "')"
 			);
 	}
 
 	@Override
 	public void updateRecept(ReceptDTO recept) throws DALException {
-		Connector.doUpdate("UPDATE recept SET  receptId = '" + recept.getReceptId() + "', receptNavn =  '"
-				+ recept.getReceptNavn() + "' WHERE receptId = " + recept.getReceptId());
+		Connector.doUpdate("UPDATE recept SET  recept_id = '" + recept.getReceptId() + "', recept_navn =  '"
+				+ recept.getReceptNavn() + "' WHERE recept_id = " + recept.getReceptId());
 	}
 @Override
 	public void deleteRecept(int receptID) throws DALException {
