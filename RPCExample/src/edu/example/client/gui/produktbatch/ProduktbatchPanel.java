@@ -149,7 +149,7 @@ public class ProduktbatchPanel extends Composite
 		deleteButton.setTitle("Slet");
 		ButtonPanel.add(deleteButton);
 		
-		tableList.setWidget(rowIndex, 5, ButtonPanel);
+		tableList.setWidget(rowIndex, 3, ButtonPanel);
 	}
 	
 	private void clearTable(int size) {
@@ -159,21 +159,24 @@ public class ProduktbatchPanel extends Composite
 	private void search(String searchText) {		
 		if(produktbatchList != null) {
 			ArrayList<ProduktbatchDTO> result = new ArrayList<>();
-			
-			try {
-				int searhInt = Integer.parseInt(searchText);
-				
-				for (ProduktbatchDTO produktbatch: produktbatchList) {
-					if(produktbatch.getPbID() == searhInt || produktbatch.getReceptID() == searhInt || produktbatch.getStatus() == searhInt) {
-						result.add(produktbatch);
+			if(searchText.length() > 0) {
+				try {
+					int searhInt = Integer.parseInt(searchText);
+					
+					for (ProduktbatchDTO produktbatch: produktbatchList) {
+						if(produktbatch.getPbID() == searhInt || produktbatch.getReceptID() == searhInt || produktbatch.getStatus() == searhInt) {
+							result.add(produktbatch);
+						}
 					}
 				}
+				catch(NumberFormatException e) { }
+				finally {
+					if(result != null)
+						update(result);
+				}
 			}
-			catch(NumberFormatException e) { }
-			finally {
-				if(result != null)
-					update(result);
-			}
+			else
+				update(produktbatchList);
 		}
 	}
 	
