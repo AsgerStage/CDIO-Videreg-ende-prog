@@ -12,7 +12,10 @@ import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.RPCServiceClientImpl;
+
+import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 
@@ -100,7 +103,7 @@ public class Login extends Composite {
 		String pw = normalPassword.getText();
 		lbltest.setText("Salt=" + result.getSalt() + ", Hash=" + result.getHash());
 		
-        boolean pwMatch = result.getHash().equals(get_SHA_512_SecurePassword(pw, result.getSalt()));
+        boolean pwMatch = result.getHash().equals(getMD5(pw,result.getSalt()));
 
 		if (pwMatch == true) {
 			lbltest.setText(lbltest.getText() + ": rigtigt password");
@@ -115,23 +118,22 @@ public class Login extends Composite {
 	}
 
 
-	public String get_SHA_512_SecurePassword(String passwordToHash, String   salt){
-	String generatedPassword = null;
-	    try {
-	         MessageDigest md = MessageDigest.getInstance("SHA-512");
-	         md.update(salt.getBytes("UTF-8"));
-	         byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
-	         StringBuilder sb = new StringBuilder();
-	         for(int i=0; i< bytes.length ;i++){
-	            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-	         }
-	         generatedPassword = sb.toString();
-	        } 
-	       catch (Exception e){
-	        e.printStackTrace(); 
-	       }
-	    return generatedPassword;
-	}
+	 public static String getMD5(final String hash, String salt) {
+		    try {
+		      MessageDigest m = MessageDigest.getInstance("MD5");
+		      m.reset();
+		      m.update(hash.getBytes());
+		      BigInteger bigInt = new BigInteger(1, m.digest());
+		      String hashtext = bigInt.toString(16);
+		      while(hashtext.length() < 32 ){
+		          hashtext = "0" + hashtext;
+		      }
+		      return hashtext;
+		    } catch (NoSuchAlgorithmException e) {
+		      e.printStackTrace();
+		      return e.getMessage();
+		    }
+		  }
 
 } 
 
