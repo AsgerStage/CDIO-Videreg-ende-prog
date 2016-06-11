@@ -3,12 +3,21 @@ package edu.example.client.gui.raavarebatch;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.cell.client.EditTextCell;
+import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.thirdparty.javascript.rhino.head.ast.Label;
+import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.DataGrid;
+import com.google.gwt.user.cellview.client.SimplePager;
+import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -39,6 +48,8 @@ public class RaavarebatchPanel extends Composite
 	private final Grid tableList;
 	private List<RaavarebatchDTO> raavarebatchList = null;
 	private List<RaavarebatchDTO> dispRaavarebatchList = null;
+	
+//	private DataGrid<RaavarebatchDTO> dataGrid;
 	
 	public RaavarebatchPanel(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		this.parent = parent;
@@ -115,6 +126,28 @@ public class RaavarebatchPanel extends Composite
 		mainPanel.add(topPanel);
 		mainPanel.add(tableList);
 		mainPanel.add(buttonPanel);
+		
+//		dataGrid = new DataGrid<RaavarebatchDTO>();
+//		dataGrid.setWidth("100%");
+//		dataGrid.setHeight("50px");
+//		dataGrid.setRowCount(5);
+//		dataGrid.setAutoHeaderRefreshDisabled(true);
+//		dataGrid.setEmptyTableWidget(new HTML("EMPTY"));
+//		
+//		Column<RaavarebatchDTO, String> raavareNameColumn = new Column<RaavarebatchDTO, String>(new TextCell()) {
+//	          @Override
+//	          public String getValue(RaavarebatchDTO object) {
+//	            return object.getRaavare().getRaavareNavn();
+//	          }
+//        };
+//	    raavareNameColumn.setSortable(false);
+//	    dataGrid.addColumn(raavareNameColumn, "Raavare Navn");
+//	    
+//	    dataGrid.setColumnWidth(raavareNameColumn, 20, Unit.PCT);
+//	    
+//	    
+//		dataGrid.setVisible(true);
+//	    mainPanel.add(dataGrid);
 	}
 
 	public void statusUpdate(String result) {
@@ -133,6 +166,8 @@ public class RaavarebatchPanel extends Composite
 		for (int i = 0; i < raavarebatchs.size(); i++) {
 			addRaavarebatchToTable(i + 1, raavarebatchs.get(i));
 		}
+		
+//	    dataGrid.setRowData(raavarebatchList);
 	}
 	
 	private void addRaavarebatchToTable(int rowIndex, RaavarebatchDTO raavarebatch) {

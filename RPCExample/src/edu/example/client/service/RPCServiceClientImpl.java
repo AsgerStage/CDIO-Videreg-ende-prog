@@ -91,12 +91,12 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 
 	@Override
 	public void createRaavarebatch(RaavarebatchDTO raavarebatch) {
-		this.service.createRaavarebatch(raavarebatch, new DefaultCallback());
+		this.service.createRaavarebatch(raavarebatch, new RaavarebatchCallback());
 	}
 
 	@Override
 	public void updateRaavarebatch(RaavarebatchDTO raavarebatch) {
-		this.service.updateRaavarebatch(raavarebatch, new DefaultCallback());
+		this.service.updateRaavarebatch(raavarebatch, new RaavarebatchCallback());
 	}
 
 	@Override
