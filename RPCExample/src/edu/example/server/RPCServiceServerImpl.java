@@ -12,7 +12,7 @@ import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 import edu.example.client.service.RPCService;
-import edu.example.server.database.MYSQLProduktBatchDAO;
+import edu.example.server.database.MYSQLProduktbatchDAO;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLRaavareDAO;
 import edu.example.server.database.MySQLRaavarebatchDAO;
@@ -365,7 +365,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	}
 	
 	//Produktbatch
-	private final MYSQLProduktBatchDAO pbDAO = new MYSQLProduktBatchDAO();
+	private final MYSQLProduktbatchDAO pbDAO = new MYSQLProduktbatchDAO();
 
 	@Override
 	public ArrayList<ProduktbatchDTO> getProduktbatchList() {
