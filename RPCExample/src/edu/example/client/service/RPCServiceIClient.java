@@ -1,6 +1,7 @@
 package edu.example.client.service;
 
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -37,6 +38,15 @@ public interface RPCServiceIClient
 	void updateRaavarebatch(RaavarebatchDTO raavarebatch);
 	
 	void deleteRaavarebatch(int rbID);
+	
+	//Produktbatch
+	void getProduktbatchList();
+	
+	void createProduktbatch(ProduktbatchDTO produktbatch);
+	
+	void updateProduktbatch(ProduktbatchDTO produktbatch);
+	
+	void deleteProduktbatch(int pbID);
 	
 	//Recepter
 	void getReceptList();

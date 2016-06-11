@@ -7,10 +7,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 import edu.example.client.service.RPCService;
+import edu.example.server.database.MYSQLProduktBatchDAO;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLRaavareDAO;
 import edu.example.server.database.MySQLRaavarebatchDAO;
@@ -345,6 +347,113 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 			int reply = rbDAO.deleteRaavarebatch(rbID);
 			if(reply > 0)
 				result = "Råvarebatchen " + rbID + " blev slettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+	
+	//Produktbatch
+	private final MYSQLProduktBatchDAO pbDAO = new MYSQLProduktBatchDAO();
+
+	@Override
+	public ArrayList<ProduktbatchDTO> getProduktbatchList() {
+		Connector con = null;
+		ArrayList<ProduktbatchDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<ProduktbatchDTO>(pbDAO.getProduktbatchList());
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String createProduktbatch(ProduktbatchDTO produktbatch) {
+		String result = "Produktbatchen " + produktbatch.getPbID() + " kunne ikke oprettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+
+			int reply = pbDAO.createProduktbatch(produktbatch);
+			if(reply > 0)
+				result = "Produktbatchen " + produktbatch.getPbID() + " blev oprettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String updateProduktbatch(ProduktbatchDTO produktbatch) {
+		String result = "Produktbatchen " + produktbatch.getPbID() + " kunne ikke opdateres: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = pbDAO.updateProduktbatch(produktbatch);
+			if(reply > 0)
+				result = "Produktbatchen " + produktbatch.getPbID() + " blev opdateret";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String deleteProduktbatch(int pbID) {
+		String result = "Produktbatchen " + pbID + " kunne ikke slettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = pbDAO.deleteProduktbatch(pbID);
+			if(reply > 0)
+				result = "Produktbatchen " + pbID + " blev slettet";
 			else
 				result += "reply = " + reply;
 		} 

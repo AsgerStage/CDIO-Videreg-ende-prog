@@ -3,21 +3,12 @@ package edu.example.client.gui.produktbatch;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.cell.client.EditTextCell;
-import com.google.gwt.cell.client.TextCell;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.thirdparty.javascript.rhino.head.ast.Label;
-import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.DataGrid;
-import com.google.gwt.user.cellview.client.SimplePager;
-import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -31,9 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.MenuWidget;
-import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.RaavareDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
 public class ProduktbatchPanel extends Composite 

@@ -23,7 +23,7 @@ public class MYSQLProduktBatchDAO implements ProduktbatchDAO
 	}
 	
 	@Override
-	public List<ProduktbatchDTO> getProduktBatchList() throws DALException {
+	public List<ProduktbatchDTO> getProduktbatchList() throws DALException {
 		List<ProduktbatchDTO> list = new ArrayList<ProduktbatchDTO>();
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch");
 		try
@@ -38,14 +38,14 @@ public class MYSQLProduktBatchDAO implements ProduktbatchDAO
 	}
 
 	@Override
-	public void createProduktBatch(ProduktbatchDTO produktbatch) throws DALException {
+	public void createProduktbatch(ProduktbatchDTO produktbatch) throws DALException {
 	Connector.doUpdate(
 			"INSERT INTO produktbatch(pbID,status,receptId) VALUES" +"("+produktbatch.getPbID()+", '"+produktbatch.getStatus()+"', '"+produktbatch.getReceptID()+"'"
 			);
 	}
 
 	@Override
-	public void updateProduktBatch(ProduktbatchDTO produktbatch) throws DALException {
+	public void updateProduktbatch(ProduktbatchDTO produktbatch) throws DALException {
 		Connector.doUpdate(
 				"UPDATE produktbatch SET  pbId = '" + produktbatch.getPbID() + "', status =  '" + produktbatch.getStatus() + 
 				"', receptId = '" + produktbatch.getReceptID() + "' WHERE pbId = " +

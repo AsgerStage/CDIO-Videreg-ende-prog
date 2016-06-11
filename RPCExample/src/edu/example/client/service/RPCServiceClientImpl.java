@@ -9,10 +9,12 @@ import edu.example.client.gui.Banner;
 import edu.example.client.gui.Lists.OperatoerList;
 import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
+import edu.example.client.gui.produktbatch.ProduktbatchPanel;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -106,6 +108,27 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	@Override
 	public void deleteRaavarebatch(int rbID) {
 		this.service.deleteRaavarebatch(rbID, new RaavarebatchCallback());
+	}
+	
+	//Produktbatch
+	@Override
+	public void getProduktbatchList() {
+		this.service.getProduktbatchList(new ProduktbatchCallback());
+	}
+
+	@Override
+	public void createProduktbatch(ProduktbatchDTO produktbatch) {
+		this.service.createProduktbatch(produktbatch, new ProduktbatchCallback());
+	}
+
+	@Override
+	public void updateProduktbatch(ProduktbatchDTO produktbatch) {
+		this.service.updateProduktbatch(produktbatch, new ProduktbatchCallback());
+	}
+
+	@Override
+	public void deleteProduktbatch(int pbID) {
+		this.service.deleteProduktbatch(pbID, new ProduktbatchCallback());
 	}
 	
 	//Recepter
@@ -208,6 +231,39 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 					raavarebatchPanel.updateTable((List<RaavarebatchDTO>) result);
 				else
 					raavarebatchPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
+			}
+		}
+	}
+	
+	/**
+	 * Async Callback for produktbatch
+	 */
+	private class ProduktbatchCallback implements AsyncCallback 
+	{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ProduktbatchPanel) {
+				ProduktbatchPanel produktbatchPanel = (ProduktbatchPanel) currentPanel;
+				produktbatchPanel.statusUpdate("Error on server: " + caught.getMessage());
+			}
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ProduktbatchPanel) {
+				ProduktbatchPanel produktbatchPanel = (ProduktbatchPanel) currentPanel;
+				
+				if(result instanceof String) 
+					produktbatchPanel.statusUpdate((String) result);
+				else if(result instanceof List<?>)
+					produktbatchPanel.updateTable((List<ProduktbatchDTO>) result);
+				else
+					produktbatchPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
 			}
 		}
 	}

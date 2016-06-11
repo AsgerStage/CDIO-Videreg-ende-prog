@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -43,6 +44,15 @@ public interface RPCService extends RemoteService
 	String updateRaavarebatch(RaavarebatchDTO raavarebatch);
 	
 	String deleteRaavarebatch(int rbID);
+	
+	//Produktbatch
+	ArrayList<ProduktbatchDTO> getProduktbatchList();
+	
+	String createProduktbatch(ProduktbatchDTO produktbatch);
+	
+	String updateProduktbatch(ProduktbatchDTO produktbatch);
+	
+	String deleteProduktbatch(int pbID);
 	
 	//Recept
 	ArrayList<ReceptDTO> getReceptList();

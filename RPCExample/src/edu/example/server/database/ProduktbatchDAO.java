@@ -7,7 +7,7 @@ import edu.example.client.models.ProduktbatchDTO;
 
 public interface ProduktbatchDAO {
 	ProduktbatchDTO getProduktBatch(int pbId) throws DALException;
-	List<ProduktbatchDTO> getProduktBatchList() throws DALException;
-	void createProduktBatch(ProduktbatchDTO produktbatch) throws DALException;
-	void updateProduktBatch(ProduktbatchDTO produktbatch) throws DALException;
+	List<ProduktbatchDTO> getProduktbatchList() throws DALException;
+	void createProduktbatch(ProduktbatchDTO produktbatch) throws DALException;
+	void updateProduktbatch(ProduktbatchDTO produktbatch) throws DALException;
 }

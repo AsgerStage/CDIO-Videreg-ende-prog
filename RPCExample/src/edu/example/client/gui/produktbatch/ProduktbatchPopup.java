@@ -89,7 +89,7 @@ public class ProduktbatchPopup extends DialogBox
 		return Integer.parseInt(receptIDBox.getText());
 	}
 
-	protected int getStatuse() {
+	protected int getStatus() {
 		return Integer.parseInt(statusBox.getText());
 	}
 	
