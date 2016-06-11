@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -48,7 +49,7 @@ public class RaavarebatchPanel extends Composite
 		tableList = new Grid(1, tableColumns);
 		init();
 		
-		this.serverComm.getRaavareList();
+		this.serverComm.getRaavarebatchList();
 	}
 	
 	private void init() {
@@ -85,7 +86,7 @@ public class RaavarebatchPanel extends Composite
 		tableList.setHTML(0, 0, "ID");
 		tableList.setHTML(0, 1, "R&aring;vare");
 		tableList.setHTML(0, 2, "M&aelig;ngde (kg)");
-		tableList.setHTML(0, 3, "Leveran&oslash;r");
+		tableList.setHTML(0, 3, "Leverand&oslash;r");
 		tableList.setHTML(0, 4, "R&aring;vare id");
 		tableList.setHTML(0, 5, "Handling");
 		tableList.setBorderWidth(1);
@@ -116,27 +117,25 @@ public class RaavarebatchPanel extends Composite
 		mainPanel.add(buttonPanel);
 	}
 
-//	public void statusUpdate(String result) {
-//		String reply = "something went wrong!";
-//		
-//		Window.alert(result);
-//	}
+	public void statusUpdate(String result) {
+		Window.alert(result);
+	}
 	
-//	public void updateTable(List<RaavareDTO> raavarer) {
-//		raavareList = raavarer;
-//		update(raavareList);
-//	}
+	public void updateTable(List<RaavarebatchDTO> raavarebatch) {
+		raavarebatchList = raavarebatch;
+		update(raavarebatchList);
+	}
 	
 	private void update(List<RaavarebatchDTO> raavarebatchs) {
 		dispRaavarebatchList = raavarebatchs;
 		clearTable(raavarebatchs.size() + 1);
 		
 		for (int i = 0; i < raavarebatchs.size(); i++) {
-			addRaavareToTable(i + 1, raavarebatchs.get(i));
+			addRaavarebatchToTable(i + 1, raavarebatchs.get(i));
 		}
 	}
 	
-	private void addRaavareToTable(int rowIndex, RaavarebatchDTO raavarebatch) {
+	private void addRaavarebatchToTable(int rowIndex, RaavarebatchDTO raavarebatch) {
 		RaavareDTO raavare = raavarebatch.getRaavare();
 		
 		tableList.setText(rowIndex, 0, "" + raavarebatch.getRbID());
@@ -199,7 +198,7 @@ public class RaavarebatchPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			search(searchBox.getText());			
+			search(searchBox.getText());			
 		}
 	}
 	
@@ -207,7 +206,7 @@ public class RaavarebatchPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			serverComm.getRaavareList();
+			serverComm.getRaavarebatchList();
 		}
 	}
 	
@@ -239,10 +238,10 @@ public class RaavarebatchPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			RaavareDTO raavare = dispRaavareList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
-//			
-//			if(Window.confirm("Er du sikker paa at du vil slette raavare " + raavare.getRaavareID() + ", " + raavare.getRaavareNavn() + " af " + raavare.getLeverandoer()))
-//				serverComm.deleteRaavare(raavare.getRaavareID());
+			RaavarebatchDTO raavarebatch = dispRaavarebatchList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			
+			if(Window.confirm("Er du sikker paa at du vil slette raavarebatch " + raavarebatch.getRbID() + ", " + raavarebatch.getMaengde() + " kg " + raavarebatch.getRaavare().getRaavareNavn() + " fra " + raavarebatch.getRaavare().getLeverandoer()))
+				serverComm.deleteRaavarebatch(raavarebatch.getRbID());
 		}
 	}
 	

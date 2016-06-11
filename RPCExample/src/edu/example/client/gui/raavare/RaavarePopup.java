@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.models.RaavareDTO;
 
-public class RaavareInfoPopup extends DialogBox 
+public class RaavarePopup extends DialogBox 
 {	
 	private TextBox idBox = new TextBox();
 	private TextBox nameBox = new TextBox();
@@ -24,7 +24,7 @@ public class RaavareInfoPopup extends DialogBox
 	
 	private boolean isCreate = false;
 	
-	public RaavareInfoPopup(RaavareDTO raavare) {
+	public RaavarePopup(RaavareDTO raavare) {
 		super();
 		VerticalPanel mainPanel = new VerticalPanel();
 		

@@ -2,6 +2,7 @@ package edu.example.client.service;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 
 public interface ExampleServiceIClient 
@@ -25,6 +26,15 @@ public interface ExampleServiceIClient
 	void updateRaavare(RaavareDTO raavare);
 	
 	void deleteRaavare(int raavareID);
+	
+	//Råvarebatch
+	void getRaavarebatchList();
+	
+	void createRaavarebatch(RaavarebatchDTO raavarebatch);
+	
+	void updateRaavarebatch(RaavarebatchDTO raavarebatch);
+	
+	void deleteRaavarebatch(int rbID);
 	
 	//Recepter
 	void getReceptList();

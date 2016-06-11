@@ -112,13 +112,7 @@ public class RaavarePanel extends Composite
 		mainPanel.add(buttonPanel);
 	}
 
-	public void statusUpdate(String result) {
-		String reply = "something went wrong!";
-//		if(result == true)
-//			reply = "Handlingen blev udfoert";
-//		else
-//			reply = "Handlingen kunne ikke udfoeres!";
-		
+	public void statusUpdate(String result) {		
 		Window.alert(result);
 	}
 	
@@ -212,7 +206,7 @@ public class RaavarePanel extends Composite
 		public void onClick(ClickEvent event) {
 			RaavareDTO raavare = dispRaavareList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-			RaavareInfoPopup editPopup = new RaavareInfoPopup(raavare);
+			RaavarePopup editPopup = new RaavarePopup(raavare);
 			editPopup.setExecuteClickHandler(new PopupHandlerExecute(editPopup));
 			editPopup.setCancelClickHandler(new PopupHandlerCancel(editPopup));
 			editPopup.show();
@@ -223,7 +217,7 @@ public class RaavarePanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			RaavareInfoPopup createPopup = new RaavareInfoPopup(null);
+			RaavarePopup createPopup = new RaavarePopup(null);
 			createPopup.setExecuteClickHandler(new PopupHandlerExecute(createPopup));
 			createPopup.setCancelClickHandler(new PopupHandlerCancel(createPopup));
 			createPopup.show();
@@ -243,9 +237,9 @@ public class RaavarePanel extends Composite
 	
 	private class PopupHandlerExecute implements ClickHandler 
 	{
-		private final RaavareInfoPopup popup;
+		private final RaavarePopup popup;
 		
-		protected PopupHandlerExecute(RaavareInfoPopup popup) {
+		protected PopupHandlerExecute(RaavarePopup popup) {
 			this.popup = popup;
 		}
 
@@ -267,9 +261,9 @@ public class RaavarePanel extends Composite
 	
 	private class PopupHandlerCancel implements ClickHandler 
 	{
-		private RaavareInfoPopup popup;
+		private RaavarePopup popup;
 		
-		protected PopupHandlerCancel(RaavareInfoPopup popup) {
+		protected PopupHandlerCancel(RaavarePopup popup) {
 			this.popup = popup;
 		}
 

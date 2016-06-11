@@ -11,8 +11,10 @@ import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
+import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 
 public class ExampleServiceClientImpl implements ExampleServiceIClient
@@ -81,6 +83,26 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 		this.service.deleteRaavare(raavareID, new DefaultCallback());
 	}
 	
+	//Raavarebatch
+	@Override
+	public void getRaavarebatchList() {
+		this.service.getRaavarebatchList(new RaavarebatchCallback());
+	}
+
+	@Override
+	public void createRaavarebatch(RaavarebatchDTO raavarebatch) {
+		this.service.createRaavarebatch(raavarebatch, new DefaultCallback());
+	}
+
+	@Override
+	public void updateRaavarebatch(RaavarebatchDTO raavarebatch) {
+		this.service.updateRaavarebatch(raavarebatch, new DefaultCallback());
+	}
+
+	@Override
+	public void deleteRaavarebatch(int rbID) {
+		this.service.deleteRaavarebatch(rbID, new RaavarebatchCallback());
+	}
 	
 	//Recepter
 	@Override
@@ -145,6 +167,39 @@ public class ExampleServiceClientImpl implements ExampleServiceIClient
 				else
 					recept.updateTable((List<ReceptDTO>) result);
 				
+			}
+		}
+	}
+	
+	/**
+	 * Async Callback for råvarebatch
+	 */
+	private class RaavarebatchCallback implements AsyncCallback 
+	{
+
+		@Override
+		public void onFailure(Throwable caught) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof RaavarebatchPanel) {
+				RaavarebatchPanel raavarebatchPanel = (RaavarebatchPanel) currentPanel;
+				raavarebatchPanel.statusUpdate("Error on server: " + caught.getMessage());
+			}
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof RaavarebatchPanel) {
+				RaavarebatchPanel raavarebatchPanel = (RaavarebatchPanel) currentPanel;
+				
+				if(result instanceof String) 
+					raavarebatchPanel.statusUpdate((String) result);
+				else if(result instanceof List<?>)
+					raavarebatchPanel.updateTable((List<RaavarebatchDTO>) result);
+				else
+					raavarebatchPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
 			}
 		}
 	}

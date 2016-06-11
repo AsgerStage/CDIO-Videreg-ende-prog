@@ -8,7 +8,7 @@ import edu.example.client.models.RaavarebatchDTO;
 public interface RaavarebatchDAO {
 	RaavarebatchDTO getRaavarebatch(int rbId) throws DALException;
 	List<RaavarebatchDTO> getRaavarebatchlist() throws DALException;
-	void createRaavarebatch(RaavarebatchDTO raavarebatch) throws DALException;
-	void updateRaavarebatch(RaavarebatchDTO raavarebatch) throws DALException;
-	void deleteRaavarebatch(int raavareId) throws DALException;
+	int createRaavarebatch(RaavarebatchDTO raavarebatch) throws DALException;
+	int updateRaavarebatch(RaavarebatchDTO raavarebatch) throws DALException;
+	int deleteRaavarebatch(int raavareId) throws DALException;
 }

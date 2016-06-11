@@ -8,10 +8,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
+import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 import edu.example.client.service.ExampleService;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLRaavareDAO;
+import edu.example.server.database.MySQLRaavarebatchDAO;
 import edu.example.server.database.MySQLReceptDAO;
 import edu.example.server.database.connector.Connector;
 
@@ -231,8 +233,116 @@ public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleS
 		return result;
 	}
 	
+	//Råvarebatch
+	private final MySQLRaavarebatchDAO rbDAO = new MySQLRaavarebatchDAO();
+	
+	@Override
+	public ArrayList<RaavarebatchDTO> getRaavarebatchList() {
+		Connector con = null;
+		ArrayList<RaavarebatchDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<RaavarebatchDTO>(rbDAO.getRaavarebatchlist());
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String createRaavarebatch(RaavarebatchDTO raavarebatch) {
+		String result = "Råvarebatchen " + raavarebatch.getRbID() + " kunne ikke oprettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+
+			int reply = rbDAO.createRaavarebatch(raavarebatch);
+			if(reply > 0)
+				result = "Råvarebatchen " + raavarebatch.getRbID() + " blev oprettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String updateRaavarebatch(RaavarebatchDTO raavarebatch) {
+		String result = "Råvarebatchen " + raavarebatch.getRbID() + " kunne ikke opdateres: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = rbDAO.updateRaavarebatch(raavarebatch);
+			if(reply > 0)
+				result = "Råvarebatchen " + raavarebatch.getRbID() + " blev opdateret";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String deleteRaavarebatch(int rbID) {
+		String result = "Råvarebatchen " + rbID + " kunne ikke slettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = rbDAO.deleteRaavarebatch(rbID);
+			if(reply > 0)
+				result = "Råvarebatchen " + rbID + " blev slettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+	
+	
 	//Recepter
-private final MySQLReceptDAO receptDAO = new MySQLReceptDAO();
+	private final MySQLReceptDAO receptDAO = new MySQLReceptDAO();
 	
 	@Override
 	public ArrayList<ReceptDTO> getReceptList() {
