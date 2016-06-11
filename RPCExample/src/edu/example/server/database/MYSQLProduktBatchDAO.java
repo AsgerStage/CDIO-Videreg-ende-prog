@@ -6,31 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
+import edu.example.client.models.ProduktbatchDTO;
 import edu.example.server.database.connector.Connector;
-import edu.example.server.database.dto.ProduktBatchDTO;
 
 public class MYSQLProduktBatchDAO implements ProduktbatchDAO 
 {
 	@Override
-	public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {
+	public ProduktbatchDTO getProduktBatch(int pbId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch WHERE pbId= "+pbId);
 		try
 		{
 			if(!rs.first()) throw new DALException("Produktbatch"+pbId+"Findes ikke");
-			return new ProduktBatchDTO (rs.getInt("pbId"),rs.getInt("status"),rs.getInt("receptId"));
+			return new ProduktbatchDTO (rs.getInt("pbId"),rs.getInt("status"),rs.getInt("receptId"));
 		}
 		catch(SQLException e){throw new DALException(e);}
 	}
 	
 	@Override
-	public List<ProduktBatchDTO> getProduktBatchList() throws DALException {
-		List<ProduktBatchDTO> list = new ArrayList<ProduktBatchDTO>();
+	public List<ProduktbatchDTO> getProduktBatchList() throws DALException {
+		List<ProduktbatchDTO> list = new ArrayList<ProduktbatchDTO>();
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch");
 		try
 		{
 			while (rs.next()) 
 			{
-				list.add(new ProduktBatchDTO(rs.getInt("PbId"), rs.getInt("status"), rs.getInt("receptId")));
+				list.add(new ProduktbatchDTO(rs.getInt("PbId"), rs.getInt("status"), rs.getInt("receptId")));
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
@@ -38,18 +38,18 @@ public class MYSQLProduktBatchDAO implements ProduktbatchDAO
 	}
 
 	@Override
-	public void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
+	public void createProduktBatch(ProduktbatchDTO produktbatch) throws DALException {
 	Connector.doUpdate(
-			"INSERT INTO produktbatch(pbID,status,receptId) VALUES" +"("+produktbatch.getPbId()+", '"+produktbatch.getStatus()+"', '"+produktbatch.getReceptId()+"'"
+			"INSERT INTO produktbatch(pbID,status,receptId) VALUES" +"("+produktbatch.getPbID()+", '"+produktbatch.getStatus()+"', '"+produktbatch.getReceptID()+"'"
 			);
 	}
 
 	@Override
-	public void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException {
+	public void updateProduktBatch(ProduktbatchDTO produktbatch) throws DALException {
 		Connector.doUpdate(
-				"UPDATE produktbatch SET  pbId = '" + produktbatch.getPbId() + "', status =  '" + produktbatch.getStatus() + 
-				"', receptId = '" + produktbatch.getReceptId() + "' WHERE pbId = " +
-				produktbatch.getPbId()
+				"UPDATE produktbatch SET  pbId = '" + produktbatch.getPbID() + "', status =  '" + produktbatch.getStatus() + 
+				"', receptId = '" + produktbatch.getReceptID() + "' WHERE pbId = " +
+				produktbatch.getPbID()
 		);
 	}
 }

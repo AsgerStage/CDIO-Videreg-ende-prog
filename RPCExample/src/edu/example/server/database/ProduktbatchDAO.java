@@ -3,11 +3,11 @@ package edu.example.server.database;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
-import edu.example.server.database.dto.ProduktBatchDTO;
+import edu.example.client.models.ProduktbatchDTO;
 
 public interface ProduktbatchDAO {
-	ProduktBatchDTO getProduktBatch(int pbId) throws DALException;
-	List<ProduktBatchDTO> getProduktBatchList() throws DALException;
-	void createProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
-	void updateProduktBatch(ProduktBatchDTO produktbatch) throws DALException;
+	ProduktbatchDTO getProduktBatch(int pbId) throws DALException;
+	List<ProduktbatchDTO> getProduktBatchList() throws DALException;
+	void createProduktBatch(ProduktbatchDTO produktbatch) throws DALException;
+	void updateProduktBatch(ProduktbatchDTO produktbatch) throws DALException;
 }

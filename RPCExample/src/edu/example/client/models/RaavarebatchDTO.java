@@ -52,6 +52,7 @@ public class RaavarebatchDTO implements Serializable
 		this.maengde = maengde;
 	}
 	
+	@Override
 	public String toString() { 
 		return "{ID=" + rbID + ", Råvare=" + raavare + ", Mængde=" + maengde + '}';
 	}
