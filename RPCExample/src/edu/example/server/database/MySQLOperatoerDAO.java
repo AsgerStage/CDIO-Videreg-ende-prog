@@ -30,7 +30,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 	
 	@Override
 	public void createOperator(OperatorDTO opr) throws DALException {
-		Connector.doUpdate ("CALL `DTU`.`create_oprator`(?, ?, ?, ?, ?, ?)",
+		Connector.doUpdate ("CALL `DTU`.`create_operator`(?, ?, ?, ?, ?, ?)",
 				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank());
 	}
 	
@@ -54,5 +54,11 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 			throw new DALException(e); 
 		}
 		return list;
+	}
+	
+	@Override
+	public void deleteOperator(int oprId) throws DALException {
+		Connector.doUpdate ("CALL `delete_operator`(?)",
+				oprId);
 	}
 }

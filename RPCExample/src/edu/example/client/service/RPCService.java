@@ -24,6 +24,8 @@ public interface RPCService extends RemoteService
 	
 	String getPassword(int oprID);
 	
+	void deleteOperator(int oprID);
+	
 	//Raavarer
 	ArrayList<RaavareDTO> getRaavareList();
 	

@@ -18,6 +18,8 @@ public interface RPCServiceIClient
 	
 	void getPassword(int oprID);
 	
+	void deleteOperator(int oprID);
+	
 	//Raavarer
 	void getRaavareList();
 	

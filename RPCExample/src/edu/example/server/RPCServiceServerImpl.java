@@ -136,6 +136,28 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 		return result;
 	}
 
+	public void deleteOperator(int oprId) {
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			opDAO.deleteOperator(oprId);
+			
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		
+	}
+	
+	
 	//Raavarer
 	private final MySQLRaavareDAO raDAO = new MySQLRaavareDAO();
 	

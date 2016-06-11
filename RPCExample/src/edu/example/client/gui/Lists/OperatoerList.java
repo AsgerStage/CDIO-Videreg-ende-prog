@@ -1,165 +1,310 @@
+/**
+ * 
+ */
 package edu.example.client.gui.Lists;
 
+/**
+ * @author Asger
+ *
+ * 10/06/2016
+ */
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.example.client.exceptions.DALException;
+import edu.example.client.exceptions.OpIdException;
+import edu.example.client.exceptions.OpNameException;
+import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.gui.MenuWidget;
-import edu.example.client.gui.profile.EditProfile;
-import edu.example.client.gui.profile.ProfilePage;
 import edu.example.client.models.OperatorDTO;
+import edu.example.client.gui.Lists.OperatorPopup;
 import edu.example.client.service.RPCServiceClientImpl;
 
-public class OperatoerList extends Composite 
+public class OperatoerList extends Composite
 {
 	public MenuWidget parent;
-	private VerticalPanel vPanel = new VerticalPanel();
 	private RPCServiceClientImpl serverComm;
+	private VerticalPanel mainPanel = new VerticalPanel();
 	
-	private Label myLbl = new Label("Operatoer");
-	private Grid opTable = new Grid(1,7);
-	private TextBox searchBox = new TextBox();
-	private final String searchBoxDefaultText = "Dette er et soegefelt";
+	private final String searchBoxDefaultText = "Soeg efter operator";
+	private final TextBox searchBox = new TextBox();
 	
-	private List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
+	private final Grid tableList = new Grid(1, 7);
+	private List<OperatorDTO> operatorList = null;
+	private List<OperatorDTO> dispOperatorList = null;
 	
 	public OperatoerList(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		this.parent = parent;
 		this.serverComm = serverComm;
-		initWidget(this.vPanel);
-		onModuleLoad();
+		
+		mainPanel.setSize("100%", "100%");
+		initWidget(mainPanel);
+		init();
+		
+		this.serverComm.getOpList();
 	}
 	
-	public void onModuleLoad() {
-		HorizontalPanel hPanel = new HorizontalPanel();
-		serverComm.getOpList();
+	private void init() {
+		//Top panel
+		HorizontalPanel topPanel = new HorizontalPanel();
 		
-		myLbl.getElement().setPropertyString("id", "opLabel");
-	 
-		hPanel.add(myLbl);
-		vPanel.add(hPanel);
-
+		HTML pageTitle = new HTML("Operat&oslash;rer");
+		pageTitle.addStyleName("h1");
+		
 		searchBox.setText(searchBoxDefaultText);
-		hPanel.add(searchBox);
-		Button SoegBtn = new Button("Soeg");
-		SoegBtn.addClickHandler(new SearchClickHandler());
-		hPanel.add(SoegBtn);
+		searchBox.addKeyPressHandler(new KeyPressHandler() {
+			@Override
+			public void onKeyPress(KeyPressEvent event) {
+				if(event.getUnicodeCharCode() == 13)
+					search(searchBox.getText());
+			}
+		});
+		searchBox.addFocusHandler(new FocusHandler() {
+			@Override
+			public void onFocus(FocusEvent event) {
+				if(searchBox.getText().equals(searchBoxDefaultText))
+					searchBox.setText("");
+			}
+		});
 		
-		Button refreshButton = new Button("Opdater");
-		refreshButton.addClickHandler(new RefreshClickHandler());
-		hPanel.add(refreshButton);
+		Button buttonSearch = new Button();
+		buttonSearch.setHTML("S&oslash;g");
+		buttonSearch.addClickHandler(new ClickHandlerSearch());
 		
-		opTable.setText(0, 0, "ID");
-		opTable.setText(0, 1, "Navn");
-		opTable.setText(0, 2, "Ini");
-		opTable.setText(0, 3, "Rank");
-		opTable.setText(0, 4, "CPR");
-		opTable.setText(0, 5, "Password");
-		opTable.setText(0, 6, "Rediger");
-		 
-		opTable.setBorderWidth(1);
-		vPanel.add(opTable);
-		opTable.setCellPadding(10);
-		opTable.getRowCount();		
+		Button buttonUpdate = new Button("Opdater");
+		buttonUpdate.addClickHandler(new ClickHandlerUpdate());
+		
+		//Table
+		tableList.setHTML(0, 0, "ID");
+		tableList.setHTML(0, 1, "CPR");
+		tableList.setHTML(0, 2, "Navn");
+		tableList.setHTML(0, 3, "Initialer");
+		tableList.setHTML(0, 4, "Rank");
+		tableList.setHTML(0, 5, "Password");
+		tableList.setHTML(0, 6, "Handling");
+		tableList.setBorderWidth(1);
+		tableList.setCellPadding(10);
+		tableList.setWidth("100%");
+		
+		//Buttom panel
+		HorizontalPanel buttonPanel = new HorizontalPanel();
+		buttonPanel.setWidth("100%");
+		buttonPanel.setHorizontalAlignment(HasAlignment.ALIGN_RIGHT);
+		buttonPanel.addStyleName("paddedVerticalPanel");
+		
+		Button createButtom = new Button();		
+		createButtom.setHTML("Opret Operat&oslash;r");
+		createButtom.setStyleName("button");
+		createButtom.addClickHandler(new ClickHandlerCreate());
+		
+		//Add widgets
+		topPanel.add(pageTitle);
+		topPanel.add(searchBox);
+		topPanel.add(buttonSearch);
+		topPanel.add(buttonUpdate);
+		
+		buttonPanel.add(createButtom);
+		
+		mainPanel.add(topPanel);
+		mainPanel.add(tableList);
+		mainPanel.add(buttonPanel);
+	}
+
+	public void statusUpdate(String result) {
+		String reply = "something went wrong!";
+//		if(result == true)
+//			reply = "Handlingen blev udfoert";
+//		else
+//			reply = "Handlingen kunne ikke udfoeres!";
+		
+		Window.alert(result);
 	}
 	
-	public void addOp(OperatorDTO operator) {		
-		opTable.resize(opTable.getRowCount() + 1, 7);
-		int rowIndex = opTable.getRowCount() - 1;
-		
-		opTable.setText(rowIndex, 0, "" + operator.getOprID());
-		opTable.setText(rowIndex, 1, operator.getName());
-		opTable.setText(rowIndex, 2, operator.getIni());
-		opTable.setText(rowIndex, 3, "" + operator.getRank());
-		opTable.setText(rowIndex, 4, "" + operator.getCpr());
-		opTable.setText(rowIndex, 5, "" + operator.getPassword());
-		
-		Button editButton = new Button("Rediger");
-		editButton.addClickHandler(new EditClickHandler(this));
-		opTable.setWidget(rowIndex, 6, editButton);
-	}	
+	public void updateTable(List<OperatorDTO> operator) {
+		operatorList = operator;
+		update(operatorList);
+	}
 	
-	public void updateOperatoerList(List<OperatorDTO> result) {
-		clear();
+	private void update(List<OperatorDTO> operator) {
+		dispOperatorList = operator;
+		clearTable(operator.size() + 1);
 		
-		if (searchBox.getText().equals(searchBoxDefaultText) || searchBox.getText().equals("")) {
-			for (int i = 0; i < result.size(); i++){
-				addOp(result.get(i));
-			}
-			
-			currentDisp = result;
+		for (int i = 0; i < operator.size(); i++) {
+			addOperatorToTable(i + 1, operator.get(i));
 		}
-		else {
+	}
+	
+	private void addOperatorToTable(int rowIndex, OperatorDTO operator) {
+		tableList.setText(rowIndex, 0, "" + operator.getOprID());
+		tableList.setText(rowIndex, 1, operator.getCpr());
+		tableList.setText(rowIndex, 2, operator.getName());
+		tableList.setText(rowIndex, 3, operator.getIni());
+		tableList.setText(rowIndex, 4, ""+operator.getRank());
+		tableList.setText(rowIndex, 5, operator.getPassword());
+		HorizontalPanel ButtonPanel = new HorizontalPanel();
+		
+		PushButton editButton = new PushButton(new Image("Billeder/edit-icon.png"));
+		editButton.addClickHandler(new ClickHandlerEdit());
+		editButton.setTitle("Rediger");
+		ButtonPanel.add(editButton);
+		
+		PushButton deleteButton = new PushButton(new Image("Billeder/trash-icon.png"));
+		deleteButton.addClickHandler(new ClickHandlerDelete());
+		deleteButton.setTitle("Slet");
+		ButtonPanel.add(deleteButton);
+		
+		tableList.setWidget(rowIndex, 6, ButtonPanel);
+	}
+	
+	private void clearTable(int size) {
+		tableList.resize(size, 7);
+	}
+	
+	private void search(String searchText) {		
+		if(operatorList != null) {
+			ArrayList<OperatorDTO> result = new ArrayList<>();
+			
 			try {
-				int searchBoxInt;
+				int searhID = Integer.parseInt(searchText);
 				
-				for(int i = 0; i < result.size(); i++) {
-					searchBoxInt=Integer.parseInt(searchBox.getText());
-					
-					if(!(result.get(i).getOprID() == searchBoxInt)){
-						result.remove(i);
-						i = -1;
+				for (OperatorDTO operator : operatorList) {
+					if(operator.getOprID() == searhID) {
+						result.add(operator);
+						break;
 					}
 				}
 			}
-			catch(Exception e) {
-				for (int i = 0; i < result.size(); i++) {
-					if (!(result.get(i).getName().contains(searchBox.getText()) || result.get(i).getIni().contains(searchBox.getText()) || result.get(i).getCpr().contains(searchBox.getText()))) {
-						result.remove(i);
-						i = -1;
-					}				
+			catch(NumberFormatException e) {
+				searchText = searchText.toUpperCase();
+				
+				for (OperatorDTO operator : operatorList) {
+					if(operator.getName().toUpperCase().contains(searchText) || operator.getCpr().toUpperCase().contains(searchText) || operator.getIni().toUpperCase().contains(searchText)) {
+						result.add(operator);
+					}
 				}
 			}
+			finally {
+				if(result != null)
+					update(result);
+			}
+		}
+	}
+	
+	private class ClickHandlerSearch implements ClickHandler
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			search(searchBox.getText());			
+		}
+	}
+	
+	private class ClickHandlerUpdate implements ClickHandler
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			serverComm.getOpList();
+		}
+	}
+	
+	private class ClickHandlerEdit implements ClickHandler
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			OperatorDTO operator = dispOperatorList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-			for (int j = 0; j < result.size(); j++){
-				addOp(result.get(j));
-			}	
-			currentDisp = result;
+			OperatorPopup editPopup = new OperatorPopup(operator);
+			editPopup.setExecuteClickHandler(new PopupHandlerExecute(editPopup));
+			editPopup.setCancelClickHandler(new PopupHandlerCancel(editPopup));
+			editPopup.show();
 		}
 	}
 	
-	public void clear() {
-		opTable.resize(1, 7);
-	}
-	
-	private class RefreshClickHandler implements ClickHandler 
+	private class ClickHandlerCreate implements ClickHandler
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			searchBox.setText(searchBoxDefaultText);
-			serverComm.getOpList();
+			OperatorPopup createPopup = new OperatorPopup(null);
+			createPopup.setExecuteClickHandler(new PopupHandlerExecute(createPopup));
+			createPopup.setCancelClickHandler(new PopupHandlerCancel(createPopup));
+			createPopup.show();
 		}
 	}
 	
-	private class SearchClickHandler implements ClickHandler 
+	private class ClickHandlerDelete implements ClickHandler
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			serverComm.getOpList();
+			OperatorDTO operator = dispOperatorList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			
+			if(Window.confirm("Er du sikker paa at du vil slette operatoren " + operator.getOprID() + ", " + operator.getName() +"?"))
+				serverComm.deleteOperator(operator.getOprID());
 		}
 	}
 	
-	public class EditClickHandler implements ClickHandler 
+	private class PopupHandlerExecute implements ClickHandler 
 	{
-		private OperatoerList parent;
-		private EditClickHandler(OperatoerList parent) {
-			this.parent = parent;
+		private final OperatorPopup popup;
+		
+		protected PopupHandlerExecute(OperatorPopup popup) {
+			this.popup = popup;
 		}
-	
-		@Override
-		public void onClick(ClickEvent event) {      
-			OperatorDTO user = currentDisp.get(opTable.getCellForEvent(event).getRowIndex()-1);
 
-            ProfilePage editProfilePanel = new EditProfile("Rediger Profil", user, parent, serverComm);
-            parent.parent.gotoPanel(editProfilePanel);
-        }
-	};
+		@Override
+		public void onClick(ClickEvent event) {
+			int operatorID = popup.getOperatorID();
+			String operatorName = popup.getOperatorName();
+			String OperatorIni=popup.getOperatorIni();
+			String operatorCPR =popup.getOperatorCpr();
+			String OperatorPassword=popup.getOperatorPassword();
+			int OperatorRank=popup.getOperatorRank();
+	
+			OperatorDTO operator;
+			try {
+				operator = new OperatorDTO(operatorID, operatorName,OperatorIni,operatorCPR,OperatorPassword,OperatorRank);
+				popup.hide();
+				if(popup.isCreate()) 
+					serverComm.createOperator(operator);
+				else 
+					serverComm.updateOperator(operator);
+			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+	}
+	
+	private class PopupHandlerCancel implements ClickHandler 
+	{
+		private OperatorPopup popup;
+		
+		protected PopupHandlerCancel(OperatorPopup popup) {
+			this.popup = popup;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			popup.hide();
+		}
+	}
 }

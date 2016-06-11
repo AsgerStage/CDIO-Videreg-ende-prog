@@ -62,6 +62,10 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 		this.service.getPassword(oprID, new DefaultCallback());
 	}
 
+	@Override
+	public void deleteOperator(int oprID) {
+		this.service.deleteOperator(oprID, new DefaultCallback());
+	}
 	//Raavarer
 	@Override
 	public void getRaavareList() {
@@ -145,7 +149,11 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 			}
 			else if(currentPanel instanceof OperatoerList) {
 				OperatoerList oplist = (OperatoerList) currentPanel;
-				oplist.updateOperatoerList((List<OperatorDTO>) result);
+				if(result instanceof String) 
+					oplist.statusUpdate((String) result);
+				else
+					oplist.updateTable((List<OperatorDTO>) result);
+				
 			}
 			else if(currentPanel instanceof Login) {
 				Login login = (Login) currentPanel;

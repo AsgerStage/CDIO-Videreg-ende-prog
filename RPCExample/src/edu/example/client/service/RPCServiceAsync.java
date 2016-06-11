@@ -20,6 +20,8 @@ public interface RPCServiceAsync
 	
 	void getPassword(int oprID, AsyncCallback callback);
 	
+	void deleteOperator(int oprID,AsyncCallback callback);
+	
 	//Raavarer
 	void getRaavareList(AsyncCallback callback);
 	
