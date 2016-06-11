@@ -11,6 +11,7 @@ import edu.example.client.gui.Lists.OperatoerList;
 import edu.example.client.gui.Lists.ReceptList;
 //import edu.example.client.gui.login.Afslut;
 import edu.example.client.gui.login.Login;
+import edu.example.client.gui.produktbatch.ProduktbatchPanel;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
@@ -46,9 +47,11 @@ public class MenuWidget extends Composite
 		miRaaverebatch.setHTML("R&aring;varebatchs");
 		menu.addItem(miRaaverebatch);
 		
-		MenuItem receptList = new MenuItem("Recepter",cmd_Recept);
+		menu.addItem(new MenuItem("Pruduktbatchs", cmd_Produktbatch));
 		
+		MenuItem receptList = new MenuItem("Recepter",cmd_Recept);
 		menu.addItem(receptList);
+		
 		menu.addItem(new MenuItem("Login", cmd_Login));
 		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
 		
@@ -62,7 +65,6 @@ public class MenuWidget extends Composite
 	
 	public void gotoPanel(Composite panel) {
 		currentPanel = panel;
-		
 		parent.setContentPanel(panel);
 	}
 
@@ -70,7 +72,6 @@ public class MenuWidget extends Composite
 		public void execute() {			
 			WeightPage  viewPanel = new WeightPage();
 			gotoPanel(viewPanel);
-		
 		}
 	};
 
@@ -85,7 +86,6 @@ public class MenuWidget extends Composite
 		public void execute() {
 			OperatoerList viewPanel = new OperatoerList(me, serverComm);
 			gotoPanel(viewPanel);
-			
 		}
 	};
 	
@@ -93,7 +93,6 @@ public class MenuWidget extends Composite
 		public void execute() {
 			RaavarePanel raavarePanel = new RaavarePanel(me, serverComm);
 			gotoPanel(raavarePanel);
-			
 		}
 	};
 	
@@ -101,27 +100,33 @@ public class MenuWidget extends Composite
 		public void execute() {
 			RaavarebatchPanel raavarebatchPanel = new RaavarebatchPanel(me, serverComm);
 			gotoPanel(raavarebatchPanel);
-			
 		}
 	};
 	
-	Command cmd_Login = new Command() {
+	Command cmd_Produktbatch = new Command() {
 		public void execute() {
-			Login viewPanel = new Login(me, serverComm);
-				gotoPanel(viewPanel);
-		}
-	};
-	
-	Command cmd_Afslut = new Command() {
-		public void execute() {
-			Afslut viewPanel = new Afslut();
-			gotoPanel(viewPanel);
+			ProduktbatchPanel produktbatchPanel = new ProduktbatchPanel(me, serverComm);
+			gotoPanel(produktbatchPanel);
 		}
 	};
 	
 	Command cmd_Recept = new Command() {
 		public void execute() {
 			ReceptList viewPanel = new ReceptList(me, serverComm);
+			gotoPanel(viewPanel);
+		}
+	};
+	
+	Command cmd_Login = new Command() {
+		public void execute() {
+			Login viewPanel = new Login(me, serverComm);
+			gotoPanel(viewPanel);
+		}
+	};
+	
+	Command cmd_Afslut = new Command() {
+		public void execute() {
+			Afslut viewPanel = new Afslut();
 			gotoPanel(viewPanel);
 		}
 	};
