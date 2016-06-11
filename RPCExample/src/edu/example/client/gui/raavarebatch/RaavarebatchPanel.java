@@ -24,12 +24,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.RaavareDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class RaavarebatchPanel extends Composite 
 {
 	public MenuWidget parent;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private VerticalPanel mainPanel = new VerticalPanel();
 	
 	private final String searchBoxDefaultText = "Soeg efter raavarebatch";
@@ -40,7 +40,7 @@ public class RaavarebatchPanel extends Composite
 	private List<RaavarebatchDTO> raavarebatchList = null;
 	private List<RaavarebatchDTO> dispRaavarebatchList = null;
 	
-	public RaavarebatchPanel(MenuWidget parent, ExampleServiceClientImpl serverComm) {
+	public RaavarebatchPanel(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		this.parent = parent;
 		this.serverComm = serverComm;
 		
@@ -214,12 +214,12 @@ public class RaavarebatchPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			RaavareDTO raavare = dispRaavareList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
-//			
-//			RaavareInfoPopup editPopup = new RaavareInfoPopup(raavare);
-//			editPopup.setExecuteClickHandler(new PopupHandlerExecute(editPopup));
-//			editPopup.setCancelClickHandler(new PopupHandlerCancel(editPopup));
-//			editPopup.show();
+			RaavarebatchDTO raavarebatch = dispRaavarebatchList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			
+			RaavarebatchPopup editPopup = new RaavarebatchPopup(raavarebatch);
+			editPopup.setExecuteClickHandler(new PopupHandlerExecute(editPopup));
+			editPopup.setCancelClickHandler(new PopupHandlerCancel(editPopup));
+			editPopup.show();
 		}
 	}
 	
@@ -227,10 +227,10 @@ public class RaavarebatchPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			RaavareInfoPopup createPopup = new RaavareInfoPopup(null);
-//			createPopup.setExecuteClickHandler(new PopupHandlerExecute(createPopup));
-//			createPopup.setCancelClickHandler(new PopupHandlerCancel(createPopup));
-//			createPopup.show();
+			RaavarebatchPopup createPopup = new RaavarebatchPopup(null);
+			createPopup.setExecuteClickHandler(new PopupHandlerExecute(createPopup));
+			createPopup.setCancelClickHandler(new PopupHandlerCancel(createPopup));
+			createPopup.show();
 		}
 	}
 	
@@ -245,41 +245,41 @@ public class RaavarebatchPanel extends Composite
 		}
 	}
 	
-//	private class PopupHandlerExecute implements ClickHandler 
-//	{
-//		private final RaavareInfoPopup popup;
-//		
-//		protected PopupHandlerExecute(RaavareInfoPopup popup) {
-//			this.popup = popup;
-//		}
-//
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			int raavareID = popup.getRaavareID();
-//			String raavareName = popup.getRaavareName();
-//			String leverandoer = popup.getRaavareLeverandoer();
-//			
-//			RaavareDTO raavare = new RaavareDTO(raavareID, raavareName, leverandoer);
-//			
-//			popup.hide();
-//			if(popup.isCreate()) 
-//				serverComm.createRaavare(raavare);
-//			else 
-//				serverComm.updateRaavare(raavare);
-//		}
-//	}
+	private class PopupHandlerExecute implements ClickHandler 
+	{
+		private final RaavarebatchPopup popup;
+		
+		protected PopupHandlerExecute(RaavarebatchPopup popup) {
+			this.popup = popup;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			int raavarebatchID = popup.getRaavarebatchID();
+			int raavareID = popup.getRaavareID();
+			double maengde = popup.getMaengde();
+			
+			RaavarebatchDTO raavarebatch = new RaavarebatchDTO(raavarebatchID, new RaavareDTO(raavareID, null, null), maengde);
+			
+			popup.hide();
+			if(popup.isCreate()) 
+				serverComm.createRaavarebatch(raavarebatch);
+			else 
+				serverComm.updateRaavarebatch(raavarebatch);
+		}
+	}
 	
-//	private class PopupHandlerCancel implements ClickHandler 
-//	{
-//		private RaavareInfoPopup popup;
-//		
-//		protected PopupHandlerCancel(RaavareInfoPopup popup) {
-//			this.popup = popup;
-//		}
-//
-//		@Override
-//		public void onClick(ClickEvent event) {
-//			popup.hide();
-//		}
-//	}
+	private class PopupHandlerCancel implements ClickHandler 
+	{
+		private RaavarebatchPopup popup;
+		
+		protected PopupHandlerCancel(RaavarebatchPopup popup) {
+			this.popup = popup;
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			popup.hide();
+		}
+	}
 }

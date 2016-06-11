@@ -43,7 +43,7 @@ public class MySQLRaavarebatchDAO implements RaavarebatchDAO
 	
 	@Override
 	public int createRaavarebatch(RaavarebatchDTO raavarebatch) throws DALException {		
-		return Connector.doUpdate("CALL `DTU`.`create_raavarebatch`(<{IN rb_id_in INT(9)}>, <{raavare_id_in INT(9)}>, <{IN maengde DOUBLE}>) ",
+		return Connector.doUpdate("CALL `DTU`.`create_raavarebatch`(?, ?, ?) ",
 				raavarebatch.getRbID(), raavarebatch.getRaavare().getRaavareID(), raavarebatch.getMaengde());
 	}
 	

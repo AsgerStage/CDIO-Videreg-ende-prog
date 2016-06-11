@@ -5,7 +5,7 @@ import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 
-public interface ExampleServiceIClient 
+public interface RPCServiceIClient 
 {
 	//operators
 	void getOpList();

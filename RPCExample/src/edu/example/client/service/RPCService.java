@@ -12,7 +12,7 @@ import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 
 @RemoteServiceRelativePath("exampleservice")
-public interface ExampleService extends RemoteService
+public interface RPCService extends RemoteService
 {
 	//operators
 	ArrayList<OperatorDTO> getOpList();

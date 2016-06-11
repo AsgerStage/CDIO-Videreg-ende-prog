@@ -7,13 +7,13 @@ import com.google.gwt.user.client.ui.Label;
 
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.models.OperatorDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class ViewProfile extends ProfilePage 
 {
 //	private ViewProfile me = this;
 	protected MenuWidget parent;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private OperatorDTO user;
 	
 	private InfoBox nameField;
@@ -25,7 +25,7 @@ public class ViewProfile extends ProfilePage
 	private Button editButton;
 	private Button cancelButton;
 	
-	public ViewProfile(String title, int userID, MenuWidget parent, ExampleServiceClientImpl serverComm) {
+	public ViewProfile(String title, int userID, MenuWidget parent, RPCServiceClientImpl serverComm) {
 		super(title);
 		this.parent = parent;
 		this.serverComm = serverComm;

@@ -3,7 +3,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -14,7 +14,7 @@ public class RPCExample implements EntryPoint
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		ExampleServiceClientImpl clientImpl = new ExampleServiceClientImpl(GWT.getModuleBaseURL() + "exampleservice");
+		RPCServiceClientImpl clientImpl = new RPCServiceClientImpl(GWT.getModuleBaseURL() + "exampleservice");
 		RootPanel.get().add(clientImpl.getMainGUI());
 	}
 }

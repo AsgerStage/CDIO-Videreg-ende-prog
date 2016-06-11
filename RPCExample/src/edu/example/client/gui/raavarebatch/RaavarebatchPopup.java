@@ -24,7 +24,7 @@ public class RaavarebatchPopup extends DialogBox
 	
 	private boolean isCreate = false;
 	
-	public RaavarebatchPopup(RaavarebatchDTO raavarebatch) {
+	protected RaavarebatchPopup(RaavarebatchDTO raavarebatch) {
 		super();
 		VerticalPanel mainPanel = new VerticalPanel();
 		
@@ -87,15 +87,15 @@ public class RaavarebatchPopup extends DialogBox
         this.setWidget(mainPanel);
 	}
 
-	public int getRaavarebatchID() {
+	protected int getRaavarebatchID() {
 		return Integer.parseInt(idBox.getText());
 	}
 
-	public int getRaavareID() {
+	protected int getRaavareID() {
 		return Integer.parseInt(raavareIDBox.getText());
 	}
 
-	public double getMaengde() {
+	protected double getMaengde() {
 		return Double.parseDouble(meangdeBox.getText());
 	}
 	

@@ -9,7 +9,7 @@ import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 
-public interface ExampleServiceAsync 
+public interface RPCServiceAsync 
 {
 	//operators
 	void getOpList(AsyncCallback callback);

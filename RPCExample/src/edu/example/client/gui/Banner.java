@@ -6,16 +6,16 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.login.Login;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class Banner extends Composite {
 
 	private VerticalPanel vPanel = new VerticalPanel(); //Hovedpanelet
 	private HorizontalPanel contentPanel;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private MenuWidget menuWidget;
 
-	public Banner(ExampleServiceClientImpl serverComm) {
+	public Banner(RPCServiceClientImpl serverComm) {
 		initWidget(this.vPanel);
 		vPanel.setSize("100%", "100%");
 

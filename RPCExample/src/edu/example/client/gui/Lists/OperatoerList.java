@@ -16,13 +16,13 @@ import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.EditProfile;
 import edu.example.client.gui.profile.ProfilePage;
 import edu.example.client.models.OperatorDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class OperatoerList extends Composite 
 {
 	public MenuWidget parent;
 	private VerticalPanel vPanel = new VerticalPanel();
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	
 	private Label myLbl = new Label("Operatoer");
 	private Grid opTable = new Grid(1,7);
@@ -31,7 +31,7 @@ public class OperatoerList extends Composite
 	
 	private List<OperatorDTO> currentDisp; //Indeholder den liste af personer der bliver displayet
 	
-	public OperatoerList(MenuWidget parent, ExampleServiceClientImpl serverComm) {
+	public OperatoerList(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		this.parent = parent;
 		this.serverComm = serverComm;
 		initWidget(this.vPanel);

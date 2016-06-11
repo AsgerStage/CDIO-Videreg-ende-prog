@@ -32,12 +32,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.models.ReceptDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class ReceptList extends Composite
 {
 	public MenuWidget parent;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private VerticalPanel mainPanel = new VerticalPanel();
 	
 	private final String searchBoxDefaultText = "Soeg efter recept";
@@ -47,7 +47,7 @@ public class ReceptList extends Composite
 	private List<ReceptDTO> receptList = null;
 	private List<ReceptDTO> dispReceptList = null;
 	
-	public ReceptList(MenuWidget parent, ExampleServiceClientImpl serverComm) {
+	public ReceptList(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		this.parent = parent;
 		this.serverComm = serverComm;
 		

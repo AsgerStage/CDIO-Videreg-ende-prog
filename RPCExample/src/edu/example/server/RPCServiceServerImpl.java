@@ -10,14 +10,14 @@ import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
-import edu.example.client.service.ExampleService;
+import edu.example.client.service.RPCService;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLRaavareDAO;
 import edu.example.server.database.MySQLRaavarebatchDAO;
 import edu.example.server.database.MySQLReceptDAO;
 import edu.example.server.database.connector.Connector;
 
-public class ExampleServiceImpl extends RemoteServiceServlet implements ExampleService
+public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCService
 {
 	private static final long serialVersionUID = 5550980922485907926L;
 	

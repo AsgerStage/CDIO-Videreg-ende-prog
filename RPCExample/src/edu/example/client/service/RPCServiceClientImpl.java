@@ -17,15 +17,15 @@ import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 
-public class ExampleServiceClientImpl implements ExampleServiceIClient
+public class RPCServiceClientImpl implements RPCServiceIClient
 {
-	private ExampleServiceAsync service;
+	private RPCServiceAsync service;
 	private Banner mainGui;
 	
-	public ExampleServiceClientImpl(String url) {
+	public RPCServiceClientImpl(String url) {
 		System.out.println("URL: " + url);
 		
-		this.service = GWT.create(ExampleService.class);
+		this.service = GWT.create(RPCService.class);
 		ServiceDefTarget endPoint = (ServiceDefTarget) this.service;
 		endPoint.setServiceEntryPoint(url);
 		

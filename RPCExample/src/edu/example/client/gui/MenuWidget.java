@@ -15,7 +15,7 @@ import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.logUd.Afslut;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 import edu.example.client.weightPage.WeightPage;
 
 public class MenuWidget extends Composite
@@ -24,9 +24,9 @@ public class MenuWidget extends Composite
 	private HorizontalPanel hPanel= new HorizontalPanel();
 	private Banner parent;
 	private Object currentPanel = null;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 
-	public MenuWidget(Banner banner, ExampleServiceClientImpl serverComm) {
+	public MenuWidget(Banner banner, RPCServiceClientImpl serverComm) {
 		initWidget(this.hPanel);
 		parent = banner;
 		this.serverComm = serverComm;

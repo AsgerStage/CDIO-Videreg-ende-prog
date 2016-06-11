@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.ViewProfile;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 
 

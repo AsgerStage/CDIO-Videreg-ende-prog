@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.models.OperatorDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 import java.security.MessageDigest;
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public class Login extends Composite {
 	String pass;
 	TextBox normalText = new TextBox();
 	PasswordTextBox normalPassword = new PasswordTextBox();
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private MenuWidget parent;
 	
     class User {
@@ -44,7 +44,7 @@ public class Login extends Composite {
 	/**
 	 * This is the entry point method.
 	 */
-	public Login(MenuWidget parent, ExampleServiceClientImpl serverComm) {
+	public Login(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		initWidget(this.vPanel);
 		this.parent = parent;
 		this.serverComm = serverComm;

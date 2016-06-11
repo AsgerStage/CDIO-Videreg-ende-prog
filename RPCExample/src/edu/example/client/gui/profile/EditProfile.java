@@ -12,12 +12,12 @@ import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.gui.Lists.OperatoerList;
 import edu.example.client.models.OperatorDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class EditProfile extends ProfilePage 
 {
 	private Object parent;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private OperatorDTO user;
 	
 	private InfoBox nameField;
@@ -30,7 +30,7 @@ public class EditProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 	
-	public EditProfile(String title, OperatorDTO user, Object parent, ExampleServiceClientImpl serverComm) {
+	public EditProfile(String title, OperatorDTO user, Object parent, RPCServiceClientImpl serverComm) {
 		super(title);
 		this.parent = parent;
 		this.serverComm = serverComm;

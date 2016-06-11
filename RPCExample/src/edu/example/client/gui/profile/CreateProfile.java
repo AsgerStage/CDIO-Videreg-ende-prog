@@ -10,11 +10,11 @@ import edu.example.client.exceptions.OpIdException;
 import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.models.OperatorDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class CreateProfile extends ProfilePage 
 {
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	
 	private InfoBox nameField;
 	private InfoBox initialsField;
@@ -25,7 +25,7 @@ public class CreateProfile extends ProfilePage
 	private Button saveButton;
 	private Button cancelButton;
 
-	public CreateProfile(String title, ExampleServiceClientImpl serverComm) {
+	public CreateProfile(String title, RPCServiceClientImpl serverComm) {
 		super(title);
 		this.serverComm = serverComm;
 

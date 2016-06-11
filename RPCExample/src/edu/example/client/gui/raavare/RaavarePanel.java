@@ -23,12 +23,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.models.RaavareDTO;
-import edu.example.client.service.ExampleServiceClientImpl;
+import edu.example.client.service.RPCServiceClientImpl;
 
 public class RaavarePanel extends Composite
 {
 	public MenuWidget parent;
-	private ExampleServiceClientImpl serverComm;
+	private RPCServiceClientImpl serverComm;
 	private VerticalPanel mainPanel = new VerticalPanel();
 	
 	private final String searchBoxDefaultText = "Soeg efter raavare";
@@ -38,7 +38,7 @@ public class RaavarePanel extends Composite
 	private List<RaavareDTO> raavareList = null;
 	private List<RaavareDTO> dispRaavareList = null;
 	
-	public RaavarePanel(MenuWidget parent, ExampleServiceClientImpl serverComm) {
+	public RaavarePanel(MenuWidget parent, RPCServiceClientImpl serverComm) {
 		this.parent = parent;
 		this.serverComm = serverComm;
 		
