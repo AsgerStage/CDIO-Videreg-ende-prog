@@ -17,7 +17,7 @@ import edu.example.client.models.ReceptDTO;
 import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.service.RPCService;
 import edu.example.server.database.MYSQLProduktbatchDAO;
-import edu.example.server.database.MYSQLReceptKompDAO;
+import edu.example.server.database.MYSQLReceptkompDAO;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLProduktbatchKompDAO;
 import edu.example.server.database.MySQLRaavareDAO;
@@ -680,31 +680,109 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 		return result;
 	}
 	
-	//Produktbatch komponent
-	private final MYSQLReceptKompDAO receptkompDAO = new MYSQLReceptKompDAO();
+	//Recept komponent
+	private final MYSQLReceptkompDAO receptkompDAO = new MYSQLReceptkompDAO();
 
 	@Override
 	public ArrayList<ReceptkompDTO> getReceptkompListByReceptID(int receptID) {
-		// TODO Auto-generated method stub
-		return null;
+		Connector con = null;
+		ArrayList<ReceptkompDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<ReceptkompDTO>(receptkompDAO.getReceptkompListByReceptID(receptID));
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try { con.closeConnection(); } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public String createReceptkomp(ReceptkompDTO receptkomp) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " kunne ikke oprettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+
+			int reply = receptkompDAO.createReceptkomp(receptkomp);
+			if(reply > 0)
+				result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " blev oprettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public String updateReceptkomp(ReceptkompDTO receptkomp) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " kunne ikke opdateres: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = receptkompDAO.updateReceptkomp(receptkomp);
+			if(reply > 0)
+				result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " blev opdateret";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public String deleteReceptkomp(int receptID, int raavareID) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "Recept komponentet " + receptID + " + " + raavareID + " kunne ikke slettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = receptkompDAO.deleteReceptkomp(receptID, raavareID);
+			if(reply > 0)
+				result = "Recept komponentet " + receptID + " + " + raavareID + " blev slettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	/* (non-Javadoc)
