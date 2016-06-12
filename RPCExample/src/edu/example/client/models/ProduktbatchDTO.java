@@ -10,6 +10,9 @@ public class ProduktbatchDTO implements Serializable
 	private static final int STATUS_NOT_STARTET = 0;
 	private static final int STATUS_STARTET = 1;
 	private static final int STATUS_COMPLETE = 2;	
+	private static final String STATUS_NOT_STARTET_STR = "Ikke paabegyndt";
+	private static final String STATUS_STARTET_STR = "Under produktion";
+	private static final String STATUS_COMPLETE_STR = "Afsluttet";	
 	
 	private int pbID;		// i omraadet 1-99999999
 	private int status;		// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
@@ -61,13 +64,26 @@ public class ProduktbatchDTO implements Serializable
 	public static String statusToString(int status) {
 		switch (status) {
 			case STATUS_NOT_STARTET:
-				return "Ikke påbegyndt";
+				return STATUS_NOT_STARTET_STR;
 			case STATUS_STARTET:
-				return "Under produktion";
+				return STATUS_STARTET_STR;
 			case STATUS_COMPLETE:
-				return "Afsluttet";
+				return STATUS_COMPLETE_STR;
 			default:
 				return "Ikke defineret";
+		}
+	}
+	
+	public static int statusToInt(String status) {
+		switch (status) {
+			case STATUS_NOT_STARTET_STR:
+				return STATUS_NOT_STARTET;
+			case STATUS_STARTET_STR:
+				return STATUS_STARTET;
+			case STATUS_COMPLETE_STR:
+				return STATUS_COMPLETE;
+			default:
+				return -1;
 		}
 	}
 

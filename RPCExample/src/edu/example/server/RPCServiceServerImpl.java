@@ -529,11 +529,11 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 		try {
 			con = new Connector();
 			receptDAO.updateRecept(recept);
-			result = "Recepten " + recept.getReceptId() + " blev opateret";
+			result = "Recepten " + recept.getReceptID() + " blev opateret";
 		} 
 		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			result = "Recepten " + recept.getReceptId() + " kunne ikke opdateres: " + e.getMessage();
+			result = "Recepten " + recept.getReceptID() + " kunne ikke opdateres: " + e.getMessage();
 		}
         finally {
             if(con != null)

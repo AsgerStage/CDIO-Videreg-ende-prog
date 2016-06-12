@@ -145,7 +145,7 @@ public class ReceptList extends Composite
 	}
 	
 	private void addReceptToTable(int rowIndex, ReceptDTO recept) {
-		tableList.setText(rowIndex, 0, "" + recept.getReceptId());
+		tableList.setText(rowIndex, 0, "" + recept.getReceptID());
 		tableList.setText(rowIndex, 1, recept.getReceptNavn());
 		
 		HorizontalPanel ButtonPanel = new HorizontalPanel();
@@ -175,7 +175,7 @@ public class ReceptList extends Composite
 				int searhID = Integer.parseInt(searchText);
 				
 				for (ReceptDTO recept : receptList) {
-					if(recept.getReceptId() == searhID) {
+					if(recept.getReceptID() == searhID) {
 						result.add(recept);
 						break;
 					}
@@ -243,8 +243,8 @@ public class ReceptList extends Composite
 		public void onClick(ClickEvent event) {
 			ReceptDTO recept = dispReceptList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-			if(Window.confirm("Er du sikker paa at du vil slette recepten " + recept.getReceptId() + ", " + recept.getReceptNavn() +"?"))
-				serverComm.deleteRecept(recept.getReceptId());
+			if(Window.confirm("Er du sikker paa at du vil slette recepten " + recept.getReceptID() + ", " + recept.getReceptNavn() +"?"))
+				serverComm.deleteRecept(recept.getReceptID());
 		}
 	}
 	

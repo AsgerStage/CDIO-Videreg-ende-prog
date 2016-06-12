@@ -60,7 +60,7 @@ public class ReceptPopup extends DialogBox
 			this.setText("Rediger Recept");
 			
 			title.setHTML("Rediger Recept");
-			idBox.setText("" + recept.getReceptId());
+			idBox.setText("" + recept.getReceptID());
 			idBox.setEnabled(false);
 			nameBox.setText(recept.getReceptNavn());
 			execute.setText("Gem");
