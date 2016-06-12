@@ -1,5 +1,7 @@
 package edu.example.client.service;
 
+import java.util.List;
+
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.RaavareDTO;
@@ -56,5 +58,9 @@ public interface RPCServiceIClient
 	void updateRecept(ReceptDTO recept);
 	
 	void deleteRecept(int receptID);
+	
+	//Telnet Client
+	void getDataList(String command, int expectedReplies, List<String> params);
+	void getData(String command, List<String> params);
 	
 }

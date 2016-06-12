@@ -1,7 +1,9 @@
 package edu.example.server;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -566,6 +568,42 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
                 } catch (SQLException e) { }
         }
 		
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.example.client.service.RPCService#getDataList(java.lang.String, int, java.util.List)
+	 */
+	@Override
+	public ArrayList<String> getDataList(String command, int expectedReplies, List<String> params) {
+		TelnetClient con=null;
+		ArrayList<String> result = null;
+		
+		try {
+			con=new TelnetClient("localhost",8000);
+			result=con.getData(command, expectedReplies, params);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see edu.example.client.service.RPCService#getData(java.lang.String, java.util.List)
+	 */
+	@Override
+	public String getData(String command, List<String> params) {
+		TelnetClient con=null;
+		String result = null;
+		
+		try {
+			con=new TelnetClient("localhost",8000);
+			result=con.getData(command, params);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 }

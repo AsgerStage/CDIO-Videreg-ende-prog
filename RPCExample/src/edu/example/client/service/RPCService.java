@@ -1,6 +1,7 @@
 package edu.example.client.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -62,4 +63,9 @@ public interface RPCService extends RemoteService
 	String updateRecept(ReceptDTO recept);
 	
 	String deleteRecept(int receptID);
+	
+	//TelnetClient
+	
+	ArrayList<String> getDataList(String command, int expectedReplies, List<String> params);
+	String getData(String command, List<String> params);
 }

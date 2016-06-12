@@ -70,7 +70,7 @@ public class MenuWidget extends Composite
 
 	Command cmd_NyAfvejning = new Command() {
 		public void execute() {			
-			WeightPage  viewPanel = new WeightPage();
+			WeightPage  viewPanel = new WeightPage(serverComm);
 			gotoPanel(viewPanel);
 		}
 	};
