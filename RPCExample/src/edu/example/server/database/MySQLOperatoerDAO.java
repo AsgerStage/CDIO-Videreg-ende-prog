@@ -21,7 +21,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 	    	if (!rs.first()) 
 	    		throw new DALException("Operatoeren " + oprId + " findes ikke");
 	    	
-	    	return new OperatorDTO (rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"), rs.getInt("rank"), rs.getString("hash"), rs.getString("salt"));
+	    	return new OperatorDTO (rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"), rs.getInt("rank"), rs.getString("hash"));
 	    }
 	    catch (SQLException | OpNameException | OpIdException | OpPasswordException e) {
 	    	throw new DALException(e);
@@ -47,7 +47,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 			list = new ArrayList<OperatorDTO>();
 			ResultSet rs = Connector.doQuery("CALL get_operators()");
 			while (rs.next()) {
-				list.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"), rs.getInt("rank"), rs.getString("hash"), rs.getString("salt")));
+				list.add(new OperatorDTO(rs.getInt("opr_id"), rs.getString("opr_navn"), rs.getString("ini"), rs.getString("cpr"), rs.getString("password"), rs.getInt("rank"), rs.getString("hash")));
 			}
 		}
 		catch (SQLException | OpNameException | OpIdException | OpPasswordException e) { 

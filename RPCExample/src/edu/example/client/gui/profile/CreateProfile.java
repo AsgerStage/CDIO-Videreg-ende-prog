@@ -155,7 +155,7 @@ public class CreateProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				serverComm.createOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", getRank()));
+				serverComm.createOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", getRank(), null));
 			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
 				e.printStackTrace();
 			}

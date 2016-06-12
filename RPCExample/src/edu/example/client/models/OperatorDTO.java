@@ -35,23 +35,21 @@ public final class OperatorDTO implements Serializable
     private String password;
     private int rank;
     private String hash;
-    private String salt;
     
     public OperatorDTO() {
     	
     }
-    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
-        setOprID(oprID);
-        setName(oprNavn);
-        setIni(ini);
-        setCpr(cpr);
-        setPassword(password);
-        setRank(rank);
+    
+//    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
+//        setOprID(oprID);
+//        setName(oprNavn);
+//        setIni(ini);
+//        setCpr(cpr);
+//        setPassword(password);
+//        setRank(rank);
+//    }
 
-        
-    }
-
-    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank, String hash, String salt) throws OpPasswordException, OpNameException, OpIdException, DALException {
+    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank, String hash) throws OpPasswordException, OpNameException, OpIdException, DALException {
         setOprID(oprID);
         setName(oprNavn);
         setIni(ini);
@@ -59,19 +57,7 @@ public final class OperatorDTO implements Serializable
         setPassword(password);
         setRank(rank);
         setHash(hash);
-        setSalt(salt);
-        
     }
-    
-    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, String hash, String salt) throws OpNameException, OpIdException, OpPasswordException {
-		setOprID(oprID);
-		setName(oprNavn);
-		setIni(ini);
-		setCpr(cpr);
-		setPassword(password);
-		setHash(hash);
-		setSalt(salt);
-	}
 	
 	public void setIni(String ini) {
         this.ini = ini;
@@ -137,6 +123,14 @@ public final class OperatorDTO implements Serializable
     public String getPassword() {
         return this.password;
     }
+
+	public String getHash() {
+		return this.hash;
+	}
+	
+	public void setHash(String hash){
+		this.hash = hash;
+	}
     
     private boolean valPass(String pass) {
         if(pass.length() < PASSWORD_MINIMUM_LENGTH)
@@ -195,7 +189,7 @@ public final class OperatorDTO implements Serializable
 
     @Override
     public String toString() {
-        return "OperatorDTO{" + "oprID=" + oprID + ", oprNavn=" + oprNavn + ", ini=" + ini + ", cpr=" + cpr + ", password=" + password + ", rank=" + rank + ", hash=" + hash + ", salt=" + salt + '}';
+        return "OperatorDTO{" + "oprID=" + oprID + ", oprNavn=" + oprNavn + ", ini=" + ini + ", cpr=" + cpr + ", rank=" + rank + ", password=" + password + ", hash=" + hash + '}';
     }
 
     @Override
@@ -205,11 +199,12 @@ public final class OperatorDTO implements Serializable
         final OperatorDTO other = (OperatorDTO) obj;
         
         return this.oprID == other.oprID &&
-               Objects.equals(this.oprNavn, other.oprNavn) &&
-               Objects.equals(this.ini, other.ini) &&
-               this.cpr == other.cpr &&
-               Objects.equals(this.password, other.password) && 
-               this.rank == other.rank;
+        		Objects.equals(this.oprNavn, other.oprNavn) &&
+                Objects.equals(this.ini, other.ini) &&
+                this.cpr == other.cpr &&
+                Objects.equals(this.password, other.password) && 
+                this.rank == other.rank &&
+                Objects.equals(this.hash, other.hash);
     }
 
     @Override
@@ -223,20 +218,4 @@ public final class OperatorDTO implements Serializable
         hash = 61 * hash + this.rank;
         return hash;
     }
-
-	public String getHash() {
-		return this.hash;
-		
-	}
-	public void setHash(String hash){
-		this.hash = hash;
-	}
-
-	public String getSalt() {
-		return this.salt;
-	}
-	public void setSalt(String salt){
-		this.salt = salt;
-	}
-	
 }

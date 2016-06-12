@@ -279,14 +279,13 @@ public class OperatoerList extends Composite
 	
 			OperatorDTO operator;
 			try {
-				operator = new OperatorDTO(operatorID, operatorName,OperatorIni,operatorCPR,OperatorPassword,OperatorRank);
+				operator = new OperatorDTO(operatorID, operatorName, OperatorIni, operatorCPR, OperatorPassword, OperatorRank, null);
 				popup.hide();
 				if(popup.isCreate()) 
 					serverComm.createOperator(operator);
 				else 
 					serverComm.updateOperator(operator);
 			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

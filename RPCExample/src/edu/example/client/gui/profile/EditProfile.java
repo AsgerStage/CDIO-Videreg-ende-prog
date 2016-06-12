@@ -11,6 +11,7 @@ import edu.example.client.exceptions.OpIdException;
 import edu.example.client.exceptions.OpNameException;
 import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.gui.Lists.OperatoerList;
+import edu.example.client.misc.Utils;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
@@ -236,7 +237,7 @@ public class EditProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), getRank()));
+				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), getRank(), Utils.getMD5Hash(user.getPassword())));
 				
 				if(parent instanceof ViewProfile) {
 					ViewProfile viewParent = (ViewProfile) parent;
