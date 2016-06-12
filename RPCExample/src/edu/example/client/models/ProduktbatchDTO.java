@@ -1,6 +1,7 @@
 package edu.example.client.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import edu.example.client.exceptions.DALException;
 
@@ -17,6 +18,7 @@ public class ProduktbatchDTO implements Serializable
 	private int pbID;		// i omraadet 1-99999999
 	private int status;		// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
 	private int receptID;
+	private ArrayList<ProduktbatchKompDTO> produktbatchKompenenter = new ArrayList<>();
 	
 	public ProduktbatchDTO() {
 		
