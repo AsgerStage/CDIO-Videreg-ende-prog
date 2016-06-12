@@ -372,27 +372,107 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	private final MySQLProduktbatchKompDAO pbkompDAO = new MySQLProduktbatchKompDAO();
 	
 	@Override
-	public ArrayList<ProduktbatchDTO> getPbkompListByPbID(int pbID) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ProduktbatchKompDTO> getPbkompListByPbID(int pbID) {
+		Connector con = null;
+		ArrayList<ProduktbatchKompDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<ProduktbatchKompDTO>(pbkompDAO.getProduktbatchKompListByRBID(pbID));
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public String createPbkomp(ProduktbatchKompDTO pbkomp) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " kunne ikke oprettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+
+			int reply = pbkompDAO.createProduktbatchKomp(pbkomp);
+			if(reply > 0)
+				result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " blev oprettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public String updatePbkomp(ProduktbatchKompDTO pbkomp) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " kunne ikke opdateres: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = pbkompDAO.updateProduktbatchKomp(pbkomp);
+			if(reply > 0)
+				result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " blev opdateret";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 
 	@Override
 	public String deletePbkomp(int pbID, int rbID) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "Produktbatch komponentet " + pbID + " + " + rbID + " kunne ikke slettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = pbkompDAO.deleteProduktbatchKomp(pbID, rbID);
+			if(reply > 0)
+				result = "Produktbatch komponentet " + pbID + " + " + rbID + " blev slettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
 	}
 	
 	//Produktbatch

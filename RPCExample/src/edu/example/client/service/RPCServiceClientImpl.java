@@ -11,6 +11,7 @@ import edu.example.client.gui.Lists.OperatoerList;
 import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.produktbatch.ProduktbatchPanel;
+import edu.example.client.gui.produktbatch.pbKomp.ProduktbatchkompPanel;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
@@ -308,35 +309,35 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	}
 	
 	/**
-	 * Async Callback for produktbatch
+	 * Async Callback for produktbatch komponent
 	 */
 	private class ProduktbatchKompCallback implements AsyncCallback 
 	{
 
 		@Override
 		public void onFailure(Throwable caught) {
-//			Object currentPanel = mainGui.getCurrentPanel();
-//			
-//			if(currentPanel instanceof ProduktbatchPanel) {
-//				ProduktbatchPanel produktbatchPanel = (ProduktbatchPanel) currentPanel;
-//				produktbatchPanel.statusUpdate("Error on server: " + caught.getMessage());
-//			}
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ProduktbatchkompPanel) {
+				ProduktbatchkompPanel pbkompPanel = (ProduktbatchkompPanel) currentPanel;
+				pbkompPanel.statusUpdate("Error on server: " + caught.getMessage());
+			}
 		}
 
 		@Override
 		public void onSuccess(Object result) {
-//			Object currentPanel = mainGui.getCurrentPanel();
-//			
-//			if(currentPanel instanceof ProduktbatchPanel) {
-//				ProduktbatchPanel produktbatchPanel = (ProduktbatchPanel) currentPanel;
-//				
-//				if(result instanceof String) 
-//					produktbatchPanel.statusUpdate((String) result);
-//				else if(result instanceof List<?>)
-//					produktbatchPanel.updateTable((List<ProduktbatchDTO>) result);
-//				else
-//					produktbatchPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
-//			}
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ProduktbatchPanel) {
+				ProduktbatchkompPanel pbkompPanel = (ProduktbatchkompPanel) currentPanel;
+				
+				if(result instanceof String) 
+					pbkompPanel.statusUpdate((String) result);
+				else if(result instanceof List<?>)
+					pbkompPanel.updateTable((List<ProduktbatchKompDTO>) result);
+				else
+					pbkompPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
+			}
 		}
 	}
 }

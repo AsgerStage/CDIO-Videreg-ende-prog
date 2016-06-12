@@ -140,7 +140,7 @@ public class ProduktbatchPanel extends Composite
 		
 		HorizontalPanel ButtonPanel = new HorizontalPanel();
 		
-		PushButton viewButton = new PushButton(new Image("Billeder/search-icon.png"));
+		PushButton viewButton = new PushButton(new Image("Billeder/view-icon.png"));
 		viewButton.addClickHandler(new ClickHandlerView(this));
 		viewButton.setTitle("Se");
 		ButtonPanel.add(viewButton);

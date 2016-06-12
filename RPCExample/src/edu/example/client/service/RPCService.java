@@ -48,7 +48,7 @@ public interface RPCService extends RemoteService
 	String deleteRaavarebatch(int rbID);
 	
 	//Produktbatch komponent
-	ArrayList<ProduktbatchDTO> getPbkompListByPbID(int pbID);
+	ArrayList<ProduktbatchKompDTO> getPbkompListByPbID(int pbID);
 	
 	String createPbkomp(ProduktbatchKompDTO pbkomp);
 	
