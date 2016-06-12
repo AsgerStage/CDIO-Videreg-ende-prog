@@ -30,14 +30,14 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 	
 	@Override
 	public void createOperator(OperatorDTO opr) throws DALException {
-		Connector.doUpdate ("CALL `DTU`.`create_operator`(?, ?, ?, ?, ?, ?)",
-				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank());
+		Connector.doUpdate ("CALL `DTU`.`create_operator`(?, ?, ?, ?, ?, ?, ?)",
+				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank(), opr.getHash());
 	}
 	
 	@Override
 	public void updateOperator(OperatorDTO opr) throws DALException {		
-		Connector.doUpdate("CALL `DTU`.`update_operator`(?, ?, ?, ?, ?, ?)",
-				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank());
+		Connector.doUpdate("CALL `DTU`.`update_operator`(?, ?, ?, ?, ?, ?, ?)",
+				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank(), opr.getHash());
 	}
 	
 	@Override

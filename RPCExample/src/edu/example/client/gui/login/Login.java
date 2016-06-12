@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.ViewProfile;
+import edu.example.client.misc.Utils;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
@@ -90,50 +91,21 @@ public class Login extends Composite {
 			int ID = Integer.parseInt(normalText.getText());
 			serverComm.getOperator(ID);
 			pass = normalPassword.getText();
-			 
-			
-			
-			
-			
-		}//s
+		}
 	}
 
-	public void CompareLogin(OperatorDTO result) {
-
+	public void CompareLogin(OperatorDTO opr) {
 		String pw = normalPassword.getText();
-		lbltest.setText("Salt=" + result.getSalt() + ", Hash=" + result.getHash());
-		
-        boolean pwMatch = result.getHash().equals(getMD5(pw,result.getSalt()));
+
+		boolean pwMatch = opr.getHash().equals(Utils.getMD5Hash(pw));
 
 		if (pwMatch == true) {
-			lbltest.setText(lbltest.getText() + ": rigtigt password");
-			//ViewProfile viewPanel = new ViewProfile("Se Profil", 25, parent, serverComm);
-			//parent.gotoPanel(viewPanel);
-		} else if (pwMatch == false) {
+			lbltest.setText("rigtigt password");
+		} 
+		else if (pwMatch == false) {
 			lbltest.setText("Forkert password");
 			normalPassword.setFocus(true);
 		}
-		else
-			lbltest.setText("test2");
 	}
-
-
-	 public static String getMD5(final String hash, String salt) {
-		    try {
-		      MessageDigest m = MessageDigest.getInstance("MD5");
-		      m.reset();
-		      m.update(hash.getBytes());
-		      BigInteger bigInt = new BigInteger(1, m.digest());
-		      String hashtext = bigInt.toString(16);
-		      while(hashtext.length() < 32 ){
-		          hashtext = "0" + hashtext;
-		      }
-		      return hashtext;
-		    } catch (NoSuchAlgorithmException e) {
-		      e.printStackTrace();
-		      return e.getMessage();
-		    }
-		  }
-
 } 
 
