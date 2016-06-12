@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.MenuWidget;
+import edu.example.client.gui.produktbatch.pbKomp.ProduktbatchkompPanel;
 import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
@@ -139,6 +140,11 @@ public class ProduktbatchPanel extends Composite
 		
 		HorizontalPanel ButtonPanel = new HorizontalPanel();
 		
+		PushButton viewButton = new PushButton(new Image("Billeder/search-icon.png"));
+		viewButton.addClickHandler(new ClickHandlerView(this));
+		viewButton.setTitle("Se");
+		ButtonPanel.add(viewButton);
+		
 		PushButton editButton = new PushButton(new Image("Billeder/edit-icon.png"));
 		editButton.addClickHandler(new ClickHandlerEdit());
 		editButton.setTitle("Rediger");
@@ -228,6 +234,25 @@ public class ProduktbatchPanel extends Composite
 			
 			if(Window.confirm("Er du sikker paa at du vil slette raavarebatch " + produktbatch.getPbID() + '?'))
 				serverComm.deleteProduktbatch(produktbatch.getPbID());
+		}
+	}
+	
+	private class ClickHandlerView implements ClickHandler
+	{
+		private ProduktbatchPanel parent;
+		
+		protected ClickHandlerView(ProduktbatchPanel parent) {
+			this.parent = parent;
+		}
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			ProduktbatchDTO produktbatch = dispProduktbatchList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			
+			ProduktbatchkompPanel pbkompPanel = new ProduktbatchkompPanel(parent, serverComm, produktbatch.getPbID());
+			parent.parent.gotoPanel(pbkompPanel);
+//			if(Window.confirm("Er du sikker paa at du vil slette raavarebatch " + produktbatch.getPbID() + '?'))
+//				serverComm.deleteProduktbatch(produktbatch.getPbID());
 		}
 	}
 	
