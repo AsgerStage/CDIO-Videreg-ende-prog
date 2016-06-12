@@ -39,15 +39,6 @@ public final class OperatorDTO implements Serializable
     public OperatorDTO() {
     	
     }
-    
-//    public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank) throws OpPasswordException, OpNameException, OpIdException, DALException {
-//        setOprID(oprID);
-//        setName(oprNavn);
-//        setIni(ini);
-//        setCpr(cpr);
-//        setPassword(password);
-//        setRank(rank);
-//    }
 
     public OperatorDTO(int oprID, String oprNavn, String ini, String cpr, String password, int rank, String hash) throws OpPasswordException, OpNameException, OpIdException, DALException {
         setOprID(oprID);

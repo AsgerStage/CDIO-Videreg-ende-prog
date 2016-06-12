@@ -7,11 +7,7 @@ import edu.example.client.exceptions.DALException;
 
 /**
  * Raavare Data Objekt
- * 
- * @author mn/sh/tb
- * @version 1.2
  */
-
 public final class RaavareDTO implements Serializable
 {
 	private static final long serialVersionUID = -5377060714932261571L;
@@ -48,7 +44,7 @@ public final class RaavareDTO implements Serializable
     	int strLength = raavareNavn.length();
     	
     	if(strLength < 2 || strLength > 20)
-    		throw new DALException("Råvare navnet skal være mellem 1 og 99999999 karakterer, den var " + strLength);
+    		throw new DALException("Råvare navnet skal være mellem 2 og 20 karakterer, den var " + strLength);
     	else
     		this.raavareNavn = raavareNavn; 
     }
@@ -61,7 +57,7 @@ public final class RaavareDTO implements Serializable
     	int strLength = leverandoer.length();
     	
     	if(strLength < 2 || strLength > 20)
-    		throw new DALException("Leverandørens navn skal være mellem 1 og 99999999 karakterer, den var " + strLength);
+    		throw new DALException("Leverandørens navn skal være mellem 2 og 20 karakterer, den var " + strLength);
     	else
     		this.leverandoer = leverandoer; 
     }
