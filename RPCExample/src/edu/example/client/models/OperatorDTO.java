@@ -9,8 +9,15 @@ import edu.example.client.exceptions.OpPasswordException;
 
 public final class OperatorDTO implements Serializable
 {
-	public static final int RANK_OPR = 4;
 	public static final int RANK_ADMIN = 1;
+	public static final int RANK_FARMA = 2;
+	public static final int RANK_VAERK = 3;
+	public static final int RANK_OPR = 4;
+
+	public static final String RANK_ADMIN_STR = "Administrator";
+	public static final String RANK_FARMA_STR = "Farmaceut";
+	public static final String RANK_VAERK_STR = "Værkfører";
+	public static final String RANK_OPR_STR = "Operatør";
 	
     private static final long serialVersionUID = 1L;
 	private int ID_MINIMUM_VALUE = 1;
@@ -156,12 +163,31 @@ public final class OperatorDTO implements Serializable
         return (lowerCase + upperCase + digit + specialChar) >= NUMBER_OF_SPECIAL_CHARACTERS;
     }
     
+    public static int rankToInt(String rank) {
+    	switch (rank) {
+		case RANK_OPR_STR:
+			return RANK_OPR;
+		case RANK_VAERK_STR:
+			return RANK_VAERK;
+		case RANK_FARMA_STR:
+			return RANK_FARMA;
+		case RANK_ADMIN_STR:
+			return RANK_ADMIN;
+		default:
+			return -1;
+		}
+    }
+    
     public static String rankToString(int rank) {
     	switch (rank) {
 		case RANK_OPR:
-			return "Operator";
+			return RANK_OPR_STR;
+		case RANK_VAERK:
+			return RANK_VAERK_STR;
+		case RANK_FARMA:
+			return RANK_FARMA_STR;
 		case RANK_ADMIN:
-			return "Administrator";
+			return RANK_ADMIN_STR;
 		default:
 			return "Undefined";
 		}
