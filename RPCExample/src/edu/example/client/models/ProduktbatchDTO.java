@@ -63,6 +63,22 @@ public class ProduktbatchDTO implements Serializable
     		this.receptID = receptID;
 	}
 	
+	public ArrayList<ProduktbatchKompDTO> getProduktbatchKompenenter () {
+		return produktbatchKompenenter;
+	}
+	
+	public void setProduktbatchKompenenter (ArrayList<ProduktbatchKompDTO> produktbatchKompenenter) {
+		this.produktbatchKompenenter = produktbatchKompenenter;
+	}
+	
+	public void addProduktbatchKompenenter (ProduktbatchKompDTO produktbatchKomp) {
+		produktbatchKompenenter.add(produktbatchKomp);
+	}
+	
+	public void clearProduktbatchKompenenter () {
+		produktbatchKompenenter.clear();
+	}
+	
 	public static String statusToString(int status) {
 		switch (status) {
 			case STATUS_NOT_STARTET:
@@ -90,7 +106,7 @@ public class ProduktbatchDTO implements Serializable
 	}
 
 	@Override
-	public String toString() { 
+	public String toString() {
 		return "{ID=" + pbID + ", ReceptID=" + receptID + ", Status=" + status + '}';
 	}
 
