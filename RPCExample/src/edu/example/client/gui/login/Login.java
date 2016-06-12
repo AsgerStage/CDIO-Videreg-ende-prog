@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.gui.profile.ViewProfile;
+import edu.example.client.misc.Session;
 import edu.example.client.misc.Utils;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.service.RPCServiceClientImpl;
@@ -105,7 +106,8 @@ public class Login extends Composite {
 
 		if (pwMatch == true) {
 			//lbltest.setText("rigtigt password");
-			ViewProfile viewPanel = new ViewProfile("Se Profil", Integer.parseInt(normalText.getText()), parent, serverComm);
+			Session.CURRENT_USER = opr;
+			ViewProfile viewPanel = new ViewProfile("Se Profil", opr.getOprID(), parent, serverComm);
 			parent.gotoPanel(viewPanel);
 		} 
 		else if (pwMatch == false) {

@@ -16,6 +16,7 @@ import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.logUd.Afslut;
+import edu.example.client.misc.Session;
 import edu.example.client.service.RPCServiceClientImpl;
 import edu.example.client.weightPage.WeightPage;
 
@@ -77,7 +78,7 @@ public class MenuWidget extends Composite
 
 	Command cmd_MinSide = new Command() {
 		public void execute() {
-			ViewProfile viewPanel = new ViewProfile("Se Profil", 25, me, serverComm);
+			ViewProfile viewPanel = new ViewProfile("Se Profil", Session.CURRENT_USER.getOprID(), me, serverComm);
 			gotoPanel(viewPanel);
 		}
 	};
