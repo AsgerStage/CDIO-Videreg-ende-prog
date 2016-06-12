@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.models.ProduktbatchKompDTO;
 
-public class ProduktbatchKompPopup extends DialogBox 
+public class ProduktbatchKompPopup extends DialogBox
 {	
 	private TextBox pbIDBox = new TextBox();
 	private TextBox rbIDBox = new TextBox();

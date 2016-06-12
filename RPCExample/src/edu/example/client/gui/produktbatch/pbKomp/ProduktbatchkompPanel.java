@@ -260,7 +260,7 @@ public class ProduktbatchkompPanel extends Composite
 			try {
 				ProduktbatchKompDTO produktbatch = new ProduktbatchKompDTO(produktbatchID, raavarebatchID, tara, netto, operatoerID);
 
-//				if(popup.isCreate()) 
+//				if(popup.isCreate())
 //					serverComm.createPbkomp(produktbatch);
 //				else 
 //					serverComm.updatePbkomp(produktbatch);
