@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
+import edu.example.client.models.ProduktbatchKompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -40,6 +41,15 @@ public interface RPCServiceIClient
 	void updateRaavarebatch(RaavarebatchDTO raavarebatch);
 	
 	void deleteRaavarebatch(int rbID);
+	
+	//Produktbatch komponent
+	void getPbkompListByPbID(int pbID);
+	
+	void createPbkomp(ProduktbatchKompDTO pbkomp);
+	
+	void updatePbkomp(ProduktbatchKompDTO pbkomp);
+	
+	void deletePbkomp(int pbID, int rbID);
 	
 	//Produktbatch
 	void getProduktbatchList();

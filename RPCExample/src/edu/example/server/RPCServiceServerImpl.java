@@ -10,12 +10,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
+import edu.example.client.models.ProduktbatchKompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
 import edu.example.client.service.RPCService;
 import edu.example.server.database.MYSQLProduktbatchDAO;
 import edu.example.server.database.MySQLOperatoerDAO;
+import edu.example.server.database.MySQLProduktbatchKompDAO;
 import edu.example.server.database.MySQLRaavareDAO;
 import edu.example.server.database.MySQLRaavarebatchDAO;
 import edu.example.server.database.MySQLReceptDAO;
@@ -364,6 +366,33 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
         }
 		
 		return result;
+	}
+
+	//Produktbatch komponent
+	private final MySQLProduktbatchKompDAO pbkompDAO = new MySQLProduktbatchKompDAO();
+	
+	@Override
+	public ArrayList<ProduktbatchDTO> getPbkompListByPbID(int pbID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createPbkomp(ProduktbatchKompDTO pbkomp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updatePbkomp(ProduktbatchKompDTO pbkomp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deletePbkomp(int pbID, int rbID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	//Produktbatch

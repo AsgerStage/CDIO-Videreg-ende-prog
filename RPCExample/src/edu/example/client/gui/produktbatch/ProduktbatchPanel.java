@@ -251,8 +251,6 @@ public class ProduktbatchPanel extends Composite
 			
 			ProduktbatchkompPanel pbkompPanel = new ProduktbatchkompPanel(parent, serverComm, produktbatch.getPbID());
 			parent.parent.gotoPanel(pbkompPanel);
-//			if(Window.confirm("Er du sikker paa at du vil slette raavarebatch " + produktbatch.getPbID() + '?'))
-//				serverComm.deleteProduktbatch(produktbatch.getPbID());
 		}
 	}
 	

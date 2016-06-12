@@ -54,7 +54,7 @@ public class ProduktbatchkompPanel extends Composite
 		tableList = new Grid(1, tableColumns);
 		init();
 		
-//		this.serverComm.getPbkompListByPbID(currPBID);
+		this.serverComm.getPbkompListByPbID(currPBID);
 	}
 	
 	private void init() {
@@ -105,7 +105,7 @@ public class ProduktbatchkompPanel extends Composite
 		buttonPanel.addStyleName("paddedVerticalPanel");
 		
 		Button createButton = new Button();		
-		createButton.setHTML("Opret Produktbatch");
+		createButton.setHTML("Opret Produktbatch Komponent");
 		createButton.setStyleName("button");
 		createButton.addClickHandler(new ClickHandlerCreate());
 		
@@ -202,7 +202,7 @@ public class ProduktbatchkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			serverComm.getPbkompListByPbID(currPBID);
+			serverComm.getPbkompListByPbID(currPBID);
 		}
 	}
 	
@@ -236,8 +236,8 @@ public class ProduktbatchkompPanel extends Composite
 		public void onClick(ClickEvent event) {
 			ProduktbatchKompDTO pbkomp = dispPbkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-//			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + '?'))
-//				serverComm.deletePbkomp(pbkomp.getPbID(), pbkomp.getRbID());
+			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + '?'))
+				serverComm.deletePbkomp(pbkomp.getPbID(), pbkomp.getRbID());
 		}
 	}
 	
@@ -260,10 +260,10 @@ public class ProduktbatchkompPanel extends Composite
 			try {
 				ProduktbatchKompDTO produktbatch = new ProduktbatchKompDTO(produktbatchID, raavarebatchID, tara, netto, operatoerID);
 
-//				if(popup.isCreate())
-//					serverComm.createPbkomp(produktbatch);
-//				else 
-//					serverComm.updatePbkomp(produktbatch);
+				if(popup.isCreate())
+					serverComm.createPbkomp(produktbatch);
+				else 
+					serverComm.updatePbkomp(produktbatch);
 			} 
 			catch (DALException e) {
 				statusUpdate(e.getMessage());

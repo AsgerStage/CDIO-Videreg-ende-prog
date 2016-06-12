@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
+import edu.example.client.models.ProduktbatchKompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -43,6 +44,15 @@ public interface RPCServiceAsync
 	void updateRaavarebatch(RaavarebatchDTO raavarebatch, AsyncCallback callback);
 	
 	void deleteRaavarebatch(int rbID, AsyncCallback callback);
+	
+	//Produktbatch komponent
+	void getPbkompListByPbID(int pbID, AsyncCallback callback);
+	
+	void createPbkomp(ProduktbatchKompDTO pbkomp, AsyncCallback callback);
+	
+	void updatePbkomp(ProduktbatchKompDTO pbkomp, AsyncCallback callback);
+	
+	void deletePbkomp(int pbID, int rbID, AsyncCallback callback);
 	
 	//Produktbatch
 	void getProduktbatchList(AsyncCallback callback);

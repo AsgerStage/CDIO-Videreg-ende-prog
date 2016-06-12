@@ -16,6 +16,7 @@ import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
+import edu.example.client.models.ProduktbatchKompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -70,6 +71,7 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	public void deleteOperator(int oprID) {
 		this.service.deleteOperator(oprID, new DefaultCallback());
 	}
+	
 	//Raavarer
 	@Override
 	public void getRaavareList() {
@@ -110,6 +112,27 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	@Override
 	public void deleteRaavarebatch(int rbID) {
 		this.service.deleteRaavarebatch(rbID, new RaavarebatchCallback());
+	}
+	
+	//Produktbatch Komponent
+	@Override
+	public void getPbkompListByPbID(int pbID) {
+		this.service.getPbkompListByPbID(pbID, new ProduktbatchKompCallback());
+	}
+
+	@Override
+	public void createPbkomp(ProduktbatchKompDTO pbkomp) {
+		this.service.createPbkomp(pbkomp, new ProduktbatchKompCallback());
+	}
+
+	@Override
+	public void updatePbkomp(ProduktbatchKompDTO pbkomp) {
+		this.service.updatePbkomp(pbkomp, new ProduktbatchKompCallback());
+	}
+
+	@Override
+	public void deletePbkomp(int pbID, int rbID) {
+		this.service.deletePbkomp(pbID, rbID, new ProduktbatchKompCallback());
 	}
 	
 	//Produktbatch
@@ -281,6 +304,39 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 				else
 					produktbatchPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
 			}
+		}
+	}
+	
+	/**
+	 * Async Callback for produktbatch
+	 */
+	private class ProduktbatchKompCallback implements AsyncCallback 
+	{
+
+		@Override
+		public void onFailure(Throwable caught) {
+//			Object currentPanel = mainGui.getCurrentPanel();
+//			
+//			if(currentPanel instanceof ProduktbatchPanel) {
+//				ProduktbatchPanel produktbatchPanel = (ProduktbatchPanel) currentPanel;
+//				produktbatchPanel.statusUpdate("Error on server: " + caught.getMessage());
+//			}
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+//			Object currentPanel = mainGui.getCurrentPanel();
+//			
+//			if(currentPanel instanceof ProduktbatchPanel) {
+//				ProduktbatchPanel produktbatchPanel = (ProduktbatchPanel) currentPanel;
+//				
+//				if(result instanceof String) 
+//					produktbatchPanel.statusUpdate((String) result);
+//				else if(result instanceof List<?>)
+//					produktbatchPanel.updateTable((List<ProduktbatchDTO>) result);
+//				else
+//					produktbatchPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
+//			}
 		}
 	}
 }
