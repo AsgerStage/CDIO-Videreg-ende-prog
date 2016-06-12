@@ -16,8 +16,8 @@ public final class OperatorDTO implements Serializable
 
 	public static final String RANK_ADMIN_STR = "Administrator";
 	public static final String RANK_FARMA_STR = "Farmaceut";
-	public static final String RANK_VAERK_STR = "Værkfører";
-	public static final String RANK_OPR_STR = "Operatør";
+	public static final String RANK_VAERK_STR = "Vaerkfoerer";
+	public static final String RANK_OPR_STR = "Operatoer";
 	
     private static final long serialVersionUID = 1L;
 	private int ID_MINIMUM_VALUE = 1;

@@ -20,6 +20,7 @@ public class EditProfile extends ProfilePage
 	private RPCServiceClientImpl serverComm;
 	private OperatorDTO user;
 	
+	private ListBox rankList = new ListBox();;
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -38,12 +39,11 @@ public class EditProfile extends ProfilePage
 		
 		init();
 		
-		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), OperatorDTO.rankToString(user.getRank()));
-		setRank(user.getRank());
+		setContent(user.getName(), user.getIni(), user.getCpr(), user.getOprID(), user.getRank());
+		
+		TextBox tbID = (TextBox) idField.getWidget();
+		tbID.setEnabled(false);
 		if(user.getRank() != OperatorDTO.RANK_ADMIN) {
-			TextBox tbID = (TextBox) idField.getWidget();
-			tbID.setEnabled(false);
-			
 			ListBox lbRank = (ListBox) rankField.getWidget();
 			lbRank.setEnabled(false);
 		}
@@ -57,9 +57,11 @@ public class EditProfile extends ProfilePage
 		cprField = new InfoBox("CPR Nr.", new TextBox());
 		idField = new InfoBox("ID", new TextBox());
 		
-		ListBox rankList = new ListBox();
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
+		rankList = new ListBox();
+		rankList.addItem(OperatorDTO.RANK_OPR_STR);
+		rankList.addItem(OperatorDTO.RANK_VAERK_STR);
+		rankList.addItem(OperatorDTO.RANK_FARMA_STR);
+		rankList.addItem(OperatorDTO.RANK_ADMIN_STR);
 		rankField = new InfoBox("Rank", rankList);
 		
 		Button passwordButton = new Button();
@@ -96,7 +98,7 @@ public class EditProfile extends ProfilePage
 	}
 
 	@Override
-	public void setContent(String name, String initials, String cpr, int id, String rank) {
+	public void setContent(String name, String initials, String cpr, int id, int rank) {
 		setName(name);
 		setInitials(initials);
 		setCPR(cpr);
@@ -153,19 +155,23 @@ public class EditProfile extends ProfilePage
 	}
 
 	@Override
-	public String getRank() {
+	public int getRank() {
 		ListBox lbRank = (ListBox) rankField.getWidget();
-		return lbRank.getSelectedItemText();
+		return OperatorDTO.rankToInt(lbRank.getSelectedItemText());
 	}
 
 	@Override
-	public void setRank(String rank) {
-		//TODO: Write method!
-	}
-	
 	public void setRank(int rank) {
 		ListBox lbRank = (ListBox) rankField.getWidget();
-		lbRank.setSelectedIndex(rank);
+		
+//		int i = 0;
+		
+		for (int j = 0; j < rankList.getItemCount(); j++) {
+			if(rankList.getItemText(j).equals(OperatorDTO.rankToString(rank))) {
+				lbRank.setSelectedIndex(j);
+				break;
+			}
+		}
 	}
 	
 	public OperatorDTO getUser() {
@@ -230,7 +236,7 @@ public class EditProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), 1));
+				serverComm.updateOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), user.getPassword(), getRank()));
 				
 				if(parent instanceof ViewProfile) {
 					ViewProfile viewParent = (ViewProfile) parent;

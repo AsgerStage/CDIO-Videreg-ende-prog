@@ -16,6 +16,7 @@ public class CreateProfile extends ProfilePage
 {
 	private RPCServiceClientImpl serverComm;
 	
+	private ListBox rankList = new ListBox();
 	private InfoBox nameField;
 	private InfoBox initialsField;
 	private InfoBox cprField;
@@ -39,9 +40,11 @@ public class CreateProfile extends ProfilePage
 		cprField = new InfoBox("CPR Nr.", new TextBox());
 		idField = new InfoBox("ID", new TextBox());
 		
-		ListBox rankList = new ListBox();
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_OPR));
-		rankList.addItem(OperatorDTO.rankToString(OperatorDTO.RANK_ADMIN));
+		rankList = new ListBox();
+		rankList.addItem(OperatorDTO.RANK_OPR_STR);
+		rankList.addItem(OperatorDTO.RANK_VAERK_STR);
+		rankList.addItem(OperatorDTO.RANK_FARMA_STR);
+		rankList.addItem(OperatorDTO.RANK_ADMIN_STR);
 		rankField = new InfoBox("Rank", rankList);
 		
 		contentPanel.add(nameField);
@@ -73,7 +76,7 @@ public class CreateProfile extends ProfilePage
 	}
 
 	@Override
-	public void setContent(String name, String initials, String cpr, int id, String rank) {
+	public void setContent(String name, String initials, String cpr, int id, int rank) {
 		setName(name);
 		setInitials(initials);
 		setCPR(cpr);
@@ -130,14 +133,21 @@ public class CreateProfile extends ProfilePage
 	}
 
 	@Override
-	public String getRank() {
+	public int getRank() {
 		ListBox lbRank = (ListBox) rankField.getWidget();
-		return lbRank.getSelectedItemText();
+		return OperatorDTO.rankToInt(lbRank.getSelectedItemText());
 	}
 
 	@Override
-	public void setRank(String rank) {
-		//TODO: Write method!
+	public void setRank(int rank) {
+		ListBox lbRank = (ListBox) rankField.getWidget();
+		
+		for (int j = 0; j < rankList.getItemCount(); j++) {
+			if(rankList.getItemText(j).equals(OperatorDTO.rankToString(rank))) {
+				lbRank.setSelectedIndex(j);
+				break;
+			}
+		}
 	}
 	
 	private class SaveClickHandler implements ClickHandler 
@@ -145,7 +155,7 @@ public class CreateProfile extends ProfilePage
 		@Override
 		public void onClick(ClickEvent event) {
 			try {
-				serverComm.createOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", -1));
+				serverComm.createOperator(new OperatorDTO(getID(), getName(), getInitials(), getCPR(), "CREATEPROFILEPANEL", getRank()));
 			} catch (OpPasswordException | OpNameException | OpIdException | DALException e) {
 				e.printStackTrace();
 			}

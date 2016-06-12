@@ -23,7 +23,6 @@ public class ViewProfile extends ProfilePage
 	private InfoBox rankField;
 	
 	private Button editButton;
-	private Button cancelButton;
 	
 	public ViewProfile(String title, int userID, MenuWidget parent, RPCServiceClientImpl serverComm) {
 		super(title);
@@ -36,7 +35,7 @@ public class ViewProfile extends ProfilePage
 	
 	public void updateUser(OperatorDTO user) {		
 		this.user = user;
-		setContent(this.user.getName(), this.user.getIni(), this.user.getCpr(), this.user.getOprID(), OperatorDTO.rankToString(this.user.getRank()));
+		setContent(this.user.getName(), this.user.getIni(), this.user.getCpr(), this.user.getOprID(), this.user.getRank());
 	}
 	
 	private void init() {
@@ -55,21 +54,16 @@ public class ViewProfile extends ProfilePage
 
 		//Buttons
 		editButton = new Button();
-		cancelButton = new Button();
 		
 		editButton.setText("Rediger");
 		editButton.setStyleName("button");
 		editButton.addClickHandler(new EditClickHandler(this));
-		cancelButton.setText("Tilbage");
-		cancelButton.setStyleName("button");
-		cancelButton.addClickHandler(new CancelClickHandler());
 		
 		buttonPanel.add(editButton);
-		buttonPanel.add(cancelButton);
 	}
 	
 	@Override
-	public void setContent(String name, String initials, String cpr, int id, String rank) {
+	public void setContent(String name, String initials, String cpr, int id, int rank) {
 		setName(name);
 		setInitials(initials);
 		setCPR(cpr);
@@ -126,15 +120,15 @@ public class ViewProfile extends ProfilePage
 	}
 
 	@Override
-	public String getRank() {
+	public int getRank() {
 		Label lblRank = (Label) rankField.getWidget();
-		return lblRank.getText();
+		return OperatorDTO.rankToInt(lblRank.getText());
 	}
 
 	@Override
-	public void setRank(String rank) {
+	public void setRank(int rank) {
 		Label lblRank = (Label) rankField.getWidget();
-		lblRank.setText(rank);
+		lblRank.setText(OperatorDTO.rankToString(rank));
 	}
 	
 	private class EditClickHandler implements ClickHandler 
@@ -149,14 +143,6 @@ public class ViewProfile extends ProfilePage
 		public void onClick(ClickEvent event) {
 			ProfilePage editProfilePanel = new EditProfile("Rediger Profil", user, parent, serverComm);
 			parent.parent.gotoPanel(editProfilePanel);
-		}
-	}
-	
-	private class CancelClickHandler implements ClickHandler 
-	{
-		@Override
-		public void onClick(ClickEvent event) {
-			// TODO Auto-generated method stub
 		}
 	}
 }
