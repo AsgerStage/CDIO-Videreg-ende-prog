@@ -1,5 +1,8 @@
 package edu.example.client.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import edu.example.client.models.OperatorDTO;
@@ -58,5 +61,10 @@ public interface RPCServiceAsync
 	void updateRecept(ReceptDTO recept, AsyncCallback callback);
 	
 	void deleteRecept(int receptID, AsyncCallback callback);
+	
+	//TelnetClient
+	void getDataList(String command, int expectedReplies, List<String> params, AsyncCallback callback);
+	
+	void getData(String command, List<String> params, AsyncCallback callback);
 	
 }

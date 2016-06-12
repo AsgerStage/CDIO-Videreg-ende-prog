@@ -1,4 +1,5 @@
 package edu.example.client.service;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
@@ -18,6 +19,7 @@ import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.weightPage.WeightPage;
 
 public class RPCServiceClientImpl implements RPCServiceIClient
 {
@@ -152,6 +154,16 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 		this.service.deleteRecept(receptID, new DefaultCallback());
 	}
 	
+	
+	//Telnet Client
+	public void getDataList(String command, int expectedReplies, List<String> params){
+		this.service.getDataList(command,expectedReplies,params, new DefaultCallback());
+	}
+	
+	public void getData(String command, List<String> params){
+		this.service.getData(command, params ,new DefaultCallback());
+	}
+	
 	/**
 	 * Async Callback
 	 */
@@ -198,6 +210,10 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 				else
 					recept.updateTable((List<ReceptDTO>) result);
 				
+			}
+			else if (currentPanel instanceof WeightPage){
+				WeightPage weightPage = (WeightPage) currentPanel;
+				if(result instanceof String) weightPage.displayData((String) result);
 			}
 		}
 	}

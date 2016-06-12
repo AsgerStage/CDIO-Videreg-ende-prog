@@ -1,30 +1,47 @@
 package edu.example.client.weightPage;
 
+import java.util.List;
+
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import edu.example.client.service.RPCServiceClientImpl;
+
 
 public class WeightPage extends Composite 
 {
 	VerticalPanel vPanel = new VerticalPanel();
+	private RPCServiceClientImpl serverComm;
+	List<String> test = null;
+	Label LabelWeightDisplay;
+	Label LabelTextDisplay;
 	
-	public WeightPage() {
+	public WeightPage(RPCServiceClientImpl serverComm) {
+		
+		
+		this.serverComm = serverComm;
 		initWidget(vPanel);
 		
 		init();
 	}
 
 	public void init() {
-		Label LabelWeightDisplay = new Label();
-		Label LabelTextDisplay = new Label();
+		
+		LabelWeightDisplay = new Label();
+		LabelTextDisplay = new Label();
 		LabelWeightDisplay.setText("0.0000 KG");
 		LabelTextDisplay.setText("Weight Text");
 		LabelWeightDisplay.addStyleName("WeightDisplay");
 		LabelTextDisplay.addStyleName("TextDisplay");
 		vPanel.add(LabelWeightDisplay);
 		vPanel.add(LabelTextDisplay);
+		
+		
+		
 
 		Grid grid = new Grid(4, 3);
 		Button bt0 = new Button("0");
@@ -52,5 +69,18 @@ public class WeightPage extends Composite
 		grid.setWidget(3, 1, bt0);
 		grid.setWidget(3, 2, btEnter);
 		vPanel.add(grid);
+		bt0.addClickHandler(new Button0ClickHandler());
 	}		
+	private class Button0ClickHandler implements ClickHandler {
+		@Override
+		public void onClick(ClickEvent event) {	
+			test.add("");
+			serverComm.getData("S", test);
+		}
+}
+	
+	public void displayData(String input){
+		LabelWeightDisplay.setText(input);
+		
+	}
 }
