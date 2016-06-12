@@ -93,7 +93,7 @@ public class ProduktbatchKompPopup extends DialogBox
         
         this.setWidget(mainPanel);
 	}
-
+	
 	protected int getProduktbatchID() {
 		return Integer.parseInt(pbIDBox.getText());
 	}

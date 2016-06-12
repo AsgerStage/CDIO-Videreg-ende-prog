@@ -121,7 +121,7 @@ public class ProduktbatchkompPanel extends Composite
 		mainPanel.add(tableList);
 		mainPanel.add(buttonPanel);
 	}
-
+	
 	public void statusUpdate(String result) {
 		Window.alert(result);
 	}
