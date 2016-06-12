@@ -237,7 +237,8 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 			}
 			else if (currentPanel instanceof WeightPage){
 				WeightPage weightPage = (WeightPage) currentPanel;
-				if(result instanceof String) weightPage.displayData((String) result);
+				if(result instanceof String) 
+					weightPage.displayData((String) result);
 			}
 		}
 	}
@@ -328,7 +329,7 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 		public void onSuccess(Object result) {
 			Object currentPanel = mainGui.getCurrentPanel();
 			
-			if(currentPanel instanceof ProduktbatchPanel) {
+			if(currentPanel instanceof ProduktbatchkompPanel) {
 				ProduktbatchkompPanel pbkompPanel = (ProduktbatchkompPanel) currentPanel;
 				
 				if(result instanceof String) 

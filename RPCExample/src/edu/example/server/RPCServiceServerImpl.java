@@ -385,9 +385,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 		}
         finally {
             if(con != null)
-                try {
-                    con.closeConnection();
-                } catch (SQLException e) { }
+                try { con.closeConnection(); } catch (SQLException e) { }
         }
 		
 		return result;
