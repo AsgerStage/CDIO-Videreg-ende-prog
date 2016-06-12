@@ -109,6 +109,11 @@ public class ProduktbatchkompPanel extends Composite
 		createButton.setStyleName("button");
 		createButton.addClickHandler(new ClickHandlerCreate());
 		
+		Button backButton = new Button();		
+		backButton.setHTML("Tilbage");
+		backButton.setStyleName("button");
+		backButton.addClickHandler(new ClickHandlerBack(this));
+		
 		//Add widgets
 		topPanel.add(pageTitle);
 		topPanel.add(searchBox);
@@ -116,6 +121,7 @@ public class ProduktbatchkompPanel extends Composite
 		topPanel.add(buttonUpdate);
 		
 		buttonPanel.add(createButton);
+		buttonPanel.add(backButton);
 		
 		mainPanel.add(topPanel);
 		mainPanel.add(tableList);
@@ -223,6 +229,17 @@ public class ProduktbatchkompPanel extends Composite
 		}
 	}
 	
+	private class ClickHandlerDelete implements ClickHandler
+	{
+		@Override
+		public void onClick(ClickEvent event) {
+			ProduktbatchKompDTO pbkomp = dispPbkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			
+			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + '?'))
+				serverComm.deletePbkomp(pbkomp.getPbID(), pbkomp.getRbID());
+		}
+	}
+	
 	private class ClickHandlerCreate implements ClickHandler
 	{
 		@Override
@@ -234,14 +251,17 @@ public class ProduktbatchkompPanel extends Composite
 		}
 	}
 	
-	private class ClickHandlerDelete implements ClickHandler
+	private class ClickHandlerBack implements ClickHandler
 	{
+		ProduktbatchkompPanel parent;
+		
+		protected ClickHandlerBack(ProduktbatchkompPanel parent) {
+			this.parent = parent;
+		}
+		
 		@Override
 		public void onClick(ClickEvent event) {
-			ProduktbatchKompDTO pbkomp = dispPbkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
-			
-			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + '?'))
-				serverComm.deletePbkomp(pbkomp.getPbID(), pbkomp.getRbID());
+			parent.parent.parent.gotoPanel(parent.parent);
 		}
 	}
 	
