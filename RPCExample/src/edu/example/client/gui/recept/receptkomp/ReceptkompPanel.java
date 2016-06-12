@@ -63,7 +63,7 @@ public class ReceptkompPanel extends Composite
 		//Top panel
 		HorizontalPanel topPanel = new HorizontalPanel();
 		
-		HTML pageTitle = new HTML("Receptbatch komponenter");
+		HTML pageTitle = new HTML("Recept komponenter");
 		pageTitle.addStyleName("h1");
 		
 		searchBox.setText(searchBoxDefaultText);
@@ -94,7 +94,7 @@ public class ReceptkompPanel extends Composite
 		tableList.setHTML(0, 1, "R&aring;vare ID");
 		tableList.setHTML(0, 2, "Nominelle V&aelig;gt (kg)");
 		tableList.setHTML(0, 3, "Tolerance (%)");
-		tableList.setHTML(0, 5, "Handling");
+		tableList.setHTML(0, 4, "Handling");
 		tableList.setBorderWidth(1);
 		tableList.setCellPadding(10);
 		tableList.setWidth("100%");

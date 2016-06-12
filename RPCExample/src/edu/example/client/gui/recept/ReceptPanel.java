@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.gui.MenuWidget;
+import edu.example.client.gui.recept.receptkomp.ReceptkompPanel;
 import edu.example.client.models.ReceptDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
@@ -120,14 +121,8 @@ public class ReceptPanel extends Composite
 		mainPanel.add(buttonPanel);
 	}
 
-	public void statusUpdate(String result) {
-		String reply = "something went wrong!";
-//		if(result == true)
-//			reply = "Handlingen blev udfoert";
-//		else
-//			reply = "Handlingen kunne ikke udfoeres!";
-		
-		Window.alert(result);
+	public void statusUpdate(String message) {
+		Window.alert(message);
 	}
 	
 	public void updateTable(List<ReceptDTO> recept) {
@@ -149,6 +144,11 @@ public class ReceptPanel extends Composite
 		tableList.setText(rowIndex, 1, recept.getReceptNavn());
 		
 		HorizontalPanel ButtonPanel = new HorizontalPanel();
+		
+		PushButton viewButton = new PushButton(new Image("Billeder/view-icon.png"));
+		viewButton.addClickHandler(new ClickHandlerView(this));
+		viewButton.setTitle("Se");
+		ButtonPanel.add(viewButton);
 		
 		PushButton editButton = new PushButton(new Image("Billeder/edit-icon.png"));
 		editButton.addClickHandler(new ClickHandlerEdit());
@@ -245,6 +245,23 @@ public class ReceptPanel extends Composite
 			
 			if(Window.confirm("Er du sikker paa at du vil slette recepten " + recept.getReceptID() + ", " + recept.getReceptNavn() +"?"))
 				serverComm.deleteRecept(recept.getReceptID());
+		}
+	}
+	
+	private class ClickHandlerView implements ClickHandler
+	{
+		private ReceptPanel parent;
+		
+		protected ClickHandlerView(ReceptPanel parent) {
+			this.parent = parent;
+		}
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			ReceptDTO recept = dispReceptList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			
+			ReceptkompPanel receptkompPanel = new ReceptkompPanel(parent, serverComm, recept.getReceptID());
+			parent.parent.gotoPanel(receptkompPanel);
 		}
 	}
 	
