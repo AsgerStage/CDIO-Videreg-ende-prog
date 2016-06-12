@@ -8,16 +8,16 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
 import edu.example.client.gui.Lists.OperatoerList;
-import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.produktbatch.ProduktbatchPanel;
 import edu.example.client.gui.produktbatch.pbKomp.ProduktbatchkompPanel;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
+import edu.example.client.gui.recept.ReceptPanel;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -122,12 +122,12 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	}
 
 	@Override
-	public void createPbkomp(ProduktbatchKompDTO pbkomp) {
+	public void createPbkomp(ProduktbatchkompDTO pbkomp) {
 		this.service.createPbkomp(pbkomp, new ProduktbatchKompCallback());
 	}
 
 	@Override
-	public void updatePbkomp(ProduktbatchKompDTO pbkomp) {
+	public void updatePbkomp(ProduktbatchkompDTO pbkomp) {
 		this.service.updatePbkomp(pbkomp, new ProduktbatchKompCallback());
 	}
 
@@ -226,8 +226,8 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 				else
 					raavarePanel.updateTable((List<RaavareDTO>) result);
 			}
-			else if(currentPanel instanceof ReceptList) {
-				ReceptList recept = (ReceptList) currentPanel;
+			else if(currentPanel instanceof ReceptPanel) {
+				ReceptPanel recept = (ReceptPanel) currentPanel;
 				
 				if(result instanceof String) 
 					recept.statusUpdate((String) result);
@@ -335,7 +335,7 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 				if(result instanceof String) 
 					pbkompPanel.statusUpdate((String) result);
 				else if(result instanceof List<?>)
-					pbkompPanel.updateTable((List<ProduktbatchKompDTO>) result);
+					pbkompPanel.updateTable((List<ProduktbatchkompDTO>) result);
 				else
 					pbkompPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
 			}

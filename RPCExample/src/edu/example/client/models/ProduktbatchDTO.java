@@ -19,7 +19,7 @@ public class ProduktbatchDTO implements Serializable
 	private int pbID;		// i omraadet 1-99999999
 	private int status;		// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
 	private int receptID;
-	private ArrayList<ProduktbatchKompDTO> produktbatchKompenenter = new ArrayList<>();
+	private ArrayList<ProduktbatchkompDTO> produktbatchKompenenter = new ArrayList<>();
 	
 	public ProduktbatchDTO() {
 		
@@ -64,15 +64,15 @@ public class ProduktbatchDTO implements Serializable
     		this.receptID = receptID;
 	}
 	
-	public ArrayList<ProduktbatchKompDTO> getProduktbatchKompenenter () {
+	public ArrayList<ProduktbatchkompDTO> getProduktbatchKompenenter () {
 		return produktbatchKompenenter;
 	}
 	
-	public void setProduktbatchKompenenter (ArrayList<ProduktbatchKompDTO> produktbatchKompenenter) {
+	public void setProduktbatchKompenenter (ArrayList<ProduktbatchkompDTO> produktbatchKompenenter) {
 		this.produktbatchKompenenter = produktbatchKompenenter;
 	}
 	
-	public void addProduktbatchKompenenter (ProduktbatchKompDTO produktbatchKomp) {
+	public void addProduktbatchKompenenter (ProduktbatchkompDTO produktbatchKomp) {
 		produktbatchKompenenter.add(produktbatchKomp);
 	}
 	

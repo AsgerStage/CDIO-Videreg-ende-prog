@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import edu.example.client.exceptions.DALException;
 
-public class ProduktbatchKompDTO implements Serializable
+public class ProduktbatchkompDTO implements Serializable
 {
 	private static final long serialVersionUID = -576200452760072531L;
 	
@@ -14,11 +14,11 @@ public class ProduktbatchKompDTO implements Serializable
 	private double netto;	// 
 	private int oprID;		// operatoer id i området 1-99999999
 	
-	public ProduktbatchKompDTO() {
+	public ProduktbatchkompDTO() {
 		
 	}
 	
-	public ProduktbatchKompDTO(int pbID, int rbID, double tara, double netto, int oprID) throws DALException {
+	public ProduktbatchkompDTO(int pbID, int rbID, double tara, double netto, int oprID) throws DALException {
 		setPbID(pbID);
 		setRbID(rbID);
 		setTara(tara);
@@ -84,7 +84,7 @@ public class ProduktbatchKompDTO implements Serializable
 	public boolean equals(Object obj) {
 		if (obj == null || getClass() != obj.getClass()) 
             return false;
-        final ProduktbatchKompDTO other = (ProduktbatchKompDTO) obj;
+        final ProduktbatchkompDTO other = (ProduktbatchkompDTO) obj;
         
         return this.pbID == other.pbID &&
         		this.rbID == other.rbID &&

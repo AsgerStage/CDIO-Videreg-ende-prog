@@ -10,7 +10,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
@@ -372,13 +372,13 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	private final MySQLProduktbatchKompDAO pbkompDAO = new MySQLProduktbatchKompDAO();
 	
 	@Override
-	public ArrayList<ProduktbatchKompDTO> getPbkompListByPbID(int pbID) {
+	public ArrayList<ProduktbatchkompDTO> getPbkompListByPbID(int pbID) {
 		Connector con = null;
-		ArrayList<ProduktbatchKompDTO> result = null;
+		ArrayList<ProduktbatchkompDTO> result = null;
 		
 		try {
 			con = new Connector();
-			result = new ArrayList<ProduktbatchKompDTO>(pbkompDAO.getProduktbatchKompListByRBID(pbID));
+			result = new ArrayList<ProduktbatchkompDTO>(pbkompDAO.getProduktbatchKompListByRBID(pbID));
 		} 
 		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
 			e.printStackTrace();
@@ -392,7 +392,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	}
 
 	@Override
-	public String createPbkomp(ProduktbatchKompDTO pbkomp) {
+	public String createPbkomp(ProduktbatchkompDTO pbkomp) {
 		String result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " kunne ikke oprettes: ";
 		Connector con = null;
 		
@@ -420,7 +420,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	}
 
 	@Override
-	public String updatePbkomp(ProduktbatchKompDTO pbkomp) {
+	public String updatePbkomp(ProduktbatchkompDTO pbkomp) {
 		String result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " kunne ikke opdateres: ";
 		Connector con = null;
 		

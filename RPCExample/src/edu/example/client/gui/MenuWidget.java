@@ -8,13 +8,13 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
 import edu.example.client.gui.Lists.OperatoerList;
-import edu.example.client.gui.Lists.ReceptList;
 //import edu.example.client.gui.login.Afslut;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.produktbatch.ProduktbatchPanel;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
+import edu.example.client.gui.recept.ReceptPanel;
 import edu.example.client.logUd.Afslut;
 import edu.example.client.misc.Session;
 import edu.example.client.service.RPCServiceClientImpl;
@@ -113,7 +113,7 @@ public class MenuWidget extends Composite
 	
 	Command cmd_Recept = new Command() {
 		public void execute() {
-			ReceptList viewPanel = new ReceptList(me, serverComm);
+			ReceptPanel viewPanel = new ReceptPanel(me, serverComm);
 			gotoPanel(viewPanel);
 		}
 	};

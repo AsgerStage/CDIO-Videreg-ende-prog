@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 
 public class ProduktbatchkompPopup extends DialogBox
 {	
@@ -26,7 +26,7 @@ public class ProduktbatchkompPopup extends DialogBox
 	
 	private boolean isCreate = false;
 	
-	protected ProduktbatchkompPopup(ProduktbatchKompDTO pbkomp) {
+	protected ProduktbatchkompPopup(ProduktbatchkompDTO pbkomp) {
 		super();
 		VerticalPanel mainPanel = new VerticalPanel();
 		
@@ -46,10 +46,10 @@ public class ProduktbatchkompPopup extends DialogBox
 			execute.setText("Opret");
 		}
 		else {
-			this.setTitle("Rediger Produktbatch");
-			this.setText("Rediger Produktbatch");
+			this.setTitle("Rediger Produktbatch Komponent");
+			this.setText("Rediger Produktbatch Komponent");
 			
-			title.setHTML("Rediger Produktbatch");
+			title.setHTML("Rediger Produktbatch Komponent");
 			pbIDBox.setText("" + pbkomp.getPbID());
 			pbIDBox.setEnabled(false);
 			rbIDBox.setText("" + pbkomp.getRbID());
