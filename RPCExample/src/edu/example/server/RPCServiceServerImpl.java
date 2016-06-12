@@ -706,6 +706,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 		
 		try {
 			con=new TelnetClient("localhost",8000);
+			con.connect();
 			result=con.getData(command, params);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

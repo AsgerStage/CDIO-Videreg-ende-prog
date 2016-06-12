@@ -26,7 +26,7 @@ public class TelnetClient
     private BufferedReader s_in;
     
     public TelnetClient(){
-    	host="localhost";
+    	host="127.0.0.1";
     	port=8000;
     }
     
@@ -58,8 +58,8 @@ public class TelnetClient
         
         StringBuilder request = new StringBuilder(command);
         if(params.size() > 0)
-            for (String param : params) {
-                request.append(' ').append(param);
+            for (int i=0;i<params.size();i++) {
+                request.append(' ').append(params.get(i));
             }
         
         String response = null;
