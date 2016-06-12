@@ -14,8 +14,10 @@ import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.service.RPCService;
 import edu.example.server.database.MYSQLProduktbatchDAO;
+import edu.example.server.database.MYSQLReceptKompDAO;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLProduktbatchKompDAO;
 import edu.example.server.database.MySQLRaavareDAO;
@@ -676,6 +678,33 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
         }
 		
 		return result;
+	}
+	
+	//Produktbatch komponent
+	private final MYSQLReceptKompDAO receptkompDAO = new MYSQLReceptKompDAO();
+
+	@Override
+	public ArrayList<ReceptkompDTO> getReceptkompListByReceptID(int receptID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String createReceptkomp(ReceptkompDTO receptkomp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateReceptkomp(ReceptkompDTO receptkomp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteReceptkomp(int receptID, int raavareID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/* (non-Javadoc)

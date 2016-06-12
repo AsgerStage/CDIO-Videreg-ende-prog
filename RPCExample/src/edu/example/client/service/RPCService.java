@@ -12,6 +12,7 @@ import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 
 @RemoteServiceRelativePath("exampleservice")
 public interface RPCService extends RemoteService
@@ -73,6 +74,15 @@ public interface RPCService extends RemoteService
 	String updateRecept(ReceptDTO recept);
 	
 	String deleteRecept(int receptID);
+	
+	//Recept komponent
+	ArrayList<ReceptkompDTO> getReceptkompListByReceptID(int receptID);
+	
+	String createReceptkomp(ReceptkompDTO receptkomp);
+	
+	String updateReceptkomp(ReceptkompDTO receptkomp);
+	
+	String deleteReceptkomp(int receptID, int raavareID);
 	
 	//TelnetClient
 	

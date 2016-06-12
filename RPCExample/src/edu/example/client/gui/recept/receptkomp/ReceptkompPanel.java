@@ -22,11 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.exceptions.DALException;
-import edu.example.client.gui.MenuWidget;
-import edu.example.client.gui.produktbatch.ProduktbatchPanel;
 import edu.example.client.gui.recept.ReceptPanel;
-import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
@@ -56,7 +52,7 @@ public class ReceptkompPanel extends Composite
 		tableList = new Grid(1, tableColumns);
 		init();
 		
-//		this.serverComm.getReceptkompListByReceptID(currReceptID);
+		this.serverComm.getReceptkompListByReceptID(currReceptID);
 	}
 	
 	private void init() {
@@ -208,7 +204,7 @@ public class ReceptkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-//			serverComm.getRecptkompListByPbID(currReceptID);
+			serverComm.getReceptkompListByReceptID(currReceptID);
 		}
 	}
 	
@@ -231,8 +227,8 @@ public class ReceptkompPanel extends Composite
 		public void onClick(ClickEvent event) {
 			ReceptkompDTO receptkomp = dispReceptkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-//			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + '?'))
-//				serverComm.deleteReceptkomp(receptkomp.getReceptID(), receptkomp.getRaavareID());
+			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + '?'))
+				serverComm.deleteReceptkomp(receptkomp.getReceptID(), receptkomp.getRaavareID());
 		}
 	}
 	
@@ -279,10 +275,10 @@ public class ReceptkompPanel extends Composite
 			try {
 				ReceptkompDTO receptkomp = new ReceptkompDTO(receptID, raavareID, nomNetto, tolerance);
 
-//				if(popup.isCreate())
-//					serverComm.createReceptkomp(receptkomp);
-//				else 
-//					serverComm.updateReceptkomp(receptkomp);
+				if(popup.isCreate())
+					serverComm.createReceptkomp(receptkomp);
+				else 
+					serverComm.updateReceptkomp(receptkomp);
 			} 
 			catch (DALException e) {
 				statusUpdate(e.getMessage());

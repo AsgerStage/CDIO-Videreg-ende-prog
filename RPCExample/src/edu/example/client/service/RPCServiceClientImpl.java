@@ -15,12 +15,14 @@ import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
 import edu.example.client.gui.recept.ReceptPanel;
+import edu.example.client.gui.recept.receptkomp.ReceptkompPanel;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
 import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.weightPage.WeightPage;
 
 public class RPCServiceClientImpl implements RPCServiceIClient
@@ -178,6 +180,26 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 		this.service.deleteRecept(receptID, new DefaultCallback());
 	}
 	
+	//Recept Komponent
+	@Override
+	public void getReceptkompListByReceptID(int receptID) {
+		this.service.getReceptkompListByReceptID(receptID, new ReceptKompCallback());
+	}
+
+	@Override
+	public void createReceptkomp(ReceptkompDTO receptkomp) {
+		this.service.createReceptkomp(receptkomp, new ReceptKompCallback());
+	}
+
+	@Override
+	public void updateReceptkomp(ReceptkompDTO receptkomp) {
+		this.service.updateReceptkomp(receptkomp, new ReceptKompCallback());
+	}
+
+	@Override
+	public void deleteReceptkomp(int receptID, int raavareID) {
+		this.service.deleteReceptkomp(receptID, raavareID, new ReceptKompCallback());
+	}
 	
 	//Telnet Client
 	public void getDataList(String command, int expectedReplies, List<String> params){
@@ -338,6 +360,38 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 					pbkompPanel.updateTable((List<ProduktbatchkompDTO>) result);
 				else
 					pbkompPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
+			}
+		}
+	}
+	
+	/**
+	 * Async Callback for recept komponent
+	 */
+	private class ReceptKompCallback implements AsyncCallback 
+	{
+		@Override
+		public void onFailure(Throwable caught) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ReceptkompPanel) {
+				ReceptkompPanel receptkompPanel = (ReceptkompPanel) currentPanel;
+				receptkompPanel.statusUpdate("Error on server: " + caught.getMessage());
+			}
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ReceptkompPanel) {
+				ReceptkompPanel receptkompPanel = (ReceptkompPanel) currentPanel;
+				
+				if(result instanceof String) 
+					receptkompPanel.statusUpdate((String) result);
+				else if(result instanceof List<?>)
+					receptkompPanel.updateTable((List<ReceptkompDTO>) result);
+				else
+					receptkompPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
 			}
 		}
 	}

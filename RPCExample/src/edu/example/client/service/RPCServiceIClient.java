@@ -8,6 +8,7 @@ import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 
 public interface RPCServiceIClient 
 {
@@ -68,6 +69,15 @@ public interface RPCServiceIClient
 	void updateRecept(ReceptDTO recept);
 	
 	void deleteRecept(int receptID);
+	
+	//Recept komponent
+	void getReceptkompListByReceptID(int receptID);
+	
+	void createReceptkomp(ReceptkompDTO receptkomp);
+	
+	void updateReceptkomp(ReceptkompDTO receptkomp);
+	
+	void deleteReceptkomp(int receptID, int raavareID);
 	
 	//Telnet Client
 	void getDataList(String command, int expectedReplies, List<String> params);
