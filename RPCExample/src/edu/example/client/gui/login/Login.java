@@ -57,6 +57,7 @@ public class Login extends Composite {
 
 	public void onModuleLoad() {
 		
+		
 
 		// Add a normal textbox
 		Label bruger = new Label("Bruger ID:");
@@ -81,6 +82,8 @@ public class Login extends Composite {
 		Authenticate.addClickHandler(new LoginClickHandler());
 		vPanel.add(Authenticate);
 		Authenticate.setStyleName("loginbutton");
+		
+		lbltest.setVisible(false);
 
 
 	}
@@ -96,13 +99,17 @@ public class Login extends Composite {
 
 	public void CompareLogin(OperatorDTO opr) {
 		String pw = normalPassword.getText();
+		
 
 		boolean pwMatch = opr.getHash().equals(Utils.getMD5Hash(pw));
 
 		if (pwMatch == true) {
-			lbltest.setText("rigtigt password");
+			//lbltest.setText("rigtigt password");
+			ViewProfile viewPanel = new ViewProfile("Se Profil", Integer.parseInt(normalText.getText()), parent, serverComm);
+			parent.gotoPanel(viewPanel);
 		} 
 		else if (pwMatch == false) {
+			lbltest.setVisible(true);
 			lbltest.setText("Forkert password");
 			normalPassword.setFocus(true);
 		}
