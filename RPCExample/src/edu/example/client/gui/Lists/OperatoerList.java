@@ -37,6 +37,7 @@ import edu.example.client.exceptions.OpPasswordException;
 import edu.example.client.gui.MenuWidget;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.gui.Lists.OperatorPopup;
+import edu.example.client.misc.Utils;
 import edu.example.client.service.RPCServiceClientImpl;
 
 public class OperatoerList extends Composite
@@ -279,7 +280,7 @@ public class OperatoerList extends Composite
 	
 			OperatorDTO operator;
 			try {
-				operator = new OperatorDTO(operatorID, operatorName, OperatorIni, operatorCPR, OperatorPassword, OperatorRank, null);
+				operator = new OperatorDTO(operatorID, operatorName, OperatorIni, operatorCPR, OperatorPassword, OperatorRank, Utils.getMD5Hash(OperatorPassword));
 				popup.hide();
 				if(popup.isCreate()) 
 					serverComm.createOperator(operator);
