@@ -222,7 +222,7 @@ public class ProduktbatchkompPanel extends Composite
 		public void onClick(ClickEvent event) {
 			ProduktbatchKompDTO pbkomp = dispPbkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-			ProduktbatchKompPopup editPopup = new ProduktbatchKompPopup(pbkomp);
+			ProduktbatchkompPopup editPopup = new ProduktbatchkompPopup(pbkomp);
 			editPopup.setExecuteClickHandler(new PopupHandlerExecute(editPopup));
 			editPopup.setCancelClickHandler(new PopupHandlerCancel(editPopup));
 			editPopup.show();
@@ -244,7 +244,7 @@ public class ProduktbatchkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			ProduktbatchKompPopup createPopup = new ProduktbatchKompPopup(null);
+			ProduktbatchkompPopup createPopup = new ProduktbatchkompPopup(null);
 			createPopup.setExecuteClickHandler(new PopupHandlerExecute(createPopup));
 			createPopup.setCancelClickHandler(new PopupHandlerCancel(createPopup));
 			createPopup.show();
@@ -267,9 +267,9 @@ public class ProduktbatchkompPanel extends Composite
 	
 	private class PopupHandlerExecute implements ClickHandler 
 	{
-		private final ProduktbatchKompPopup popup;
+		private final ProduktbatchkompPopup popup;
 		
-		protected PopupHandlerExecute(ProduktbatchKompPopup popup) {
+		protected PopupHandlerExecute(ProduktbatchkompPopup popup) {
 			this.popup = popup;
 		}
 
@@ -300,9 +300,9 @@ public class ProduktbatchkompPanel extends Composite
 	
 	private class PopupHandlerCancel implements ClickHandler 
 	{
-		private ProduktbatchKompPopup popup;
+		private ProduktbatchkompPopup popup;
 		
-		protected PopupHandlerCancel(ProduktbatchKompPopup popup) {
+		protected PopupHandlerCancel(ProduktbatchkompPopup popup) {
 			this.popup = popup;
 		}
 

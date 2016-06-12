@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.models.ProduktbatchKompDTO;
 
-public class ProduktbatchKompPopup extends DialogBox
+public class ProduktbatchkompPopup extends DialogBox
 {	
 	private TextBox pbIDBox = new TextBox();
 	private TextBox rbIDBox = new TextBox();
@@ -26,7 +26,7 @@ public class ProduktbatchKompPopup extends DialogBox
 	
 	private boolean isCreate = false;
 	
-	protected ProduktbatchKompPopup(ProduktbatchKompDTO pbkomp) {
+	protected ProduktbatchkompPopup(ProduktbatchKompDTO pbkomp) {
 		super();
 		VerticalPanel mainPanel = new VerticalPanel();
 		

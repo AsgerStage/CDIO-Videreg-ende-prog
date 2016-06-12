@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.client.exceptions.DALException;
+import edu.example.client.models.ReceptkompDTO;
 import edu.example.server.database.connector.Connector;
-import edu.example.server.database.dto.ReceptKompDTO;
 
 /**
  * @author Asger
@@ -30,12 +30,12 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO
 	 * @see daointerfaces01917.ReceptKompDAO#getReceptKomp(int, int)
 	 */
 	@Override
-	public ReceptKompDTO getReceptKomp(int receptId, int raavareId) throws DALException {
+	public ReceptkompDTO getReceptKomp(int receptId, int raavareId) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM receptkomponent WHERE recept_id= "+receptId+" AND raavare_id="+raavareId);
 		try
 		{
 			if(!rs.first()) throw new DALException("Recept komponent"+receptId+"Findes ikke");
-			return new ReceptKompDTO (rs.getInt("recept_id"),rs.getInt("raavare_id"),rs.getDouble("nom_netto"),rs.getDouble("tolerance"));
+			return new ReceptkompDTO (rs.getInt("recept_id"),rs.getInt("raavare_id"),rs.getDouble("nom_netto"),rs.getDouble("tolerance"));
 		}
 		catch(SQLException e){throw new DALException(e);}
 	}
@@ -45,14 +45,14 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO
 	 * @see daointerfaces01917.ReceptKompDAO#getReceptKompList(int)
 	 */
 	@Override
-	public List<ReceptKompDTO> getReceptKompList(int receptId) throws DALException {
-			List<ReceptKompDTO> list = new ArrayList<ReceptKompDTO>();
+	public List<ReceptkompDTO> getReceptKompList(int receptId) throws DALException {
+			List<ReceptkompDTO> list = new ArrayList<ReceptkompDTO>();
 			ResultSet rs = Connector.doQuery("SELECT * FROM produktbatchkomponent WHERE recept_id="+receptId);
 			try
 			{
 				while (rs.next()) 
 				{
-					list.add(new ReceptKompDTO(rs.getInt("recept_id"),rs.getInt("raavare_id"),rs.getDouble("nom_netto"),rs.getDouble("tolerance")));
+					list.add(new ReceptkompDTO(rs.getInt("recept_id"),rs.getInt("raavare_id"),rs.getDouble("nom_netto"),rs.getDouble("tolerance")));
 				}
 			}
 			catch (SQLException e) { throw new DALException(e); }
@@ -63,14 +63,14 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO
 	 * @see daointerfaces01917.ReceptKompDAO#getReceptKompList()
 	 */
 	@Override
-	public List<ReceptKompDTO> getReceptKompList() throws DALException {
-		List<ReceptKompDTO> list = new ArrayList<ReceptKompDTO>();
+	public List<ReceptkompDTO> getReceptKompList() throws DALException {
+		List<ReceptkompDTO> list = new ArrayList<ReceptkompDTO>();
 		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatchkomponent");
 		try
 		{
 			while (rs.next()) 
 			{
-				list.add(new ReceptKompDTO(rs.getInt("recept_id"),rs.getInt("raavare_id"),rs.getDouble("nom_netto"),rs.getDouble("tolerance")));
+				list.add(new ReceptkompDTO(rs.getInt("recept_id"),rs.getInt("raavare_id"),rs.getDouble("nom_netto"),rs.getDouble("tolerance")));
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
@@ -81,9 +81,9 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO
 	 * @see daointerfaces01917.ReceptKompDAO#createReceptKomp(dto01917.ReceptKompDTO)
 	 */
 	@Override
-	public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+	public void createReceptKomp(ReceptkompDTO receptkomponent) throws DALException {
 		Connector.doUpdate(
-				"INSERT INTO produktbatchkomponent(recept_id,raavare_id,nom_netto,tolerance) VALUES" +"("+receptkomponent.getReceptId()+", '"+receptkomponent.getRaavareId()+"', '"+receptkomponent.getNomNetto()+"', '"+receptkomponent.getTolerance()+"'"
+				"INSERT INTO produktbatchkomponent(recept_id,raavare_id,nom_netto,tolerance) VALUES" +"("+receptkomponent.getReceptID()+", '"+receptkomponent.getRaavareID()+"', '"+receptkomponent.getNomNetto()+"', '"+receptkomponent.getTolerance()+"'"
 				);
 		}
 
@@ -93,11 +93,11 @@ public class MYSQLReceptKompDAO implements ReceptKompDAO
 	 * @see daointerfaces01917.ReceptKompDAO#updateReceptKomp(dto01917.ReceptKompDTO)
 	 */
 	@Override
-	public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+	public void updateReceptKomp(ReceptkompDTO receptkomponent) throws DALException {
 		Connector.doUpdate(
-				"UPDATE produktbatch SET  recept_id = '" + receptkomponent.getReceptId() + "', raavare_id =  '" + receptkomponent.getRaavareId()+ 
+				"UPDATE produktbatch SET  recept_id = '" + receptkomponent.getReceptID() + "', raavare_id =  '" + receptkomponent.getRaavareID()+ 
 				"', nom_netto = '" + receptkomponent.getNomNetto() + "', tolerance='"+receptkomponent.getTolerance()+"' WHERE recept_id = " +
-				receptkomponent.getReceptId()
+				receptkomponent.getReceptID()
 		);
 	}
 

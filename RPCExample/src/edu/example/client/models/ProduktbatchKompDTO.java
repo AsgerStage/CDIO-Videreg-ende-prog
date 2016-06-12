@@ -76,7 +76,7 @@ public class ProduktbatchKompDTO implements Serializable
 	}
 	
 	@Override
-	public String toString() { 
+	public String toString() {
 		return "{PBID=" + pbID + ", RBID=" + rbID + ", Tara=" + tara + ", Netto=" + netto + ", OprID=" + oprID + '}'; 
 	}
 
