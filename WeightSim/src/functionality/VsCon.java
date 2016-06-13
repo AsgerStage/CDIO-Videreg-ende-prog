@@ -8,8 +8,7 @@ public class VsCon
     private static Thread userInputThread;
     private static Scanner userInputScanner = new Scanner(System.in);
     private static ServerSocket listener;
-    private static double brutto = 0;
-    private static double tara = 0;
+    private static double weight = 0;
     private static String inline;
     private static String indtDisp = "";
     private static int portdst = 8000;
@@ -59,47 +58,14 @@ public class VsCon
     private static void server() {
         try {
             while (!(inline = instream.readLine().toUpperCase()).isEmpty()) { //her ventes på input
-                if (inline.startsWith("RM20 8")) {
-                    String dispTmp = indtDisp;
-                    indtDisp = inline.substring(8, inline.indexOf("\"", 8));
-                    outstream.writeBytes("RM20 B\r\n");
+                if (inline.startsWith("S")) {
+                    outstream.writeBytes(""+weight);
                     
-                    printmenu();
-                    
-                    userInputThread.stop();
-                    outstream.writeBytes("RM20 A " + new Scanner(System.in).nextLine() + "\r\n");
-                    
-                    userInputScanner = new Scanner(System.in);
-                    userInputThread = new Thread(new User());
-                    userInputThread.setDaemon(true);
-                    userInputThread.start();
-                    indtDisp = dispTmp;
-                }
-                else if (inline.startsWith("D")) {
-                    if (inline.equals("DW"))
-                        indtDisp = "";
-                    else
-                        indtDisp = (inline.substring(2, inline.length())); //her skal anførselstegn udm.
-                    outstream.writeBytes("DB" + "\r\n");
-                }
-                else if (inline.startsWith("T")) {
-                    outstream.writeBytes("T S " + (tara) + " kg " + "\r\n");        //HVOR MANGE SPACE?
-                    tara();
-                }
-                else if (inline.startsWith("S")) {
-                    outstream.writeBytes("S S " + (brutto - tara) + " kg " + "\r\n");//HVOR MANGE SPACE?
-                }
-                else if (inline.startsWith("B")) {
-                    setBrutto(Double.parseDouble(inline.substring(2, inline.length())));
-                    outstream.writeBytes("DB" + "\r\n");
-                }
-                else if (inline.startsWith("Q")) {
-                    quit();
-                }
-                else {
-                    outstream.writeBytes("ES" + "\r\n");
-                }
                 
+                    
+                    
+                }
+               
                 printmenu();
                 listener.close();
                 sock.close();
@@ -128,7 +94,7 @@ public class VsCon
         for(int i = 0; i < 2; i++)
             System.out.println("                                                 ");
         System.out.println("*************************************************");
-        System.out.println("Netto: " + (brutto - tara) + " kg"                );
+        System.out.println("Weight: " + (weight) + " kg"                );
         System.out.println("Instruktionsdisplay: " +  indtDisp                );
         System.out.println("*************************************************");
         System.out.println("                                                 ");
@@ -136,7 +102,7 @@ public class VsCon
         System.out.println("Debug info:                                      ");
         if(sock != null)
             System.out.println("Hooked up to " + sock.getInetAddress()        );
-        System.out.println("Brutto: " + (brutto)+ " kg"                       );
+        System.out.println("Weight: " + (weight)+ " kg"                       );
         System.out.println("Streng modtaget: " + inline                       );
         System.out.println("                                                 ");
         System.out.println("Denne vægt simulator lytter på ordrene           ");
@@ -150,17 +116,7 @@ public class VsCon
         System.out.print  ("Tast her: "                                       );
     }
     
-    private static void tara() {
-        tara = brutto;
-    }
-    
-    private static double setBrutto(double newBrutto) {
-        if (newBrutto >= 0.0 && newBrutto <= 6.0)
-            brutto = newBrutto;
-        else
-            throw new IllegalArgumentException("Brutto skal være mellem 0.0 og 6.0 kg");
-        return brutto;
-    }
+  
     
     private static void quit() {
         try {
@@ -187,6 +143,13 @@ public class VsCon
         }
     }
     
+    private static double setWeight(double newWeight) {
+        if (newWeight >= 0.0 && newWeight <= 6.0)
+            weight = newWeight;
+        else
+            throw new IllegalArgumentException("Weight skal være mellem 0.0 og 6.0 kg");
+        return weight;
+    }
     private static class User implements Runnable
     {
         @Override
@@ -194,11 +157,9 @@ public class VsCon
             String userInput;
             while(!(userInput = userInputScanner.nextLine().toUpperCase()).isEmpty() || userInputScanner.hasNext()) {
                 try {
-                    if (userInput.startsWith("T")) {
-                        tara();
-                    }
-                    else if (userInput.startsWith("B")) {
-                        setBrutto(Double.parseDouble(userInput.substring(2, userInput.length())));
+                   
+                    if (userInput.startsWith("B")) {
+                        setWeight(Double.parseDouble(userInput.substring(2, userInput.length())));
                     }
                     else if (userInput.startsWith("Q")) {
                         quit();
