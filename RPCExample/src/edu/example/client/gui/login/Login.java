@@ -87,6 +87,7 @@ public class Login extends Composite {
 		if (pwMatch == true) {
 			// lbltest.setText("rigtigt password");
 			Session.CURRENT_USER = opr;
+			MenuWidget.updateMenu(opr.getRank());
 			ViewProfile viewPanel = new ViewProfile("Se Profil", opr.getOprID(), parent, serverComm);
 			parent.gotoPanel(viewPanel);
 		} else if (pwMatch == false) {

@@ -5,15 +5,15 @@
    
 
         <g:MenuBar vertical='true' ui:field='mainMenu'> 
-            <g:MenuItem ui:field='item1'>Ny Afvejning</g:MenuItem> 
-            <g:MenuItem ui:field='item2'>Min Side</g:MenuItem> 
-             <g:MenuItem ui:field='item3'>Søg</g:MenuItem>
-             <g:MenuItem ui:field='item4'>Råvarer</g:MenuItem>
-             <g:MenuItem ui:field='item5'>Råvarerbatch</g:MenuItem>
-             <g:MenuItem ui:field='item6'>Produktbatch</g:MenuItem>
-             <g:MenuItem ui:field='item7'>Recept</g:MenuItem>
-             <g:MenuItem ui:field='item8'>Login</g:MenuItem>
-             <g:MenuItem ui:field='item9'>Afslut</g:MenuItem>
+            <g:MenuItem ui:field='miAfvejning'>Ny Afvejning</g:MenuItem> 
+            <g:MenuItem ui:field='miProfile'>Min Side</g:MenuItem> 
+             <g:MenuItem ui:field='miOperators'>Operatøre</g:MenuItem>
+             <g:MenuItem ui:field='miRaavare'>Råvarer</g:MenuItem>
+             <g:MenuItem ui:field='miRB'>Råvarerbatch</g:MenuItem>
+             <g:MenuItem ui:field='miPB'>Produktbatch</g:MenuItem>
+             <g:MenuItem ui:field='miRecept'>Recept</g:MenuItem>
+             <g:MenuItem ui:field='miLogin'>Login</g:MenuItem>
+             <g:MenuItem ui:field='miTerminate'>Afslut</g:MenuItem>
 
         </g:MenuBar> 
 </ui:UiBinder> 
