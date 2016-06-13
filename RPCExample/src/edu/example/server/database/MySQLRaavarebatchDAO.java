@@ -13,11 +13,11 @@ import edu.example.server.database.connector.Connector;
 public class MySQLRaavarebatchDAO implements RaavarebatchDAO 
 {	
 	@Override
-	public RaavarebatchDTO getRaavarebatch(int raavareID) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM raavarebatch WHERE raavare_id = " + raavareID);
+	public RaavarebatchDTO getRaavarebatch(int rbID) throws DALException {
+		ResultSet rs = Connector.doQuery("SELECT * FROM get_raavarebatch WHERE rb_id = " + rbID);
 	    try {
 	    	if (!rs.first()) 
-	    		throw new DALException("RaavareBatch " + raavareID + " findes ikke");
+	    		throw new DALException("Raavarebatch " + rbID + " findes ikke");
 			return new RaavarebatchDTO (rs.getInt("rb_id"), new RaavareDTO(rs.getInt("raavare_id"), rs.getString("raavare_navn"), rs.getString("leverandoer")), rs.getDouble("maengde"));
 	    }
 	    catch (SQLException e) {

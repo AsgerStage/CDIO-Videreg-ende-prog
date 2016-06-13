@@ -29,6 +29,8 @@ public interface RPCServiceAsync
 	void deleteOperator(int oprID,AsyncCallback callback);
 	
 	//Raavarer
+	void getRaavarebatch(int rbID, AsyncCallback callback);
+	
 	void getRaavareList(AsyncCallback callback);
 	
 	void createRaavare(RaavareDTO raavare, AsyncCallback callback);
@@ -56,6 +58,8 @@ public interface RPCServiceAsync
 	void deletePbkomp(int pbID, int rbID, AsyncCallback callback);
 	
 	//Produktbatch
+	void getProduktbatch(int pbID, AsyncCallback callback); 
+	
 	void getProduktbatchList(AsyncCallback callback);
 	
 	void createProduktbatch(ProduktbatchDTO produktbatch, AsyncCallback callback);
@@ -65,6 +69,8 @@ public interface RPCServiceAsync
 	void deleteProduktbatch(int pbID, AsyncCallback callback);
 	
 	//Recept
+	void getRecept(int receptID, AsyncCallback callback);
+	
 	void getReceptList(AsyncCallback callback);
 	
 	void createRecept(ReceptDTO recept, AsyncCallback callback);

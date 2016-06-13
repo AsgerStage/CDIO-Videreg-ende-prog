@@ -40,6 +40,8 @@ public interface RPCService extends RemoteService
 	String deleteRaavare(int raavareID);
 	
 	//Råvarebatch
+	RaavarebatchDTO getRaavarebatch(int rbID);
+	
 	ArrayList<RaavarebatchDTO> getRaavarebatchList();
 	
 	String createRaavarebatch(RaavarebatchDTO raavarebatch);
@@ -58,6 +60,8 @@ public interface RPCService extends RemoteService
 	String deletePbkomp(int pbID, int rbID);
 	
 	//Produktbatch
+	ProduktbatchDTO getProduktbatch(int pbID);
+	
 	ArrayList<ProduktbatchDTO> getProduktbatchList();
 	
 	String createProduktbatch(ProduktbatchDTO produktbatch);
@@ -67,6 +71,8 @@ public interface RPCService extends RemoteService
 	String deleteProduktbatch(int pbID);
 	
 	//Recept
+	ReceptDTO getRecept(int receptID);
+	
 	ArrayList<ReceptDTO> getReceptList();
 	
 	String createRecept(ReceptDTO recept);

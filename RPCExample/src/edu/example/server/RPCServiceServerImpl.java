@@ -263,6 +263,28 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	
 	//Råvarebatch
 	private final MySQLRaavarebatchDAO rbDAO = new MySQLRaavarebatchDAO();
+
+	@Override
+	public RaavarebatchDTO getRaavarebatch(int rbID) {
+		Connector con = null;
+		RaavarebatchDTO result = null;
+		
+		try {
+			con = new Connector();
+			result = rbDAO.getRaavarebatch(rbID);
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
 	
 	@Override
 	public ArrayList<RaavarebatchDTO> getRaavarebatchList() {
@@ -477,6 +499,28 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	private final MYSQLProduktbatchDAO pbDAO = new MYSQLProduktbatchDAO();
 
 	@Override
+	public ProduktbatchDTO getProduktbatch(int pbID) {
+		Connector con = null;
+		ProduktbatchDTO result = null;
+		
+		try {
+			con = new Connector();
+			result = pbDAO.getProduktbatch(pbID);
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
 	public ArrayList<ProduktbatchDTO> getProduktbatchList() {
 		Connector con = null;
 		ArrayList<ProduktbatchDTO> result = null;
@@ -583,6 +627,28 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	
 	//Recepter
 	private final MySQLReceptDAO receptDAO = new MySQLReceptDAO();
+
+	@Override
+	public ReceptDTO getRecept(int receptID) {
+		Connector con = null;
+		ReceptDTO result = null;
+		
+		try {
+			con = new Connector();
+			result = receptDAO.getRecept(receptID);
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
 	
 	@Override
 	public ArrayList<ReceptDTO> getReceptList() {

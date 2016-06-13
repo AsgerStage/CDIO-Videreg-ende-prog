@@ -13,7 +13,7 @@ public class MYSQLProduktbatchDAO implements ProduktbatchDAO
 {
 	@Override
 	public ProduktbatchDTO getProduktbatch(int pbID) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch WHERE pbId = " + pbID);
+		ResultSet rs = Connector.doQuery("SELECT * FROM produktbatch WHERE pb_id = " + pbID);
 		try {
 			if (!rs.first()) 
 				throw new DALException("Produktbatch " + pbID + " Findes ikke");

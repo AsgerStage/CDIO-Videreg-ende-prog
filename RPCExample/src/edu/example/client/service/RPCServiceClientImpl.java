@@ -98,6 +98,11 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	
 	//Raavarebatch
 	@Override
+	public void getRaavarebatch(int rbID) {
+		this.service.getRaavarebatch(rbID, new DefaultCallback());
+	}
+	
+	@Override
 	public void getRaavarebatchList() {
 		this.service.getRaavarebatchList(new RaavarebatchCallback());
 	}
@@ -140,6 +145,11 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	
 	//Produktbatch
 	@Override
+	public void getProduktbatch(int pbID) {
+		this.service.getProduktbatch(pbID, new DefaultCallback());
+	}
+	
+	@Override
 	public void getProduktbatchList() {
 		this.service.getProduktbatchList(new ProduktbatchCallback());
 	}
@@ -161,6 +171,11 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	
 	//Recepter
 	@Override
+	public void getRecept(int receptID) {
+		this.service.getRecept(receptID, new DefaultCallback());
+	}
+	
+	@Override
 	public void getReceptList() {
 		this.service.getReceptList(new DefaultCallback());
 	}
@@ -180,7 +195,7 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 		this.service.deleteRecept(receptID, new DefaultCallback());
 	}
 	
-	//Recept Komponent
+	//Recept Komponent	
 	@Override
 	public void getReceptkompListByReceptID(int receptID) {
 		this.service.getReceptkompListByReceptID(receptID, new ReceptKompCallback());
@@ -234,7 +249,6 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 					oplist.statusUpdate((String) result);
 				else
 					oplist.updateTable((List<OperatorDTO>) result);
-				
 			}
 			else if(currentPanel instanceof Login) {
 				Login login = (Login) currentPanel;
@@ -255,12 +269,19 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 					recept.statusUpdate((String) result);
 				else
 					recept.updateTable((List<ReceptDTO>) result);
-				
 			}
 			else if (currentPanel instanceof WeightPage){
 				WeightPage weightPage = (WeightPage) currentPanel;
 				if(result instanceof String) 
 					weightPage.displayData((String) result);
+				else if(result instanceof OperatorDTO) 
+					weightPage.setCurOpr((OperatorDTO) result);
+				else if(result instanceof ProduktbatchDTO) 
+					weightPage.setCurPB((ProduktbatchDTO) result);
+				else if(result instanceof ReceptDTO) 
+					weightPage.setCurRecept((ReceptDTO) result);
+				else if(result instanceof RaavarebatchDTO) 
+					weightPage.setCurRB((RaavarebatchDTO) result);
 			}
 		}
 	}

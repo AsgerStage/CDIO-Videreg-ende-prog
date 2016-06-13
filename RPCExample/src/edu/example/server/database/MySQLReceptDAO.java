@@ -12,10 +12,11 @@ import edu.example.server.database.connector.Connector;
 public class MySQLReceptDAO implements ReceptDAO 
 {
 	@Override
-	public ReceptDTO getRecept(int receptId) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM recept WHERE recept_id = " + receptId);
+	public ReceptDTO getRecept(int receptID) throws DALException {
+		ResultSet rs = Connector.doQuery("SELECT * FROM recept WHERE recept_id = " + receptID);
 	    try {
-	    	if (!rs.first()) throw new DALException("recepten " + receptId + " findes ikke");
+	    	if (!rs.first()) 
+	    		throw new DALException("recepten " + receptID + " findes ikke");
 	    	return new ReceptDTO (rs.getInt("recept_id"), rs.getString("recept_navn"));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }

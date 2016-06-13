@@ -26,6 +26,8 @@ public interface RPCServiceIClient
 	void deleteOperator(int oprID);
 	
 	//Raavarer
+	void getRaavarebatch(int rbID);
+	
 	void getRaavareList();
 	
 	void createRaavare(RaavareDTO raavare);
@@ -53,6 +55,8 @@ public interface RPCServiceIClient
 	void deletePbkomp(int pbID, int rbID);
 	
 	//Produktbatch
+	void getProduktbatch(int pbID);
+	
 	void getProduktbatchList();
 	
 	void createProduktbatch(ProduktbatchDTO produktbatch);
@@ -62,6 +66,8 @@ public interface RPCServiceIClient
 	void deleteProduktbatch(int pbID);
 	
 	//Recepter
+	void getRecept(int receptID);
+	
 	void getReceptList();
 	
 	void createRecept(ReceptDTO recept);
