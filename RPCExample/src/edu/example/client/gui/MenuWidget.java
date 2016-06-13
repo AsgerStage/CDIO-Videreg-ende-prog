@@ -1,11 +1,15 @@
 package edu.example.client.gui;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.Widget;
 
 import edu.example.client.gui.Lists.OperatoerList;
 import edu.example.client.gui.Lists.ReceptList;
@@ -22,42 +26,42 @@ import edu.example.client.weightPage.WeightPage;
 
 public class MenuWidget extends Composite
 {
+	private static MenuWidgetUiBinder uiBinder = GWT.create(MenuWidgetUiBinder.class);
+	interface MenuWidgetUiBinder extends UiBinder<Widget, MenuWidget> {}
 	private MenuWidget me = this;
-	private HorizontalPanel hPanel= new HorizontalPanel();
 	private Banner parent;
 	private Object currentPanel = null;
 	private RPCServiceClientImpl serverComm;
+    @UiField MenuBar mainMenu; 
+    @UiField MenuItem item1; 
+    @UiField MenuItem item2; 
+    @UiField MenuItem item3; 
+    @UiField MenuItem item4; 
+    @UiField MenuItem item5; 
+    @UiField MenuItem item6; 
+    @UiField MenuItem item7; 
+    @UiField MenuItem item8; 
+    @UiField MenuItem item9; 
+    
+
 
 	public MenuWidget(Banner banner, RPCServiceClientImpl serverComm) {
-		initWidget(this.hPanel);
+		initWidget(uiBinder.createAndBindUi(this));
+		
+		item1.setScheduledCommand(cmd_NyAfvejning);
+		item2.setScheduledCommand(cmd_MinSide);
+		item3.setScheduledCommand(cmd_Soeg);
+		item4.setScheduledCommand(cmd_Raavare);
+		item5.setScheduledCommand(cmd_Raavarebatch);
+		item6.setScheduledCommand(cmd_Produktbatch);
+		item7.setScheduledCommand(cmd_Recept);
+		item8.setScheduledCommand(cmd_Login);
+		item9.setScheduledCommand(cmd_Afslut);
+		
 		parent = banner;
 		this.serverComm = serverComm;
 		
-		
-		MenuBar menu = new MenuBar(true);
-		menu.addItem(new MenuItem("Ny afvejning", cmd_NyAfvejning));
-		menu.addItem(new MenuItem("Min side", cmd_MinSide));
-		menu.addItem(new MenuItem("Soeg", cmd_Soeg));
-		
-		MenuItem miRaavere = new MenuItem("", cmd_Raavare);
-		miRaavere.setHTML("R&aring;varer");
-		menu.addItem(miRaavere);
-		
 
-		MenuItem miRaaverebatch = new MenuItem("", cmd_Raavarebatch);
-		miRaaverebatch.setHTML("R&aring;varebatchs");
-		menu.addItem(miRaaverebatch);
-		
-		menu.addItem(new MenuItem("Pruduktbatchs", cmd_Produktbatch));
-		
-		MenuItem receptList = new MenuItem("Recepter",cmd_Recept);
-		menu.addItem(receptList);
-		
-		menu.addItem(new MenuItem("Login", cmd_Login));
-		menu.addItem(new MenuItem("Afslut", cmd_Afslut));
-		
-		hPanel.add(menu);
-		menu.setHeight("100%");
 	}
 	
 	public Object getCurrentPanel() {

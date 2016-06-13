@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent"> 
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'> 
+    
+   
+
+        <g:MenuBar vertical='true' ui:field='mainMenu'> 
+            <g:MenuItem ui:field='item1'>Ny Afvejning</g:MenuItem> 
+            <g:MenuItem ui:field='item2'>Min Side</g:MenuItem> 
+             <g:MenuItem ui:field='item3'>Søg</g:MenuItem>
+             <g:MenuItem ui:field='item4'>Råvarer</g:MenuItem>
+             <g:MenuItem ui:field='item5'>Råvarerbatch</g:MenuItem>
+             <g:MenuItem ui:field='item6'>Produktbatch</g:MenuItem>
+             <g:MenuItem ui:field='item7'>Recept</g:MenuItem>
+             <g:MenuItem ui:field='item8'>Login</g:MenuItem>
+             <g:MenuItem ui:field='item9'>Afslut</g:MenuItem>
+
+        </g:MenuBar> 
+</ui:UiBinder> 
