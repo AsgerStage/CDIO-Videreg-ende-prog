@@ -101,6 +101,14 @@ public class VsCon
                 }
                 
                 printmenu();
+                listener.close();
+                sock.close();
+                instream.close();
+                outstream.close();
+                listener = new ServerSocket(portdst);
+                sock = listener.accept();
+                instream = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+                outstream = new DataOutputStream(sock.getOutputStream());
             }
         }
         catch (Exception e){
