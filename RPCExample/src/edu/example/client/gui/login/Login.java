@@ -31,7 +31,6 @@ public class Login extends Composite {
 	}
 
 	VerticalPanel vPanel = new VerticalPanel();
-	private Label lbltest;
 	int username;
 	String pass;
 	private RPCServiceClientImpl serverComm;

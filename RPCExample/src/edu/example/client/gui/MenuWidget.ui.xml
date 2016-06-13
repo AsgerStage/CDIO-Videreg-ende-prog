@@ -12,7 +12,7 @@
              <g:MenuItem ui:field='miRB'>Råvarerbatch</g:MenuItem>
              <g:MenuItem ui:field='miPB'>Produktbatch</g:MenuItem>
              <g:MenuItem ui:field='miRecept'>Recept</g:MenuItem>
-             <g:MenuItem ui:field='miLogin'>Login</g:MenuItem>
+             <g:MenuItem ui:field='miLogin'></g:MenuItem>
              <g:MenuItem ui:field='miTerminate'>Afslut</g:MenuItem>
 
         </g:MenuBar> 

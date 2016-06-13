@@ -132,7 +132,7 @@ public class MenuWidget extends Composite
 	
 	private Command cmd_Afslut = new Command() {
 		public void execute() {
-			Afslut viewPanel = new Afslut();
+			Afslut viewPanel = new Afslut(me, serverComm);
 			gotoPanel(viewPanel);
 		}
 	};
