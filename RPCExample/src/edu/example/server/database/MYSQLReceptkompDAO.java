@@ -16,7 +16,7 @@ public class MYSQLReceptkompDAO implements ReceptkompDAO
 {
 	@Override
 	public ReceptkompDTO getReceptkomp(int receptID, int raavareID) throws DALException {
-		try	{
+		try	{ 
 			ResultSet rs = Connector.doQuery("SELECT * FROM receptkomponent WHERE recept_id = " + receptID + " AND raavare_id = " + raavareID);
 			if(!rs.first()) 
 				throw new DALException("Recept komponent" + receptID + "Findes ikke");

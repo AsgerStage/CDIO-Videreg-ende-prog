@@ -22,7 +22,7 @@ public class ProduktbatchkompPopup extends DialogBox
 	private TextBox oprIDBox = new TextBox();
 	
 	private Button cancel = new Button("Anuller");
-	private Button execute = new Button();
+	private Button execute = new Button(); 
 	
 	private boolean isCreate = false;
 	
