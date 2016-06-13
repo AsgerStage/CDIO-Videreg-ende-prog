@@ -14,7 +14,7 @@ public class ProduktbatchkompDTO implements Serializable
 	private double netto;	// 
 	private int oprID;		// operatoer id i området 1-99999999
 	
-	public ProduktbatchkompDTO() {
+	public ProduktbatchkompDTO() { 
 		
 	}
 	
