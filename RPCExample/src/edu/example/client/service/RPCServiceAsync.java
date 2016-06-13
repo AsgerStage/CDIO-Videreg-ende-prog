@@ -7,10 +7,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 
 public interface RPCServiceAsync 
 {
@@ -48,9 +49,9 @@ public interface RPCServiceAsync
 	//Produktbatch komponent
 	void getPbkompListByPbID(int pbID, AsyncCallback callback);
 	
-	void createPbkomp(ProduktbatchKompDTO pbkomp, AsyncCallback callback);
+	void createPbkomp(ProduktbatchkompDTO pbkomp, AsyncCallback callback);
 	
-	void updatePbkomp(ProduktbatchKompDTO pbkomp, AsyncCallback callback);
+	void updatePbkomp(ProduktbatchkompDTO pbkomp, AsyncCallback callback);
 	
 	void deletePbkomp(int pbID, int rbID, AsyncCallback callback);
 	
@@ -71,6 +72,15 @@ public interface RPCServiceAsync
 	void updateRecept(ReceptDTO recept, AsyncCallback callback);
 	
 	void deleteRecept(int receptID, AsyncCallback callback);
+	
+	//Recept komponent
+	void getReceptkompListByReceptID(int receptID, AsyncCallback callback);
+	
+	void createReceptkomp(ReceptkompDTO receptkomp, AsyncCallback callback);
+	
+	void updateReceptkomp(ReceptkompDTO receptkomp, AsyncCallback callback);
+	
+	void deleteReceptkomp(int receptID, int raavareID, AsyncCallback callback);
 	
 	//TelnetClient
 	void getDataList(String command, int expectedReplies, List<String> params, AsyncCallback callback);

@@ -4,10 +4,11 @@ import java.util.List;
 
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 
 public interface RPCServiceIClient 
 {
@@ -45,9 +46,9 @@ public interface RPCServiceIClient
 	//Produktbatch komponent
 	void getPbkompListByPbID(int pbID);
 	
-	void createPbkomp(ProduktbatchKompDTO pbkomp);
+	void createPbkomp(ProduktbatchkompDTO pbkomp);
 	
-	void updatePbkomp(ProduktbatchKompDTO pbkomp);
+	void updatePbkomp(ProduktbatchkompDTO pbkomp);
 	
 	void deletePbkomp(int pbID, int rbID);
 	
@@ -68,6 +69,15 @@ public interface RPCServiceIClient
 	void updateRecept(ReceptDTO recept);
 	
 	void deleteRecept(int receptID);
+	
+	//Recept komponent
+	void getReceptkompListByReceptID(int receptID);
+	
+	void createReceptkomp(ReceptkompDTO receptkomp);
+	
+	void updateReceptkomp(ReceptkompDTO receptkomp);
+	
+	void deleteReceptkomp(int receptID, int raavareID);
 	
 	//Telnet Client
 	void getDataList(String command, int expectedReplies, List<String> params);

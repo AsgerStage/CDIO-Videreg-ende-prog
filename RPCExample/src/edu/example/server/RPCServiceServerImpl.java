@@ -10,12 +10,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.example.client.exceptions.DALException;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.service.RPCService;
 import edu.example.server.database.MYSQLProduktbatchDAO;
+import edu.example.server.database.MYSQLReceptkompDAO;
 import edu.example.server.database.MySQLOperatoerDAO;
 import edu.example.server.database.MySQLProduktbatchKompDAO;
 import edu.example.server.database.MySQLRaavareDAO;
@@ -372,13 +374,13 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	private final MySQLProduktbatchKompDAO pbkompDAO = new MySQLProduktbatchKompDAO();
 	
 	@Override
-	public ArrayList<ProduktbatchKompDTO> getPbkompListByPbID(int pbID) {
+	public ArrayList<ProduktbatchkompDTO> getPbkompListByPbID(int pbID) {
 		Connector con = null;
-		ArrayList<ProduktbatchKompDTO> result = null;
+		ArrayList<ProduktbatchkompDTO> result = null;
 		
 		try {
 			con = new Connector();
-			result = new ArrayList<ProduktbatchKompDTO>(pbkompDAO.getProduktbatchKompListByRBID(pbID));
+			result = new ArrayList<ProduktbatchkompDTO>(pbkompDAO.getProduktbatchKompListByRBID(pbID));
 		} 
 		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
 			e.printStackTrace();
@@ -392,7 +394,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	}
 
 	@Override
-	public String createPbkomp(ProduktbatchKompDTO pbkomp) {
+	public String createPbkomp(ProduktbatchkompDTO pbkomp) {
 		String result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " kunne ikke oprettes: ";
 		Connector con = null;
 		
@@ -420,7 +422,7 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 	}
 
 	@Override
-	public String updatePbkomp(ProduktbatchKompDTO pbkomp) {
+	public String updatePbkomp(ProduktbatchkompDTO pbkomp) {
 		String result = "Produktbatch komponentet " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + " kunne ikke opdateres: ";
 		Connector con = null;
 		
@@ -667,6 +669,111 @@ public class RPCServiceServerImpl extends RemoteServiceServlet implements RPCSer
 		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
 			e.printStackTrace();
 			result = "Recepten " + receptID + " kunne ikke slettes: " + e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+	
+	//Recept komponent
+	private final MYSQLReceptkompDAO receptkompDAO = new MYSQLReceptkompDAO();
+
+	@Override
+	public ArrayList<ReceptkompDTO> getReceptkompListByReceptID(int receptID) {
+		Connector con = null;
+		ArrayList<ReceptkompDTO> result = null;
+		
+		try {
+			con = new Connector();
+			result = new ArrayList<ReceptkompDTO>(receptkompDAO.getReceptkompListByReceptID(receptID));
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+		}
+        finally {
+            if(con != null)
+                try { con.closeConnection(); } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String createReceptkomp(ReceptkompDTO receptkomp) {
+		String result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " kunne ikke oprettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+
+			int reply = receptkompDAO.createReceptkomp(receptkomp);
+			if(reply > 0)
+				result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " blev oprettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result += e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String updateReceptkomp(ReceptkompDTO receptkomp) {
+		String result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " kunne ikke opdateres: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = receptkompDAO.updateReceptkomp(receptkomp);
+			if(reply > 0)
+				result = "Recept komponentet " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + " blev opdateret";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (DALException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			result = e.getMessage();
+		}
+        finally {
+            if(con != null)
+                try {
+                    con.closeConnection();
+                } catch (SQLException e) { }
+        }
+		
+		return result;
+	}
+
+	@Override
+	public String deleteReceptkomp(int receptID, int raavareID) {
+		String result = "Recept komponentet " + receptID + " + " + raavareID + " kunne ikke slettes: ";
+		Connector con = null;
+		
+		try {
+			con = new Connector();
+			int reply = receptkompDAO.deleteReceptkomp(receptID, raavareID);
+			if(reply > 0)
+				result = "Recept komponentet " + receptID + " + " + raavareID + " blev slettet";
+			else
+				result += "reply = " + reply;
+		} 
+		catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | DALException e) {
+			e.printStackTrace();
+			result += e.getMessage();
 		}
         finally {
             if(con != null)

@@ -8,19 +8,21 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import edu.example.client.gui.Banner;
 import edu.example.client.gui.Lists.OperatoerList;
-import edu.example.client.gui.Lists.ReceptList;
 import edu.example.client.gui.login.Login;
 import edu.example.client.gui.produktbatch.ProduktbatchPanel;
 import edu.example.client.gui.produktbatch.pbKomp.ProduktbatchkompPanel;
 import edu.example.client.gui.profile.ViewProfile;
 import edu.example.client.gui.raavare.RaavarePanel;
 import edu.example.client.gui.raavarebatch.RaavarebatchPanel;
+import edu.example.client.gui.recept.ReceptPanel;
+import edu.example.client.gui.recept.receptkomp.ReceptkompPanel;
 import edu.example.client.models.OperatorDTO;
 import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchKompDTO;
+import edu.example.client.models.ProduktbatchkompDTO;
 import edu.example.client.models.RaavareDTO;
 import edu.example.client.models.RaavarebatchDTO;
 import edu.example.client.models.ReceptDTO;
+import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.weightPage.WeightPage;
 
 public class RPCServiceClientImpl implements RPCServiceIClient
@@ -122,12 +124,12 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 	}
 
 	@Override
-	public void createPbkomp(ProduktbatchKompDTO pbkomp) {
+	public void createPbkomp(ProduktbatchkompDTO pbkomp) {
 		this.service.createPbkomp(pbkomp, new ProduktbatchKompCallback());
 	}
 
 	@Override
-	public void updatePbkomp(ProduktbatchKompDTO pbkomp) {
+	public void updatePbkomp(ProduktbatchkompDTO pbkomp) {
 		this.service.updatePbkomp(pbkomp, new ProduktbatchKompCallback());
 	}
 
@@ -178,6 +180,26 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 		this.service.deleteRecept(receptID, new DefaultCallback());
 	}
 	
+	//Recept Komponent
+	@Override
+	public void getReceptkompListByReceptID(int receptID) {
+		this.service.getReceptkompListByReceptID(receptID, new ReceptKompCallback());
+	}
+
+	@Override
+	public void createReceptkomp(ReceptkompDTO receptkomp) {
+		this.service.createReceptkomp(receptkomp, new ReceptKompCallback());
+	}
+
+	@Override
+	public void updateReceptkomp(ReceptkompDTO receptkomp) {
+		this.service.updateReceptkomp(receptkomp, new ReceptKompCallback());
+	}
+
+	@Override
+	public void deleteReceptkomp(int receptID, int raavareID) {
+		this.service.deleteReceptkomp(receptID, raavareID, new ReceptKompCallback());
+	}
 	
 	//Telnet Client
 	public void getDataList(String command, int expectedReplies, List<String> params){
@@ -226,8 +248,8 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 				else
 					raavarePanel.updateTable((List<RaavareDTO>) result);
 			}
-			else if(currentPanel instanceof ReceptList) {
-				ReceptList recept = (ReceptList) currentPanel;
+			else if(currentPanel instanceof ReceptPanel) {
+				ReceptPanel recept = (ReceptPanel) currentPanel;
 				
 				if(result instanceof String) 
 					recept.statusUpdate((String) result);
@@ -335,9 +357,41 @@ public class RPCServiceClientImpl implements RPCServiceIClient
 				if(result instanceof String) 
 					pbkompPanel.statusUpdate((String) result);
 				else if(result instanceof List<?>)
-					pbkompPanel.updateTable((List<ProduktbatchKompDTO>) result);
+					pbkompPanel.updateTable((List<ProduktbatchkompDTO>) result);
 				else
 					pbkompPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
+			}
+		}
+	}
+	
+	/**
+	 * Async Callback for recept komponent
+	 */
+	private class ReceptKompCallback implements AsyncCallback 
+	{
+		@Override
+		public void onFailure(Throwable caught) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ReceptkompPanel) {
+				ReceptkompPanel receptkompPanel = (ReceptkompPanel) currentPanel;
+				receptkompPanel.statusUpdate("Error on server: " + caught.getMessage());
+			}
+		}
+
+		@Override
+		public void onSuccess(Object result) {
+			Object currentPanel = mainGui.getCurrentPanel();
+			
+			if(currentPanel instanceof ReceptkompPanel) {
+				ReceptkompPanel receptkompPanel = (ReceptkompPanel) currentPanel;
+				
+				if(result instanceof String) 
+					receptkompPanel.statusUpdate((String) result);
+				else if(result instanceof List<?>)
+					receptkompPanel.updateTable((List<ReceptkompDTO>) result);
+				else
+					receptkompPanel.statusUpdate("Received unknown message from server " + result.getClass().getSimpleName() + "{" + result.toString() + "}");
 			}
 		}
 	}

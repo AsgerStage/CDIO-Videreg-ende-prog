@@ -1,4 +1,4 @@
-package edu.example.client.gui.produktbatch.pbKomp;
+package edu.example.client.gui.recept.receptkomp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,46 +22,44 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.example.client.exceptions.DALException;
-import edu.example.client.gui.MenuWidget;
-import edu.example.client.gui.produktbatch.ProduktbatchPanel;
-import edu.example.client.models.ProduktbatchDTO;
-import edu.example.client.models.ProduktbatchkompDTO;
+import edu.example.client.gui.recept.ReceptPanel;
+import edu.example.client.models.ReceptkompDTO;
 import edu.example.client.service.RPCServiceClientImpl;
 
-public class ProduktbatchkompPanel extends Composite 
+public class ReceptkompPanel extends Composite 
 {
-	public ProduktbatchPanel parent;
+	public ReceptPanel parent;
 	private RPCServiceClientImpl serverComm;
 	private VerticalPanel mainPanel = new VerticalPanel();
 	
-	private final String searchBoxDefaultText = "Soeg efter produktbatch komponenter";
+	private final String searchBoxDefaultText = "Soeg efter recept komponenter";
 	private final TextBox searchBox = new TextBox();
 	
-	private final int tableColumns = 6;
+	private final int tableColumns = 5;
 	private final Grid tableList;
-	private List<ProduktbatchkompDTO> pbkompList = null;
-	private List<ProduktbatchkompDTO> dispPbkompList = null;
+	private List<ReceptkompDTO> receptkompList = null;
+	private List<ReceptkompDTO> dispReceptkompList = null;
 	
-	private int currPBID;
+	private int currReceptID;
 		
-	public ProduktbatchkompPanel(ProduktbatchPanel parent, RPCServiceClientImpl serverComm, int pbID) {
+	public ReceptkompPanel(ReceptPanel parent, RPCServiceClientImpl serverComm, int receptID) {
 		this.parent = parent;
 		this.serverComm = serverComm;
-		this.currPBID = pbID;
+		this.currReceptID = receptID;
 		
 		mainPanel.setSize("100%", "100%");
 		initWidget(mainPanel);
 		tableList = new Grid(1, tableColumns);
 		init();
 		
-		this.serverComm.getPbkompListByPbID(currPBID);
+		this.serverComm.getReceptkompListByReceptID(currReceptID);
 	}
 	
 	private void init() {
 		//Top panel
 		HorizontalPanel topPanel = new HorizontalPanel();
 		
-		HTML pageTitle = new HTML("Produktbatch komponenter");
+		HTML pageTitle = new HTML("Recept komponenter");
 		pageTitle.addStyleName("h1");
 		
 		searchBox.setText(searchBoxDefaultText);
@@ -88,12 +86,11 @@ public class ProduktbatchkompPanel extends Composite
 		buttonUpdate.addClickHandler(new ClickHandlerUpdate());
 		
 		//Table
-		tableList.setHTML(0, 0, "Produkt ID");
-		tableList.setHTML(0, 1, "R&aring;varebatch ID");
-		tableList.setHTML(0, 2, "Tara");
-		tableList.setHTML(0, 3, "Netto");
-		tableList.setHTML(0, 4, "Operat&oslash;r ID");
-		tableList.setHTML(0, 5, "Handling");
+		tableList.setHTML(0, 0, "Recept ID");
+		tableList.setHTML(0, 1, "R&aring;vare ID");
+		tableList.setHTML(0, 2, "Nominelle V&aelig;gt (kg)");
+		tableList.setHTML(0, 3, "Tolerance (%)");
+		tableList.setHTML(0, 4, "Handling");
 		tableList.setBorderWidth(1);
 		tableList.setCellPadding(10);
 		tableList.setWidth("100%");
@@ -105,7 +102,7 @@ public class ProduktbatchkompPanel extends Composite
 		buttonPanel.addStyleName("paddedVerticalPanel");
 		
 		Button createButton = new Button();		
-		createButton.setHTML("Opret Produktbatch Komponent");
+		createButton.setHTML("Opret Recept Komponent");
 		createButton.setStyleName("button");
 		createButton.addClickHandler(new ClickHandlerCreate());
 		
@@ -132,26 +129,25 @@ public class ProduktbatchkompPanel extends Composite
 		Window.alert(message);
 	}
 	
-	public void updateTable(List<ProduktbatchkompDTO> pbkomp) {
-		pbkompList = pbkomp;
-		update(pbkompList);
+	public void updateTable(List<ReceptkompDTO> receptkomp) {
+		receptkompList = receptkomp;
+		update(receptkompList);
 	}
 	
-	private void update(List<ProduktbatchkompDTO> pbkomps) {
-		dispPbkompList = pbkomps;
-		clearTable(pbkomps.size() + 1);
+	private void update(List<ReceptkompDTO> receptkomps) {
+		dispReceptkompList = receptkomps;
+		clearTable(receptkomps.size() + 1);
 		
-		for (int i = 0; i < pbkomps.size(); i++) {
-			addPbkompToTable(i + 1, pbkomps.get(i));
+		for (int i = 0; i < receptkomps.size(); i++) {
+			addReceptkompToTable(i + 1, receptkomps.get(i));
 		}
 	}
 	
-	private void addPbkompToTable(int rowIndex, ProduktbatchkompDTO pbKomp) {		
-		tableList.setText(rowIndex, 0, "" + pbKomp.getPbID());
-		tableList.setText(rowIndex, 1, "" + pbKomp.getRbID());
-		tableList.setText(rowIndex, 2, "" + pbKomp.getTara());
-		tableList.setText(rowIndex, 3, "" + pbKomp.getNetto());
-		tableList.setText(rowIndex, 4, "" + pbKomp.getOprID());
+	private void addReceptkompToTable(int rowIndex, ReceptkompDTO receptKomp) {		
+		tableList.setText(rowIndex, 0, "" + receptKomp.getReceptID());
+		tableList.setText(rowIndex, 1, "" + receptKomp.getRaavareID());
+		tableList.setText(rowIndex, 2, "" + receptKomp.getNomNetto());
+		tableList.setText(rowIndex, 3, "" + receptKomp.getTolerance());
 		
 		HorizontalPanel ButtonPanel = new HorizontalPanel();
 		
@@ -173,15 +169,15 @@ public class ProduktbatchkompPanel extends Composite
 	}
 	
 	private void search(String searchText) {
-		if(pbkompList != null) {
-			ArrayList<ProduktbatchkompDTO> result = new ArrayList<>();
+		if(receptkompList != null) {
+			ArrayList<ReceptkompDTO> result = new ArrayList<>();
 			if(searchText.length() > 0) {
 				try {
 					int searhInt = Integer.parseInt(searchText);
 					
-					for (ProduktbatchkompDTO pbkomp: pbkompList) {
-						if(pbkomp.getPbID() == searhInt || pbkomp.getRbID() == searhInt || pbkomp.getOprID() == searhInt) {
-							result.add(pbkomp);
+					for (ReceptkompDTO receptkomp: receptkompList) {
+						if(receptkomp.getReceptID() == searhInt || receptkomp.getRaavareID() == searhInt) {
+							result.add(receptkomp);
 						}
 					}
 				}
@@ -192,7 +188,7 @@ public class ProduktbatchkompPanel extends Composite
 				}
 			}
 			else
-				update(pbkompList);
+				update(receptkompList);
 		}
 	}
 	
@@ -208,7 +204,7 @@ public class ProduktbatchkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			serverComm.getPbkompListByPbID(currPBID);
+			serverComm.getReceptkompListByReceptID(currReceptID);
 		}
 	}
 	
@@ -216,9 +212,9 @@ public class ProduktbatchkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			ProduktbatchkompDTO pbkomp = dispPbkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			ReceptkompDTO pbkomp = dispReceptkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-			ProduktbatchkompPopup editPopup = new ProduktbatchkompPopup(pbkomp);
+			ReceptkompPopup editPopup = new ReceptkompPopup(pbkomp);
 			editPopup.setExecuteClickHandler(new PopupHandlerExecute(editPopup));
 			editPopup.setCancelClickHandler(new PopupHandlerCancel(editPopup));
 			editPopup.show();
@@ -229,10 +225,10 @@ public class ProduktbatchkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			ProduktbatchkompDTO pbkomp = dispPbkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
+			ReceptkompDTO receptkomp = dispReceptkompList.get(tableList.getCellForEvent(event).getRowIndex() - 1);
 			
-			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + pbkomp.getPbID() + " + " + pbkomp.getRbID() + '?'))
-				serverComm.deletePbkomp(pbkomp.getPbID(), pbkomp.getRbID());
+			if(Window.confirm("Er du sikker paa at du vil slette produktbatch komponenten " + receptkomp.getReceptID() + " + " + receptkomp.getRaavareID() + '?'))
+				serverComm.deleteReceptkomp(receptkomp.getReceptID(), receptkomp.getRaavareID());
 		}
 	}
 	
@@ -240,7 +236,7 @@ public class ProduktbatchkompPanel extends Composite
 	{
 		@Override
 		public void onClick(ClickEvent event) {
-			ProduktbatchkompPopup createPopup = new ProduktbatchkompPopup(null);
+			ReceptkompPopup createPopup = new ReceptkompPopup(null);
 			createPopup.setExecuteClickHandler(new PopupHandlerExecute(createPopup));
 			createPopup.setCancelClickHandler(new PopupHandlerCancel(createPopup));
 			createPopup.show();
@@ -249,9 +245,9 @@ public class ProduktbatchkompPanel extends Composite
 	
 	private class ClickHandlerBack implements ClickHandler
 	{
-		ProduktbatchkompPanel parent;
+		ReceptkompPanel parent;
 		
-		protected ClickHandlerBack(ProduktbatchkompPanel parent) {
+		protected ClickHandlerBack(ReceptkompPanel parent) {
 			this.parent = parent;
 		}
 		
@@ -263,27 +259,26 @@ public class ProduktbatchkompPanel extends Composite
 	
 	private class PopupHandlerExecute implements ClickHandler 
 	{
-		private final ProduktbatchkompPopup popup;
+		private final ReceptkompPopup popup;
 		
-		protected PopupHandlerExecute(ProduktbatchkompPopup popup) {
+		protected PopupHandlerExecute(ReceptkompPopup popup) {
 			this.popup = popup;
 		}
 
 		@Override
 		public void onClick(ClickEvent event) {
-			int produktbatchID = popup.getProduktbatchID();
-			int raavarebatchID = popup.getRaavarebatchID();
-			double tara = popup.getTara();
-			double netto = popup.getNetto();
-			int operatoerID = popup.getOperatoerID();
+			int receptID = popup.getReceptID();
+			int raavareID = popup.getRaavareID();
+			double nomNetto = popup.getNomNetto();
+			double tolerance = popup.getTolerance();
 			
 			try {
-				ProduktbatchkompDTO produktbatch = new ProduktbatchkompDTO(produktbatchID, raavarebatchID, tara, netto, operatoerID);
+				ReceptkompDTO receptkomp = new ReceptkompDTO(receptID, raavareID, nomNetto, tolerance);
 
 				if(popup.isCreate())
-					serverComm.createPbkomp(produktbatch);
+					serverComm.createReceptkomp(receptkomp);
 				else 
-					serverComm.updatePbkomp(produktbatch);
+					serverComm.updateReceptkomp(receptkomp);
 			} 
 			catch (DALException e) {
 				statusUpdate(e.getMessage());
@@ -296,9 +291,9 @@ public class ProduktbatchkompPanel extends Composite
 	
 	private class PopupHandlerCancel implements ClickHandler 
 	{
-		private ProduktbatchkompPopup popup;
+		private ReceptkompPopup popup;
 		
-		protected PopupHandlerCancel(ProduktbatchkompPopup popup) {
+		protected PopupHandlerCancel(ReceptkompPopup popup) {
 			this.popup = popup;
 		}
 
