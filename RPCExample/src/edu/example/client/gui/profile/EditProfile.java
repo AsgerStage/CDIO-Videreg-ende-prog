@@ -55,7 +55,9 @@ public class EditProfile extends ProfilePage
 		//Content
 		nameField = new InfoBox("Navn", new TextBox());
 		initialsField = new InfoBox("Initialer", new TextBox());
-		cprField = new InfoBox("CPR Nr.", new TextBox());
+		TextBox cprBox = new TextBox();
+		cprBox.setEnabled(false);
+		cprField = new InfoBox("CPR Nr.", cprBox);
 		idField = new InfoBox("ID", new TextBox());
 		
 		rankList = new ListBox();

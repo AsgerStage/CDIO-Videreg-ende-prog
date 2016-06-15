@@ -10,14 +10,14 @@ import edu.example.client.service.RPCServiceClientImpl;
 
 public class Banner extends Composite {
 
-	private VerticalPanel vPanel = new VerticalPanel(); //Hovedpanelet
+	private VerticalPanel mainPanel = new VerticalPanel(); //Hovedpanelet
 	private HorizontalPanel contentPanel;
 	private RPCServiceClientImpl serverComm;
 	private MenuWidget menuWidget;
 
 	public Banner(RPCServiceClientImpl serverComm) {
-		initWidget(this.vPanel);
-		vPanel.setSize("100%", "100%");
+		initWidget(this.mainPanel);
+		mainPanel.setSize("100%", "100%");
 
 		this.serverComm = serverComm;
 
@@ -27,7 +27,7 @@ public class Banner extends Composite {
 	public void init() {
 		menuWidget = new MenuWidget(this, serverComm);
 
-		vPanel.setBorderWidth(1);
+		mainPanel.setBorderWidth(1);
 
 		HorizontalPanel bannerPanel = new HorizontalPanel(); // Panelet som indeholder billedet
 		bannerPanel.setWidth("100%");
@@ -35,21 +35,18 @@ public class Banner extends Composite {
 		HorizontalPanel contentHolderPanel= new HorizontalPanel(); // Skal indeholde to mindre paneler et med menu og et med et tomt vindue
 		contentHolderPanel.setBorderWidth(1);
 
-//		Login logI = new Login(menuWidget, serverComm);
-
 		contentPanel = new HorizontalPanel(); // skal indeholde tomt vindue
 		contentPanel.setSize("100%", "100%");
-//		contentPanel.add(logI);
 
 		Image img = new Image("Billeder/B.png");  
 
 		bannerPanel.add(img);
-		vPanel.add(bannerPanel);
+		mainPanel.add(bannerPanel);
 
 		contentHolderPanel.add(menuWidget);
 		contentHolderPanel.add(contentPanel);
 		contentHolderPanel.setCellWidth(menuWidget, "11%");
-		vPanel.add(contentHolderPanel);
+		mainPanel.add(contentHolderPanel);
 		
 		menuWidget.gotoPanel(new Login(menuWidget, serverComm));
 	}

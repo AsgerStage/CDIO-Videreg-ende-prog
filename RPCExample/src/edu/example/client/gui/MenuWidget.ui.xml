@@ -1,19 +1,16 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent"> 
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'> 
-    
-   
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui' > 
 
-        <g:MenuBar vertical='true' ui:field='mainMenu'> 
-            <g:MenuItem ui:field='miAfvejning'>Ny Afvejning</g:MenuItem> 
-            <g:MenuItem ui:field='miProfile'>Min Side</g:MenuItem> 
-             <g:MenuItem ui:field='miOperators'>Operatøre</g:MenuItem>
-             <g:MenuItem ui:field='miRaavare'>Råvarer</g:MenuItem>
-             <g:MenuItem ui:field='miRB'>Råvarerbatch</g:MenuItem>
-             <g:MenuItem ui:field='miPB'>Produktbatch</g:MenuItem>
-             <g:MenuItem ui:field='miRecept'>Recept</g:MenuItem>
-             <g:MenuItem ui:field='miLogin'></g:MenuItem>
-             <g:MenuItem ui:field='miTerminate'>Afslut</g:MenuItem>
-
-        </g:MenuBar> 
-</ui:UiBinder> 
+	<g:MenuBar vertical='true' ui:field='mainMenu'> 
+		<g:MenuItem ui:field='miAfvejning'>Ny Afvejning</g:MenuItem> 
+		<g:MenuItem ui:field='miProfile'>Min Side</g:MenuItem> 
+		<g:MenuItem ui:field='miOperators'>Operatøre</g:MenuItem>
+		<g:MenuItem ui:field='miRaavare'>Råvarer</g:MenuItem>
+		<g:MenuItem ui:field='miRB'>Råvarerbatch</g:MenuItem>
+		<g:MenuItem ui:field='miPB'>Produktbatch</g:MenuItem>
+		<g:MenuItem ui:field='miRecept'>Recept</g:MenuItem>
+		<g:MenuItem ui:field='miLogin'></g:MenuItem>
+		<g:MenuItem ui:field='miTerminate'>Afslut</g:MenuItem>
+	</g:MenuBar>
+	
+</ui:UiBinder>
