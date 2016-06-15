@@ -1,18 +1,14 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
-
-
-
-	<g:VerticalPanel width="200px" height="auto">
+	<g:VerticalPanel width="100%" height="auto">
 		<g:Label text="Username:" width="100%" height="auto" />
 		<g:TextBox ui:field="normalText" width="90%" height="auto"/>
 		<g:Label text="Password:" width="100%" height="auto" />
 		<g:PasswordTextBox ui:field="normalPassword" width="90%"
 			height="auto" />
 		<g:Cell horizontalAlignment="ALIGN_CENTER">
-			<g:Button text="Login" ui:field="Authenticate" height="25px" />
+			<g:Button text="Login" ui:field="authenticate" height="auto" />
 		</g:Cell>
 	</g:VerticalPanel>
 
