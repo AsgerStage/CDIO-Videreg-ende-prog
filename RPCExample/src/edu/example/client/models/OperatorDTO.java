@@ -1,6 +1,9 @@
 package edu.example.client.models;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 import edu.example.client.exceptions.DALException;
@@ -27,7 +30,7 @@ public final class OperatorDTO implements Serializable {
 	private int NAME_MINIMUM_LENGTH = 2;
 	private int PASSWORD_MINIMUM_LENGTH = 6;
 	private int NUMBER_OF_SPECIAL_CHARACTERS = 3;
-	private int CPR_MINIMUM_LENGTH = 11;
+	private int CPR_LENGTH = 11;
 
 	private int oprID;
 	private String oprNavn;
@@ -93,8 +96,21 @@ public final class OperatorDTO implements Serializable {
 	}
 
 	public void setCpr(String cpr) throws DALException{
-		if (cpr.length() == CPR_MINIMUM_LENGTH)
-			this.cpr = cpr;
+		if (cpr.length() == CPR_LENGTH) {
+			try {
+				int day = Integer.parseInt(cpr.substring(0, 2));
+		        int month = Integer.parseInt(cpr.substring(2, 4));
+		        Integer.parseInt(cpr.substring(4, 6));
+		        Integer.parseInt(cpr.substring(7, 11));       
+		        
+		        if(month > 12 || day > 31)
+					throw new DALException("Ugyldigt dato i cpr nummeret");
+				
+				this.cpr = cpr;
+			} catch (Exception e) {
+				throw new DALException("Ugyldigt cprnummer: " + e);
+			}
+		}
 		else
 			throw new DALException("CPR overholder ikke kravende");
 
