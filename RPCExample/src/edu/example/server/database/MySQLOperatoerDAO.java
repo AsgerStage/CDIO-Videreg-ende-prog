@@ -16,7 +16,7 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 {
 	@Override
 	public OperatorDTO getOperator(int oprId) throws DALException {
-		ResultSet rs = Connector.doQuery("CALL `DTU`.`get_operator`(?)", oprId);
+		ResultSet rs = Connector.doQuery("CALL `get_operator`(?)", oprId);
 	    try {			
 	    	if (!rs.first()) 
 	    		throw new DALException("Operatoeren " + oprId + " findes ikke");
@@ -30,13 +30,13 @@ public class MySQLOperatoerDAO implements OperatoerDAO
 	
 	@Override
 	public void createOperator(OperatorDTO opr) throws DALException {
-		Connector.doUpdate ("CALL `DTU`.`create_operator`(?, ?, ?, ?, ?, ?, ?)",
+		Connector.doUpdate ("CALL `create_operator`(?, ?, ?, ?, ?, ?, ?)",
 				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank(), opr.getHash());
 	}
 	
 	@Override
 	public void updateOperator(OperatorDTO opr) throws DALException {		
-		Connector.doUpdate("CALL `DTU`.`update_operator`(?, ?, ?, ?, ?, ?, ?)",
+		Connector.doUpdate("CALL `update_operator`(?, ?, ?, ?, ?, ?, ?)",
 				opr.getOprID(), opr.getName(), opr.getIni(), opr.getCpr(), opr.getPassword(), opr.getRank(), opr.getHash());
 	}
 	

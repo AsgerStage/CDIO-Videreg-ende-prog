@@ -92,14 +92,13 @@ public final class OperatorDTO implements Serializable {
 			throw new OpNameException("Operatoer navnet overholder ikke kravende");
 	}
 
-	public void setCpr(String cpr) throws DALException{
-//		this.cpr = cpr;
+	public void setCpr(String cpr) throws DALException {
 		if (cpr.length() == CPR_LENGTH) {
 			try {
 				int day = Integer.parseInt(cpr.substring(0, 2));
 		        int month = Integer.parseInt(cpr.substring(2, 4));
 		        Integer.parseInt(cpr.substring(4, 6));
-		        Integer.parseInt(cpr.substring(7, 11));       
+		        Integer.parseInt(cpr.substring(7, 11));
 		        
 		        if(month > 12 || day > 31)
 					throw new DALException("Ugyldigt dato i cpr nummeret");
