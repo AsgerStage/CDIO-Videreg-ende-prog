@@ -1,9 +1,6 @@
 package edu.example.client.models;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
 import edu.example.client.exceptions.DALException;
@@ -96,6 +93,7 @@ public final class OperatorDTO implements Serializable {
 	}
 
 	public void setCpr(String cpr) throws DALException{
+//		this.cpr = cpr;
 		if (cpr.length() == CPR_LENGTH) {
 			try {
 				int day = Integer.parseInt(cpr.substring(0, 2));

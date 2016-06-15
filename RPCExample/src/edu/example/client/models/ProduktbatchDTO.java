@@ -9,12 +9,12 @@ public class ProduktbatchDTO implements Serializable
 {
 	private static final long serialVersionUID = 8533525616049826629L;
 	
-	private static final int STATUS_NOT_STARTET = 0;
-	private static final int STATUS_STARTET = 1;
-	private static final int STATUS_COMPLETE = 2;	
-	private static final String STATUS_NOT_STARTET_STR = "Ikke startet";
-	private static final String STATUS_STARTET_STR = "Under produktion";
-	private static final String STATUS_COMPLETE_STR = "Afsluttet";	
+	public static final int STATUS_NOT_STARTET = 0;
+	public static final int STATUS_STARTET = 1;
+	public static final int STATUS_COMPLETE = 2;	
+	public static final String STATUS_NOT_STARTET_STR = "Ikke startet";
+	public static final String STATUS_STARTET_STR = "Under produktion";
+	public static final String STATUS_COMPLETE_STR = "Afsluttet";	
 	
 	private int pbID;		// i omraadet 1-99999999
 	private int status;		// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet

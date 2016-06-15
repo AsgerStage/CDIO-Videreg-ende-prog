@@ -170,12 +170,30 @@ public class ProduktbatchPanel extends Composite
 					int searhInt = Integer.parseInt(searchText);
 					
 					for (ProduktbatchDTO produktbatch: produktbatchList) {
-						if(produktbatch.getPbID() == searhInt || produktbatch.getReceptID() == searhInt || produktbatch.getStatus() == searhInt) {
+						if(produktbatch.getPbID() == searhInt || produktbatch.getReceptID() == searhInt) {
 							result.add(produktbatch);
 						}
 					}
 				}
-				catch(NumberFormatException e) { }
+				catch(NumberFormatException e) {
+					searchText = searchText.toLowerCase();
+					int searchStatus = -1;
+					
+					if(ProduktbatchDTO.STATUS_COMPLETE_STR.toLowerCase().contains(searchText))
+						searchStatus = ProduktbatchDTO.STATUS_COMPLETE;
+					else if(ProduktbatchDTO.STATUS_STARTET_STR.toLowerCase().contains(searchText))
+						searchStatus = ProduktbatchDTO.STATUS_STARTET;
+					else if(ProduktbatchDTO.STATUS_NOT_STARTET_STR.toLowerCase().contains(searchText))
+						searchStatus = ProduktbatchDTO.STATUS_NOT_STARTET;
+					
+					if(searchStatus != 1) {
+						for (ProduktbatchDTO produktbatch: produktbatchList) {
+							if(produktbatch.getStatus() == searchStatus) {
+								result.add(produktbatch);
+							}
+						}
+					}
+				}
 				finally {
 					if(result != null)
 						update(result);
