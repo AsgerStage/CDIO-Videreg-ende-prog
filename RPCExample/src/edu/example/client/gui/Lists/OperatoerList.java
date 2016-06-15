@@ -185,10 +185,10 @@ public class OperatoerList extends Composite
 			ArrayList<OperatorDTO> result = new ArrayList<>();
 			
 			try {
-				int searhID = Integer.parseInt(searchText);
+				int searchInt = Integer.parseInt(searchText);
 				
 				for (OperatorDTO operator : operatorList) {
-					if(operator.getOprID() == searhID) {
+					if(operator.getOprID() == searchInt || operator.getRank() == searchInt) {
 						result.add(operator);
 						break;
 					}

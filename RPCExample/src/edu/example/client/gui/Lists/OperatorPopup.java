@@ -69,6 +69,7 @@ public class OperatorPopup extends DialogBox
 			idBox.setEnabled(false);
 			nameBox.setText(operator.getName());
 			cprBox.setText(operator.getCpr());
+			cprBox.setEnabled(false);
 			iniBox.setText(operator.getIni());
 			rankBox.setText(""+operator.getRank());
 			passwordBox.setText(operator.getPassword());
